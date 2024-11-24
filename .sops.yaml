@@ -1,0 +1,11 @@
+keys:
+  - &aaron age1zg2820husqaquj5qs9mg9daxr6usl5cv3h5l4jy86dtf7xg4v5vsjqd7mx
+  - &galago age1hkna6cc8e79680ux6rs3rd7dd7qnz94dxneg0nwn7cl7knlgg3xsrka8rz
+  - &gameconsole age1ps9fqkw6f06a9ctl805mrz0tqfxadudczurr98vs00ml2zd8uecsrnl8nn
+creation_rules:
+  - path_regex: secrets/secrets.yaml$
+    key_groups:
+      - age:
+        - *aaron
+        - *galago
+        - *gameconsole

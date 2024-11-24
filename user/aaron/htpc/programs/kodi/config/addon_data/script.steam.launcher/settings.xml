@@ -1,0 +1,26 @@
+<settings version="2">
+    <setting id="QuitKodi" default="true">0</setting>
+    <setting id="MinimiseKodi" default="true">true</setting>
+    <setting id="KodiLinux" default="true">/usr/bin/kodi</setting>
+    <setting id="SteamLinux" default="true">/usr/bin/steam-gamescope</setting>
+    <setting id="KodiWin" default="true">C:\Program Files\Kodi\Kodi.exe</setting>
+    <setting id="SteamWin" default="true">C:\Program Files (x86)\Steam\steam.exe</setting>
+    <setting id="KodiOsx" default="true">/Applications/Kodi.app/</setting>
+    <setting id="SteamOsx" default="true">/Applications/Steam.app/</setting>
+    <setting id="ForceKillKodi" default="true">0</setting>
+    <setting id="DesktopMode" default="true">false</setting>
+    <setting id="DelUserScript" default="true">false</setting>
+    <setting id="KodiPortable" default="true">false</setting>
+    <setting id="SuspendAudio" default="true">false</setting>
+    <setting id="BusyDialogTime" default="true">10</setting>
+    <setting id="ScriptUpdateCheck" default="true">true</setting>
+    <setting id="FilePathCheck" default="true">true</setting>
+    <setting id="WmctrlCheck">true</setting>
+    <setting id="CustomScript" default="true">false</setting>
+    <setting id="CustomScriptFolder" default="true" />
+    <setting id="PreScriptEnabled" default="true">false</setting>
+    <setting id="PreScript" default="true" />
+    <setting id="PostScriptEnabled" default="true">false</setting>
+    <setting id="PostScript" default="true" />
+    <setting id="SteamParameters" default="true" />
+</settings>
