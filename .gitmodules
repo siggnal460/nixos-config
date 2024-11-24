@@ -1,3 +1,0 @@
-[submodule "compose/comfyui/ComfyUI"]
-	path = compose/comfyui/ComfyUI
-	url = https://github.com/comfyanonymous/ComfyUI
