@@ -10,6 +10,7 @@
     extraConfig = {
       init.defaultBranch = "master";
       pull.rebase = "true";
+      safe.directory = "/etc/nixos";
     };
   };
 }
