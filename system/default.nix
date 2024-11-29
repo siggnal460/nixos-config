@@ -187,7 +187,7 @@
 
   fonts = {
     packages = with pkgs; [
-      (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
+      fira-code
       noto-fonts
       noto-fonts-extra
       noto-fonts-cjk-sans
@@ -195,16 +195,16 @@
     ];
     fontconfig.defaultFonts = {
       serif = [
-        "FiraCode"
+        "fira-code"
         "noto-fonts"
       ];
-      emoji = [ "FiraCode" ];
+      emoji = [ "fira-code" ];
       sansSerif = [
-        "FiraCode"
+        "fira-code"
         "noto-fonts"
       ];
       monospace = [
-        "FiraCode"
+        "fira-code"
         "noto-fonts"
       ];
     };

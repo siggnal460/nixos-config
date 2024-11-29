@@ -1,6 +1,10 @@
 {
   imports = [ ./aaron ];
 
+  users.groups = {
+    media = { };
+  };
+
   home-manager = {
     sharedModules = [
       {

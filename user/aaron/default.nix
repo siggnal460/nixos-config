@@ -12,6 +12,7 @@
           "aaron"
           "wheel"
           "networkmanager"
+          "media"
         ];
         initialPassword = "password"; # change later
         openssh.authorizedKeys.keys = [
