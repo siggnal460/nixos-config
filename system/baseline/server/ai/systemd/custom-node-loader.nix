@@ -8,20 +8,18 @@ let
       );
     in
     ''
-      custom_node_dir="/export/ai/appdata/comfyui/custom_nodes"
-      for dir in $custom_node_dir; do
-      		if [ -d "$dir/.git" ]; then
-      				echo "Pulling changes in $dir"
-      				(cd "$dir" && git pull)
-      		fi
-      done
-      cd $custom_node_dir
-      ${cloneUrl}
+      		  comfyui_dir="/export/ai/appdata/comfyui"
+            cd $comfyui_dir/custom_nodes
+            ${cloneUrl}
+            for dir in $comfyui_dir/custom_nodes; do
+      			    chmod 0775 -R $dir
+            		if [ -d "$dir/.git" ]; then
+            				echo "Pulling changes in $dir"
+            				(cd "$dir" && git pull)
+            		fi
+            done
     '';
   node_files = [
-    "https://github.com/Acly/comfyui-tooling-nodes"
-    "https://github.com/Acly/comfyui-inpaint-nodes"
-    "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
     "https://github.com/Fannovel16/comfyui_controlnet_aux"
   ];
 in
@@ -31,7 +29,10 @@ in
     wantedBy = [
       "multi-user.target"
     ];
-    after = [ "systemd-tmpfiles-setup.service" ];
+    after = [
+      "systemd-tmpfiles-setup.service"
+      "podman-comfyui.service"
+    ];
     serviceConfig = {
       Type = "exec";
       Restart = "on-failure";

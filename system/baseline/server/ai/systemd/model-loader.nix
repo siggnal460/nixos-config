@@ -17,6 +17,16 @@ let
     '';
   model_files = [
     {
+      filename = "flux1-dev-fp8.safetensors";
+      output_dir = "/export/ai/models/checkpoints";
+      url = "https://huggingface.co/Comfy-Org/flux1-dev/resolve/main/flux1-dev-fp8.safetensors";
+    }
+    {
+      filename = "sd3.5_large.safetensors";
+      output_dir = "/export/ai/models/checkpoints";
+      url = "https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/resolve/main/sd3.5_large_fp8_scaled.safetensors";
+    }
+    {
       filename = "flux1-dev-fp8-e4m3fn.safetensors";
       output_dir = "/export/ai/models/unet";
       url = "https://huggingface.co/Kijai/flux-fp8/resolve/main/flux1-dev-fp8-e4m3fn.safetensors";
@@ -27,9 +37,19 @@ let
       url = "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors";
     }
     {
-      filename = "t5xxl_fp8_e4m3fn.safetensors";
+      filename = "clip_g.safetensors";
       output_dir = "/export/ai/models/clip";
-      url = "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors";
+      url = "https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/resolve/main/text_encoders/clip_g.safetensors";
+    }
+    {
+      filename = "google_t5xxl_fp8_e4m3fn.safetensors";
+      output_dir = "/export/ai/models/clip";
+      url = "https://huggingface.co/mcmonkey/google_t5-v1_1-xxl_encoderonly/resolve/main/t5xxl_fp8_e4m3fn.safetensors";
+    }
+    {
+      filename = " t5xxl_fp8_e4m3fn.safetensors";
+      output_dir = "/export/ai/models/clip";
+      url = "https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/resolve/main/text_encoders/t5xxl_fp8_e4m3fn.safetensors";
     }
     {
       filename = "ae.safetensors";
@@ -71,6 +91,16 @@ let
       output_dir = "/export/ai/models/inpaint";
       url = "https://huggingface.co/Acly/MAT/resolve/main/MAT_Places512_G_fp16.safetensors";
     }
+    {
+      filename = "diffusion_pytorch_model.safetensors";
+      output_dir = "/export/ai/models/controlnet/flux";
+      url = "https://huggingface.co/InstantX/FLUX.1-dev-Controlnet-Union/resolve/main/diffusion_pytorch_model.safetensors";
+    }
+    {
+      filename = "pulid_flux_v0.9.1.safetensors";
+      output_dir = "/export/ai/models/pulid";
+      url = "https://huggingface.co/guozinan/PuLID/resolve/main/pulid_flux_v0.9.1.safetensors";
+    }
   ];
 in
 {
@@ -83,8 +113,8 @@ in
     serviceConfig = {
       Type = "exec";
       Restart = "on-failure";
-      RestartSec = "1s";
-      RestartMaxDelaySec = "2h";
+      RestartSec = "10min";
+      RestartMaxDelaySec = "10h";
       RestartSteps = "10";
     };
 

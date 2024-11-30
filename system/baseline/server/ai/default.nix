@@ -7,13 +7,14 @@
   ];
 
   systemd.tmpfiles.rules = [
-    "d /oci_cache 0775 root users"
-    "d /oci_cache/comfyui 0775 root users"
+    "d /oci_cache 0774 root root"
+    "d /oci_cache/comfyui 0774 root users"
+    "d /oci_cache/comfyui/huggingface 0770 root users"
     "d /oci_cache/comfyui/pip 0770 root users"
 
-    "d /export/ai 0775 root users"
+    "d /export/ai 0774 root users"
 
-    "d /export/ai/appdata 0775 root users"
+    "d /export/ai/appdata 0774 root users"
     "d /export/ai/appdata/ollama 0770 root users"
     "d /export/ai/appdata/open-webui/data 0770 root users"
     "d /export/ai/appdata/sillytavern/data 0770 root users"
@@ -21,27 +22,29 @@
     "d /export/ai/appdata/sillytavern/plugins 0770 root users"
     "d /export/ai/appdata/openedai-speech/voices 0770 root users"
     "d /export/ai/appdata/openedai-speech/config 0770 root users"
-    "d /export/ai/appdata/comfyui/custom_nodes 0775 root users"
+    "d /export/ai/appdata/comfyui/custom_nodes 0760 root users"
     "d /export/ai/appdata/comfyui/workflows 0770 root users"
 
-    "d /export/ai/models/checkpoints 0775 root users"
-    "d /export/ai/models/controlnet 0775 root users"
-    "d /export/ai/models/clip 0775 root users"
-    "d /export/ai/models/clip_vision 0775 root users"
-    "d /export/ai/models/clip_vision/SD1.5 0775 root users"
-    "d /export/ai/models/diffusion_models 0775 root users"
-    "d /export/ai/models/embeddings 0775 root users"
-    "d /export/ai/models/inpaint 0775 root users"
-    "d /export/ai/models/ipadapter 0775 root users"
-    "d /export/ai/models/loras 0775 root users"
-    "d /export/ai/models/onnx 0775 root users"
-    "d /export/ai/models/sams 0775 root users"
-    "d /export/ai/models/ultralytics 0775 root users"
-    "d /export/ai/models/unet 0775 root users"
-    "d /export/ai/models/upscale_models 0775 root users"
-    "d /export/ai/models/vae 0775 root users"
+    "d /export/ai/models 0774 root users"
+    "d /export/ai/models/checkpoints 0770 root users"
+    "d /export/ai/models/controlnet 0770 root users"
+    "d /export/ai/models/clip 0770 root users"
+    "d /export/ai/models/clip_vision 0770 root users"
+    "d /export/ai/models/clip_vision/SD1.5 0770 root users"
+    "d /export/ai/models/diffusion_models 0770 root users"
+    "d /export/ai/models/embeddings 0770 root users"
+    "d /export/ai/models/inpaint 0770 root users"
+    "d /export/ai/models/ipadapter 0770 root users"
+    "d /export/ai/models/loras 0770 root users"
+    "d /export/ai/models/pulid 0770 root users"
+    "d /export/ai/models/onnx 0770 root users"
+    "d /export/ai/models/sams 0770 root users"
+    "d /export/ai/models/ultralytics 0770 root users"
+    "d /export/ai/models/unet 0770 root users"
+    "d /export/ai/models/upscale_models 0770 root users"
+    "d /export/ai/models/vae 0770 root users"
 
-    "d /export/ai/images 0775 root users"
+    "d /export/ai/images 0770 root users"
   ];
 
   services.nfs.server = {
@@ -66,7 +69,8 @@
       ];
       extraOptions = [
         "--name=openedai-speech"
-        "--gpus=1"
+        "--gpus=all"
+        "--group-add=users"
       ];
     };
 
@@ -83,6 +87,7 @@
       extraOptions = [
         "--name=ollama"
         "--gpus=all"
+        "--group-add=users"
       ];
     };
 
@@ -96,6 +101,7 @@
       extraOptions = [
         "--name=sillytavern"
         "--gpus=all"
+        "--group-add=users"
       ];
       volumes = [
         "/export/ai/appdata/sillytavern/data:/home/node/app/data"
@@ -131,6 +137,7 @@
       extraOptions = [
         "--name=open-webui"
         "--gpus=all"
+        "--group-add=users"
       ];
       volumes = [
         "/export/ai/appdata/open-webui/data:/app/backend/data"
@@ -148,10 +155,10 @@
         HF_HOME = "/cache/huggingface/hub";
         COMFYUI_PATH = "/app";
         COMFYUI_MODEL_PATH = "/app/models";
-        COMFYUI_EXTRA_ARGS = "--lowvram --multi-user";
+        COMFYUI_EXTRA_ARGS = "--lowvram";
       };
       volumes = [
-        "/oci_cache/comfyui:/cache/huggingface/hub/hub"
+        "/oci_cache/comfyui/huggingface:/cache/huggingface/hub"
         "/oci_cache/comfyui/pip:/cache/pip"
         "/export/ai/images:/app/output"
         "/export/ai/appdata/comfyui/custom_nodes:/app/custom_nodes"
@@ -174,6 +181,7 @@
       extraOptions = [
         "--name=comfyui"
         "--gpus=all"
+        "--group-add=users"
       ];
     };
 
@@ -184,6 +192,11 @@
         "io.containers.autoupdate" = "registry";
       };
       ports = [ "7860:7860" ];
+      extraOptions = [
+        "--name=fluxgym"
+        "--gpus=all"
+        "--group-add=users"
+      ];
     };
   };
 }
