@@ -72,8 +72,8 @@ in
       directory = {
         style = "fg:${fg} bg:${darker_bg}";
         format = "[ [󰉋](fg:${blue} bg:${darker_bg}) $path ]($style)[$read_only]($read_only_style)";
-        read_only = "󰌾";
-        read_only_style = "${orange}";
+        read_only = "󰌾 ";
+        read_only_style = "fg:${orange} bg:${darker_bg}";
       };
 
       directory.substitutions = {
