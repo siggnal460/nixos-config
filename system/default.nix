@@ -187,7 +187,7 @@
 
   fonts = {
     packages = with pkgs; [
-      fira-code
+      nerd-fonts.fira-code
       noto-fonts
       noto-fonts-extra
       noto-fonts-cjk-sans
