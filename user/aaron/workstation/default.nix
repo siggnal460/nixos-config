@@ -7,7 +7,6 @@
 
   home-manager.users.aaron = {
     imports = [
-      ./programs/mangohud
       ./programs/mpv
     ];
 

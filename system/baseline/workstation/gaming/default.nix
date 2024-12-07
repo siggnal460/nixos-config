@@ -12,14 +12,10 @@
         "steam-run"
         "steam-original"
         "steam-unwrapped"
-        "discord"
       ];
   };
 
   environment.systemPackages = with pkgs; [
-    (pkgs.discord.override {
-      withVencord = true;
-    })
     heroic
     obs-studio
     phoronix-test-suite

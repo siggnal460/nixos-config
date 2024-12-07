@@ -10,13 +10,6 @@
     inputs.nix-gaming.nixosModules.platformOptimizations
   ];
 
-  #programs.gamemode = {
-  #  enable = true;
-  #  settings = {
-  #    general.defaultgov = "performance";
-  #  };
-  #};
-
   services.pipewire.lowLatency = {
     enable = true;
     quantum = 64;
@@ -40,17 +33,15 @@
     wantedBy = [ "multi-user.target" ];
     path = [ pkgs.flatpak ];
     script = ''
-            flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-      			if ! flatpak list --app | grep -q "com.valvesoftware.Steam"; then
-      				flatpak install -y flathub com.valvesoftware.Steam
-      			else
-      			  echo "Steam flatpak already installed"
-      			fi
-      			flatpak update -y
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+      flatpak uninstall --unused -y --noninteractive
+      flatpak install -y --noninteractive flathub com.valvesoftware.Steam//stable
+      flatpak install -y --noninteractive flathub org.freedesktop.Platform.VulkanLayer.MangoHud//24.08
+      flatpak install -y --noninteractive flathub com.discordapp.Discord//stable
+      flatpak override --env=MANGOHUD=1 com.valvesoftware.Steam
+      flatpak override --env=MANGOHUD_CONFIG=fps_limit=175 com.valvesoftware.Steam
+      flatpak update -y
     '';
   };
 
-  #system.environmentPackages = with pkgs; [
-  #  proton.ge-custom
-  #];
 }
