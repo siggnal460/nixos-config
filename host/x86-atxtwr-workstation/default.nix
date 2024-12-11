@@ -37,6 +37,8 @@
 
   services.ratbagd.enable = true;
 
+  systemd.tpm2.enable = false;
+
   environment = {
     systemPackages = with pkgs; [
       system76-keyboard-configurator

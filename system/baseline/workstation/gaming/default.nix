@@ -19,6 +19,5 @@
     heroic
     obs-studio
     phoronix-test-suite
-    xivlauncher
   ];
 }

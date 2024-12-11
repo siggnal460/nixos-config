@@ -38,10 +38,10 @@
       flatpak install -y --noninteractive flathub com.valvesoftware.Steam//stable
       flatpak install -y --noninteractive flathub org.freedesktop.Platform.VulkanLayer.MangoHud//24.08
       flatpak install -y --noninteractive flathub com.discordapp.Discord//stable
+      flatpak install -y --noninteractive flathub dev.goats.xivlauncher
       flatpak override --env=MANGOHUD=1 com.valvesoftware.Steam
       flatpak override --env=MANGOHUD_CONFIG=fps_limit=175 com.valvesoftware.Steam
       flatpak update -y
     '';
   };
-
 }

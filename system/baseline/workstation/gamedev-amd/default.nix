@@ -2,7 +2,7 @@
 {
   imports = [ ../../../shared/blender-amd.nix ];
 
-  #hardware.opentabletdriver.enable = true;
+  hardware.opentabletdriver.enable = true;
 
   environment.systemPackages = with pkgs; [
     audacity
