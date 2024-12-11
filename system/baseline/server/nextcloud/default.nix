@@ -1,7 +1,5 @@
 {
-  systemd.tmpfiles.rules = [
-    "d /exports/nextcloud-data 0664 nextcloud nextcloud"
-  ];
+  systemd.tmpfiles.rules = [ "d /exports/nextcloud-data 0664 nextcloud nextcloud" ];
 
   services.nextcloud = {
     enable = true;

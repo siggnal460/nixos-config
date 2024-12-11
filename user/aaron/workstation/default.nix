@@ -1,14 +1,10 @@
 {
   users.users.aaron.extraGroups = [ "libvirtd" ];
 
-  systemd.tmpfiles.rules = [
-    "d /home/aaron/projects 0700 aaron users"
-  ];
+  systemd.tmpfiles.rules = [ "d /home/aaron/projects 0700 aaron users" ];
 
   home-manager.users.aaron = {
-    imports = [
-      ./programs/mpv
-    ];
+    imports = [ ./programs/mpv ];
 
     accounts.email.accounts.aaron.thunderbird.enable = true;
 

@@ -10,9 +10,7 @@
 }:
 
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"
@@ -31,8 +29,7 @@
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."luks-be040596-d803-4161-8e79-1509b85b2e3c".device =
-    "/dev/disk/by-uuid/be040596-d803-4161-8e79-1509b85b2e3c";
+  boot.initrd.luks.devices."luks-be040596-d803-4161-8e79-1509b85b2e3c".device = "/dev/disk/by-uuid/be040596-d803-4161-8e79-1509b85b2e3c";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/35D7-5B2A";

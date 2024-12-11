@@ -1,11 +1,6 @@
+{ pkgs, ... }:
 {
-  pkgs,
-  ...
-}:
-{
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   #  boot.kernelParams = [ #maybe not needed
   #    "video=DP-1:2560x1440@240"

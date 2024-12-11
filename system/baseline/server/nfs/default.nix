@@ -1,15 +1,5 @@
 {
-  boot.initrd.systemd.tmpfiles.settings = {
-    "10-nfs-exports" = {
-      "/export" = {
-        d = {
-          mode = "0664";
-          user = "root";
-          group = "root";
-        };
-      };
-    };
-  };
+  systemd.tmpfiles.rules = [ "d /export 0664 root root" ];
 
   networking.firewall.allowedTCPPorts = [ 2049 ];
 

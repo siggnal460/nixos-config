@@ -1,9 +1,4 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}:
+{ config, ... }:
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -17,15 +12,12 @@
     ];
   };
 
-  # hardware.graphics.enable = true; change with 24.11
-  hardware.graphics = lib.mkDefault {
-    enable = true;
-    enable32Bit = true;
-  };
+  #hardware.graphics = {
+  #  enable = true;
+  #  enable32Bit = true;
+  #};
 
   services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia-container-toolkit.enable = true;
 
   hardware.nvidia = {
     modesetting.enable = true;

@@ -81,9 +81,7 @@
         "io.containers.autoupdate" = "registry";
       };
       ports = [ "11434:11434" ];
-      volumes = [
-        "/export/ai/appdata/ollama:/root/.ollama"
-      ];
+      volumes = [ "/export/ai/appdata/ollama:/root/.ollama" ];
       extraOptions = [
         "--name=ollama"
         "--gpus=all"
@@ -139,9 +137,7 @@
         "--gpus=all"
         "--group-add=users"
       ];
-      volumes = [
-        "/export/ai/appdata/open-webui/data:/app/backend/data"
-      ];
+      volumes = [ "/export/ai/appdata/open-webui/data:/app/backend/data" ];
     };
 
     comfyui = {

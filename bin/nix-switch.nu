@@ -7,9 +7,9 @@ def build_cores [ ] -> int {
 }
 
 def build_jobs [ ] -> int {
-    let mem = sys mem | get total | into string | str replace "GiB" "" | into float
+    #let mem = sys mem | get total | into string | str replace "GiB" "" | into float
 
-    if $mem > 8 { ($mem / 8 | math round | into int) } else { 1 }
+    #if $mem > 8 { ($mem / 8 | math round | into int) } else { 1 }
 }
 
 def print_header [ text: string ] -> string {
@@ -35,7 +35,8 @@ def format_nix_files [ ] {
 
 def update [ flake_name: string flake_folder: string limit: bool ] {
     if $limit == true {
-        nh os switch -H $flake_name $flake_folder -- --accept-flake-config --cores build_cores -j build_jobs
+        #nh os switch -H $flake_name $flake_folder -- --accept-flake-config --cores build_cores -j build_jobs
+	print "Limit not yet implemented"
     } else {
         nh os switch -H $flake_name $flake_folder -- --accept-flake-config
     }

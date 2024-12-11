@@ -23,7 +23,5 @@ in
     jack.enable = true;
     wireplumber.enable = true;
   };
-  environment.systemPackages = [
-    pipewire-start
-  ];
+  environment.systemPackages = [ pipewire-start ];
 }

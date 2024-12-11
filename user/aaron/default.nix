@@ -15,9 +15,7 @@
           "media"
         ];
         initialPassword = "password"; # change later
-        openssh.authorizedKeys.keys = [
-          ""
-        ];
+        openssh.authorizedKeys.keys = [ "" ];
       };
     };
     groups = {
@@ -28,9 +26,7 @@
   };
 
   systemd = {
-    tmpfiles.rules = [
-      "d /home/aaron/Projects 0700 aaron aaron"
-    ];
+    tmpfiles.rules = [ "d /home/aaron/Projects 0700 aaron aaron" ];
   };
 
   nix.settings.trusted-users = [ "aaron" ];

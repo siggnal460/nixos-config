@@ -19,16 +19,12 @@ let
             		fi
             done
     '';
-  node_files = [
-    "https://github.com/Fannovel16/comfyui_controlnet_aux"
-  ];
+  node_files = [ "https://github.com/Fannovel16/comfyui_controlnet_aux" ];
 in
 {
   systemd.services.custom-node-loader = {
     description = "ComfyUI custom node background download";
-    wantedBy = [
-      "multi-user.target"
-    ];
+    wantedBy = [ "multi-user.target" ];
     after = [
       "systemd-tmpfiles-setup.service"
       "podman-comfyui.service"

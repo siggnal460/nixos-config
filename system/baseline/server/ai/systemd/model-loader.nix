@@ -106,9 +106,7 @@ in
 {
   systemd.services.model-loader = {
     description = "AI model background downloads";
-    wantedBy = [
-      "multi-user.target"
-    ];
+    wantedBy = [ "multi-user.target" ];
     after = [ "systemd-tmpfiles-setup.service" ];
     serviceConfig = {
       Type = "exec";

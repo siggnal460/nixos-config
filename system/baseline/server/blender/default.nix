@@ -1,7 +1,5 @@
 {
-  systemd.tmpfiles.rules = [
-    "d /export/blender 0770 root users"
-  ];
+  systemd.tmpfiles.rules = [ "d /export/blender 0770 root users" ];
 
   networking.firewall.allowedTCPPorts = [ 8642 ];
 

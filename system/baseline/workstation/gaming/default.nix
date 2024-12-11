@@ -1,8 +1,6 @@
 { pkgs, lib, ... }:
 {
-  imports = [
-    ../../../shared/gaming-tweaks.nix
-  ];
+  imports = [ ../../../shared/gaming-tweaks.nix ];
 
   nixpkgs.config = {
     allowUnfreePredicate =

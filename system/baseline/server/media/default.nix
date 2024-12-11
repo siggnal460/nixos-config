@@ -13,16 +13,20 @@
 
   users.users = {
     jellyfin = {
-      extraGroups = "media";
+      extraGroups = [ "media" ];
+      isSystemUser = true;
     };
     radarr = {
-      extraGroups = "media";
+      extraGroups = [ "media" ];
+      isSystemUser = true;
     };
     sonarr = {
-      extraGroups = "media";
+      extraGroups = [ "media" ];
+      isSystemUser = true;
     };
     prowlarr = {
-      extraGroups = "media";
+      group = "media";
+      isSystemUser = true;
     };
   };
 

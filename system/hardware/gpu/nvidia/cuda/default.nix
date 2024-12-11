@@ -4,9 +4,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # TODO REPLACE LATER
-  environment.systemPackages = [
-    pkgs.cudaPackages.cudatoolkit
-  ];
+  environment.systemPackages = [ pkgs.cudaPackages.cudatoolkit ];
 
   nixpkgs.config.cudaSupport = true;
 

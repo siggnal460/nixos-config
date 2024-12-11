@@ -6,9 +6,7 @@
   ...
 }:
 {
-  imports = [
-    ./extras/current-system-packages.nix
-  ];
+  imports = [ ./extras/current-system-packages.nix ];
 
   boot = {
     tmp.useTmpfs = lib.mkDefault true;
@@ -148,9 +146,7 @@
     apparmor.killUnconfinedConfinables = true;
     auditd.enable = true;
     audit.enable = true;
-    audit.rules = [
-      "-a exit,always -F arch=b64 -S execve"
-    ];
+    audit.rules = [ "-a exit,always -F arch=b64 -S execve" ];
     #restrict what sudo can do to basic admin functions
     sudo = {
       enable = true;
@@ -187,7 +183,7 @@
 
   fonts = {
     packages = with pkgs; [
-      nerd-fonts.fira-code
+      #nerd-fonts.fira-code
       noto-fonts
       noto-fonts-extra
       noto-fonts-cjk-sans
