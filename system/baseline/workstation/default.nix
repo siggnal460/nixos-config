@@ -80,7 +80,7 @@
       gparted
       jellyfin-media-player
       libreoffice
-      pkgsStable.logseq
+      #logseq
       loupe
       mpv
       openvpn
