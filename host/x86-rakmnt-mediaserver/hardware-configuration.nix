@@ -10,7 +10,9 @@
 }:
 
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
   boot.initrd.availableKernelModules = [
     "nvme"
@@ -38,7 +40,25 @@
     ];
   };
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/d63ad52f-afb3-4516-bdf1-f2bc64df04b8"; } ];
+  fileSystems."/var/lib/containers/storage/overlay" = {
+    device = "/var/lib/containers/storage/overlay";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
+  fileSystems."/export" = {
+    device = "zfspool";
+    fsType = "zfs";
+  };
+
+  fileSystems."/export/media" = {
+    device = "zfspool/media";
+    fsType = "zfs";
+  };
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/d63ad52f-afb3-4516-bdf1-f2bc64df04b8"; }
+  ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -46,6 +66,8 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp42s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.podman0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.veth0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
