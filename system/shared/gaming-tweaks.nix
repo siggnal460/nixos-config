@@ -12,18 +12,9 @@
     rate = 48000;
   };
 
-  # This always fucking breaks...
-  #programs.steam = {
-  #  enable = true;
-  #	package = pkgsStable.steam;
-  #  platformOptimizations.enable = true;
-  #  extest.enable = true;
-  #  extraCompatPackages = with pkgs; [
-  #    proton-ge-bin
-  #  ];
-  #};
-
   services.flatpak.enable = true;
+
+  hardware.steam-hardware.enable = true;
 
   systemd.services.flatpak-app-installer = {
     wantedBy = [ "multi-user.target" ];
