@@ -3,6 +3,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
 {
@@ -226,7 +227,7 @@
     stateVersion = "23.11";
     autoUpgrade = {
       enable = true;
-      flake = "$/etc/nixos";
+      flake = inputs.self.outPath;
       allowReboot = true;
       persistent = true;
       randomizedDelaySec = "210min";
