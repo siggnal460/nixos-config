@@ -10,7 +10,7 @@
   ];
 
   networking = {
-	  hostName = "x86-atxtwr-workstation";
+    hostName = "x86-atxtwr-workstation";
     interfaces.enp4s0 = {
       useDHCP = false;
       ipv4.addresses = [

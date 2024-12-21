@@ -11,7 +11,7 @@
       daemon.enable = true;
       scanner.enable = true;
       updater.enable = true;
-      fangfrish.enable = true;
+      fangfrisch.enable = true;
     };
   };
 
