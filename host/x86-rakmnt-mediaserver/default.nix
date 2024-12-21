@@ -8,7 +8,23 @@
     };
   };
 
-  networking.hostId = "bda395e9";
+  networking = {
+    hostId = "bda395e9";
+    hostName = "x86-atxtwr-workstation";
+    interfaces.enp42s0 = {
+      useDHCP = false;
+      ipv4.addresses = [
+        {
+          address = "10.0.0.7";
+          prefixLength = 12;
+        }
+      ];
+    };
+    defaultGateway = {
+      address = "10.0.0.1";
+      interface = "enp4s0";
+    };
+  };
 
   services.zfs.autoScrub = {
     enable = true;
@@ -28,13 +44,5 @@
     datasets."zfspool/media" = {
       useTemplate = [ "backup" ];
     };
-  };
-
-  networking = {
-    hostName = "x86-rakmnt-mediaserver";
-    #interface.eth0.ipv4.addresses = [{
-    #  address = "10.4.0.1";
-    #  prefixLength = 12;
-    #}];
   };
 }

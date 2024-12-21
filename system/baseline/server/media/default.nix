@@ -21,7 +21,7 @@
   ];
 
   services.nfs.server = {
-    exports = ''/export/media 10.0.0.8(rw,nohide,insecure,no_subtree_check)'';
+    exports = ''/export/media 10.0.0.15(rw,nohide,insecure,no_subtree_check)'';
   };
 
   users.users = {
