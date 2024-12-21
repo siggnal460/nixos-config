@@ -11,6 +11,7 @@
     ../../shared/pipewire.nix
     ../../shared/bluetooth.nix
     ../../shared/nfs-client.nix
+    ../../shared/cosmic.nix
   ];
 
   _module.args.pkgsStable = import inputs.nixpkgs {
