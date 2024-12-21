@@ -2,11 +2,6 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
-  #  boot.kernelParams = [ #maybe not needed
-  #    "video=DP-1:2560x1440@240"
-  #    "video=DP-3:1920x1080@144"
-  #  ];
-
   swapDevices = [
     {
       device = "/swapfile";
@@ -15,14 +10,20 @@
   ];
 
   networking = {
-    hostName = "x86-atxtwr-workstation";
-    #interfaces.enp7s0 = {
-    #useDHCP = false;
-    #ipv4.addresses = [{
-    #address = "10.6.0.1";
-    #prefixLength = 12;
-    #}];
-    #};
+	  hostName = "x86-atxtwr-workstation";
+    interfaces.enp4s0 = {
+      useDHCP = false;
+      ipv4.addresses = [
+        {
+          address = "10.0.0.15";
+          prefixLength = 12;
+        }
+      ];
+    };
+    defaultGateway = {
+      address = "10.0.0.1";
+      interface = "enp4s0";
+    };
   };
 
   fileSystems."/mnt/extra-drives" = {

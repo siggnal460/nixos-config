@@ -102,7 +102,6 @@
 
   networking = {
     firewall.enable = true;
-    networkmanager.enable = true;
     stevenblack.enable = true;
     firewall.allowedTCPPorts = [ ];
     firewall.allowedUDPPorts = [ ];
@@ -243,7 +242,11 @@
     ];
   };
 
-  systemd.coredump.enable = false;
+  systemd = {
+    coredump.enable = false;
+    #network = {
+    #
+  };
 
   users.defaultUserShell = pkgs.nushell;
 
