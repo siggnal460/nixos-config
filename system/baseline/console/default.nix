@@ -16,8 +16,10 @@
     allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [
+        "steam"
         "steam-jupiter-original"
         "steamdeck-hw-theme"
+        "steam-jupiter-unwrapped"
       ];
   };
 

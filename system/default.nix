@@ -106,7 +106,6 @@
     stevenblack.enable = true;
     firewall.allowedTCPPorts = [ ];
     firewall.allowedUDPPorts = [ ];
-    defaultGateway = "10.0.0.1";
     nameservers = [
       "76.76.2.0"
       "76.76.10.0"
