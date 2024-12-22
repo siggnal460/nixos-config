@@ -75,6 +75,7 @@
       anki
       pkgsStable.calibre
       element-desktop
+      deluge
       firefox
       gimp
       gnupg

@@ -48,12 +48,12 @@ def repo_changes [ ] -> bool {
 
 # Quick-and-dirty utility to update a Nix + Home Manager system and keep it's changes in sync with a remote Git repository
 def main [
-    --branch (-b): string = "master"   					# The branch from which to pull or to which to push
-    --full (-f)                        					# Will also update the flake lock file to perform a full upgrade.
-    --limit (-l)                       					# Automatically limit update process to a small amount of cores/threads. Useful for expensive build processes. Amount is based on system CPU threads and RAM.
-    --path (-p): string = "/etc/nixos" 					# Filepath to the folder containing the flake.nix.
-    --name (-n): string                					# Use the flake with this name. Defaults to the hostname if not specified.
-    --remote (-r): string = "origin"   					# Your origin repository name.
+    --branch (-b): string = "master"   					                # The branch from which to pull or to which to push
+    --full (-f)                        					                # Will also update the flake lock file to perform a full upgrade.
+    --limit (-l)                       					                # Automatically limit update process to a small amount of cores/threads. Useful for expensive build processes. Amount is based on system CPU threads and RAM.
+    --path (-p): string = "/etc/nixos" 					                # Filepath to the folder containing the flake.nix.
+    --name (-n): string                					                # Use the flake with this name. Defaults to the hostname if not specified.
+    --remote (-r): string = "origin"   					                # Your origin repository name.
     --url (-r): string = "git@github.com:siggnal460/nixos-config.git"   # Your origin repository SSH url, in the vein of git@github.com:<username>/<repo>.git
 ] {
     mut commit_msg = ""
@@ -90,7 +90,7 @@ def main [
 
     print_header "CHECKING FOR CHANGES"
     if (repo_changes) {
-	git add .
+    	git add .
         print "Uncommitted changes found:"
         git diff --staged
         print "Please enter a commit message (Ctrl-C to exit without committing):"
@@ -104,35 +104,36 @@ def main [
     }
     print "\n"
 
-    if $full {
-        print_header "UPDATING FLAKE.LOCK"
-        print "Checking for updates..."
-        sudo nix flake update
-        print "\n"
-	if not (repo_changes) {
-            print_success "No update for flake.lock found"
-	} else if $commit_msg != "" {
-            print "flake.lock updates found."
-	    git reset --soft HEAD~1
-	    git add .
-            git commit -m $commit_msg
-            print_success "Added flake.lock changes to commit."
-        } else if $commit_msg == "" {
-            print "flake.lock updates found."
-	    git add .
-            $commit_msg = "Updated flake.lock"
-            git commit -m $commit_msg
-            print_success "Committed with \"Updated flake.lock\""
-        }
-        print "\n"
-    }
-
     print_header "CHECKING REMOTE"
     print "Fetching from github..."
     git fetch $remote $branch
     git pull $remote $branch
     print_success "Pull complete"
     print "\n"
+
+    if $full {
+        print_header "UPDATING FLAKE.LOCK"
+        print "Checking for updates..."
+        sudo nix flake update
+        print "\n"
+
+    	if not (repo_changes) {
+            print_success "No update for flake.lock found"
+    	} else if $commit_msg != "" {
+            print "flake.lock updates found."
+    	    git reset --soft HEAD~1
+    	    git add .
+            git commit -m $commit_msg
+            print_success "Added flake.lock changes to commit."
+        } else if $commit_msg == "" {
+            print "flake.lock updates found."
+       	    git add .
+            $commit_msg = "Updated flake.lock"
+            git commit -m $commit_msg
+            print_success "Committed with \"Updated flake.lock\""
+        }
+        print "\n"
+    }
 
     print_header "SWITCHING TO NEW CONFIGURATION"
     try {

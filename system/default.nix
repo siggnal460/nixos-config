@@ -244,8 +244,6 @@
 
   systemd = {
     coredump.enable = false;
-    #network = {
-    #
   };
 
   users.defaultUserShell = pkgs.nushell;
