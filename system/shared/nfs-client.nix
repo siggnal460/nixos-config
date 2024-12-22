@@ -35,7 +35,7 @@
   };
 
   fileSystems."/mnt/ai" = {
-    device = "10.0.0.11:/export/ai";
+    device = "10.0.0.15:/export/ai";
     fsType = "nfs4";
     options = [
       "x-systemd.automount"
@@ -43,7 +43,7 @@
     ];
   };
   fileSystems."/mnt/blender" = {
-    device = "10.0.0.11:/export/blender";
+    device = "10.0.0.15:/export/blender";
     fsType = "nfs4";
     options = [
       "x-systemd.automount"
