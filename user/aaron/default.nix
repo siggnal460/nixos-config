@@ -25,6 +25,10 @@
     };
   };
 
+  users.groups.media = {
+    gid = 982;
+  };
+
   systemd = {
     tmpfiles.rules = [ "d /home/aaron/Projects 0700 aaron aaron" ];
   };

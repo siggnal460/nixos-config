@@ -76,6 +76,7 @@ def main [
     print_header "BUILD INFORMATION"
     print $"Flake Path: ($flake_folder)"
     print $"Flake Name: ($flake_name)"
+    print $"Repo URL: ($url)"
     print $"Branch: ($branch)"
     print $"Remote: ($remote)"
     print $"Update flake.lock: ($full)"

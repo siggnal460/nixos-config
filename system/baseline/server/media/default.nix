@@ -73,7 +73,6 @@
     prowlarr = {
       gid = 704;
     };
-    media = { };
   };
 
   virtualisation.oci-containers.containers = {
