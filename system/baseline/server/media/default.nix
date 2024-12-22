@@ -11,13 +11,13 @@
     "d /export/media/appdata/prowlarr/data 0770 prowlarr prowlarr"
     "d /export/media/appdata/radarr/data 0770 radarr radarr"
     "d /export/media/appdata/sonarr/data 0770 sonarr sonarr"
-    "d /export/media/anime 0775 root media"
-    "d /export/media/books 0775 root media"
-    "d /export/media/courses 0775 root media"
-    "d /export/media/movies 0775 root media"
-    "d /export/media/music 0775 root media"
-    "d /export/media/tvshows 0775 root media"
-    "d /export/media/downloads 0775 root media"
+    "d /export/media/anime 0770 root media"
+    "d /export/media/books 0770 root media"
+    "d /export/media/courses 0770 root media"
+    "d /export/media/movies 0770 root media"
+    "d /export/media/music 0770 root media"
+    "d /export/media/tvshows 0770 root media"
+    "d /export/media/downloads 0770 root media"
   ];
 
   services.nfs.server = {
