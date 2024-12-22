@@ -4,6 +4,6 @@
   networking.firewall.allowedTCPPorts = [ 8642 ];
 
   services.nfs.server = {
-    exports = ''/export/blender 10.0.0.8/12(rw,sync,no_subtree_check,insecure,nohide)'';
+    exports = ''/export/blender 10.0.0.15/12(rw,sync,no_subtree_check,insecure,nohide)'';
   };
 }

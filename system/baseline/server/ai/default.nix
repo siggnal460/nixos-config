@@ -48,7 +48,7 @@
   ];
 
   services.nfs.server = {
-    exports = ''/export/ai 10.0.0.8(rw,nohide,insecure,no_subtree_check)'';
+    exports = ''/export/ai 10.0.0.15(rw,nohide,insecure,no_subtree_check)'';
   };
 
   virtualisation.oci-containers.containers = {
