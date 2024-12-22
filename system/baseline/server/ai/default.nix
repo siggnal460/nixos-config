@@ -151,7 +151,7 @@
         HF_HOME = "/cache/huggingface/hub";
         COMFYUI_PATH = "/app";
         COMFYUI_MODEL_PATH = "/app/models";
-        COMFYUI_EXTRA_ARGS = "--lowvram";
+        #COMFYUI_EXTRA_ARGS = "--lowvram";
       };
       volumes = [
         "/oci_cache/comfyui/huggingface:/cache/huggingface/hub"
