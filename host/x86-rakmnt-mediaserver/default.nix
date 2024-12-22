@@ -10,7 +10,7 @@
 
   networking = {
     hostId = "bda395e9";
-    hostName = "x86-atxtwr-workstation";
+    hostName = "x86-rakmnt-mediaserver";
     interfaces.enp42s0 = {
       useDHCP = false;
       ipv4.addresses = [
@@ -22,7 +22,7 @@
     };
     defaultGateway = {
       address = "10.0.0.1";
-      interface = "enp4s0";
+      interface = "enp42s0";
     };
   };
 
