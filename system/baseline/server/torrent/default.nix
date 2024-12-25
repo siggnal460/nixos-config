@@ -4,6 +4,10 @@
     "d /export/media/appdata/transmission/data 0770 transmission transmission"
   ];
 
+  networking.firewall.allowedTCPPorts = [ 51413 ];
+
+  networking.firewall.allowedUDPPorts = [ 51413 ];
+
   users.users = {
     transmission = {
       uid = 710;
@@ -35,6 +39,7 @@
         PUID = "710";
         PGID = "710";
         TZ = "America/Denver";
+        PEERPORT = "51413";
       };
       volumes = [
         "/export/media/downloads:/downloads"

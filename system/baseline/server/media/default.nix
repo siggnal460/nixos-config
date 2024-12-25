@@ -22,6 +22,7 @@
     "d /export/media/downloads/complete 0770 transmission media"
     "d /export/media/downloads/complete/anime 0770 transmission media"
     "d /export/media/downloads/complete/tvshows 0770 transmission media"
+    "d /export/media/downloads/complete/movies 0770 transmission media"
     "d /export/media/downloads/incomplete 0770 transmission media"
   ];
 
@@ -114,7 +115,7 @@
       ];
       environment = {
         PUID = "701";
-        PGID = "701";
+        PGID = "982";
         TZ = "America/Denver";
       };
       volumes = [
