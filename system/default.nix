@@ -106,11 +106,8 @@
     firewall.allowedTCPPorts = [ ];
     firewall.allowedUDPPorts = [ ];
     nameservers = [
-      "76.76.2.0"
-      "76.76.10.0"
-      "1.1.1.1"
       "8.8.8.8"
-      "8.8.4.4"
+      "8.8.8.4"
     ];
     #    extraHosts = ''
     #      127.0.0.1 localhost
