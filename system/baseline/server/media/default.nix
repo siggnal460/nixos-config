@@ -3,21 +3,26 @@
     "d /oci_cache/jellyfin 0770 jellyfin jellyfin"
     "d /export/media 0775 root root"
     "d /export/media/appdata 0775 root root"
-    "d /export/media/appdata/bazarr/data 0770 bazarr bazarr"
-    "d /export/media/appdata/jellyfin/config 0770 jellyfin jellyfin"
-    "d /export/media/appdata/jellyfin/data 0770 jellyfin jellyfin"
+    "d /export/media/appdata/bazarr/data 0770 bazarr users"
+    "d /export/media/appdata/jellyfin/config 0770 jellyfin users"
+    "d /export/media/appdata/jellyfin/data 0770 jellyfin users"
     "d /export/media/appdata/jellyseerr/data 0770 root users"
-    "d /export/media/appdata/lidarr/data 0770 prowlarr prowlarr"
-    "d /export/media/appdata/prowlarr/data 0770 prowlarr prowlarr"
-    "d /export/media/appdata/radarr/data 0770 radarr radarr"
-    "d /export/media/appdata/sonarr/data 0770 sonarr sonarr"
+    "d /export/media/appdata/lidarr/data 0770 prowlarr users"
+    "d /export/media/appdata/prowlarr/data 0770 prowlarr users"
+    "d /export/media/appdata/radarr/data 0770 radarr users"
+    "d /export/media/appdata/sonarr/data 0770 sonarr users"
+    "d /export/media/appdata/sonarr-anime/data 0770 sonarr users"
     "d /export/media/anime 0770 root media"
     "d /export/media/books 0770 root media"
     "d /export/media/courses 0770 root media"
     "d /export/media/movies 0770 root media"
     "d /export/media/music 0770 root media"
     "d /export/media/tvshows 0770 root media"
-    "d /export/media/downloads 0770 root media"
+    "d /export/media/downloads 0770 transmission media"
+    "d /export/media/downloads/complete 0770 transmission media"
+    "d /export/media/downloads/complete/anime 0770 transmission media"
+    "d /export/media/downloads/complete/tvshows 0770 transmission media"
+    "d /export/media/downloads/incomplete 0770 transmission media"
   ];
 
   services.nfs.server = {
@@ -25,53 +30,35 @@
   };
 
   users.users = {
-    bazarr = {
-      uid = 703;
-      isSystemUser = true;
-      group = "bazarr";
-      extraGroups = [ "media" ];
-    };
     jellyfin = {
       uid = 700;
       isSystemUser = true;
-      group = "jellyfin";
-      extraGroups = [ "media" ];
-    };
-    prowlarr = {
-      uid = 704;
-      isSystemUser = true;
-      group = "prowlarr";
-      extraGroups = [ "media" ];
+      group = "media";
     };
     radarr = {
       uid = 701;
       isSystemUser = true;
-      group = "radarr";
-      extraGroups = [ "media" ];
-    };
-    sonarr = {
-      uid = 702;
-      isSystemUser = true;
-      group = "sonarr";
-      extraGroups = [ "media" ];
-    };
-  };
-
-  users.groups = {
-    jellyfin = {
-      gid = 700;
-    };
-    radarr = {
-      gid = 701;
-    };
-    sonarr = {
-      gid = 702;
+      group = "media";
     };
     bazarr = {
-      gid = 703;
+      uid = 703;
+      isSystemUser = true;
+      group = "media";
     };
     prowlarr = {
-      gid = 704;
+      uid = 704;
+      isSystemUser = true;
+      group = "media";
+    };
+    sonarr = {
+      uid = 705;
+      isSystemUser = true;
+      group = "media";
+    };
+    sonarr-anime = {
+      uid = 706;
+      isSystemUser = true;
+      group = "media";
     };
   };
 
@@ -108,6 +95,7 @@
         "--name=jellyfin"
       ];
     };
+
     radarr = {
       image = "lscr.io/linuxserver/radarr:latest";
       autoStart = true;
@@ -131,6 +119,7 @@
         "--name=radarr"
       ];
     };
+
     sonarr = {
       image = "lscr.io/linuxserver/sonarr:latest";
       autoStart = true;
@@ -141,18 +130,44 @@
         "8989:8989"
       ];
       environment = {
-        PUID = "702";
-        PGID = "702";
+        PUID = "705";
+        PGID = "982";
         TZ = "America/Denver";
       };
       volumes = [
         "/export/media/appdata/sonarr/data:/config"
         "/export/media/tvshows:/tvshows"
+        "/export/media/downloads:/downloads"
       ];
       extraOptions = [
         "--name=sonarr"
       ];
     };
+
+    sonarr-anime = {
+      image = "lscr.io/linuxserver/sonarr:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      ports = [
+        "8988:8989"
+      ];
+      environment = {
+        PUID = "706";
+        PGID = "982";
+        TZ = "America/Denver";
+      };
+      volumes = [
+        "/export/media/appdata/sonarr-anime/data:/config"
+        "/export/media/anime:/tvshows"
+        "/export/media/downloads:/downloads"
+      ];
+      extraOptions = [
+        "--name=sonarr-anime"
+      ];
+    };
+
     bazarr = {
       image = "lscr.io/linuxserver/bazarr:latest";
       autoStart = true;
@@ -164,7 +179,7 @@
       ];
       environment = {
         PUID = "703";
-        PGID = "703";
+        PGID = "982";
         TZ = "America/Denver";
       };
       volumes = [
@@ -176,6 +191,7 @@
         "--name=bazarr"
       ];
     };
+
     prowlarr = {
       image = "lscr.io/linuxserver/prowlarr:latest";
       autoStart = true;
@@ -187,7 +203,7 @@
       ];
       environment = {
         PUID = "704";
-        PGID = "704";
+        PGID = "982";
         TZ = "America/Denver";
       };
       volumes = [
@@ -195,6 +211,23 @@
       ];
       extraOptions = [
         "--name=prowlarr"
+      ];
+    };
+
+    flaresolverr = {
+      image = "ghcr.io/flaresolverr/flaresolverr:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      ports = [
+        "8191:8191"
+      ];
+      environment = {
+        TZ = "America/Denver";
+      };
+      extraOptions = [
+        "--name=flaresolverr"
       ];
     };
   };
