@@ -40,6 +40,11 @@
       isSystemUser = true;
       group = "media";
     };
+    jellyseerr = {
+      uid = 702;
+      isSystemUser = true;
+      group = "media";
+    };
     bazarr = {
       uid = 703;
       isSystemUser = true;
@@ -77,9 +82,10 @@
       ];
       environment = {
         PUID = "700";
-        PGID = "700";
+        PGID = "982";
         TZ = "America/Denver";
-        NVIDIA_VISIBLE_DEVICES = "all";
+        NVIDIA_DRIVER_CAPABILITIES = "all";
+        NVIDIA_VISIBLE_DEVICES = "1";
       };
       volumes = [
         "/oci_cache/jellyfin:/config/cache"
@@ -93,6 +99,7 @@
       ];
       extraOptions = [
         "--name=jellyfin"
+        "--gpus=1"
       ];
     };
 
@@ -211,6 +218,28 @@
       ];
       extraOptions = [
         "--name=prowlarr"
+      ];
+    };
+
+    jellyseerr = {
+      image = "docker.io/fallenbagel/jellyseerr:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      ports = [
+        "5055:5055"
+      ];
+      environment = {
+        PUID = "702";
+        PGID = "982";
+        TZ = "America/Denver";
+      };
+      volumes = [
+        "/export/media/appdata/jellyseerr/data:/app/config"
+      ];
+      extraOptions = [
+        "--name=jellyseerr"
       ];
     };
 
