@@ -148,6 +148,16 @@
             ]
             [ ./user/aaron/workstation ];
 
+        ## TABLETS ##
+        x86-tablet-starlite =
+          mkComputerUnstable "x86_64-linux" ./host/x86-tablet-starlite
+            [
+						  nixos-hardware.nixosModules.starlabs-starlite-i5
+              ./system/baseline/workstation
+              ./system/baseline/workstation/art
+            ]
+            [ ./user/aaron/workstation ];
+
         ## CONSOLES ##
         x86-minitx-jovian =
           mkComputerUnstable "x86_64-linux" ./host/x86-minitx-jovian
