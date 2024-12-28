@@ -1,6 +1,7 @@
 {
   systemd.tmpfiles.rules = [
-    "d /oci_cache/jellyfin 0770 jellyfin jellyfin"
+    "d /oci_cache 0775 root root"
+    "d /oci_cache/jellyfin 0770 jellyfin root"
     "d /export/media 0775 root root"
     "d /export/media/appdata 0775 root root"
     "d /export/media/appdata/bazarr/data 0770 bazarr users"
@@ -11,7 +12,7 @@
     "d /export/media/appdata/prowlarr/data 0770 prowlarr users"
     "d /export/media/appdata/radarr/data 0770 radarr users"
     "d /export/media/appdata/sonarr/data 0770 sonarr users"
-    "d /export/media/appdata/sonarr-anime/data 0770 sonarr users"
+    "d /export/media/appdata/sonarr-anime/data 0770 sonarr-anime users"
     "d /export/media/anime 0770 root media"
     "d /export/media/books 0770 root media"
     "d /export/media/courses 0770 root media"
