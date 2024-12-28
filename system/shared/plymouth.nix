@@ -11,7 +11,6 @@
     initrd.verbose = false;
     plymouth = {
       enable = true;
-      theme = "breeze";
     };
   };
 }

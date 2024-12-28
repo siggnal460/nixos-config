@@ -31,7 +31,10 @@
       "nfs"
       "nfs4"
     ];
-    kernelModules = [ "nfs" ];
+    kernelModules = [
+      "nfs"
+      "nfs4"
+    ];
   };
 
   fileSystems."/mnt/ai" = {

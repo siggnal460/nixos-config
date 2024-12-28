@@ -33,12 +33,14 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     sops-nix.url = "github:Mic92/sops-nix";
+    stylix.url = "github:danth/stylix";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     jovian-nixos.url = "github:Jovian-Experiments/Jovian-NixOS";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nixified-ai.url = "github:nixified-ai/flake";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nixpkgs-unstable.follows = "nixos-cosmic/nixpkgs-unstable";
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -48,20 +50,22 @@
   outputs =
     inputs@{
       self,
-      nixpkgs,
-      nixpkgs-unstable,
+      chaotic,
       home-manager,
       home-manager-unstable,
-      sops-nix,
-      nixos-hardware,
       jovian-nixos,
       nix-gaming,
       nix-index-database,
       nixified-ai,
-      chaotic,
+      nixos-hardware,
       nixos-cosmic,
+      nixpkgs,
+      nixpkgs-unstable,
+      sops-nix,
+      stylix,
       ...
     }:
+
     let
       mkComputerStable =
         system: configurationNix: extraModules: extraHomeModules:
@@ -92,6 +96,7 @@
             configurationNix
             sops-nix.nixosModules.sops
             chaotic.nixosModules.default
+            stylix.nixosModules.stylix
             nix-index-database.nixosModules.nix-index
             ./system
             home-manager-unstable.nixosModules.home-manager
@@ -102,6 +107,7 @@
             }
           ] ++ extraModules; # system modules
         };
+
     in
     {
       nixosConfigurations = {

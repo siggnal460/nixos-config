@@ -54,7 +54,8 @@ def main [
     --path (-p): string = "/etc/nixos" 					                # Filepath to the folder containing the flake.nix.
     --name (-n): string                					                # Use the flake with this name. Defaults to the hostname if not specified.
     --remote (-r): string = "origin"   					                # Your origin repository name.
-    --url (-r): string = "git@github.com:siggnal460/nixos-config.git"   # Your origin repository SSH url, in the vein of git@github.com:<username>/<repo>.git
+    --short (-s)                    					                # Perform a simple nixos-rebuild switch with no interaction to git
+    --url (-u): string = "git@github.com:siggnal460/nixos-config.git"   # Your origin repository SSH url, in the vein of git@github.com:<username>/<repo>.git
 ] {
     mut commit_msg = ""
     let flake_folder = $path
@@ -69,6 +70,19 @@ def main [
     if ($folder_type != dir) {
         print_error $"Tried to update from ($flake_folder), but it is not a directory, it's a ($folder_type). --path needs to be set to the directory the flake.nix is located within."
         exit 1
+    }
+
+    if $short {
+        try {
+            update $flake_name $flake_folder $limit
+        } catch {
+            |err| $err.msg
+        	git reset --soft HEAD~1
+        	exit 1
+        }
+        print_success "Switch complete"
+        print "\n"
+        exit 0
     }
 
     cd $flake_folder
@@ -142,7 +156,7 @@ def main [
     } catch {
         |err| $err.msg
     	git reset --soft HEAD~1
-	exit 1
+    	exit 1
     }
     print_success "Switch complete"
     print "\n"

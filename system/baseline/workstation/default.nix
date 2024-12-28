@@ -61,12 +61,18 @@
 
   services.flatpak.enable = true;
 
+  stylix = {
+    enable = true;
+    polarity = "dark";
+    image = ../../../images/wallpapers/tux.png;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+  };
+
   systemd.services.flatpak-install = {
     wantedBy = [ "multi-user.target" ];
     path = [ pkgs.flatpak ];
     script = ''
-                  flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-      						flatpak install --or-update -y flathub dev.vencord.Vesktop
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     '';
   };
 
