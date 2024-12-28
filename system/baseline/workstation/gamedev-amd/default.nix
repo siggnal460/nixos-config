@@ -6,7 +6,7 @@
 
   environment.systemPackages = with pkgs; [
     audacity
-    ardour
+    #ardour
     godot_4
     inkscape
     kdePackages.kdenlive

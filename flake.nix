@@ -40,7 +40,6 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nixified-ai.url = "github:nixified-ai/flake";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    nixpkgs-unstable.follows = "nixos-cosmic/nixpkgs-unstable";
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
