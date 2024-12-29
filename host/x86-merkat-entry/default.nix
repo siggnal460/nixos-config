@@ -2,6 +2,6 @@
   imports = [ ./hardware-configuration.nix ];
 
   networking = {
-    hostName = "x86-tablet-starlite";
-	};
+    hostName = "x86-merkat-entry";
+  };
 }

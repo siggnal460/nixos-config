@@ -152,7 +152,7 @@
         x86-tablet-starlite =
           mkComputerUnstable "x86_64-linux" ./host/x86-tablet-starlite
             [
-						  nixos-hardware.nixosModules.starlabs-starlite-i5
+              nixos-hardware.nixosModules.starlabs-starlite-i5
               ./system/baseline/workstation
               ./system/baseline/workstation/art
             ]
@@ -186,22 +186,22 @@
             [ ./user/aaron/htpc ];
 
         ## SERVERS ##
-        x86-merkat-entry =
-          mkComputerStable "x86_64-linux" ./host/x86-merkat-entry
+        x86-merkat-webservers =
+          mkComputerStable "x86_64-linux" ./host/x86-merkat-webservers
             [
-              ./system/hardware/gpu/intel
               ./system/baseline/server
-              ./system/baseline/server/caddy
-              ./system/baseline/server/headscale
+              #./system/hardware/gpu/intel
             ]
             [ ];
 
-        x86-merkat-webserver =
-          mkComputerUnstable "x86_64-linux" ./host/x86-merkat-webserver
+        x86-merkat-entry =
+          mkComputerStable "x86_64-linux" ./host/x86-merkat-entry
             [
-              ./system/hardware/gpu/intel
               ./system/baseline/server
-              ./system/baseline/server/nextcloud
+              #./system/baseline/server/authelia
+              ./system/baseline/server/reverse-proxy
+              #./system/baseline/server/headscale
+              #./system/hardware/gpu/intel
             ]
             [ ];
 
@@ -228,6 +228,7 @@
               ./system/baseline/server/media
               ./system/baseline/server/torrent
               ./system/baseline/server/nfs
+              #./system/baseline/server/nextcloud
             ]
             [ ];
       };

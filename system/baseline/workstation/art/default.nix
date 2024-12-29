@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-	  blender
-		gimp
+    blender
+    gimp
     inkscape
     krita
     libresprite
