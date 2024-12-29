@@ -3,5 +3,5 @@
 
   networking = {
     hostName = "x86-tablet-starlite";
-	};
+  };
 }
