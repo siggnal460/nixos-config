@@ -56,7 +56,6 @@
       age.sshKeyPaths = [ "/home/aaron/.ssh/id_ed25519" ];
       age.generateKey = true;
       defaultSopsFormat = "yaml";
-      validateSopsFiles = false;
     };
 
     accounts.email.accounts.aaron = {

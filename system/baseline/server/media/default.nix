@@ -1,10 +1,18 @@
+let
+  jellyseerrApiFile = "/var/lib/doplarr/jellyseerr_api";
+  discordApiFile = "/var/lib/doplarr/discord_api";
+in
 {
   systemd.tmpfiles.rules = [
-    "d /oci_cache 0775 root root"
+    "d /oci_cache 0755 root root"
     "d /oci_cache/jellyfin 0770 jellyfin root"
+    #"d /var/lib/doplarr 0400 doplarr root"
+    #"f /var/lib/doplarr/jellyseerr_api 0400 doplarr root"
+    #"f /var/lib/doplarr/discord_api 0400 doplarr root"
     "d /export/media 0775 root root"
     "d /export/media/appdata 0775 root root"
     "d /export/media/appdata/bazarr/data 0770 bazarr users"
+    "d /export/media/appdata/doplarr/data 0770 doplarr users"
     "d /export/media/appdata/jellyfin/config 0770 jellyfin users"
     "d /export/media/appdata/jellyfin/data 0770 jellyfin users"
     "d /export/media/appdata/jellyseerr/data 0770 root users"
@@ -64,6 +72,11 @@
     };
     sonarr-anime = {
       uid = 706;
+      isSystemUser = true;
+      group = "media";
+    };
+    doplarr = {
+      uid = 707;
       isSystemUser = true;
       group = "media";
     };
@@ -244,6 +257,28 @@
         "--name=jellyseerr"
       ];
     };
+
+    #doplarr = {
+    #  image = "docker.io/fallenbagel/doplarr:latest";
+    #  autoStart = true;
+    #  labels = {
+    #    "io.containers.autoupdate" = "registry";
+    #  };
+    #  environment = {
+    #    PUID = "707";
+    #    PGID = "982";
+    #    TZ = "America/Denver";
+    #		FILE__DISCORD__TOKEN = "${discordApiFile}";
+    #		FILE__OVERSEERR__API = "${jellyseerrApiFile}";
+    #		OVERSEERR__URL = "http://host.docker.internal:5055";
+    #  };
+    #  volumes = [
+    #    "/export/media/appdata/doplarr/data:/config"
+    #  ];
+    #  extraOptions = [
+    #    "--name=doplarr"
+    #  ];
+    #};
 
     flaresolverr = {
       image = "ghcr.io/flaresolverr/flaresolverr:latest";
