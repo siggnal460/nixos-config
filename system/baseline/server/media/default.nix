@@ -3,6 +3,8 @@ let
   discordApiFile = "/var/lib/doplarr/discord_api";
 in
 {
+  imports = [ ../../../shared/podman.nix ];
+
   systemd.tmpfiles.rules = [
     "d /oci_cache 0755 root root"
     "d /oci_cache/jellyfin 0770 jellyfin root"
@@ -16,13 +18,18 @@ in
     "d /export/media/appdata/jellyfin/config 0770 jellyfin users"
     "d /export/media/appdata/jellyfin/data 0770 jellyfin users"
     "d /export/media/appdata/jellyseerr/data 0770 root users"
+    "d /export/media/appdata/komga/data 0770 komga users"
     "d /export/media/appdata/lidarr/data 0770 prowlarr users"
     "d /export/media/appdata/prowlarr/data 0770 prowlarr users"
     "d /export/media/appdata/radarr/data 0770 radarr users"
+    "d /export/media/appdata/readarr/data 0770 readarr users"
     "d /export/media/appdata/sonarr/data 0770 sonarr users"
     "d /export/media/appdata/sonarr-anime/data 0770 sonarr-anime users"
     "d /export/media/anime 0770 root media"
     "d /export/media/books 0770 root media"
+    "d /export/media/books/comics 0770 root media"
+    "d /export/media/books/manga 0770 root media"
+    "d /export/media/books/regular 0770 root media"
     "d /export/media/courses 0770 root media"
     "d /export/media/movies 0770 root media"
     "d /export/media/music 0770 root media"
@@ -30,6 +37,7 @@ in
     "d /export/media/downloads 0770 transmission media"
     "d /export/media/downloads/complete 0770 transmission media"
     "d /export/media/downloads/complete/anime 0770 transmission media"
+    "d /export/media/downloads/complete/books 0770 transmission media"
     "d /export/media/downloads/complete/tvshows 0770 transmission media"
     "d /export/media/downloads/complete/movies 0770 transmission media"
     "d /export/media/downloads/incomplete 0770 transmission media"
@@ -77,6 +85,16 @@ in
     };
     doplarr = {
       uid = 707;
+      isSystemUser = true;
+      group = "media";
+    };
+    komga = {
+      uid = 708;
+      isSystemUser = true;
+      group = "media";
+    };
+    readarr = {
+      uid = 709;
       isSystemUser = true;
       group = "media";
     };
@@ -255,6 +273,53 @@ in
       ];
       extraOptions = [
         "--name=jellyseerr"
+      ];
+    };
+
+    komga = {
+      image = "docker.io/gotson/komga:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      ports = [
+        "25600:25600"
+      ];
+      environment = {
+        PUID = "708";
+        PGID = "982";
+        TZ = "America/Denver";
+      };
+      volumes = [
+        "/export/media/books:/data"
+        "/export/media/appdata/komga/data:/config"
+      ];
+      extraOptions = [
+        "--name=komga"
+      ];
+    };
+
+    readarr = {
+      image = "lscr.io/linuxserver/readarr:develop"; # TODO switch to stable when ready
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      ports = [
+        "8787:8787"
+      ];
+      environment = {
+        PUID = "709";
+        PGID = "982";
+        TZ = "America/Denver";
+      };
+      volumes = [
+        "/export/media/appdata/readarr/data:/config"
+        "/export/media/books:/books"
+        "/export/media/downloads:/downloads"
+      ];
+      extraOptions = [
+        "--name=readarr"
       ];
     };
 

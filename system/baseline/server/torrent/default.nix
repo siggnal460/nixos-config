@@ -4,6 +4,8 @@
     "d /export/media/appdata/transmission/data 0770 transmission transmission"
   ];
 
+  imports = [ ../../../shared/podman.nix ];
+
   networking.firewall.allowedTCPPorts = [ 51413 ];
 
   networking.firewall.allowedUDPPorts = [ 51413 ];
