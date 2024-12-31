@@ -11,7 +11,6 @@
     ../../shared/pipewire.nix
     ../../shared/bluetooth.nix
     ../../shared/nfs-client.nix
-    ../../shared/cosmic.nix
   ];
 
   _module.args.pkgsStable = import inputs.nixpkgs {
@@ -79,7 +78,7 @@
   environment = {
     systemPackages = with pkgs; [
       anki
-      pkgsStable.calibre
+      calibre
       element-desktop
       deluge
       firefox

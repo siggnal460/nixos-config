@@ -117,6 +117,7 @@
               #system-wide modules
               ./system/hardware/gpu/intel
               ./system/hardware/thunderbolt
+              ./system/de/cosmic
               ./system/baseline/workstation
               ./system/baseline/workstation/gamedev
               ./system/baseline/workstation/vm-host
@@ -140,6 +141,7 @@
             [
               ./system/hardware/gpu/amd
               ./system/hardware/gpu/amd/rocm
+              ./system/de/cosmic
               ./system/baseline/workstation
               ./system/baseline/workstation/ai-amd
               ./system/baseline/workstation/gaming
