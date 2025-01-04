@@ -233,6 +233,7 @@
               ./system/baseline/server/media
               ./system/baseline/server/download-client
               ./system/baseline/server/nfs
+              ./system/baseline/server/netbootxyz
               #./system/baseline/server/nextcloud
             ]
             [ ];
