@@ -6,41 +6,31 @@ in
   imports = [ ../../../shared/podman.nix ];
 
   systemd.tmpfiles.rules = [
-    "d /oci_cache 0755 root root"
-    "d /oci_cache/jellyfin 0770 jellyfin root"
     #"d /var/lib/doplarr 0400 doplarr root"
     #"f /var/lib/doplarr/jellyseerr_api 0400 doplarr root"
     #"f /var/lib/doplarr/discord_api 0400 doplarr root"
     "d /export/media 0775 root root"
-    "d /export/media/appdata 0775 root root"
-    "d /export/media/appdata/bazarr/data 0770 bazarr users"
-    "d /export/media/appdata/doplarr/data 0770 doplarr users"
-    "d /export/media/appdata/jellyfin/config 0770 jellyfin users"
-    "d /export/media/appdata/jellyfin/data 0770 jellyfin users"
-    "d /export/media/appdata/jellyseerr/data 0770 root users"
-    "d /export/media/appdata/komga/data 0770 komga users"
-    "d /export/media/appdata/lidarr/data 0770 prowlarr users"
-    "d /export/media/appdata/prowlarr/data 0770 prowlarr users"
-    "d /export/media/appdata/radarr/data 0770 radarr users"
-    "d /export/media/appdata/readarr/data 0770 readarr users"
-    "d /export/media/appdata/sonarr/data 0770 sonarr users"
-    "d /export/media/appdata/sonarr-anime/data 0770 sonarr-anime users"
-    "d /export/media/anime 0770 root media"
-    "d /export/media/books 0770 root media"
-    "d /export/media/books/comics 0770 root media"
-    "d /export/media/books/manga 0770 root media"
-    "d /export/media/books/regular 0770 root media"
-    "d /export/media/courses 0770 root media"
-    "d /export/media/movies 0770 root media"
-    "d /export/media/music 0770 root media"
-    "d /export/media/tvshows 0770 root media"
-    "d /export/media/downloads 0770 transmission media"
-    "d /export/media/downloads/complete 0770 transmission media"
-    "d /export/media/downloads/complete/anime 0770 transmission media"
-    "d /export/media/downloads/complete/books 0770 transmission media"
-    "d /export/media/downloads/complete/tvshows 0770 transmission media"
-    "d /export/media/downloads/complete/movies 0770 transmission media"
-    "d /export/media/downloads/incomplete 0770 transmission media"
+    "d /etc/bazarr 0770 bazarr users"
+    "d /etc/doplarr 0770 doplarr users"
+    "d /etc/jellyfin 0770 jellyfin users"
+    "d /etc/jellyseerr 0770 root users"
+    "d /etc/komga 0770 komga users"
+    "d /etc/lidarr 0770 prowlarr users"
+    "d /etc/prowlarr 0770 prowlarr users"
+    "d /etc/radarr 0770 radarr users"
+    "d /etc/readarr 0770 readarr users"
+    "d /etc/sonarr 0770 sonarr users"
+    "d /etc/sonarr-anime 0770 sonarr-anime users"
+    "d /export/media/data 0775 root media"
+    "d /export/media/data/anime 0775 root media"
+    "d /export/media/data/books 0775 root media"
+    "d /export/media/data/books/comics 0775 root media"
+    "d /export/media/data/books/manga 0775 root media"
+    "d /export/media/data/books/regular 0775 root media"
+    "d /export/media/data/courses 0775 root media"
+    "d /export/media/data/movies 0775 root media"
+    "d /export/media/data/music 0775 root media"
+    "d /export/media/data/tvshows 0775 root media"
   ];
 
   services.nfs.server = {
@@ -121,14 +111,8 @@ in
         NVIDIA_VISIBLE_DEVICES = "1";
       };
       volumes = [
-        "/oci_cache/jellyfin:/config/cache"
-        "/export/media/appdata/jellyfin/config:/config"
-        "/export/media/anime:/data/anime"
-        "/export/media/books:/data/books"
-        "/export/media/courses:/data/courses"
-        "/export/media/tvshows:/data/tvshows"
-        "/export/media/movies:/data/movies"
-        "/export/media/music:/data/music"
+        "/etc/jellyfin:/config"
+        "/export/media/data:/data"
       ];
       extraOptions = [
         "--name=jellyfin"
@@ -151,9 +135,8 @@ in
         TZ = "America/Denver";
       };
       volumes = [
-        "/export/media/appdata/radarr/data:/config"
-        "/export/media/movies:/movies"
-        "/export/media/downloads:/downloads"
+        "/etc/radarr:/config"
+        "/export/media:/data"
       ];
       extraOptions = [
         "--name=radarr"
@@ -175,9 +158,8 @@ in
         TZ = "America/Denver";
       };
       volumes = [
-        "/export/media/appdata/sonarr/data:/config"
-        "/export/media/tvshows:/tvshows"
-        "/export/media/downloads:/downloads"
+        "/etc/sonarr:/config"
+        "/export/media:/data"
       ];
       extraOptions = [
         "--name=sonarr"
@@ -199,9 +181,8 @@ in
         TZ = "America/Denver";
       };
       volumes = [
-        "/export/media/appdata/sonarr-anime/data:/config"
-        "/export/media/anime:/tvshows"
-        "/export/media/downloads:/downloads"
+        "/etc/sonarr-anime:/config"
+        "/export/media:/data"
       ];
       extraOptions = [
         "--name=sonarr-anime"
@@ -223,9 +204,9 @@ in
         TZ = "America/Denver";
       };
       volumes = [
-        "/export/media/appdata/bazarr/data:/config"
-        "/export/media/movies:/movies"
-        "/export/media/tvshows:/tv"
+        "/etc/bazarr:/config"
+        "/export/media/data/movies:/movies"
+        "/export/media/data/tvshows:/tv"
       ];
       extraOptions = [
         "--name=bazarr"
@@ -247,7 +228,7 @@ in
         TZ = "America/Denver";
       };
       volumes = [
-        "/export/media/appdata/prowlarr/data:/config"
+        "/etc/prowlarr:/config"
       ];
       extraOptions = [
         "--name=prowlarr"
@@ -269,7 +250,7 @@ in
         TZ = "America/Denver";
       };
       volumes = [
-        "/export/media/appdata/jellyseerr/data:/app/config"
+        "/etc/jellyseerr:/app/config"
       ];
       extraOptions = [
         "--name=jellyseerr"
@@ -291,8 +272,8 @@ in
         TZ = "America/Denver";
       };
       volumes = [
-        "/export/media/books:/data"
-        "/export/media/appdata/komga/data:/config"
+        "/etc/komga:/config"
+        "/export/media/data/books:/data"
       ];
       extraOptions = [
         "--name=komga"
@@ -314,36 +295,35 @@ in
         TZ = "America/Denver";
       };
       volumes = [
-        "/export/media/appdata/readarr/data:/config"
-        "/export/media/books:/books"
-        "/export/media/downloads:/downloads"
+        "/etc/readarr:/config"
+        "/export/media:/data"
       ];
       extraOptions = [
         "--name=readarr"
       ];
     };
 
-    #doplarr = {
-    #  image = "docker.io/fallenbagel/doplarr:latest";
-    #  autoStart = true;
-    #  labels = {
-    #    "io.containers.autoupdate" = "registry";
-    #  };
-    #  environment = {
-    #    PUID = "707";
-    #    PGID = "982";
-    #    TZ = "America/Denver";
-    #		FILE__DISCORD__TOKEN = "${discordApiFile}";
-    #		FILE__OVERSEERR__API = "${jellyseerrApiFile}";
-    #		OVERSEERR__URL = "http://host.docker.internal:5055";
-    #  };
-    #  volumes = [
-    #    "/export/media/appdata/doplarr/data:/config"
-    #  ];
-    #  extraOptions = [
-    #    "--name=doplarr"
-    #  ];
-    #};
+    #  #doplarr = {
+    #  #  image = "docker.io/fallenbagel/doplarr:latest";
+    #  #  autoStart = true;
+    #  #  labels = {
+    #  #    "io.containers.autoupdate" = "registry";
+    #  #  };
+    #  #  environment = {
+    #  #    PUID = "707";
+    #  #    PGID = "982";
+    #  #    TZ = "America/Denver";
+    #  #		FILE__DISCORD__TOKEN = "${discordApiFile}";
+    #  #		FILE__OVERSEERR__API = "${jellyseerrApiFile}";
+    #  #		OVERSEERR__URL = "http://host.docker.internal:5055";
+    #  #  };
+    #  #  volumes = [
+    #  #    "/export/media/appdata/doplarr/data:/config"
+    #  #  ];
+    #  #  extraOptions = [
+    #  #    "--name=doplarr"
+    #  #  ];
+    #  #};
 
     flaresolverr = {
       image = "ghcr.io/flaresolverr/flaresolverr:latest";

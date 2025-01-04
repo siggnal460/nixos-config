@@ -231,7 +231,7 @@
               ./system/baseline/server/openvpn-client
               ./system/baseline/server/streaming
               ./system/baseline/server/media
-              ./system/baseline/server/torrent
+              ./system/baseline/server/download-client
               ./system/baseline/server/nfs
               #./system/baseline/server/nextcloud
             ]
