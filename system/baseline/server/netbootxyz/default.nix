@@ -1,6 +1,6 @@
 {
   systemd.tmpfiles.rules = [
-    "d /etc/netbootxyz 0400 netbootxyz netbootxyz"
+    "d /etc/netbootxyz 0774 netbootxyz netbootxyz"
     "d /export/netbootxyz/assets 0775 netbootxyz netbootxyz"
   ];
 
@@ -34,6 +34,8 @@
         PUID = "750";
         PGID = "750";
         TZ = "America/Denver";
+        WEB_APP_PORT = "3000";
+        NGINX_PORT = "80";
       };
       volumes = [
         "/etc/netbootxyz:/config"

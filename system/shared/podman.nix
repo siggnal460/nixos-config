@@ -14,14 +14,25 @@
     };
   };
 
-  virtualisation.oci-containers.containers = {
-    watchtower = {
-      image = "docker.io/containrrr/watchtower:latest";
-      volumes = [ "/var/run/podman/podman.sock:/var/run/docker.sock:rw" ];
-    };
-  };
-
   virtualisation.oci-containers.backend = "podman";
 
-  environment.systemPackages = [ pkgs.podman-compose ];
+  systemd = {
+    timers = {
+      podman-updater = {
+        timerConfig = {
+          Unit = "podman-updater.service";
+          OnCalendar = "*-*-* 4:00:00";
+        };
+        wantedBy = [ "timers.target" ];
+      };
+    };
+    services.podman-updater = {
+      description = "Service that runs daily to update all podman containers";
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "sudo podman auto-update";
+      };
+    };
+  };
 }

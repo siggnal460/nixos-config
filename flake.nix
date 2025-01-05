@@ -229,7 +229,7 @@
               ./system/hardware/gpu/nvidia/cuda
               ./system/baseline/server
               ./system/baseline/server/openvpn-client
-              ./system/baseline/server/streaming
+              #./system/baseline/server/streaming
               ./system/baseline/server/media
               ./system/baseline/server/download-client
               ./system/baseline/server/nfs
