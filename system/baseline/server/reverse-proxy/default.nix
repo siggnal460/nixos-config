@@ -17,16 +17,16 @@ in
           					file_server
           					root * ${
                  pkgs.runCommand "populateCaddyHtml" { } ''
-                           mkdir "$out"
-                   				echo "${builtins.readFile htmlFile}" > "$out/index.html"
-                             				''
+                   							mkdir "$out"
+                   							echo "${builtins.readFile htmlFile}" > "$out/index.html"
+                   						''
                }
-          					'';
+          				'';
       };
       "media.gappyland.org" = {
         extraConfig = ''
-          				  reverse_proxy /jellyfin* 10.0.0.7:8096
-          				'';
+          	reverse_proxy /jellyfin* 10.0.0.7:8096
+        '';
       };
     };
   };

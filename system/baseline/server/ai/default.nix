@@ -2,6 +2,7 @@
 {
   imports = [
     ../../../shared/latest-kernel.nix
+    ../../../shared/podman.nix
     ./systemd/model-loader.nix
     ./systemd/custom-node-loader.nix
   ];
