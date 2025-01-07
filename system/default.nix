@@ -109,23 +109,13 @@
       "8.8.8.8"
       "8.8.8.4"
     ];
-    #    extraHosts = ''
-    #      127.0.0.1 localhost
-    #      10.0.0.11 x86-atxtwr-computeserver
-    #      10.1.0.1  x86-thnkpd-netman
-    #      10.2.0.1  x86-galago-servman
-    #      10.3.0.1  arm-rasbpi-rproxy
-    #      10.4.0.1  x86-racmnt-mediaserv
-    #      10.5.0.1  arm-rasbpi-secretserv
-    #      10.5.0.2  arm-rasbpi-backupser
-    #      10.5.0.3  arm-rasbpi-torrentserv
-    #      10.5.0.4  x86-merkat-testserv
-    #      10.6.0.1  x86-atxtwr-gamingpc
-    #      10.6.0.2  x86-minitx-jovian
-    #      10.6.0.3  x86-stmdck-jovian
-    #      10.6.0.4  x86-cphone-graphene
-    #      10.6.0.5  x86-merkat-htpc
-    #    '';
+    # these are temporary
+    extraHosts = ''
+      								   127.0.0.1 localhost
+      									 10.0.0.7   x86-rakmnt-mediaserver
+      									 10.0.0.10  x86-atxtwr-computserver
+      									 10.0.0.11  x86-merkat-entry
+      								 '';
   };
 
   programs = {

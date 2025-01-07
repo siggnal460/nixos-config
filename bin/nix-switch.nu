@@ -1,30 +1,30 @@
 #!/usr/bin/env nu
 
-def build_cores [ ] -> int {
+def build_cores [ ] {
     let threads = nproc | into int
 
     if $threads > 8 { ($threads / 8 | math round | into int) } else { 1 }
 }
 
-def build_jobs [ ] -> int {
+def build_jobs [ ] {
     #let mem = sys mem | get total | into string | str replace "GiB" "" | into float
 
     #if $mem > 8 { ($mem / 8 | math round | into int) } else { 1 }
 }
 
-def print_header [ text: string ] -> string {
+def print_header [ text: string ] {
     print $"(ansi blue_reverse)------ ($text) ------(ansi reset)"
 }
 
-def print_error [ text: string ] -> string {
+def print_error [ text: string ] {
     print $"(ansi red)($text)(ansi reset)"
 }
 
-def print_success [ text: string ] -> string {
+def print_success [ text: string ] {
     print $"(ansi green)($text)(ansi reset)"
 }
 
-def print_warning [ text: string ] -> string {
+def print_warning [ text: string ] {
     print $"(ansi yellow)($text)(ansi reset)"
 }
 
@@ -42,7 +42,7 @@ def update [ flake_name: string flake_folder: string limit: bool ] {
     }
 }
 
-def repo_changes [ ] -> bool {
+def repo_changes [ ] {
     if (git status -s | str length) > 0 { true } else { false }
 }
 

@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  #imports = [ ../../../shared/blender-amd.nix ];
+  imports = [ ../../../shared/blender-amd.nix ];
 
   hardware.opentabletdriver.enable = true;
 
