@@ -150,6 +150,11 @@ def main [
         print "\n"
     }
 
+    # temporary workaround for stylix
+    rm /home/aaron/.config/gtk-3.0/gtk.css
+    rm /home/aaron/.config/gtk-4.0/gtk.css
+    rm -r /home/aaron/.local/share/flatpak/overrides/global
+
     print_header "SWITCHING TO NEW CONFIGURATION"
     try {
         update $flake_name $flake_folder $limit
