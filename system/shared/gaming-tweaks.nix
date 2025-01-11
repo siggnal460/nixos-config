@@ -6,15 +6,29 @@
     inputs.nix-gaming.nixosModules.platformOptimizations
   ];
 
-  services.pipewire.lowLatency = {
-    enable = true;
-    quantum = 64;
-    rate = 48000;
+  #boot.kernel.sysctl = {
+  #	"kernel.sched_cfs_bandwidth_slice_us" = 3000;
+  #	"net.ipv4.tcp_fin_timeout" = 25;
+  #	"vm.max_map_count" = 2147483642;
+  #};
+
+  services = {
+    scx = {
+      enable = true;
+      scheduler = "scx_lavd";
+    };
+    pipewire.lowLatency = {
+      enable = true;
+      quantum = 64;
+      rate = 48000;
+    };
   };
 
   services.flatpak.enable = true;
 
   hardware.steam-hardware.enable = true;
+
+  programs.steam.platformOptimizations.enable = true;
 
   systemd.services.flatpak-app-installer = {
     wantedBy = [ "multi-user.target" ];
