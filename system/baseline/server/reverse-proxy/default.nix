@@ -25,8 +25,9 @@ in
       };
       "media.gappyland.org" = {
         extraConfig = ''
-          	reverse_proxy /jellyfin* 10.0.0.7:8096
-        '';
+          				redir /jellyfin /jellyfin/
+                    				  reverse_proxy /jellyfin/* 10.0.0.7:8096
+                    				'';
       };
     };
   };

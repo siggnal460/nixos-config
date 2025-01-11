@@ -191,20 +191,21 @@
             [ ./user/aaron/htpc ];
 
         ## SERVERS ##
-        x86-merkat-webservers =
-          mkComputerStable "x86_64-linux" ./host/x86-merkat-webservers
-            [
-              ./system/baseline/server
-              #./system/hardware/gpu/intel
-            ]
-            [ ];
+        #x86-merkat-ldap =
+        #  mkComputerStable "x86_64-linux" ./host/x86-merkat-webservers
+        #    [
+        #      ./system/baseline/server
+        #      ./system/baseline/server/freeipa
+        #      #./system/hardware/gpu/intel
+        #    ]
+        #    [ ];
 
         x86-merkat-entry =
           mkComputerStable "x86_64-linux" ./host/x86-merkat-entry
             [
               ./system/baseline/server
-              #./system/baseline/server/authelia
               ./system/baseline/server/reverse-proxy
+              ./system/baseline/server/freeipa
               #./system/baseline/server/headscale
               #./system/hardware/gpu/intel
             ]
