@@ -12,6 +12,10 @@
     "d /oci_cache/comfyui 0774 root users"
     "d /oci_cache/comfyui/huggingface 0770 root users"
     "d /oci_cache/comfyui/pip 0770 root users"
+    "d /oci_cache/comfyui/matplotlib 0770 root users"
+
+    "d /venv/comfyui/lib 0770 root users"
+    "d /venv/comfyui/lib64 0770 root users"
 
     "d /export/ai 0774 root users"
 
@@ -23,7 +27,7 @@
     "d /export/ai/appdata/sillytavern/plugins 0770 root users"
     "d /export/ai/appdata/openedai-speech/voices 0770 root users"
     "d /export/ai/appdata/openedai-speech/config 0770 root users"
-    "d /export/ai/appdata/comfyui/custom_nodes 0760 root users"
+    "d /export/ai/appdata/comfyui/custom_nodes 0770 root users"
     "d /export/ai/appdata/comfyui/workflows 0770 root users"
 
     "d /export/ai/models 0774 root users"
@@ -99,7 +103,6 @@
       ports = [ "4000:8000" ];
       extraOptions = [
         "--name=sillytavern"
-        "--gpus=all"
         "--group-add=users"
       ];
       volumes = [
@@ -135,7 +138,6 @@
       };
       extraOptions = [
         "--name=open-webui"
-        "--gpus=all"
         "--group-add=users"
       ];
       volumes = [ "/export/ai/appdata/open-webui/data:/app/backend/data" ];
@@ -155,8 +157,9 @@
         #COMFYUI_EXTRA_ARGS = "--lowvram";
       };
       volumes = [
-        "/oci_cache/comfyui/huggingface:/cache/huggingface/hub"
-        "/oci_cache/comfyui/pip:/cache/pip"
+        "/oci_cache/comfyui:/cache"
+        #"/venv/comfyui/lib:/app/venv/lib"
+        #"/venv/comfyui/lib64:/app/venv/lib64"
         "/export/ai/images:/app/output"
         "/export/ai/appdata/comfyui/custom_nodes:/app/custom_nodes"
         "/export/ai/models/checkpoints:/app/models/checkpoints"
