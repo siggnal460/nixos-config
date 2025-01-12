@@ -114,7 +114,7 @@
     extraHosts = ''
       								   127.0.0.1 localhost
       									 10.0.0.7   x86-rakmnt-mediaserver
-      									 10.0.0.10  x86-atxtwr-computserver
+      									 10.0.0.10  x86-atxtwr-computeserver
       									 10.0.0.11  x86-merkat-entry.gappyland.org x86-merkat-entry
       								 '';
   };
