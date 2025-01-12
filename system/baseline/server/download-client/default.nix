@@ -47,7 +47,7 @@
       ];
       environment = {
         PUID = "710";
-        PGID = "710";
+        PGID = "982";
         TZ = "America/Denver";
         PEERPORT = "51413";
       };
@@ -70,7 +70,7 @@
       ];
       environment = {
         PUID = "711";
-        PGID = "711";
+        PGID = "982";
         TZ = "America/Denver";
       };
       volumes = [
