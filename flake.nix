@@ -157,7 +157,7 @@
         x86-tablet-starlite =
           mkComputerUnstable "x86_64-linux" ./host/x86-tablet-starlite
             [
-              nixos-hardware.nixosModules.starlabs-starlite-i5
+              ./system/hardware/tablet
               ./system/baseline/workstation
               ./system/baseline/workstation/art
             ]
@@ -188,7 +188,7 @@
               ./system/hardware/gpu/intel
               ./system/baseline/htpc
             ]
-            [ ./user/aaron/htpc ];
+            [ ./user/kodi ];
 
         ## SERVERS ##
         #x86-merkat-ldap =

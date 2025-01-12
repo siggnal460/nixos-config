@@ -23,10 +23,7 @@
     program = "${
       pkgs.kodi-wayland.passthru.withPackages (
         kodiPkgs: with kodiPkgs; [
-          invidious
           jellyfin
-          joystick
-          steam-library
         ]
       )
     }/bin/kodi-standalone";
