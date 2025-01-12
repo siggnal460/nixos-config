@@ -101,7 +101,7 @@
   };
 
   networking = {
-	  networkmanager.enable = true;
+    networkmanager.enable = true;
     firewall.enable = true;
     stevenblack.enable = true;
     firewall.allowedTCPPorts = [ ];
