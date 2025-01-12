@@ -15,7 +15,7 @@ in
 {
   security.rtkit.enable = true;
   services = {
-    pulseaudio.enable = false;
+    #pulseaudio.enable = false;
     pipewire = {
       enable = true;
       alsa = {

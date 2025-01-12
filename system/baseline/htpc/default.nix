@@ -11,12 +11,8 @@
 
   users.extraUsers.kodi.isNormalUser = true;
 
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-  };
+  hardware.graphics.enable = true;
 
-  # Configures wayland kiosk running kodi
   services.cage = {
     enable = true;
     user = "kodi";
@@ -24,6 +20,9 @@
       pkgs.kodi-wayland.passthru.withPackages (
         kodiPkgs: with kodiPkgs; [
           jellyfin
+          keymap
+          invidious
+          sponsorblock
         ]
       )
     }/bin/kodi-standalone";

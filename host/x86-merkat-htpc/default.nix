@@ -9,6 +9,6 @@
   ];
 
   networking = {
-    hostName = "x86-merkat-freeipa";
-	};
+    hostName = "x86-merkat-htpc";
+  };
 }
