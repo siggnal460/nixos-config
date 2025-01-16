@@ -24,5 +24,10 @@
       enable = true;
       openFirewall = true;
     };
+    fail2ban = {
+      # monitors ssh logs by default
+      enable = true;
+      ignoreIP = [ "10.0.0.0/12" ];
+    };
   };
 }

@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 let
   jellyseerrApiFile = "/var/lib/doplarr/jellyseerr_api";
   discordApiFile = "/var/lib/doplarr/discord_api";
@@ -33,8 +34,37 @@ in
     "d /export/media/data/tvshows 0775 root media"
   ];
 
-  services.nfs.server = {
-    exports = ''/export/media 10.0.0.15(rw,nohide,insecure,no_subtree_check)'';
+  services = {
+    nfs.server = {
+      exports = ''/export/media 10.0.0.15(rw,nohide,insecure,no_subtree_check)'';
+    };
+    fail2ban = {
+      jails = {
+        jellyfin = {
+          settings = {
+            enabled = "true";
+            backend = "auto";
+            port = "80,443";
+            protocol = "tcp";
+            filter = "jellyfin";
+            maxretry = "3";
+            bantime = "86400";
+            findtime = "43200";
+            logpath = "/etc/jellyfin/log/log*.log";
+            action = "iptables-allports[name=jellyfin, chain=DOCKER-USER]";
+          };
+        };
+      };
+    };
+  };
+
+  environment.etc = {
+    "fail2ban/filter.d/jellyfin.conf".text = pkgs.lib.mkDefault (
+      pkgs.lib.mkAfter ''
+        [Definition]
+        failregex = ^.*Authentication request for .* has been denied \(IP: "<ADDR>"\)\.
+      ''
+    );
   };
 
   users.users = {

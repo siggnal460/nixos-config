@@ -35,4 +35,8 @@
       script = "${pkgs.sudo}/bin/sudo ${pkgs.podman}/bin/podman auto-update";
     };
   };
+
+  environment.systemPackages = [
+    pkgs.podman-compose
+  ];
 }
