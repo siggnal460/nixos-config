@@ -59,7 +59,7 @@ let
     {
       filename = "8-step-flux.safetensors";
       output_dir = "/export/ai/models/loras";
-      url = "https://huggingface.co/alimama-creative/FLUX.1-Turbo-Alpha/blob/main/diffusion_pytorch_model.safetensors";
+      url = "https://huggingface.co/alimama-creative/FLUX.1-Turbo-Alpha/resolve/main/diffusion_pytorch_model.safetensors";
     }
     {
       filename = "SD1.5/model.safetensors";
