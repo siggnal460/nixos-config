@@ -22,6 +22,7 @@ in
     "d /etc/readarr 0770 readarr users"
     "d /etc/sonarr 0770 sonarr users"
     "d /etc/sonarr-anime 0770 sonarr-anime users"
+    "d /etc/wizarr 0770 wizarr wizarr"
     "d /export/media/data 0775 root media"
     "d /export/media/data/anime 0775 root media"
     "d /export/media/data/books 0775 root media"
@@ -117,6 +118,17 @@ in
       uid = 709;
       isSystemUser = true;
       group = "media";
+    };
+    wizarr = {
+      uid = 712;
+      isSystemUser = true;
+      group = "wizarr";
+    };
+  };
+
+  users.groups = {
+    wizarr = {
+      gid = 712;
     };
   };
 
@@ -369,6 +381,24 @@ in
       };
       extraOptions = [
         "--name=flaresolverr"
+      ];
+    };
+
+    wizarr = {
+      image = "ghcr.io/wizarr/wizarr:beta";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      environment = {
+        PUID = "712";
+        PGID = "712";
+      };
+      ports = [
+        "5690:5690"
+      ];
+      volumes = [
+        "/etc/wizarr:/data/database"
       ];
     };
   };
