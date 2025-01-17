@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }:
 {
   imports = [
-    ./latest-kernel.nix
+    #./latest-kernel.nix
     inputs.nix-gaming.nixosModules.pipewireLowLatency
     inputs.nix-gaming.nixosModules.platformOptimizations
   ];
