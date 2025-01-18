@@ -385,7 +385,7 @@ in
     };
 
     wizarr = {
-      image = "ghcr.io/wizarr/wizarr:latest";
+      image = "ghcr.io/wizarrr/wizarr:latest";
       autoStart = true;
       labels = {
         "io.containers.autoupdate" = "registry";
