@@ -237,6 +237,7 @@
               ./system/baseline/server/nfs
               ./system/baseline/server/netbootxyz
               ./system/baseline/server/nextcloud
+              ./system/baseline/server/encoding
             ]
             [ ];
       };

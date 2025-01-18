@@ -1,4 +1,9 @@
 {
+  systemd.tmpfiles.rules = [
+    "d /export/media/samba 0770 root users"
+    "d /export/media/samba/aaron 0700 aaron users"
+  ];
+
   services.samba = {
     enable = true;
     securityType = "user";
@@ -14,15 +19,15 @@
         "guest account" = "nobody";
         "map to guest" = "bad user";
       };
-      "public" = {
-        "path" = "/export/media/data/workstuff";
+      "private" = {
+        "path" = "/export/media/samba/aaron";
         "browseable" = "yes";
         "read only" = "no";
-        "guest ok" = "yes";
+        "guest ok" = "no";
         "create mask" = "0644";
         "directory mask" = "0755";
-        "force user" = "username";
-        "force group" = "groupname";
+        "force user" = "aaron";
+        "force group" = "users";
       };
     };
   };
@@ -32,6 +37,5 @@
     openFirewall = true;
   };
 
-  networking.firewall.enable = true;
   networking.firewall.allowPing = true;
 }
