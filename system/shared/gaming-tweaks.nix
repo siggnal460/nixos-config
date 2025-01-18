@@ -6,17 +6,11 @@
     inputs.nix-gaming.nixosModules.platformOptimizations
   ];
 
-  #boot.kernel.sysctl = {
-  #	"kernel.sched_cfs_bandwidth_slice_us" = 3000;
-  #	"net.ipv4.tcp_fin_timeout" = 25;
-  #	"vm.max_map_count" = 2147483642;
-  #};
-
   services = {
-    scx = {
-      enable = true;
-      scheduler = "scx_lavd";
-    };
+    #scx = {
+    #  enable = true;
+    #  scheduler = "scx_lavd";
+    #};
     pipewire.lowLatency = {
       enable = true;
       quantum = 64;

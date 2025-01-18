@@ -36,7 +36,7 @@ def format_nix_files [ ] {
 def update [ flake_name: string flake_folder: string limit: bool ] {
     if $limit == true {
         #nh os switch -H $flake_name $flake_folder -- --accept-flake-config --cores build_cores -j build_jobs
-	print "Limit not yet implemented"
+    	print "Limit not yet implemented"
     } else {
         nh os switch -H $flake_name $flake_folder -- --accept-flake-config
     }
