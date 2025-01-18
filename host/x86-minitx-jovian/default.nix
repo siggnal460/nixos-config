@@ -1,13 +1,5 @@
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
   imports = [ ./hardware-configuration.nix ];
-
-  #nixpkgs.config.allowBroken = true;
 
   boot = {
     #kernelPackages = lib.mkForce pkgs.pkgs.linuxPackages;
@@ -20,7 +12,5 @@
 
   networking = {
     hostName = "x86-minitx-jovian";
-    #   interface.eth0.ipv4.addresses = [ {
-    #     address = "10.6.0.1";
   };
 }

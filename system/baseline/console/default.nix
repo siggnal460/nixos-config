@@ -9,6 +9,7 @@
     ../../shared/pipewire.nix
     ../../shared/bluetooth.nix
     ../../shared/remotely-managed.nix
+    ../../shared/networkmanager.nix
     #../../shared/mesa-git.nix
   ];
 
