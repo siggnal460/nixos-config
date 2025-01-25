@@ -48,13 +48,14 @@ def repo_changes [ ] {
 
 # Quick-and-dirty utility to update a Nix + Home Manager system and keep it's changes in sync with a remote Git repository
 def main [
-    --branch (-b): string = "master"   					                # The branch from which to pull or to which to push
-    --full (-f)                        					                # Will also update the flake lock file to perform a full upgrade.
-    --limit (-l)                       					                # Automatically limit update process to a small amount of cores/threads. Useful for expensive build processes. Amount is based on system CPU threads and RAM.
-    --path (-p): string = "/etc/nixos" 					                # Filepath to the folder containing the flake.nix.
-    --name (-n): string                					                # Use the flake with this name. Defaults to the hostname if not specified.
-    --remote (-r): string = "origin"   					                # Your origin repository name.
-    --short (-s)                    					                # Perform a simple nixos-rebuild switch with no interaction to git
+    --branch (-b): string = "master"   					# The branch from which to pull or to which to push
+    --full (-f)                        					# Will also update the flake lock file to perform a full upgrade.
+    --hardware (-h)                        				# Will also update the hosts hardware-configuration.nix with the current hardware setup.
+    --limit (-l)                       					# Automatically limit update process to a small amount of cores/threads. Useful for expensive build processes. Amount is based on system CPU threads and RAM.
+    --path (-p): string = "/etc/nixos" 					# Filepath to the folder containing the flake.nix.
+    --name (-n): string                					# Use the flake with this name. Defaults to the hostname if not specified.
+    --remote (-r): string = "origin"   					# Your origin repository name.
+    --short (-s)                    					# Perform a simple nixos-rebuild switch with no interaction to git
     --url (-u): string = "git@github.com:siggnal460/nixos-config.git"   # Your origin repository SSH url, in the vein of git@github.com:<username>/<repo>.git
 ] {
     mut commit_msg = ""
@@ -96,6 +97,11 @@ def main [
     print $"Update flake.lock: ($full)"
     print $"Limit Build Resources: ($limit)"
     print "\n"
+
+    if $hardware {
+	print_header "UPDATING HARDWARE CONFIG"
+	nixos-generate-config --show-hardware-config | save --force $"/etc/nixos/host/($flake_name)/hardware-configuration.nix"
+    }
 
     print_header "FORMATTING NIX FILES"
     print "Formatting all nix files with nixfmt..."
