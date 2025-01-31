@@ -11,7 +11,7 @@
 
   networking = {
     hostName = "x86-atxtwr-workstation";
-    interfaces.enp4s0 = {
+    interfaces.enp5s0 = {
       useDHCP = false;
       ipv4.addresses = [
         {
@@ -22,7 +22,7 @@
     };
     defaultGateway = {
       address = "10.0.0.1";
-      interface = "enp4s0";
+      interface = "enp5s0";
     };
   };
 

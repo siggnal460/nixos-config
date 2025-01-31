@@ -214,6 +214,12 @@
       allowReboot = true;
       persistent = true;
       randomizedDelaySec = "210min";
+      flags = [
+        "--update-input"
+        "nixpkgs"
+        "--commit-lock-file"
+        "-L"
+      ];
       dates = "00:30";
       rebootWindow = {
         lower = "00:30";
