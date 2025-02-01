@@ -1,4 +1,7 @@
+{ config, ... }:
 {
+  imports = [ ../../../shared/podman.nix ];
+
   systemd.tmpfiles.rules = [
     "d /var/lib/ipa-data 0774 freeipa freeipa"
   ];
@@ -21,19 +24,19 @@
     freeipa = {
       image = "docker.io/freeipa/freeipa-server:almalinux-9";
       autoStart = true;
-      hostname = "x86-merkat-entry.gappyland.org";
+      hostname = "${config.networking.fqdn}";
       labels = {
         "io.containers.autoupdate" = "registry";
       };
       ports = [
         "53:53"
         "53:53/udp"
-        "80:80"
+        "81:80"
         "88:88"
         "88:88/udp"
         "123:123"
         "389:389"
-        "443:443"
+        "444:443"
         "464:464"
         "464:464/udp"
         "636:636"
@@ -42,6 +45,9 @@
         PUID = "800";
         PGID = "800";
         IPA_SERVER_IP = "10.0.0.11"; # fix later
+        PASSWORD = "justatest";
+        DEBUG_TRACE = "1";
+        DEBUG_NO_EXIT = "1";
       };
       volumes = [
         "/var/lib/ipa-data:/data"
@@ -49,10 +55,14 @@
       extraOptions = [
         "--name=freeipa"
         "--read-only"
+        #"--dns=127.0.0.1"
       ];
       cmd = [
         "-U"
-        "-r GAPPYLAND.ORG"
+        "-r"
+        "GAPPYLAND.ORG"
+        #"-p GAPPYLAND.ORG"
+        #"-a GAPPYLAND.ORG"
         "--no-ntp"
       ];
     };

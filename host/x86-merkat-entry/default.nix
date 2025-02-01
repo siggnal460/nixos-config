@@ -3,5 +3,6 @@
 
   networking = {
     hostName = "x86-merkat-entry";
+    domain = "gappyland.org";
   };
 }

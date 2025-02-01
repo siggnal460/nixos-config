@@ -112,7 +112,7 @@
     ];
     # these are temporary
     extraHosts = ''
-      								   127.0.0.1 localhost
+      								   127.0.0.1  x86-merkat-entry.gappyland.org x86-merkat-entry localhost
       									 10.0.0.7   x86-rakmnt-mediaserver
       									 10.0.0.10  x86-atxtwr-computeserver
       									 10.0.0.11  x86-merkat-entry.gappyland.org x86-merkat-entry
@@ -217,7 +217,6 @@
       flags = [
         "--update-input"
         "nixpkgs"
-        "--commit-lock-file"
         "-L"
       ];
       dates = "00:30";

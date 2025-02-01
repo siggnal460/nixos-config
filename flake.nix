@@ -205,7 +205,7 @@
             [
               ./system/baseline/server
               ./system/baseline/server/reverse-proxy
-              ./system/baseline/server/freeipa
+              #./system/baseline/server/freeipa
               #./system/baseline/server/headscale
               #./system/hardware/gpu/intel
             ]
