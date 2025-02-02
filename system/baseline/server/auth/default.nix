@@ -131,7 +131,7 @@ in
         AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE = secrets."${host}/authelia/smtp_password".path;
       };
     };
- };
+  };
 
   users = {
     users.${auth_instance} = {
