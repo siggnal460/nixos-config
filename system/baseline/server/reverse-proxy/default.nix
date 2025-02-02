@@ -25,16 +25,19 @@ in
         			'';
 
       "auth.${domain}".extraConfig = ''
-        				reverse_proxy :9091
+        			    reverse_proxy :9091
         			'';
 
       "users.${domain}".extraConfig = ''
-        				reverse_proxy :${toString ldap_cfg.settings.http_port}
+        			    reverse_proxy :${toString ldap_cfg.settings.http_port}
         			'';
 
       "media.${domain}".extraConfig = ''
-                  				redir /jellyfin /jellyfin/
-        									reverse_proxy /jellyfin/* 10.0.0.7:8096
+                  redir /jellyfin /jellyfin/
+        			    reverse_proxy /jellyfin/* 10.0.0.7:8096
+        			'';
+      "nextcloud.${domain}".extraConfig = ''
+        		      reverse_proxy https://10.0.0.7:443
         			'';
     };
     extraConfig = ''
