@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   htmlFile = ./files/index.html;
+  domain = "gappyland.org";
+  ldap_cfg = config.services.lldap;
 in
 {
   networking.firewall.allowedTCPPorts = [
@@ -11,24 +13,37 @@ in
   services.caddy = {
     enable = true;
     virtualHosts = {
-      "gappyland.org" = {
-        extraConfig = ''
-          					encode gzip
-          					file_server
-          					root * ${
-                 pkgs.runCommand "populateCaddyHtml" { } ''
-                   							mkdir "$out"
-                   							echo "${builtins.readFile htmlFile}" > "$out/index.html"
-                   						''
-               }
-          				'';
-      };
-      "media.gappyland.org" = {
-        extraConfig = ''
-          				redir /jellyfin /jellyfin/
-                    				  reverse_proxy /jellyfin/* 10.0.0.7:8096
-                    				'';
-      };
+      ${domain}.extraConfig = ''
+                  					encode gzip
+                  					file_server
+                  					root * ${
+                         pkgs.runCommand "populateCaddyHtml" { } ''
+                           							mkdir "$out"
+                           							echo "${builtins.readFile htmlFile}" > "$out/index.html"
+                           						''
+                       }
+        			'';
+
+      "auth.${domain}".extraConfig = ''
+        				reverse_proxy :9091
+        			'';
+
+      "users.${domain}".extraConfig = ''
+        				reverse_proxy :${toString ldap_cfg.settings.http_port}
+        			'';
+
+      "media.${domain}".extraConfig = ''
+                  				redir /jellyfin /jellyfin/
+        									reverse_proxy /jellyfin/* 10.0.0.7:8096
+        			'';
     };
+    extraConfig = ''
+      			(auth) {
+      					forward_auth :9091 {
+      							uri /api/authz/forward-auth
+      							copy_headers remote-user remote-groups remote-email remote-name
+      					}
+      			}
+      		'';
   };
 }

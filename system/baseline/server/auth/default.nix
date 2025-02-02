@@ -8,6 +8,8 @@ let
   ldap_cfg = config.services.lldap;
 in
 {
+  networking.firewall.allowedTCPPorts = [ 3890 ];
+
   services = {
     redis.servers.gappyland.enable = true;
 
@@ -91,12 +93,13 @@ in
             }
           ];
         };
-        notifier.smtp = {
-          address = "smtp.mail.yahoo.com:465";
-          username = "gappyland@yahoo.com";
-          sender = "admin@${domain}";
+        notifier = {
+          disable_startup_check = true;
         };
-        log.level = "info";
+        log = {
+          level = "debug";
+          keep_stdout = true;
+        };
         #identity_providers.oidc = {
         #  cors = {
         #    endpoints = [ "token" ];
@@ -128,26 +131,7 @@ in
         AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE = secrets."${host}/authelia/smtp_password".path;
       };
     };
-
-    caddy = {
-      virtualHosts = {
-        "auth.${domain}".extraConfig = ''
-          					reverse_proxy :9091
-          				'';
-        "users.${domain}".extraConfig = ''
-          					reverse_proxy :${toString ldap_cfg.settings.http_port}
-          				'';
-      };
-      extraConfig = ''
-        (auth) {
-            forward_auth :9091 {
-                uri /api/authz/forward-auth
-                copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
-            }
-        }
-      '';
-    };
-  };
+ };
 
   users = {
     users.${auth_instance} = {
