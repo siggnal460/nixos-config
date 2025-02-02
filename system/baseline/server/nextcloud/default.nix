@@ -1,8 +1,12 @@
+let
+  host = "x86-rakmnt-mediaserver";
+in
 {
   imports = [ ../../../shared/podman.nix ];
 
   systemd.tmpfiles.rules = [
     "d /etc/nextcloud 0774 nextcloud nextcloud"
+    "d /etc/nextcloud-mariadb 0774 nextcloud nextcloud"
     "d /export/nextcloud 0774 nextcloud nextcloud"
   ];
 
@@ -47,5 +51,30 @@
         "--name=nextcloud"
       ];
     };
+    #nextcloud-mariadb = {
+    #  image = "lscr.io/linuxserver/mariadb:latest";
+    #  autoStart = true;
+    #  labels = {
+    #    "io.containers.autoupdate" = "registry";
+    #  };
+    #  ports = [
+    #    "3306:3306"
+    #  ];
+    #  environment = {
+    #    PUID = "760";
+    #    PGID = "760";
+    #    TZ = "America/Denver";
+    #  };
+    #  volumes = [
+    #    "/etc/nextcloud-mariadb:/config"
+    #  ];
+    #  extraOptions = [
+    #    "--name=nextcloud-mariadb"
+    #  ];
+    #};
+
+    #sops.secrets = {
+    #  "${host}/nextcloud/admin_db_password".owner = "nextcloud";
+    #};
   };
 }

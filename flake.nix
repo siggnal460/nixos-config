@@ -233,9 +233,9 @@
               ./system/baseline/server/openvpn-client
               #./system/baseline/server/streaming
               ./system/baseline/server/media
-              ./system/baseline/server/samba
               ./system/baseline/server/download-client
               ./system/baseline/server/nfs
+              ./system/baseline/server/samba
               ./system/baseline/server/netbootxyz
               ./system/baseline/server/nextcloud
               ./system/baseline/server/encoding

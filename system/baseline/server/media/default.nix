@@ -24,6 +24,7 @@ in
     "d /etc/sonarr-anime 0770 sonarr-anime users"
     "d /etc/wizarr 0770 wizarr wizarr"
     "d /export/media/data 0775 root media"
+    "d /export/media/data/dlna 0770 aaron media"
     "d /export/media/data/anime 0775 root media"
     "d /export/media/data/books 0775 root media"
     "d /export/media/data/books/comics 0775 root media"
