@@ -1,7 +1,9 @@
 keys:
-  - &doplarr ...
+  - &user_aaron age1dtjnc6477chq4n434t2gxf3w87ch3pww5gjzwkqavx9nqzk6zgzseek00q
+  - &server_x86-merkat-entry age18w5y7wpuf0umzrxjw7w9yd85ngzn3fyvestyq3wt62s98rnghsxq5hk3yq
 creation_rules:
   - path_regex: secrets/secrets.yaml$
     key_groups:
       - age:
-        - *doplarr
+        - *user_aaron
+        - *server_x86-merkat-entry

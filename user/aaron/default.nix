@@ -50,13 +50,7 @@
       stateVersion = "23.11";
     };
 
-    sops = {
-      age.keyFile = "/home/aaron/.config/sops/age/keys.txt";
-      defaultSopsFile = ../../../secrets/secrets.yaml;
-      age.sshKeyPaths = [ "/home/aaron/.ssh/id_ed25519" ];
-      age.generateKey = true;
-      defaultSopsFormat = "yaml";
-    };
+    sops.age.generateKey = true;
 
     accounts.email.accounts.aaron = {
       address = "siggnal@proton.me";
