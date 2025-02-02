@@ -1,9 +1,13 @@
 keys:
-  - &user_aaron age1dtjnc6477chq4n434t2gxf3w87ch3pww5gjzwkqavx9nqzk6zgzseek00q
+  - &user_aaron_entry age1dtjnc6477chq4n434t2gxf3w87ch3pww5gjzwkqavx9nqzk6zgzseek00q
+  - &user_aaron_gamingpc age15lctyzps9amrf0gq2c9twt6rt0t75phfa2p4fwu6n2j0dp4x2d0qx06hwm
   - &server_x86-merkat-entry age18w5y7wpuf0umzrxjw7w9yd85ngzn3fyvestyq3wt62s98rnghsxq5hk3yq
+  - &server_x86-atxtwr-gamingpc age1w4yhe66tlnhwl7vkrqlqtd0f3g6z4qjv3l9eklzm27yyl900gyns4es40n
 creation_rules:
   - path_regex: secrets/secrets.yaml$
     key_groups:
       - age:
-        - *user_aaron
+        - *user_aaron_entry
+        - *user_aaron_gamingpc
         - *server_x86-merkat-entry
+        - *server_x86-atxtwr-gamingpc
