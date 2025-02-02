@@ -244,6 +244,7 @@
   sops = {
     defaultSopsFile = ../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
+    age.keyFile = "/var/lib/sops-nix/keys.txt";
     secrets."test" = { }; # this is for some stupid fucking reason required to generated the age key (???)
   };
 
