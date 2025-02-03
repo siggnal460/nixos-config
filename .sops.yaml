@@ -14,4 +14,4 @@ creation_rules:
         - *user_aaron_mediaserver
         - *server_x86-merkat-entry
         - *server_x86-atxtwr-gamingpc
-        - *server_x86-rakmnt-mediaserver 
+        - *server_x86-rakmnt-mediaserver

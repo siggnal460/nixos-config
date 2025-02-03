@@ -1,3 +1,4 @@
+{ config, ... }:
 let
   host = "x86-rakmnt-mediaserver";
 in
@@ -51,30 +52,35 @@ in
         "--name=nextcloud"
       ];
     };
-    #nextcloud-mariadb = {
-    #  image = "lscr.io/linuxserver/mariadb:latest";
-    #  autoStart = true;
-    #  labels = {
-    #    "io.containers.autoupdate" = "registry";
-    #  };
-    #  ports = [
-    #    "3306:3306"
-    #  ];
-    #  environment = {
-    #    PUID = "760";
-    #    PGID = "760";
-    #    TZ = "America/Denver";
-    #  };
-    #  volumes = [
-    #    "/etc/nextcloud-mariadb:/config"
-    #  ];
-    #  extraOptions = [
-    #    "--name=nextcloud-mariadb"
-    #  ];
-    #};
+    nextcloud-mariadb = {
+      image = "lscr.io/linuxserver/mariadb:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      ports = [
+        "3306:3306"
+      ];
+      environment = {
+        PUID = "760";
+        PGID = "760";
+        TZ = "America/Denver";
+        MYSQL_ROOT_PASSWORD = config.sops.secrets."${host}/nextcloud/db_admin_password".path;
+        MYSQL_DATABASE = "nextcloud";
+        MYSQL_USER = "nextcloud";
+        MYSQL_PASSWORD = config.sops.secrets."${host}/nextcloud/db_user_password".path;
+      };
+      volumes = [
+        "/etc/nextcloud-mariadb:/config"
+      ];
+      extraOptions = [
+        "--name=nextcloud-mariadb"
+      ];
+    };
+  };
 
-    #sops.secrets = {
-    #  "${host}/nextcloud/admin_db_password".owner = "nextcloud";
-    #};
+  sops.secrets = {
+    "${host}/nextcloud/db_admin_password".owner = "nextcloud";
+    "${host}/nextcloud/db_user_password".owner = "nextcloud";
   };
 }
