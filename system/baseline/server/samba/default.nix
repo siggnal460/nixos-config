@@ -30,7 +30,7 @@
         "force group" = "users";
       };
       "movies" = {
-        "path" = "/export/media/movies";
+        "path" = "/export/media/data/movies";
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "yes";
