@@ -19,7 +19,7 @@
         "guest account" = "nobody";
         "map to guest" = "bad user";
       };
-      "private" = {
+      "aaron" = {
         "path" = "/export/media/samba/aaron";
         "browseable" = "yes";
         "read only" = "no";
@@ -27,6 +27,16 @@
         "create mask" = "0644";
         "directory mask" = "0755";
         "force user" = "aaron";
+        "force group" = "users";
+      };
+      "movies" = {
+        "path" = "/export/media/movies";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "root";
         "force group" = "users";
       };
     };
