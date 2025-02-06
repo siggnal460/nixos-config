@@ -61,14 +61,13 @@ in
       ports = [
         "3306:3306"
       ];
+      environmentFiles = [ config.sops.secrets."${host}/nextcloud/mariadb_env".path ];
       environment = {
         PUID = "760";
         PGID = "760";
         TZ = "America/Denver";
-        MYSQL_ROOT_PASSWORD = config.sops.secrets."${host}/nextcloud/db_admin_password".path;
         MYSQL_DATABASE = "nextcloud";
         MYSQL_USER = "nextcloud";
-        MYSQL_PASSWORD = config.sops.secrets."${host}/nextcloud/db_user_password".path;
       };
       volumes = [
         "/etc/nextcloud-mariadb:/config"
@@ -80,7 +79,8 @@ in
   };
 
   sops.secrets = {
-    "${host}/nextcloud/db_admin_password".owner = "nextcloud";
-    "${host}/nextcloud/db_user_password".owner = "nextcloud";
+    "${host}/nextcloud/mariadb_env".owner = "nextcloud";
+    #  "${host}/nextcloud/db_admin_password".owner = "nextcloud";
+    #  "${host}/nextcloud/db_user_password".owner = "nextcloud";
   };
 }

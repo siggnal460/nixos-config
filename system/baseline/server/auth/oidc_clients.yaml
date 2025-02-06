@@ -1,0 +1,9 @@
+identity_providers:
+  oidc:
+    clients:
+      - client_name: "Nextcloud"
+        client_id: {{ secret "/run/secrets/nextcloud-oidc-client-id_authelia" | mindent 10 "|" | msquote }}
+        client_secret: {{ secret "/run/secrets/gappyland/nextcloud/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
+        authorization_policy: "one_factor"
+        redirect_uris:
+          - "https://nextcloud.gappyland.org/auth/openid/authelia"

@@ -5,7 +5,6 @@ let
   auth_instance = "authelia-gappyland";
   redis_instance = "redis-gappyland";
   host = "x86-merkat-entry";
-  ldap_cfg = config.services.lldap;
 in
 {
   networking.firewall.allowedTCPPorts = [ 3890 ];
@@ -100,28 +99,28 @@ in
           level = "debug";
           keep_stdout = true;
         };
-        #identity_providers.oidc = {
-        #  cors = {
-        #    endpoints = [ "token" ];
-        #    allowed_origins_from_client_redirect_uris = true;
-        #  };
-        #  authorization_policies.default = {
-        #    default_policy = "one_factor";
-        #    rules = [
-        #      {
-        #        policy = "deny";
-        #        subject = "group:lldap_strict_readonly";
-        #      }
-        #    ];
-        #  };
-        #};
+        identity_providers.oidc = {
+          cors = {
+            endpoints = [ "token" ];
+            allowed_origins_from_client_redirect_uris = true;
+          };
+          authorization_policies.default = {
+            default_policy = "one_factor";
+            rules = [
+              {
+                policy = "deny";
+                subject = "group:lldap_strict_readonly";
+              }
+            ];
+          };
+        };
         server.endpoints.authz.forward-auth.implementation = "ForwardAuth";
       };
-      #settingsFiles = [ ./oidc_clients.yaml ];
+      settingsFiles = [ ./oidc_clients.yaml ];
       secrets = with config.sops; {
         jwtSecretFile = secrets."${host}/authelia/jwt_secret".path;
-        #oidcIssuerPrivateKeyFile = secrets."${host}/authelia/jwks".path;
-        #oidcHmacSecretFile = secrets."${host}/authelia/hmac_secret".path;
+        oidcIssuerPrivateKeyFile = secrets."${host}/authelia/jwks".path;
+        oidcHmacSecretFile = secrets."${host}/authelia/hmac_secret".path;
         sessionSecretFile = secrets."${host}/authelia/session_secret".path;
         storageEncryptionKeyFile = secrets."${host}/authelia/storage_encryption_key".path;
       };
