@@ -37,7 +37,7 @@ in
         			    reverse_proxy /jellyfin/* 10.0.0.7:8096
         			'';
       "nextcloud.${domain}".extraConfig = ''
-        		      reverse_proxy https://10.0.0.7:443
+        		      reverse_proxy 10.0.0.7:443
         			'';
     };
     extraConfig = ''
