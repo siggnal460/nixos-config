@@ -1,7 +1,7 @@
 identity_providers:
   oidc:
     clients:
-        client_name: "Nextcloud"
+      - client_name: "Nextcloud"
         client_id: 'nextcloud'
         client_secret: {{ secret "/run/secrets/gappyland/nextcloud/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
         public: false
