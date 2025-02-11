@@ -246,7 +246,6 @@
       keyFile = "/var/lib/sops-nix/keys.txt";
       generateKey = true;
     };
-    secrets."test" = { }; # this is for some stupid fucking reason required to generated the age key (???)
   };
 
   environment = {

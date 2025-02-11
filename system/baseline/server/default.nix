@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ../../shared/remotely-managed.nix
@@ -18,4 +19,8 @@
     enable = false;
     powerOnBoot = false;
   };
+
+  environment.systemPackages = [
+    pkgs.waypipe
+  ];
 }
