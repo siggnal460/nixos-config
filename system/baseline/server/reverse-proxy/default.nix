@@ -6,7 +6,6 @@ let
 in
 {
   networking.firewall.allowedTCPPorts = [
-    80
     443
   ];
 
@@ -34,16 +33,16 @@ in
 
       "media.${domain}".extraConfig = ''
                   redir /jellyfin /jellyfin/
-        			    reverse_proxy /jellyfin/* 10.0.0.7:8096
+        			    reverse_proxy /jellyfin/* x86-rakmnt-mediaserver:8096
         			'';
       "nextcloud.${domain}".extraConfig = ''
-                		      reverse_proxy 10.0.0.7:443 {
-        										transport http {
-        											tls
-        											tls_insecure_skip_verify
-        										}
-            }
-                			'';
+        			  import auth
+
+                reverse_proxy x86-rakmnt-mediaserver:443 {
+        				  transport http {
+        					  tls_insecure_skip_verify
+        					}
+                        			'';
     };
     extraConfig = ''
       			(auth) {

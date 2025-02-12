@@ -2,14 +2,14 @@ identity_providers:
   oidc:
     clients:
       - client_name: "Nextcloud"
-        client_id: 'nextcloud'
-        client_secret: {{ secret "/run/secrets/gappyland/nextcloud/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
+        client_id: {{ secret "/run/secrets/nextcloud-oidc-client-id_authelia" | mindent 10 "|" | msquote }}
+        client_secret: {{ secret "/run/secrets/x86-merkat-entry/nextcloud/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
         public: false
         authorization_policy: "two_factor"
         require_pkce: true
         pkce_challenge_method: 'S256'
         redirect_uris:
-          - "https://nextcloud.gappyland.org/apps/oidc_login-oidc"
+          - "https://nextcloud.gappyland.org/apps/oidc_login/oidc"
         scopes:
           - 'openid'
           - 'profile'

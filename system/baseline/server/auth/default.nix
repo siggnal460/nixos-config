@@ -65,12 +65,15 @@ in
           groups_filter = "(member={dn})";
           user = "uid=authelia,ou=people,${base_dn}";
         };
+        totp = {
+          disable = false;
+        };
         access_control = {
           default_policy = "deny";
           rules = lib.mkAfter [
             {
               domain = "*.${domain}";
-              policy = "one_factor";
+              policy = "two_factor";
             }
           ];
         };
@@ -86,6 +89,7 @@ in
             {
               domain = domain;
               authelia_url = "https://auth.${domain}";
+              default_redirection_url = "https://www.${domain}";
               inactivity = "1M";
               expiration = "3M";
               remember_me = "1y";
@@ -93,7 +97,11 @@ in
           ];
         };
         notifier = {
-          disable_startup_check = true;
+          smtp = {
+            address = "smtp://smtp.resend.com:587";
+            username = "resend";
+            sender = "Gappyland <admin@updates.gappyland.org>";
+          };
         };
         log = {
           level = "debug";
@@ -105,7 +113,7 @@ in
             allowed_origins_from_client_redirect_uris = true;
           };
           authorization_policies.default = {
-            default_policy = "one_factor";
+            default_policy = "two_factor";
             rules = [
               {
                 policy = "deny";
@@ -127,7 +135,7 @@ in
       environmentVariables = with config.sops; {
         AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE =
           secrets."${host}/authelia/lldap_authelia_password".path;
-        AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE = secrets."${host}/authelia/smtp_password".path;
+        AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE = secrets."${host}/authelia/smtp_api_key".path;
       };
     };
   };
@@ -174,13 +182,16 @@ in
   };
 
   sops.secrets = {
+    "${host}/nextcloud/oidc_client_id".owner = auth_instance;
+    "${host}/nextcloud/oidc_client_secret/nextcloud".owner = auth_instance;
+    "${host}/nextcloud/oidc_client_secret/authelia".owner = auth_instance;
     "${host}/authelia/hmac_secret".owner = auth_instance;
     "${host}/authelia/jwks".owner = auth_instance;
     "${host}/authelia/jwt_secret".owner = auth_instance;
     "${host}/authelia/session_secret".owner = auth_instance;
     "${host}/authelia/storage_encryption_key".owner = auth_instance;
     "${host}/authelia/lldap_authelia_password".owner = auth_instance;
-    "${host}/authelia/smtp_password".owner = auth_instance;
+    "${host}/authelia/smtp_api_key".owner = auth_instance;
     "${host}/lldap/jwt_secret".owner = "lldap";
     "${host}/lldap/key_seed".owner = "lldap";
     "${host}/lldap/admin_password".owner = "lldap";
