@@ -144,7 +144,7 @@
             [
               ./system/hardware/gpu/amd
               ./system/hardware/gpu/amd/rocm
-              ./system/de/cosmic
+              ./system/de/plasma
               ./system/baseline/workstation
               ./system/baseline/workstation/ai-amd
               ./system/baseline/workstation/gaming
