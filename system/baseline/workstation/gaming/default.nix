@@ -17,6 +17,8 @@
       ];
   };
 
+  programs.steam.gamescopeSession.enable = true;
+
   environment.systemPackages = with pkgs; [
     heroic
     obs-studio

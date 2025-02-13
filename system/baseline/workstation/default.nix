@@ -62,6 +62,7 @@
 
   stylix = {
     enable = true;
+    autoEnable = true;
     polarity = "dark";
     image = ../../../images/wallpapers/tux.png;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";

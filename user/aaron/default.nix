@@ -44,6 +44,7 @@
       ./programs/starship
       #./programs/zellij
     ];
+    stylix.enable = true;
     home = {
       username = "aaron";
       homeDirectory = "/home/aaron";
