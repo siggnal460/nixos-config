@@ -11,7 +11,7 @@ let
       echo "${downloadInputEntry}" > /tmp/model-downloads.txt
       ${pkgs.aria2}/bin/aria2c \
       	--continue \
-      	--max-overall-download-limit=5M \
+      	--max-overall-download-limit=10M \
       	--no-conf \
       	--input-file=/tmp/model-downloads.txt
     '';
@@ -32,13 +32,18 @@ let
       url = "https://huggingface.co/Kijai/flux-fp8/resolve/main/flux1-dev-fp8-e4m3fn.safetensors";
     }
     {
+      filename = "flux1-schnell.safetensors";
+      output_dir = "/export/ai/models/unet";
+      url = "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/flux1-schnell.safetensors";
+    }
+    {
       filename = "clip_l.safetensors";
-      output_dir = "/export/ai/models/clip";
+      output_dir = "/export/ai/models/clip/flux";
       url = "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors";
     }
     {
       filename = "clip_g.safetensors";
-      output_dir = "/export/ai/models/clip";
+      output_dir = "/export/ai/models/clip/sd";
       url = "https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/resolve/main/text_encoders/clip_g.safetensors";
     }
     {
@@ -47,9 +52,19 @@ let
       url = "https://huggingface.co/mcmonkey/google_t5-v1_1-xxl_encoderonly/resolve/main/t5xxl_fp8_e4m3fn.safetensors";
     }
     {
+      filename = " t5xxl_fp16_e4m3fn.safetensors";
+      output_dir = "/export/ai/models/clip/flux";
+      url = "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp16.safetensors";
+    }
+    {
       filename = " t5xxl_fp8_e4m3fn.safetensors";
-      output_dir = "/export/ai/models/clip";
+      output_dir = "/export/ai/models/clip/sd";
       url = "https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/resolve/main/text_encoders/t5xxl_fp8_e4m3fn.safetensors";
+    }
+    {
+      filename = " t5xxl_fp8_e4m3fn.safetensors";
+      output_dir = "/export/ai/models/clip/flux";
+      url = "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors";
     }
     {
       filename = "ae.safetensors";
