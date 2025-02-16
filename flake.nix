@@ -83,7 +83,7 @@
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+              #home-manager.useUserPackages = true;
               imports = [ ./user ] ++ extraHomeModules;
             }
           ] ++ extraModules; # system modules
@@ -104,7 +104,7 @@
             home-manager-unstable.nixosModules.home-manager
             {
               home-manager.useUserPackages = true;
-              home-manager.useGlobalPkgs = true;
+              #home-manager.useGlobalPkgs = true;
               imports = [ ./user ] ++ extraHomeModules;
             }
           ] ++ extraModules; # system modules
