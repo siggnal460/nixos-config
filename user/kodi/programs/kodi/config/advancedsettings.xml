@@ -1,0 +1,10 @@
+<advancedsettings version="1.0">
+    <fullscreen>true</fullscreen>
+    <lookandfeel>
+        <skincolors>midnight</skincolors>
+        <enablerssfeeds>true</enablerssfeeds>
+    </lookandfeel>
+    <locale>
+        <country>USA (24h)</country>
+    </locale>
+</advancedsettings>
