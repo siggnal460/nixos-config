@@ -4,7 +4,6 @@ let
   base_dn = "dc=gappyland,dc=org";
   auth_instance = "authelia-gappyland";
   redis_instance = "redis-gappyland";
-  host = "x86-merkat-entry";
 in
 {
   networking.firewall.allowedTCPPorts = [ 3890 ];
