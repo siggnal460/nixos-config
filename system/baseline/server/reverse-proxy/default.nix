@@ -24,11 +24,11 @@ in
         			'';
 
       "auth.${domain}".extraConfig = ''
-        			    reverse_proxy :9091
+        			    reverse_proxy x86-merkat-auth:9091
         			'';
 
       "users.${domain}".extraConfig = ''
-        			    reverse_proxy :${toString ldap_cfg.settings.http_port}
+        			    reverse_proxy x86-merkat-auth:${toString ldap_cfg.settings.http_port}
         			'';
 
       "media.${domain}".extraConfig = ''
@@ -48,7 +48,7 @@ in
     };
     extraConfig = ''
       			(auth) {
-      					forward_auth :9091 {
+      					forward_auth x86-merkat-auth:9091 {
       							uri /api/authz/forward-auth
       							copy_headers remote-user remote-groups remote-email remote-name
       					}
