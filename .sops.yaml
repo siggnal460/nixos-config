@@ -1,10 +1,10 @@
 keys:
   - &user_aaron_gamingpc age15lctyzps9amrf0gq2c9twt6rt0t75phfa2p4fwu6n2j0dp4x2d0qx06hwm
   - &user_aaron_mediaserver age1lthnsqvt38rm6ylhpacgm2ryhnzmhpnwc6xa2s22ntkl7fyxhggqx0qj4h
-  - &user_aaron_auth age1jsxmx0642xcuuayrrfqqec8yjpmfe2y0pg9mlzsprjh3wyhmsasse22pqf
+  - &user_aaron_auth age1ve39m3j55pw94j3at72yxupfjsra4z8mrysf2eqtm65dk4hemcfqxtsej7
   - &server_gamingpc age1w4yhe66tlnhwl7vkrqlqtd0f3g6z4qjv3l9eklzm27yyl900gyns4es40n
   - &server_mediaserver age1cjk0vwkckvurf5fpltnlaa6vv0mjjgcm97xfwcatdz3ffgna6gwq9nnz7r
-  - &server_auth age1eennd7sna589zk87tm5al409xptyqlzrtwjwvjn4wh4tgym5gqrqpu8u5u
+  - &server_auth age1m36enhql42snlt2v0fgv6dtmwzv2qtte7vgzudnzvp0rakhu0deqhkexrt
 creation_rules:
   - path_regex: secrets/secrets.yaml$
     key_groups:

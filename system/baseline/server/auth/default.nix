@@ -6,7 +6,10 @@ let
   redis_instance = "redis-gappyland";
 in
 {
-  networking.firewall.allowedTCPPorts = [ 3890 ];
+  networking.firewall.allowedTCPPorts = [
+    3890
+    17170
+  ];
 
   services = {
     redis.servers.gappyland.enable = true;
