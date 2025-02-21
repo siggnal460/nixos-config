@@ -6,5 +6,5 @@
     domain = "gappyland.org";
   };
 
-  sops.defaultSopsFile = ../../x86-merkat-auth/secrets.yaml;
+  sops.defaultSopsFile = ../../secrets/x86-merkat-auth/secrets.yaml;
 }

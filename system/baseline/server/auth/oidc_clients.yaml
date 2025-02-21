@@ -2,8 +2,8 @@ identity_providers:
   oidc:
     clients:
       - client_name: "Nextcloud"
-        client_id: {{ secret "/run/secrets/shared/nextcloud/oidc_client_id" | mindent 10 "|" | msquote }}
-        client_secret: {{ secret "/run/secrets/x86-merkat-entry/nextcloud/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
+        client_id: {{ secret "/run/secrets/authelia/nextcloud/oidc_client_id" | mindent 10 "|" | msquote }}
+        client_secret: {{ secret "/run/secrets/authelia/nextcloud/oidc_client_secret/hashed" | mindent 10 "|" | msquote }}
         public: false
         authorization_policy: "two_factor"
         require_pkce: true

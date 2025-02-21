@@ -48,9 +48,9 @@ in
         database_url = "postgresql://lldap@localhost/lldap?host=/run/postgresql";
       };
       environment = {
-        LLDAP_JWT_SECRET_FILE = config.sops.secrets."${host}/lldap/jwt_secret".path;
-        LLDAP_KEY_SEED_FILE = config.sops.secrets."${host}/lldap/key_seed".path;
-        LLDAP_LDAP_USER_PASS_FILE = config.sops.secrets."${host}/lldap/admin_password".path;
+        LLDAP_JWT_SECRET_FILE = config.sops.secrets."lldap/jwt_secret".path;
+        LLDAP_KEY_SEED_FILE = config.sops.secrets."lldap/key_seed".path;
+        LLDAP_LDAP_USER_PASS_FILE = config.sops.secrets."lldap/admin_password".path;
       };
     };
 
@@ -126,16 +126,16 @@ in
       };
       settingsFiles = [ ./oidc_clients.yaml ];
       secrets = with config.sops; {
-        jwtSecretFile = secrets."${host}/authelia/jwt_secret".path;
-        oidcIssuerPrivateKeyFile = secrets."${host}/authelia/jwks".path;
-        oidcHmacSecretFile = secrets."${host}/authelia/hmac_secret".path;
-        sessionSecretFile = secrets."${host}/authelia/session_secret".path;
-        storageEncryptionKeyFile = secrets."${host}/authelia/storage_encryption_key".path;
+        jwtSecretFile = secrets."authelia/jwt_secret".path;
+        oidcIssuerPrivateKeyFile = secrets."authelia/jwks".path;
+        oidcHmacSecretFile = secrets."authelia/hmac_secret".path;
+        sessionSecretFile = secrets."authelia/session_secret".path;
+        storageEncryptionKeyFile = secrets."authelia/storage_encryption_key".path;
       };
       environmentVariables = with config.sops; {
         AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE =
-          secrets."${host}/authelia/lldap_authelia_password".path;
-        AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE = secrets."${host}/authelia/smtp_api_key".path;
+          secrets."authelia/lldap_authelia_password".path;
+        AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE = secrets."authelia/smtp_api_key".path;
       };
     };
   };
@@ -182,18 +182,17 @@ in
   };
 
   sops.secrets = {
-    "${host}/nextcloud/oidc_client_id".owner = auth_instance;
-    "${host}/nextcloud/oidc_client_secret/nextcloud".owner = auth_instance;
-    "${host}/nextcloud/oidc_client_secret/authelia".owner = auth_instance;
-    "${host}/authelia/hmac_secret".owner = auth_instance;
-    "${host}/authelia/jwks".owner = auth_instance;
-    "${host}/authelia/jwt_secret".owner = auth_instance;
-    "${host}/authelia/session_secret".owner = auth_instance;
-    "${host}/authelia/storage_encryption_key".owner = auth_instance;
-    "${host}/authelia/lldap_authelia_password".owner = auth_instance;
-    "${host}/authelia/smtp_api_key".owner = auth_instance;
-    "${host}/lldap/jwt_secret".owner = "lldap";
-    "${host}/lldap/key_seed".owner = "lldap";
-    "${host}/lldap/admin_password".owner = "lldap";
+    "authelia/nextcloud/oidc_client_id".owner = auth_instance;
+    "authelia/nextcloud/oidc_client_secret/hashed".owner = auth_instance;
+    "authelia/hmac_secret".owner = auth_instance;
+    "authelia/jwks".owner = auth_instance;
+    "authelia/jwt_secret".owner = auth_instance;
+    "authelia/session_secret".owner = auth_instance;
+    "authelia/storage_encryption_key".owner = auth_instance;
+    "authelia/lldap_authelia_password".owner = auth_instance;
+    "authelia/smtp_api_key".owner = auth_instance;
+    "lldap/jwt_secret".owner = "lldap";
+    "lldap/key_seed".owner = "lldap";
+    "lldap/admin_password".owner = "lldap";
   };
 }
