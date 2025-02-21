@@ -9,6 +9,7 @@ in
   networking.firewall.allowedTCPPorts = [
     3890
     17170
+    9091
   ];
 
   services = {
