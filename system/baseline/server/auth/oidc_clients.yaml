@@ -9,11 +9,11 @@ identity_providers:
         require_pkce: true
         pkce_challenge_method: 'S256'
         redirect_uris:
-          - "https://nextcloud.gappyland.org/apps/oidc_login-oidc"
+          - "https://nextcloud.gappyland.org/apps/user_oidc/code"
         scopes:
           - 'openid'
           - 'profile'
           - 'email'
           - 'groups'
         userinfo_signed_response_alg: 'none'
-        token_endpoint_auth_method: 'client_secret_basic'
+        token_endpoint_auth_method: 'client_secret_post'
