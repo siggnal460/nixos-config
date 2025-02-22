@@ -6,6 +6,7 @@ let
 in
 {
   networking.firewall.allowedTCPPorts = [
+    80
     443
   ];
 
@@ -37,13 +38,14 @@ in
         			'';
 
       "nextcloud.${domain}".extraConfig = ''
-                			  import auth
+                        			  import auth
 
-                        reverse_proxy x86-rakmnt-mediaserver:80 {
-                				  transport http {
-                					  tls_insecure_skip_verify
-                					}
-        								}
+                                reverse_proxy https://x86-rakmnt-mediaserver:443 {
+        												  transport http {
+        													  tls
+        														tls_insecure_skip_verify
+        													}
+        												}
       '';
     };
     extraConfig = ''
