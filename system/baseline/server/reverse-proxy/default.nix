@@ -14,15 +14,10 @@ in
     enable = true;
     virtualHosts = {
       ${domain}.extraConfig = ''
-                  					encode gzip
-                  					file_server
-                  					root * ${
-                         pkgs.runCommand "populateCaddyHtml" { } ''
-                           							mkdir "$out"
-                           							echo "${builtins.readFile htmlFile}" > "$out/index.html"
-                           						''
-                       }
-        			'';
+                          					encode gzip
+                          					file_server
+        														reverse_proxy x86-merkat-auth:8082
+                			'';
 
       "auth.${domain}".extraConfig = ''
         			    reverse_proxy x86-merkat-auth:9091
