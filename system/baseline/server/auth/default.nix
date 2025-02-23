@@ -186,7 +186,7 @@ in
 
   sops.secrets = {
     "authelia/nextcloud/oidc_client_id".owner = auth_instance;
-    "authelia/nextcloud/oidc_client_secret/hashed".owner = auth_instance;
+    "authelia/nextcloud/oidc_client_secret".owner = auth_instance;
     "authelia/komga/oidc_client_id".owner = auth_instance;
     "authelia/komga/oidc_client_secret".owner = auth_instance;
     "authelia/hmac_secret".owner = auth_instance;
