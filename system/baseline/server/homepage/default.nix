@@ -117,6 +117,7 @@ in
           {
             EmulatorJS = {
               icon = "emulatorjs.svg";
+              href = "https://games.gappyland.org";
             };
           }
           {
@@ -133,6 +134,7 @@ in
           {
             Jellyseerr = {
               icon = "jellyseerr.svg";
+              href = "https://jellyseerr.gappyland.org";
             };
           }
           {
@@ -193,7 +195,7 @@ in
       {
         search = {
           provider = "duckduckgo";
-          focus = false;
+          focus = true;
           showSearchSuggestions = true;
           target = "_top";
         };
@@ -268,7 +270,7 @@ in
             NixOS = [
               {
                 icon = "nixos.svg";
-                href = "https://nixos.org";
+                href = "https://search.nixos.org/options";
               }
             ];
           }

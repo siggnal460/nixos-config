@@ -32,6 +32,16 @@ in
         			    reverse_proxy /jellyfin/* x86-rakmnt-mediaserver:8096
         			'';
 
+      "jellyseerr.${domain}".extraConfig = ''
+        			    reverse_proxy x86-rakmnt-mediaserver:5055
+        			'';
+
+      "games.${domain}".extraConfig = ''
+                  import auth
+
+        			    reverse_proxy x86-rakmnt-mediaserver:81
+        			'';
+
       "nextcloud.${domain}".extraConfig = ''
                         			  import auth
 
