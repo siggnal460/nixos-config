@@ -206,6 +206,7 @@
               ./system/baseline/server
               ./system/baseline/server/reverse-proxy
               ./system/baseline/server/homepage
+              ./system/baseline/server/beszel-agent
               #./system/baseline/server/headscale
             ]
             [ ];

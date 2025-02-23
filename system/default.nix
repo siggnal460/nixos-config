@@ -7,7 +7,10 @@
   ...
 }:
 {
-  imports = [ ./extras/current-system-packages.nix ];
+  imports = [
+    ./extras/current-system-packages.nix
+    ./extras/options.nix
+  ];
 
   boot = {
     tmp.useTmpfs = lib.mkDefault true;
