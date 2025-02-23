@@ -196,7 +196,6 @@
             [
               ./system/baseline/server
               ./system/baseline/server/auth
-              ./system/baseline/server/homepage
             ]
             [ ];
 
@@ -205,6 +204,7 @@
             [
               ./system/baseline/server
               ./system/baseline/server/reverse-proxy
+              ./system/baseline/server/homepage
               #./system/baseline/server/headscale
             ]
             [ ];
