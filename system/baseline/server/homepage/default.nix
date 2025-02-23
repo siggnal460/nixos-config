@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   inputs,
   ...
 }:
@@ -22,8 +21,8 @@ let
     postInstall = ''
       mkdir -p $out/share/homepage/public/images
       ln -s ${background} $out/share/homepage/public/images/background.jpeg
-      ln -s ${icon} $out/share/homepage/public/images/favicon.jpeg
-      ln -s ${logo} $out/share/homepage/public/images/logo.jpeg
+      ln -s ${icon} $out/share/homepage/public/images/favicon.ico
+      ln -s ${logo} $out/share/homepage/public/images/logo.png
     '';
   });
 in
@@ -32,13 +31,19 @@ in
     enable = true;
     package = package;
     openFirewall = true;
-    environmentFile = config.sops.secrets."homepage/env".path;
+
+    customCSS = ''
+      			#revalidate {
+      				display: none;
+      			}
+      		'';
 
     settings = {
       title = "Gappyland";
       description = "Gappy Makes Me Happy";
       hideVersion = true;
       theme = "dark";
+      language = "en";
       background = {
         image = "/images/background.jpeg";
         blur = "sm";
@@ -47,6 +52,16 @@ in
         opacity = "50";
       };
       favicon = "/images/favicon.ico";
+      statusStyle = "dot";
+      quicklaunch = {
+        searchDescriptions = true;
+        hideInternetSearch = true;
+        showSearchSuggestions = true;
+        hideVisitURL = true;
+        provider = "duckduckgo";
+      };
+      color = "slate";
+      target = "_self";
     };
 
     services = [
@@ -56,49 +71,42 @@ in
             Dashboard = {
               icon = "nextcloud.svg";
               href = "https://nextcloud.gappyland.org/apps/dashboard";
-              target = "_self";
             };
           }
           {
             Calendar = {
               icon = "nextcloud-calendar.svg";
               href = "https://nextcloud.gappyland.org/apps/calendar";
-              target = "_self";
             };
           }
           {
             Contacts = {
               icon = "nextcloud-contacts.svg";
               href = "https://nextcloud.gappyland.org/apps/contacts";
-              target = "_self";
             };
           }
           {
             Files = {
               icon = "nextcloud-files.svg";
               href = "https://nextcloud.gappyland.org/apps/files";
-              target = "_self";
             };
           }
           {
             News = {
               icon = "nextcloud-news.svg";
               href = "https://nextcloud.gappyland.org/apps/news";
-              target = "_self";
             };
           }
           {
             Notes = {
               icon = "nextcloud-notes.svg";
               href = "https://nextcloud.gappyland.org/apps/notes";
-              target = "_self";
             };
           }
           {
             Tasks = {
               icon = "nextcloud-tasks.svg";
               href = "https://nextcloud.gappyland.org/apps/tasks";
-              target = "_self";
             };
           }
         ];
@@ -107,7 +115,7 @@ in
       {
         Media = [
           {
-            Gaseous = {
+            EmulatorJS = {
               icon = "emulatorjs.svg";
             };
           }
@@ -120,8 +128,6 @@ in
             Jellyfin = {
               icon = "jellyfin.svg";
               href = "https://media.gappyland.org/jellyfin";
-              siteMonitor = "https://media.gappyland.org/jellyfin";
-              target = "_self";
             };
           }
           {
@@ -155,15 +161,25 @@ in
       {
         Management = [
           {
-            LLDAP = {
-              icon = "freeipa.svg";
-              href = "https://users.gappyland.org";
-              target = "_self";
+            Authelia = {
+              icon = "authelia.svg";
+              href = "https://auth.gappyland.org";
             };
           }
           {
             Beszel = {
               icon = "beszel.svg";
+            };
+          }
+          {
+            Gitea = {
+              icon = "gitea.svg";
+            };
+          }
+          {
+            LLDAP = {
+              icon = "freeipa.svg";
+              href = "https://users.gappyland.org";
             };
           }
         ];
@@ -175,16 +191,6 @@ in
         logo.icon = "/images/logo.png";
       }
       {
-        datetime = {
-          text_size = "l";
-          format = {
-            timeStyle = "short";
-            dateStyle = "short";
-            hourCycle = "h23";
-          };
-        };
-      }
-      {
         search = {
           provider = "duckduckgo";
           focus = false;
@@ -193,21 +199,118 @@ in
         };
       }
       {
-        openmeteo = {
-          label = "Weather";
-          latitude = "41.109700";
-          longitude = "111.982700";
-          timezone = "America/Denver";
-          units = "imperial";
-          cache = 5;
+        datetime = {
+          text_size = "sm";
+          locale = "de";
           format = {
-            maximumFractionDigits = "1";
+            hourCycle = "h23";
+            dateStyle = "short";
+            timeStyle = "short";
           };
         };
       }
+    ];
 
+    bookmarks = [
+      {
+        Development = [
+          {
+            Github = [
+              {
+                icon = "github.svg";
+                href = "https://github.com/";
+              }
+            ];
+          }
+          {
+            Python = [
+              {
+                icon = "python.svg";
+                href = "https://docs.python.org/";
+              }
+            ];
+          }
+          {
+            Rust = [
+              {
+                icon = "rust.svg";
+                href = "https://docs.rs";
+              }
+            ];
+          }
+        ];
+      }
+
+      {
+        Containers = [
+          {
+            Dockerhub = [
+              {
+                icon = "docker.svg";
+                href = "https://hub.docker.com";
+              }
+            ];
+          }
+          {
+            Linuxserver = [
+              {
+                icon = "linuxserver-io.svg";
+                href = "https://docs.linuxserver.io";
+              }
+            ];
+          }
+        ];
+      }
+
+      {
+        Linux = [
+          {
+            NixOS = [
+              {
+                icon = "nixos.svg";
+                href = "https://nixos.org";
+              }
+            ];
+          }
+        ];
+      }
+
+      {
+        Selfhosting = [
+          {
+            Authelia = [
+              {
+                icon = "authelia.svg";
+                href = "https://www.authelia.com/";
+              }
+            ];
+          }
+          {
+            Caddy = [
+              {
+                icon = "caddy.svg";
+                href = "https://caddyserver.com/docs/";
+              }
+            ];
+          }
+          {
+            Cloudflare = [
+              {
+                icon = "cloudflare.svg";
+                href = "https://dash.cloudflare.com/";
+              }
+            ];
+          }
+          {
+            Homepage = [
+              {
+                icon = "homepage.png";
+                href = "https://gethomepage.dev/";
+              }
+            ];
+          }
+        ];
+      }
     ];
   };
-
-  sops.secrets."homepage/env".sopsFile = ../../../../secrets/x86-merkat-auth/secrets.yaml;
 }
