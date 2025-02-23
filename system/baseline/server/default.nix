@@ -9,7 +9,16 @@
   services = {
     clamav = {
       daemon.enable = true;
-      scanner.enable = true;
+      scanner = {
+        enable = true;
+        scanDirectories = [
+          "/etc"
+          "/home"
+          "/tmp"
+          "/var/lib"
+          "/var/tmp"
+        ];
+      };
       updater.enable = true;
       fangfrisch.enable = true;
     };

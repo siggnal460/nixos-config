@@ -38,16 +38,6 @@ in
         			    reverse_proxy x86-merkat-auth:8090
         			'';
 
-      "jellyseerr.${domain}".extraConfig = ''
-        			    reverse_proxy x86-rakmnt-mediaserver:5055
-        			'';
-
-      "games.${domain}".extraConfig = ''
-                  import auth
-
-        			    reverse_proxy x86-rakmnt-mediaserver:81
-        			'';
-
       "books.${domain}".extraConfig = ''
                   import auth
 

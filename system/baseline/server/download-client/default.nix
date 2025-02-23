@@ -20,6 +20,11 @@
 
   networking.firewall.allowedUDPPorts = [ 51413 ];
 
+  services.clamav.scanner.scanDirectories = [
+    "/export/media/torrents"
+    "/export/media/usenet"
+  ];
+
   users.users = {
     transmission = {
       uid = 710;
