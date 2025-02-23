@@ -3,6 +3,7 @@
     "d /etc/emulatorjs 0700 emulatorjs emulatorjs"
     "d /export/emulatorjs 0775 emulatorjs emulatorjs"
     "d /export/emulatorjs/data 0770 emulatorjs users"
+    "Z /export/emulatorjs/data 0770 emulatorjs users"
   ];
 
   services = {

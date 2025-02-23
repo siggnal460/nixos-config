@@ -1,7 +1,13 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   jellyseerrApiFile = "/var/lib/doplarr/jellyseerr_api";
   discordApiFile = "/var/lib/doplarr/discord_api";
+  auth_site = "https://auth.gappyland.org";
 in
 {
   imports = [ ../../../shared/podman.nix ];
@@ -132,6 +138,33 @@ in
     wizarr = {
       gid = 712;
     };
+  };
+
+  environment.etc."komga/application.yml".source =
+    lib.mkForce config.sops.templates.komga-config.path;
+  sops.templates.komga-config = {
+    content = # yaml
+      ''
+        				komga:
+        					oauth2-account-creation: true
+        				spring:
+        					security:
+        						oauth2:
+        							client:
+        								registration:
+        									authelia:
+        										client-id: "${config.sops.placeholder."komga/oidc_client_id"}"
+        										client-secret: "${config.sops.placeholder."komga/oidc_client_secret"}"
+        										client-name: 'Authelia'
+        										scope: 'openid,profile,email'
+        										authorization-grant-type: 'authorization_code'
+        										redirect-uri: "{baseScheme}://{baseHost}{basePort}{basePath}/login/oauth2/code/authelia"
+        								provider:
+        									authelia:
+        										issuer-uri: '${auth_site}'
+        										user-name-attribute: 'preferred_username'
+      '';
+    owner = "komga";
   };
 
   virtualisation.oci-containers.containers = {
@@ -404,4 +437,10 @@ in
       ];
     };
   };
+
+  sops.secrets = {
+    "komga/oidc_client_id".owner = "komga";
+    "komga/oidc_client_secret".owner = "komga";
+  };
+
 }
