@@ -1,7 +1,36 @@
-{ config, ... }:
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
+let
+  background = pkgs.fetchurl {
+    name = "xVWaGv3.jpeg";
+    url = "https://i.imgur.com/xVWaGv3.jpeg";
+    hash = "sha256-0G+o36zUJas1ZZ1L5TiQNrjxS8nVAoHCwRlA9gsUEyY=";
+  };
+  logo = builtins.path {
+    path = "${inputs.self}/images/icons/menacing.png";
+    name = "homepage-logo";
+  };
+  icon = builtins.path {
+    path = "${inputs.self}/images/icons/menacing.ico";
+    name = "homepage-icon";
+  };
+  package = pkgs.homepage-dashboard.overrideAttrs (oldAttrs: {
+    postInstall = ''
+      mkdir -p $out/share/homepage/public/images
+      ln -s ${background} $out/share/homepage/public/images/background.jpeg
+      ln -s ${icon} $out/share/homepage/public/images/favicon.jpeg
+      ln -s ${logo} $out/share/homepage/public/images/logo.jpeg
+    '';
+  });
+in
 {
   services.homepage-dashboard = {
     enable = true;
+    package = package;
     openFirewall = true;
     environmentFile = config.sops.secrets."homepage/env".path;
 
@@ -11,13 +40,13 @@
       hideVersion = true;
       theme = "dark";
       background = {
-        image = "https://i.imgur.com/xVWaGv3.jpeg";
+        image = "/images/background.jpeg";
         blur = "sm";
         saturate = "50";
         brightness = "50";
         opacity = "50";
       };
-      favicon = "../../../../images/icons/menacing.ico";
+      favicon = "/images/favicon.ico";
     };
 
     services = [
@@ -91,7 +120,7 @@
             Jellyfin = {
               icon = "jellyfin.svg";
               href = "https://media.gappyland.org/jellyfin";
-              ping = "https://media.gappyland.org/jellyfin";
+              siteMonitor = "https://media.gappyland.org/jellyfin";
               target = "_self";
             };
           }
@@ -142,6 +171,9 @@
     ];
 
     widgets = [
+      {
+        logo.icon = "/images/logo.png";
+      }
       {
         datetime = {
           text_size = "l";
