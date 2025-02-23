@@ -70,43 +70,43 @@ in
           {
             Dashboard = {
               icon = "nextcloud.svg";
-              href = "https://nextcloud.gappyland.org/apps/dashboard";
+              href = "https://cloud.gappyland.org/apps/dashboard";
             };
           }
           {
             Calendar = {
               icon = "nextcloud-calendar.svg";
-              href = "https://nextcloud.gappyland.org/apps/calendar";
+              href = "https://cloud.gappyland.org/apps/calendar";
             };
           }
           {
             Contacts = {
               icon = "nextcloud-contacts.svg";
-              href = "https://nextcloud.gappyland.org/apps/contacts";
+              href = "https://cloud.gappyland.org/apps/contacts";
             };
           }
           {
             Files = {
               icon = "nextcloud-files.svg";
-              href = "https://nextcloud.gappyland.org/apps/files";
+              href = "https://cloud.gappyland.org/apps/files";
             };
           }
           {
             News = {
               icon = "nextcloud-news.svg";
-              href = "https://nextcloud.gappyland.org/apps/news";
+              href = "https://cloud.gappyland.org/apps/news";
             };
           }
           {
             Notes = {
               icon = "nextcloud-notes.svg";
-              href = "https://nextcloud.gappyland.org/apps/notes";
+              href = "https://cloud.gappyland.org/apps/notes";
             };
           }
           {
             Tasks = {
               icon = "nextcloud-tasks.svg";
-              href = "https://nextcloud.gappyland.org/apps/tasks";
+              href = "https://cloud.gappyland.org/apps/tasks";
             };
           }
         ];
@@ -117,7 +117,7 @@ in
           {
             EmulatorJS = {
               icon = "emulatorjs.svg";
-              href = "https://games.gappyland.org";
+              href = "https://roms.gappyland.org";
             };
           }
           {
@@ -128,13 +128,13 @@ in
           {
             Jellyfin = {
               icon = "jellyfin.svg";
-              href = "https://media.gappyland.org/jellyfin";
+              href = "https://media.gappyland.org";
             };
           }
           {
             Jellyseerr = {
               icon = "jellyseerr.svg";
-              href = "https://jellyseerr.gappyland.org";
+              href = "https://requests.gappyland.org";
             };
           }
           {
@@ -149,13 +149,15 @@ in
       {
         AI = [
           {
-            OpenWebUI = {
-              icon = "https://github.com/open-webui/open-webui/blob/main/static/favicon.png?raw=true";
+            Automatic1111 = {
+              icon = "https://user-images.githubusercontent.com/36368048/196280761-1535f413-a91e-4b6a-af6a-b890f8ae204c.png";
+              href = "https://imagegen.gappyland.org";
             };
           }
           {
-            Automatic1111 = {
-              icon = "https://user-images.githubusercontent.com/36368048/196280761-1535f413-a91e-4b6a-af6a-b890f8ae204c.png";
+            OpenWebUI = {
+              icon = "https://github.com/open-webui/open-webui/blob/main/static/favicon.png?raw=true";
+              href = "https://textgen.gappyland.org";
             };
           }
         ];
@@ -182,7 +184,7 @@ in
           }
           {
             HomeAssistant = {
-              icon = "homeassistant.svg";
+              icon = "home-assistant.svg";
             };
           }
           {

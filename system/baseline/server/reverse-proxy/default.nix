@@ -24,12 +24,13 @@ in
         			'';
 
       "users.${domain}".extraConfig = ''
+                  import auth
+
         			    reverse_proxy x86-merkat-auth:${toString ldap_cfg.settings.http_port}
         			'';
 
       "media.${domain}".extraConfig = ''
-                  redir /jellyfin /jellyfin/
-        			    reverse_proxy /jellyfin/* x86-rakmnt-mediaserver:8096
+        			    reverse_proxy x86-rakmnt-mediaserver:8096
         			'';
 
       "monitoring.${domain}".extraConfig = ''
@@ -38,13 +39,23 @@ in
         			    reverse_proxy x86-merkat-auth:8090
         			'';
 
+      "requests.${domain}".extraConfig = ''
+        			    reverse_proxy x86-rakmnt-mediaserver:5055
+        			'';
+
+      "roms.${domain}".extraConfig = ''
+                  import auth
+
+        			    reverse_proxy x86-rakmnt-mediaserver:81
+        			'';
+
       "books.${domain}".extraConfig = ''
                   import auth
 
         			    reverse_proxy x86-rakmnt-mediaserver:25600
         			'';
 
-      "nextcloud.${domain}".extraConfig = ''
+      "cloud.${domain}".extraConfig = ''
                         			  import auth
 
                                 reverse_proxy https://x86-rakmnt-mediaserver:443 {
