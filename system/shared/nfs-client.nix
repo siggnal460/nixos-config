@@ -22,10 +22,16 @@
           group = "users";
         };
       };
+      "/mnt/emulatorjs" = {
+        d = {
+          mode = "0770";
+          user = "root";
+          group = "users";
+        };
+      };
     };
   };
 
-  # NOTE I have to manually run sudo modprobe nfs despite this config
   boot.initrd = {
     supportedFilesystems = [
       "nfs"
@@ -55,6 +61,14 @@
   };
   fileSystems."/mnt/media" = {
     device = "10.0.0.7:/export/media";
+    fsType = "nfs4";
+    options = [
+      "x-systemd.automount"
+      "_netdev"
+    ];
+  };
+  fileSystems."/mnt/emulatorjs" = {
+    device = "10.0.0.7:/export/emulatorjs";
     fsType = "nfs4";
     options = [
       "x-systemd.automount"
