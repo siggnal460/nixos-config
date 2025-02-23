@@ -16,7 +16,7 @@ in
       ${domain}.extraConfig = ''
                           					encode gzip
                           					file_server
-        														reverse_proxy x86-merkat-auth:8082
+        														reverse_proxy :8082
                 			'';
 
       "auth.${domain}".extraConfig = ''
