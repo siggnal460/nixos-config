@@ -196,6 +196,7 @@
             [
               ./system/baseline/server
               ./system/baseline/server/auth
+              ./system/baseline/server/beszel-hub
             ]
             [ ];
 
