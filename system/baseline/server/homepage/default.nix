@@ -172,11 +172,17 @@ in
           {
             Beszel = {
               icon = "beszel.svg";
+              href = "https://monitoring.gappyland.org";
             };
           }
           {
             Gitea = {
               icon = "gitea.svg";
+            };
+          }
+          {
+            HomeAssistant = {
+              icon = "homeassistant.svg";
             };
           }
           {

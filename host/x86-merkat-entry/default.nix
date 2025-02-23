@@ -1,7 +1,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../../shared/podman.nix
+    ../../system/shared/podman.nix
   ];
 
   networking = {

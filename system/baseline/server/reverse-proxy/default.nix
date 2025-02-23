@@ -32,6 +32,12 @@ in
         			    reverse_proxy /jellyfin/* x86-rakmnt-mediaserver:8096
         			'';
 
+      "monitoring.${domain}".extraConfig = ''
+                  import auth
+
+        			    reverse_proxy x86-merkat-auth:8090
+        			'';
+
       "jellyseerr.${domain}".extraConfig = ''
         			    reverse_proxy x86-rakmnt-mediaserver:5055
         			'';
