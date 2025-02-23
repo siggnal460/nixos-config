@@ -140,6 +140,7 @@ in
           {
             Komga = {
               icon = "komga.svg";
+              href = "https://books.gappyland.org";
             };
           }
         ];

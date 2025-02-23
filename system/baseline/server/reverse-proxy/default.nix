@@ -42,6 +42,12 @@ in
         			    reverse_proxy x86-rakmnt-mediaserver:81
         			'';
 
+      "books.${domain}".extraConfig = ''
+                  import auth
+
+        			    reverse_proxy x86-rakmnt-mediaserver:25600
+        			'';
+
       "nextcloud.${domain}".extraConfig = ''
                         			  import auth
 
