@@ -283,6 +283,14 @@ in
               }
             ];
           }
+          {
+            Home-Manager = [
+              {
+                icon = "nixos.svg";
+                href = "https://nix-community.github.io/home-manager/options.xhtml";
+              }
+            ];
+          }
         ];
       }
 
