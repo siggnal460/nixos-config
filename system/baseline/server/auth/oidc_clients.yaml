@@ -17,6 +17,19 @@ identity_providers:
           - 'groups'
         userinfo_signed_response_alg: 'none'
         token_endpoint_auth_method: 'client_secret_post'
+      - client_name: "Open WebUI"
+        client_id: {{ secret "/run/secrets/authelia/openwebui/oidc_client_id" | mindent 10 "|" | msquote }}
+        client_secret: {{ secret "/run/secrets/authelia/openwebui/oidc_client_secret" | mindent 10 "|" | msquote }}
+        public: false
+        authorization_policy: "two_factor"
+        redirect_uris:
+          - "https://textgen.gappyland.org/oauth/oidc/callback"
+        scopes:
+          - 'openid'
+          - 'profile'
+          - 'groups'
+          - 'email'
+        userinfo_signed_response_alg: 'RS256'
       - client_id: {{ secret "/run/secrets/authelia/komga/oidc_client_id" | mindent 10 "|" | msquote }}
         client_name: 'Komga'
         client_secret: {{ secret "/run/secrets/authelia/komga/oidc_client_secret" | mindent 10 "|" | msquote }}

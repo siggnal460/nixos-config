@@ -74,6 +74,13 @@ in
         access_control = {
           default_policy = "deny";
           rules = lib.mkAfter [
+            # Allow access through various app APIs for mobile apps
+            {
+              domain = "cloud.${domain}";
+              resources = [ "^/index.php/apps/news/api/.*$" ];
+              methods = [ "GET" ];
+              policy = "bypass";
+            }
             {
               domain = "*.${domain}";
               policy = "two_factor";
@@ -189,6 +196,8 @@ in
     "authelia/nextcloud/oidc_client_secret".owner = auth_instance;
     "authelia/komga/oidc_client_id".owner = auth_instance;
     "authelia/komga/oidc_client_secret".owner = auth_instance;
+    "authelia/openwebui/oidc_client_id".owner = auth_instance;
+    "authelia/openwebui/oidc_client_secret".owner = auth_instance;
     "authelia/hmac_secret".owner = auth_instance;
     "authelia/jwks".owner = auth_instance;
     "authelia/jwt_secret".owner = auth_instance;
