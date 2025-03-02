@@ -3,10 +3,10 @@
   imports = [
     ../../../shared/latest-kernel.nix
     ../../../shared/podman.nix
-    #./model-loader.nix
   ];
 
   systemd.tmpfiles.rules = [
+    "d /var/lib/invokeai 0774 root users"
     "d /var/lib/comfyui 0774 root users"
     "d /var/lib/ollama 0774 root users"
     "d /var/lib/open-webui/data 0770 root users"
@@ -31,6 +31,7 @@
         "io.containers.autoupdate" = "registry";
       };
       environmentFiles = [ "/run/secrets/invokeai_secrets" ];
+      volumes = [ "/var/lib/invokeai:/invokeai" ];
       ports = [ "9091:9090" ];
       extraOptions = [
         "--name=invokeai"

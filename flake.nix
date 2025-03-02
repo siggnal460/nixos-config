@@ -108,7 +108,7 @@
     {
       nixosConfigurations = {
         ## WORKSTATIONS ##
-        x86-laptop-galago =
+        x86-galago-galago =
           mkComputerUnstable "x86_64-linux" ./host/x86-laptop-galago # machine specific configuration
             [
               #system-wide modules

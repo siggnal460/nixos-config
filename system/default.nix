@@ -251,6 +251,12 @@
     };
   };
 
+  stylix = {
+    # per cryptic error message, stylix doesn't work on stable, but also needs to be set for all unstable regardless if it has a gui...
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+  };
+
   environment = {
     variables = {
       EDITOR = "nvim";
