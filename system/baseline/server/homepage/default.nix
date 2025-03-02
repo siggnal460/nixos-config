@@ -151,7 +151,7 @@ in
           {
             InvokeAI = {
               icon = "invoke-ai";
-             href = "https://imagegen.gappyland.org";
+              href = "https://imagegen.gappyland.org";
             };
           }
           {
