@@ -4,7 +4,6 @@
   nixConfig = {
     substituters = [
       "https://cache.nixos.org/"
-      #"https://nyx.chaotic.cx/"
       "https://nix-community.cachix.org"
       "https://cosmic.cachix.org/"
       "https://nix-gaming.cachix.org"
@@ -12,8 +11,6 @@
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      #"nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
-      #"chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
@@ -42,7 +39,6 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nixified-ai.url = "github:nixified-ai/flake";
-    #chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -52,7 +48,6 @@
   outputs =
     inputs@{
       self,
-      #chaotic,
       home-manager,
       home-manager-unstable,
       jovian-nixos,
@@ -97,7 +92,6 @@
           modules = [
             configurationNix
             sops-nix.nixosModules.sops
-            #chaotic.nixosModules.default
             stylix.nixosModules.stylix
             nix-index-database.nixosModules.nix-index
             ./system
