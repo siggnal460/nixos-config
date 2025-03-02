@@ -222,6 +222,7 @@
               ./system/baseline/server/blender
               ./system/baseline/server/nfs
               ./system/baseline/server/beszel-agent
+              ./system/baseline/server/habittrove
             ]
             [ ];
 

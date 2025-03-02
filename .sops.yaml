@@ -2,9 +2,11 @@ keys:
   - &user_aaron_gamingpc age15lctyzps9amrf0gq2c9twt6rt0t75phfa2p4fwu6n2j0dp4x2d0qx06hwm
   - &user_aaron_mediaserver age1lthnsqvt38rm6ylhpacgm2ryhnzmhpnwc6xa2s22ntkl7fyxhggqx0qj4h
   - &user_aaron_auth age1ve39m3j55pw94j3at72yxupfjsra4z8mrysf2eqtm65dk4hemcfqxtsej7
+  - &user_aaron_computeserver age13gcre65vt0n8s4llxe7dxjfw94cpy757avr8ldr6jkwwhy0l0ems3saq0s
   - &server_gamingpc age1w4yhe66tlnhwl7vkrqlqtd0f3g6z4qjv3l9eklzm27yyl900gyns4es40n
   - &server_mediaserver age1cjk0vwkckvurf5fpltnlaa6vv0mjjgcm97xfwcatdz3ffgna6gwq9nnz7r
   - &server_auth age1m36enhql42snlt2v0fgv6dtmwzv2qtte7vgzudnzvp0rakhu0deqhkexrt
+  - &server_computeserver age1hm20lsugmn7mclnrcp9yngme73x4mwyz4jxkmad2lm7mwcvgza2qvtuq7g
 creation_rules:
   - path_regex: secrets/secrets.yaml$
     key_groups:
@@ -12,6 +14,7 @@ creation_rules:
         - *user_aaron_gamingpc
         - *user_aaron_mediaserver
         - *user_aaron_auth
+        - *user_aaron_computeserver
   - path_regex: secrets/x86-rakmnt-mediaserver/secrets.yaml$
     key_groups:
       - age:
@@ -22,3 +25,8 @@ creation_rules:
       - age:
         - *user_aaron_auth
         - *server_auth
+  - path_regex: secrets/x86-atxtwr-computeserver/secrets.yaml$
+    key_groups:
+      - age:
+        - *user_aaron_computeserver
+        - *server_computeserver
