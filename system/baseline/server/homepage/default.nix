@@ -149,8 +149,8 @@ in
       {
         AI = [
           {
-            Automatic1111 = {
-              icon = "https://user-images.githubusercontent.com/36368048/196280761-1535f413-a91e-4b6a-af6a-b890f8ae204c.png";
+            InvokeAI = {
+              icon = "invoke-ai";
               href = "https://imagegen.gappyland.org";
             };
           }
