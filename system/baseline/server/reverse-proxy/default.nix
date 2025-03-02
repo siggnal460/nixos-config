@@ -55,6 +55,18 @@ in
         			    reverse_proxy x86-rakmnt-mediaserver:25600
         			'';
 
+      "textgen.${domain}".extraConfig = ''
+                  import auth
+
+        			    reverse_proxy x86-atxtwr-computeserver:3000
+        			'';
+
+      "imagegen.${domain}".extraConfig = ''
+                  import auth
+
+        			    reverse_proxy x86-atxtwr-computeserver:9091
+        			'';
+
       "cloud.${domain}".extraConfig = ''
                         			  import auth
 
