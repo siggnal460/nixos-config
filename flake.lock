@@ -67,7 +67,7 @@
         "type": "github"
       }
     },
-   "firefox-gnome-theme": {
+    "firefox-gnome-theme": {
       "flake": false,
       "locked": {
         "lastModified": 1739223196,
@@ -593,7 +593,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs-lib": {
       "locked": {
         "lastModified": 1740791350,
         "narHash": "sha256-igS2Z4tVw5W/x3lCZeeadt0vcU9fxtetZ/RyrqsCRQ0=",

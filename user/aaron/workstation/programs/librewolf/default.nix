@@ -42,6 +42,60 @@ in
         id = 0;
         name = "${config.home.username}";
         isDefault = true;
+        bookmarks = [
+          {
+            #Local Servers
+            name = "Local Servers";
+            toolbar = true;
+            bookmarks = [
+              {
+                name = "Beszel";
+                url = "https://x86-rakmnt-mediaserver:6767";
+              }
+              {
+                name = "ComfyUI";
+                url = "https://x86-atxtwr-computeserver:8188";
+              }
+              {
+                name = "FluxGym";
+                url = "https://x86-atxtwr-computeserver:7860";
+              }
+              {
+                name = "Nextcloud";
+                url = "https://x86-rakmnt-mediaserver";
+              }
+              {
+                name = "Prowlarr";
+                url = "https://x86-rakmnt-mediaserver:9696";
+              }
+              {
+                name = "Radarr";
+                url = "https://x86-rakmnt-mediaserver:7878";
+              }
+              {
+                name = "Readarr";
+                url = "https://x86-rakmnt-mediaserver:8787";
+              }
+              {
+                name = "SillyTavern";
+                url = "https://x86-atxtwr-computeserver:4000";
+              }
+              {
+                name = "Sonarr";
+                url = "https://x86-rakmnt-mediaserver:8989";
+              }
+              {
+                name = "Sonarr-Anime";
+                url = "https://x86-rakmnt-mediaserver:8988";
+              }
+              {
+                name = "Transmission";
+                url = "https://x86-rakmnt-mediaserver:9091";
+              }
+            ];
+          }
+        ];
+
         search = {
           force = true;
           default = "PrivateSearch";
@@ -110,9 +164,19 @@ in
     };
 
     policies.ExtensionSettings = {
+      "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+        default_area = "menupanel";
+        install_url = latestSourceURL "bitwarden-password-manager";
+        installation_mode = "force_installed";
+      };
       "addon@darkreader.org" = {
         default_area = "menupanel";
         install_url = latestSourceURL "darkreader";
+        installation_mode = "force_installed";
+      };
+      "transmitter@unrelenting.technology" = {
+        default_area = "menupanel";
+        install_url = latestSourceURL "transmitter-for-transmission";
         installation_mode = "force_installed";
       };
       "sponsorBlocker@ajay.app" = {
