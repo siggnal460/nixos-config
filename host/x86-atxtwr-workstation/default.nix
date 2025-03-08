@@ -9,6 +9,13 @@
     }
   ];
 
+  services.ollama = {
+    environmentVariables = {
+      HCC_AMDGPU_TARGET = "gfx1100";
+    };
+    rocmOverrideGfx = "11.0.0";
+  };
+
   networking = {
     hostName = "x86-atxtwr-workstation";
     interfaces.enp5s0 = {

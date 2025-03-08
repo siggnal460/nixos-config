@@ -21,6 +21,7 @@
   services.openssh.enable = false;
 
   programs = {
+    evince.enable = true;
     #firejail.enable = true;
     gnupg.agent = {
       # gpg keys

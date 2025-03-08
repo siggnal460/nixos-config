@@ -140,7 +140,6 @@
               ./system/hardware/gpu/amd/rocm
               ./system/de/cosmic
               ./system/baseline/workstation
-              ./system/baseline/workstation/ai-amd
               ./system/baseline/workstation/gaming
               ./system/baseline/workstation/gamedev-amd
               ./system/baseline/workstation/development

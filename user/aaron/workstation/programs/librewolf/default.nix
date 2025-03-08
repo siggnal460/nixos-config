@@ -196,7 +196,7 @@ in
       };
       "{4520dc08-80f4-4b2e-982a-c17af42e5e4d}" = {
         default_area = "menupanel";
-        install_url = latestSourceURL "tokyo-night-milav/";
+        install_url = latestSourceURL "tokyo-night-milav";
         installation_mode = "force_installed";
       };
       "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
