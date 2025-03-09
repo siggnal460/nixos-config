@@ -36,6 +36,7 @@
       extraOptions = [
         "--name=invokeai"
         "--gpus=all"
+        "--group-add=users"
       ];
     };
 

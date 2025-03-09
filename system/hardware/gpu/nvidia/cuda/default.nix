@@ -1,4 +1,3 @@
-# For use with Nvidia GPUs, imported as needed
 { pkgs, ... }:
 {
   nixpkgs.config.allowUnfree = true;
@@ -9,4 +8,6 @@
   nixpkgs.config.cudaSupport = true;
 
   hardware.nvidia-container-toolkit.enable = true;
+
+  services.ollama.acceleration = "cuda";
 }
