@@ -33,7 +33,8 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix/release-24.11";
+    stylix-unstable.url = "github:danth/stylix";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     jovian-nixos.url = "github:Jovian-Experiments/Jovian-NixOS";
     nix-gaming.url = "github:fufexan/nix-gaming";
@@ -60,6 +61,7 @@
       nixpkgs-unstable,
       sops-nix,
       stylix,
+      stylix-unstable,
       ...
     }:
 
@@ -73,6 +75,7 @@
           modules = [
             configurationNix
             sops-nix.nixosModules.sops
+            stylix.nixosModules.stylix
             nix-index-database.nixosModules.nix-index
             ./system
             home-manager.nixosModules.home-manager
@@ -92,7 +95,7 @@
           modules = [
             configurationNix
             sops-nix.nixosModules.sops
-            stylix.nixosModules.stylix
+            stylix-unstable.nixosModules.stylix
             nix-index-database.nixosModules.nix-index
             ./system
             home-manager-unstable.nixosModules.home-manager

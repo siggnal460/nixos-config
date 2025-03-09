@@ -2,7 +2,6 @@
   pkgs,
   inputs,
   config,
-  pkgsStable,
   ...
 }:
 {
@@ -61,14 +60,6 @@
 
   services.flatpak.enable = true;
 
-  stylix = {
-    enable = true;
-    autoEnable = true;
-    polarity = "dark";
-    image = ../../../images/wallpapers/tux.png;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-  };
-
   systemd.services.flatpak-install = {
     wantedBy = [ "multi-user.target" ];
     path = [ pkgs.flatpak ];
@@ -89,7 +80,7 @@
       gparted
       jellyfin-media-player
       libreoffice
-      #logseq
+      logseq
       loupe
       mpv
       openvpn
