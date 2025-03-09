@@ -216,6 +216,7 @@
               ./system/baseline/server/nfs
               ./system/baseline/server/beszel-agent
               ./system/baseline/server/habittrove
+              ./system/baseline/server/linkwarden
             ]
             [ ];
 
