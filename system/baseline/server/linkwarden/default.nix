@@ -27,9 +27,12 @@
         "3001:3000"
       ];
       environmentFiles = [ "/run/secrets/linkwarden_secrets" ];
-      #environment = {
-      #  DATABASE_URL = "postgresql://postgres:\${POSTGRES_PASSWORD}@linkwarden-postgres:5432/postgres";
-      #};
+      environment = {
+        NEXT_PUBLIC_AUTHELIA_ENABLED = "true";
+        AUTHELIA_WELLKNOWN_URL = "https://auth.gappyland.org/.well-known/openid-configuration";
+        NEXT_PUBLIC_DISABLE_REGISTRATION = "true";
+        NEXT_PUBLIC_CREDENTIALS_ENABLED = "false";
+      };
       volumes = [
         "/var/lib/linkwarden:/data/data"
       ];
