@@ -39,6 +39,12 @@ in
         			    reverse_proxy x86-merkat-auth:8090
         			'';
 
+      "linkwarden.${domain}".extraConfig = ''
+                  import auth
+
+        			    reverse_proxy x86-atxtwr-computeserver:3001
+        			'';
+
       "requests.${domain}".extraConfig = ''
         			    reverse_proxy x86-rakmnt-mediaserver:5055
         			'';
