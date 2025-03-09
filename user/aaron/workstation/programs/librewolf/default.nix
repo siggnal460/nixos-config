@@ -209,6 +209,11 @@ in
         install_url = latestSourceURL "leechblock-ng";
         installation_mode = "force_installed";
       };
+      "jordanlinkwarden@gmail.com" = {
+        default_area = "menupanel";
+        install_url = latestSourceURL "linkwarden";
+        installation_mode = "force_installed";
+      };
     };
   };
 }

@@ -1,7 +1,5 @@
 {
   pkgs,
-  inputs,
-  config,
   ...
 }:
 {
@@ -11,11 +9,6 @@
     ../../shared/bluetooth.nix
     ../../shared/nfs-client.nix
   ];
-
-  _module.args.pkgsStable = import inputs.nixpkgs {
-    inherit (pkgs.stdenv.hostPlatform) system;
-    inherit (config.nixpkgs) config;
-  };
 
   services.openssh.enable = false;
 
@@ -80,7 +73,6 @@
       gparted
       jellyfin-media-player
       libreoffice
-      logseq
       loupe
       mpv
       openvpn
