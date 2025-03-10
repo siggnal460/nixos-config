@@ -230,12 +230,73 @@ in
 
     bookmarks = [
       {
+        Local = [
+          {
+            Bazarr = [
+              {
+                icon = "bazarr.svg";
+                href = "http://x86-rakmnt-mediaserver:6767";
+              }
+            ];
+          }
+          {
+            Netbootxyz = [
+              {
+                icon = "netboot.svg";
+                href = "http://x86-rakmnt-mediaserver:3000";
+              }
+            ];
+          }
+          {
+            Prowlarr = [
+              {
+                icon = "prowlarr.svg";
+                href = "http://x86-rakmnt-mediaserver:9696";
+              }
+            ];
+          }
+          {
+            Radarr = [
+              {
+                icon = "radarr.svg";
+                href = "http://x86-rakmnt-mediaserver:7878";
+              }
+            ];
+          }
+          {
+            Sonarr = [
+              {
+                icon = "sonarr.svg";
+                href = "http://x86-rakmnt-mediaserver:8989";
+              }
+            ];
+          }
+          {
+            Sonarr-Anime = [
+              {
+                icon = "sonarr.svg";
+                href = "http://x86-rakmnt-mediaserver:8988";
+              }
+            ];
+          }
+        ];
+      }
+
+      {
         Development = [
           {
             Github = [
               {
                 icon = "github.svg";
                 href = "https://github.com/";
+              }
+            ];
+          }
+          {
+            Go = [
+              {
+                icon = "go.svg";
+                href = "https://go.dev/doc/";
               }
             ];
           }
@@ -259,7 +320,7 @@ in
       }
 
       {
-        Containers = [
+        Linux = [
           {
             Dockerhub = [
               {
@@ -276,11 +337,6 @@ in
               }
             ];
           }
-        ];
-      }
-
-      {
-        Linux = [
           {
             NixOS = [
               {
@@ -297,6 +353,7 @@ in
               }
             ];
           }
+
         ];
       }
 
