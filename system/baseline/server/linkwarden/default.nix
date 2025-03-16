@@ -1,7 +1,7 @@
 {
   systemd.tmpfiles.rules = [
     "d /var/lib/linkwarden 0700 linkwarden linkwarden"
-    "d /var/lib/linkwarden-postgres 0700 linkwarden linkwarden"
+    "d /var/lib/linkwarden-db 0700 linkwarden linkwarden"
   ];
 
   services.ollama = {
@@ -26,7 +26,7 @@
   };
 
   virtualisation.oci-containers.containers = {
-    linkwarden-postgres = {
+    linkwarden-db = {
       image = "docker.io/postgres:16-alpine";
       autoStart = true;
       labels = {
@@ -38,7 +38,7 @@
         PGID = "715";
       };
       volumes = [
-        "/var/lib/linkwarden-postgres:/var/lib/postgresql/data"
+        "/var/lib/linkwarden-db:/var/lib/postgresql/data"
       ];
     };
 

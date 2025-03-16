@@ -220,6 +220,7 @@
               ./system/baseline/server/beszel-agent
               ./system/baseline/server/habittrove
               ./system/baseline/server/linkwarden
+              ./system/baseline/server/gitea
             ]
             [ ];
 
