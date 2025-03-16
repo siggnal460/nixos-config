@@ -285,6 +285,14 @@ in
       {
         Development = [
           {
+            DuckAI = [
+              {
+                icon = "duckduckgo.svg";
+                href = "https://duck.ai";
+              }
+            ];
+          }
+          {
             Github = [
               {
                 icon = "github.svg";
@@ -297,6 +305,14 @@ in
               {
                 icon = "go.svg";
                 href = "https://go.dev/doc/";
+              }
+            ];
+          }
+          {
+            lua = [
+              {
+                icon = "lua.svg";
+                href = "https://www.lua.org/manual/5.3/";
               }
             ];
           }

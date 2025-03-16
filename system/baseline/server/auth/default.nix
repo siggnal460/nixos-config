@@ -7,7 +7,7 @@ let
 in
 {
   networking.firewall.allowedTCPPorts = [
-    3890
+    #3890
     17170
     9091
   ];
@@ -75,12 +75,12 @@ in
           default_policy = "deny";
           rules = lib.mkAfter [
             # Allow access through various app APIs for mobile apps
-            {
-              domain = "cloud.${domain}";
-              resources = [ "^/index.php/apps/news/api/.*$" ];
-              methods = [ "GET" ];
-              policy = "bypass";
-            }
+            #{
+            #  domain = "cloud.${domain}";
+            #  resources = [ "^/index.php/apps/news/api/.*$" ];
+            #  methods = [ "GET" ];
+            #  policy = "bypass";
+            #}
             {
               domain = "*.${domain}";
               policy = "two_factor";
