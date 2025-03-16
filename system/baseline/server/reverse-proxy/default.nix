@@ -73,6 +73,12 @@ in
         			    reverse_proxy x86-atxtwr-computeserver:9091
         			'';
 
+      "gitea.${domain}".extraConfig = ''
+                  import auth
+
+        			    reverse_proxy x86-atxtwr-computeserver:3003
+        			'';
+
       "cloud.${domain}".extraConfig = ''
                         			  import auth
 

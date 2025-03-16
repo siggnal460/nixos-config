@@ -180,6 +180,7 @@ in
           {
             Gitea = {
               icon = "gitea.svg";
+              href = "https://gitea.gappyland.org";
             };
           }
           {
