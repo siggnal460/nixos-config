@@ -9,6 +9,5 @@ with lib;
         description = "Public SSH key for the Beszel client";
       };
     };
-
   };
 }

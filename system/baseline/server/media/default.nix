@@ -16,21 +16,20 @@ in
     #"d /var/lib/doplarr 0400 doplarr root"
     #"f /var/lib/doplarr/jellyseerr_api 0400 doplarr root"
     #"f /var/lib/doplarr/discord_api 0400 doplarr root"
+    "d /etc/bazarr 0770 bazarr wheel"
+    "d /etc/doplarr 0770 doplarr wheel"
+    "d /etc/jellyfin 0770 jellyfin wheel"
+    "d /etc/jellyseerr 0770 root wheel"
+    "d /etc/komga 0770 komga wheel"
+    "d /etc/lidarr 0770 prowlarr wheel"
+    "d /etc/prowlarr 0770 prowlarr wheel"
+    "d /etc/radarr 0770 radarr wheel"
+    "d /etc/readarr 0770 readarr wheel"
+    "d /etc/recyclarr 0770 recyclarr wheel"
+    "d /etc/sonarr 0770 sonarr wheel"
+    "d /etc/sonarr-anime 0770 sonarr-anime wheel"
     "d /export/media 0775 root root"
-    "d /etc/bazarr 0770 bazarr users"
-    "d /etc/doplarr 0770 doplarr users"
-    "d /etc/jellyfin 0770 jellyfin users"
-    "d /etc/jellyseerr 0770 root users"
-    "d /etc/komga 0770 komga users"
-    "d /etc/lidarr 0770 prowlarr users"
-    "d /etc/prowlarr 0770 prowlarr users"
-    "d /etc/radarr 0770 radarr users"
-    "d /etc/readarr 0770 readarr users"
-    "d /etc/sonarr 0770 sonarr users"
-    "d /etc/sonarr-anime 0770 sonarr-anime users"
-    "d /etc/wizarr 0770 wizarr wizarr"
     "d /export/media/data 0775 root media"
-    "d /export/media/data/dlna 0770 aaron media"
     "d /export/media/data/anime 0775 root media"
     "d /export/media/data/books 0775 root media"
     "d /export/media/data/books/comics 0775 root media"
@@ -127,21 +126,75 @@ in
       isSystemUser = true;
       group = "media";
     };
-    wizarr = {
-      uid = 712;
+    recyclarr = {
+      uid = 713;
       isSystemUser = true;
-      group = "wizarr";
+      group = "recyclarr";
     };
   };
 
   users.groups = {
-    wizarr = {
-      gid = 712;
+    recyclarr = {
+      gid = 713;
     };
   };
 
-  environment.etc."komga/application.yml".source =
-    lib.mkForce config.sops.templates.komga-config.path;
+  environment.etc = {
+    "recyclarr/recyclarr.yml".source = lib.mkForce config.sops.templates.recyclarr-config.path;
+    "komga/application.yml".source = lib.mkForce config.sops.templates.komga-config.path;
+  };
+
+  sops.templates.recyclarr-config = {
+    owner = "recyclarr";
+    file = (pkgs.formats.yaml { }).generate "yaml" {
+      radarr = {
+        main = {
+          base_url = "!secret ${config.sops.placeholder."recyclarr/radarr_url"}";
+          api_key = "!secret ${config.sops.placeholder."recyclarr/radarr_api"}";
+          media_naming = {
+            folder = "jellyfin";
+            movie = {
+              rename = "true";
+              standard = "jellyfin";
+            };
+          };
+          quality_definition = {
+            type = "movie";
+            preferred_ratio = "0.5";
+          };
+          quality_profiles = {
+            name = "TraSH";
+          };
+          delete_old_custom_formats = "false";
+          replace_existing_custom_formats = "false";
+          custom_formats = {
+            trash_ids = [
+              # Good
+              "570bc9ebecd92723d2d21500f4be314c" # Remaster
+              "eca37840c13c6ef2dd0262b141a5482f" # 4K Remaster
+              "e0c07d59beb37348e975a930d5e50319" # Criterion Collection
+              "9d27d9d2181838f76dee150882bdc58c" # Masters of Cinema
+              "db9b4c4b53d312a3ca5f1378f6440fc9" # Vinegar Syndrome
+              "957d0f44b592285f26449575e8b1167e" # Special Edition
+              "eecf3a857724171f968a66cb5719e152" # IMAX
+              "9f6cbff8cfe4ebbc1bde14c7b7bec0de" # IMAX Enhanced
+              # Bad
+              "b6832f586342ef70d9c128d40c07b872" # Bad dual groups
+              "90cedc1fea7ea5d11298bebd3d1d3223" # EVO (no WEBDL)
+              "ae9b7c9ebde1f3bd336a8cbd1ec4c5e5" # No RIsGroup
+              "7357cf5161efbf8c4d5d0c30b4815ee2" # Obfuscated
+              "5c44f52a8714fdd79bb4d98e2673be1f" # Retags
+              "f537cf427b64c38c8e36298f657e4828" # Scene
+            ];
+          };
+          assign_score_to = {
+            name = "TraSH";
+          };
+        };
+      };
+    };
+  };
+
   sops.templates.komga-config = {
     owner = "komga";
     file = (pkgs.formats.yaml { }).generate "yaml" {
@@ -202,6 +255,24 @@ in
       extraOptions = [
         "--name=jellyfin"
         "--gpus=1"
+      ];
+    };
+
+    recyclarr = {
+      image = "ghcr.io/recyclarr/recyclarr:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      user = "713:713";
+      environment = {
+        TZ = "America/Denver";
+      };
+      volumes = [
+        "/etc/recyclarr:/config"
+      ];
+      extraOptions = [
+        "--name=recyclarr"
       ];
     };
 
@@ -449,6 +520,8 @@ in
   sops.secrets = {
     "komga/oidc_client_id".owner = "komga";
     "komga/oidc_client_secret".owner = "komga";
+    "recyclarr/radarr_url".owner = "recyclarr";
+    "recyclarr/radarr_api".owner = "recyclarr";
   };
 
 }

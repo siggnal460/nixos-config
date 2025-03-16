@@ -9,9 +9,13 @@
     "d /export/media/torrents/incomplete 0770 transmission media"
     "d /export/media/usenet 0770 nzbget media"
     "d /export/media/usenet/completed 0770 nzbget media"
+    "d /export/media/usenet/completed/Anime 0770 nzbget media"
     "d /export/media/usenet/completed/Movies 0770 nzbget media"
-    "d /etc/transmission 0750 transmission users"
-    "d /etc/nzbget 0750 nzbget users"
+    "d /export/media/usenet/completed/Series 0770 nzbget media"
+    "d /export/media/youtube 0770 pinchflat media"
+    "d /etc/transmission 0750 transmission wheel"
+    "d /etc/nzbget 0750 nzbget wheel"
+    "d /etc/pinchflat 0750 pinchflat wheel"
   ];
 
   imports = [ ../../../shared/podman.nix ];
@@ -36,9 +40,37 @@
       isSystemUser = true;
       group = "media";
     };
+    pinchflat = {
+      uid = 712;
+      isSystemUser = true;
+      group = "media";
+    };
   };
 
   virtualisation.oci-containers.containers = {
+    pinchflat = {
+      image = "ghcr.io/kieraneglin/pinchflat:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      ports = [
+        "8945:8945"
+      ];
+      environment = {
+        PUID = "712";
+        PGID = "982";
+        TZ = "America/Denver";
+      };
+      volumes = [
+        "/export/media/youtube:/downloads"
+        "/etc/pinchflat:/config"
+      ];
+      extraOptions = [
+        "--name=pinchflat"
+      ];
+    };
+
     transmission = {
       image = "lscr.io/linuxserver/transmission:latest";
       autoStart = true;
@@ -64,6 +96,7 @@
         "--name=transmission"
       ];
     };
+
     nzbget = {
       image = "lscr.io/linuxserver/nzbget:latest";
       autoStart = true;
