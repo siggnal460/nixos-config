@@ -196,7 +196,6 @@ in
         }
       ];
     };
->>>>>>> d6d7120 (Added more systemd timers and the start of a backup system)
   };
 
   environment.etc = {
