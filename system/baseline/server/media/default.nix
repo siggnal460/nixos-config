@@ -30,16 +30,16 @@ in
     "d /etc/sonarr-anime 0770 sonarr-anime wheel"
     "d /export/media 0775 root root"
     "d /export/media/data 0775 root media"
-    "d /export/media/data/anime 0775 root media"
+    "d /export/media/data/anime 0775 sonarr-anime media"
     "d /export/media/data/books 0775 root media"
     "d /export/media/data/books/comics 0775 root media"
     "d /export/media/data/books/manga 0775 root media"
     "d /export/media/data/books/regular 0775 root media"
     "d /export/media/data/courses 0775 root media"
-    "d /export/media/data/movies 0775 root media"
+    "d /export/media/data/movies 0775 radarr media"
     "d /export/media/data/music 0775 root media"
-    "d /export/media/data/tvshows 0775 root media"
-    "d /export/media/data/workouts 0775 root media"
+    "d /export/media/data/tvshows 0775 sonarr media"
+    "d /export/media/data/workouts 0775 sonarr media"
   ];
 
   services = {
