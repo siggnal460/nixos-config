@@ -127,7 +127,7 @@
       clean = {
         enable = true;
         extraArgs = "--keep-since 4d --keep 5";
-        dates = "weekly";
+        dates = "Mon *-*-* 00:15:00";
       };
     };
     nix-index-database.comma.enable = true;
@@ -215,16 +215,16 @@
       flake = inputs.self.outPath;
       allowReboot = true;
       persistent = true;
-      randomizedDelaySec = "210min";
+      randomizedDelaySec = "30min";
       flags = [
-        "--update-input"
+        "--accept-flake-config"
         "nixpkgs"
         "-L"
       ];
-      dates = "00:30";
+      dates = "04:00";
       rebootWindow = {
-        lower = "00:30";
-        upper = "04:00";
+        lower = "04:00";
+        upper = "05:00";
       };
     };
   };
@@ -274,6 +274,7 @@
     systemPackages = with pkgs; [
       freshfetch
       git
+      mdformat
       nixfmt-rfc-style
       ripgrep
       (writeScriptBin "nix-switch" (builtins.readFile ../bin/nix-switch.nu))

@@ -28,9 +28,12 @@ def print_warning [ text: string ] {
     print $"(ansi yellow)($text)(ansi reset)"
 }
 
-def format_nix_files [ ] {
+def format_files [ ] {
     let nix_files = ls ...(glob **/*.{nix})
+    #let md_files = ls ...(glob **/*.{md})
     $nix_files | each { |file| print $"Formatting ($file.name)..."; nixfmt ($file.name) }
+    ## mdformat doesn't work with tables, needs a plugin (why??)
+    #$md_files | each { |file| print $"Formatting ($file.name)..."; mdformat --wrap 100 ($file.name) }
 }
 
 def update [ flake_name: string flake_folder: string limit: bool ] {
@@ -105,8 +108,8 @@ def main [
 
     print_header "FORMATTING NIX FILES"
     print "Formatting all nix files with nixfmt..."
-    format_nix_files
-    print_success "Nix files formatted!"
+    format_files
+    print_success "Files formatted!"
     print "\n"
 
     print_header "CHECKING FOR CHANGES"

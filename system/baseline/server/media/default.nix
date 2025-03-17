@@ -18,7 +18,7 @@ in
     #"f /var/lib/doplarr/discord_api 0400 doplarr root"
     "d /etc/bazarr 0770 bazarr wheel"
     "d /etc/doplarr 0770 doplarr wheel"
-    "d /etc/jellyfin 0770 jellyfin wheel"
+    "d /etc/jellyfin 0775 jellyfin wheel"
     "d /etc/jellyseerr 0770 root wheel"
     "d /etc/komga 0770 komga wheel"
     "d /etc/lidarr 0770 prowlarr wheel"
@@ -28,6 +28,8 @@ in
     "d /etc/recyclarr 0770 recyclarr wheel"
     "d /etc/sonarr 0770 sonarr wheel"
     "d /etc/sonarr-anime 0770 sonarr-anime wheel"
+    "d /export/backups 0774 restic wheel"
+    "d /export/backups/jellyfin 0774 restic wheel"
     "d /export/media 0775 root root"
     "d /export/media/data 0775 root media"
     "d /export/media/data/anime 0775 sonarr-anime media"
@@ -62,6 +64,27 @@ in
             action = "iptables-allports[name=jellyfin, chain=DOCKER-USER]";
           };
         };
+      };
+    };
+    restic = {
+      backups.jellyfin = {
+        initialize = true;
+        user = "restic";
+        repository = "/export/backups/jellyfin";
+        passwordFile = "/run/secrets/restic-password";
+        paths = [
+          "/etc/jellyfin"
+        ];
+        exclude = [
+          "/etc/jellyfin/cache"
+        ];
+        pruneOpts = [
+          "--keep-latest"
+          "--keep-weekly 4"
+        ];
+        backupPrepareCommand = "sudo podman stop jellyfin";
+        backupCleanupCommand = "sudo podman start jellyfin";
+        timerConfig.OnCalendar = "00:30";
       };
     };
   };
@@ -131,12 +154,49 @@ in
       isSystemUser = true;
       group = "recyclarr";
     };
+    restic = {
+      uid = 760;
+      isSystemUser = true;
+      group = "restic";
+    };
   };
 
   users.groups = {
     recyclarr = {
       gid = 713;
     };
+    restic = {
+      gid = 760;
+    };
+  };
+
+  security = {
+    wrappers.restic = {
+      source = "${pkgs.restic.out}/bin/restic";
+      owner = "restic";
+      group = "restic";
+      permissions = "u=rwx,g=,o=";
+      capabilities = "cap_dac_read_search=+ep";
+    };
+    sudo = {
+      enable = true;
+      execWheelOnly = true;
+      extraRules = [
+        {
+          commands =
+            builtins.map
+              (command: {
+                command = "/run/current-system/sw/bin/${command}";
+                options = [ "NOPASSWD" ];
+              })
+              [
+                "podman"
+              ];
+          users = [ "restic" ];
+        }
+      ];
+    };
+>>>>>>> d6d7120 (Added more systemd timers and the start of a backup system)
   };
 
   environment.etc = {
@@ -522,6 +582,6 @@ in
     "komga/oidc_client_secret".owner = "komga";
     "recyclarr/radarr_url".owner = "recyclarr";
     "recyclarr/radarr_api".owner = "recyclarr";
+    "restic-password".owner = "restic";
   };
-
 }
