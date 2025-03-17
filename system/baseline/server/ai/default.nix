@@ -7,7 +7,7 @@
 
   systemd.tmpfiles.rules = [
     "d /var/lib/invokeai 0774 root users"
-    "d /var/lib/comfyui 0774 podman-ai podman-ai"
+    "d /var/lib/comfyui 0774 root users"
     "d /var/lib/ollama 0774 root users"
     "d /var/lib/open-webui/data 0770 root users"
     "d /var/lib/openedai-speech/voices 0770 root users"
@@ -21,33 +21,6 @@
 
   services.nfs.server = {
     exports = ''/export/ai 10.0.0.15(rw,nohide,insecure,no_subtree_check)'';
-  };
-
-  users = {
-    users = {
-      "podman-ai" = {
-        isSystemUser = true;
-        createHome = true;
-        linger = true;
-        group = "podman-ai";
-        home = "/home/podman-ai";
-        subUidRanges = [
-          {
-            count = 100;
-            startUid = 600;
-          }
-        ];
-        subGidRanges = [
-          {
-            count = 100;
-            startGid = 600;
-          }
-        ];
-      };
-    };
-    groups = {
-      "podman-ai" = { };
-    };
   };
 
   virtualisation.oci-containers.containers = {
@@ -180,10 +153,6 @@
 
     ## Doesn't work rn
     #comfyui = {
-    #  podman = {
-    #	  user = "podman-ai";
-    #		sdnotify = "healthy";
-    #	};
     #  image = "docker.io/yanwk/comfyui-boot:cu121";
     #  autoStart = true;
     #  labels = {
@@ -196,6 +165,7 @@
     #  extraOptions = [
     #    "--name=comfyui"
     #    "--gpus=all"
+    #    "--group-add=users"
     #  ];
     #};
 
