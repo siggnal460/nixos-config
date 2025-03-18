@@ -241,6 +241,14 @@ in
             ];
           }
           {
+            ComfyUI = [
+              {
+                abbr = "CU";
+                href = "http://x86-atxtwr-computeserver:8188";
+              }
+            ];
+          }
+          {
             Netbootxyz = [
               {
                 icon = "netboot.svg";
