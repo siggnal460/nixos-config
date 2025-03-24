@@ -18,6 +18,6 @@
     nil
     nixd
     rust-analyzer
-    zed-editor
+    #zed-editor
   ];
 }

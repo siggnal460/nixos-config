@@ -50,8 +50,9 @@ virtualization, development, etc.
 
 | Process                   | Time          |
 | ------------------------- | ------------- |
-| Podman Garbage Collection | 0000 Tuesdays |
+| Nix Store Optimization    | 0000          |
 | nh Garbage Collection     | 0015 Mondays  |
+| Podman Garbage Collection | 0015 Tuesdays |
 | Restic Backups            | 0030-0130     |
 | Podman Auto-Upgrade       | 0030-0330     |
 | ClamAV Scanning           | 0145          |

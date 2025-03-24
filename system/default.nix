@@ -192,6 +192,28 @@
   #  };
   #};
 
+  stylix.fonts = {
+    serif = {
+      package = pkgs.nerd-fonts.fira-code;
+      name = "Fira Code Serif";
+    };
+
+    sansSerif = {
+      package = pkgs.nerd-fonts.fira-code;
+      name = "Fira Code Sans";
+    };
+
+    monospace = {
+      package = pkgs.nerd-fonts.fira-code;
+      name = "Fira Code Mono";
+    };
+
+    emoji = {
+      package = pkgs.noto-fonts-emoji;
+      name = "Noto Color Emoji";
+    };
+  };
+
   nix = {
     settings = {
       experimental-features = [
@@ -203,6 +225,10 @@
         "@wheel"
         "root"
       ];
+    };
+    optimise = {
+      automatic = true;
+      dates = [ "00:00" ];
     };
   };
 

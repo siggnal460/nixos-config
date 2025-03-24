@@ -3,17 +3,20 @@ let
 in
 { config, pkgs, ... }:
 {
+  stylix.targets.librewolf.profileNames = [ "aaron" ];
+
   programs.librewolf = {
     enable = true;
 
     policies = {
+      Authentication = true;
       DisableAccounts = true;
       DisableFirefoxAccounts = true;
       DisableFirefoxScreenshots = true;
       DisableFirefoxStudies = true;
       DisablePocket = true;
       DisableTelemetry = true;
-      DisplayBookmarksToolbar = "never";
+      DisplayBookmarksToolbar = "newtab";
 
       EnableTrackingProtection = {
         Cryptomining = true;
@@ -35,6 +38,23 @@ in
         "browser.newtabpage.pinned" = "";
         "browser.topsites.contile.enabled" = false;
       };
+
+      Cookies.Allow = [
+        "auth.gappyland.org"
+        "media.gappyland.org"
+        "requests.gappyland.org"
+        "x86-rakmnt-mediaserver"
+        "x86-rakmnt-mediaserver:6767"
+        "x86-rakmnt-mediaserver:8188"
+        "x86-rakmnt-mediaserver:7860"
+        "x86-rakmnt-mediaserver:9696"
+        "x86-rakmnt-mediaserver:7878"
+        "x86-rakmnt-mediaserver:8787"
+        "x86-rakmnt-mediaserver:4000"
+        "x86-rakmnt-mediaserver:8989"
+        "x86-rakmnt-mediaserver:8988"
+        "x86-rakmnt-mediaserver:9091"
+      ];
     };
 
     profiles = {
@@ -42,74 +62,70 @@ in
         id = 0;
         name = "${config.home.username}";
         isDefault = true;
-        bookmarks = [
-          {
-            #Local Servers
-            name = "Local Servers";
-            toolbar = true;
-            bookmarks = [
-              {
-                name = "Beszel";
-                url = "https://x86-rakmnt-mediaserver:6767";
-              }
-              {
-                name = "ComfyUI";
-                url = "https://x86-atxtwr-computeserver:8188";
-              }
-              {
-                name = "FluxGym";
-                url = "https://x86-atxtwr-computeserver:7860";
-              }
-              {
-                name = "Nextcloud";
-                url = "https://x86-rakmnt-mediaserver";
-              }
-              {
-                name = "Prowlarr";
-                url = "https://x86-rakmnt-mediaserver:9696";
-              }
-              {
-                name = "Radarr";
-                url = "https://x86-rakmnt-mediaserver:7878";
-              }
-              {
-                name = "Readarr";
-                url = "https://x86-rakmnt-mediaserver:8787";
-              }
-              {
-                name = "SillyTavern";
-                url = "https://x86-atxtwr-computeserver:4000";
-              }
-              {
-                name = "Sonarr";
-                url = "https://x86-rakmnt-mediaserver:8989";
-              }
-              {
-                name = "Sonarr-Anime";
-                url = "https://x86-rakmnt-mediaserver:8988";
-              }
-              {
-                name = "Transmission";
-                url = "https://x86-rakmnt-mediaserver:9091";
-              }
-            ];
-          }
-        ];
+        bookmarks = {
+          force = true;
+          settings = [
+            {
+              name = "Amazon";
+              url = "https://amazon.com";
+            }
+            {
+              name = "Local Servers";
+              toolbar = true;
+              bookmarks = [
+                {
+                  name = "Beszel";
+                  url = "https://x86-rakmnt-mediaserver:6767";
+                }
+                {
+                  name = "ComfyUI";
+                  url = "https://x86-atxtwr-computeserver:8188";
+                }
+                {
+                  name = "FluxGym";
+                  url = "https://x86-atxtwr-computeserver:7860";
+                }
+                {
+                  name = "Nextcloud";
+                  url = "https://x86-rakmnt-mediaserver";
+                }
+                {
+                  name = "Prowlarr";
+                  url = "https://x86-rakmnt-mediaserver:9696";
+                }
+                {
+                  name = "Radarr";
+                  url = "https://x86-rakmnt-mediaserver:7878";
+                }
+                {
+                  name = "Readarr";
+                  url = "https://x86-rakmnt-mediaserver:8787";
+                }
+                {
+                  name = "SillyTavern";
+                  url = "https://x86-atxtwr-computeserver:4000";
+                }
+                {
+                  name = "Sonarr";
+                  url = "https://x86-rakmnt-mediaserver:8989";
+                }
+                {
+                  name = "Sonarr-Anime";
+                  url = "https://x86-rakmnt-mediaserver:8988";
+                }
+                {
+                  name = "Transmission";
+                  url = "https://x86-rakmnt-mediaserver:9091";
+                }
+              ];
+            }
+          ];
+        };
 
         search = {
           force = true;
-          default = "PrivateSearch";
+          default = "duckduckgo";
           engines = {
-            "PrivateSearch" = {
-              urls = [
-                {
-                  template = "https://privatesearch.app/search?q={searchTerms}";
-                }
-              ];
-              iconUpdateURL = "https://privatesearch.app/static/themes/simple/img/favicon.svg";
-              definedAliases = [ "@privatesearch" ];
-            };
-
             "NixOS Options" = {
               urls = [
                 {
@@ -117,7 +133,7 @@ in
                 }
               ];
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@nixos" ];
+              definedAliases = [ "@nix" ];
             };
 
             "Nix Packages" = {
@@ -152,7 +168,7 @@ in
                   template = "https://www.openstreetmap.org/search?query={searchTerms}";
                 }
               ];
-              iconUpdateURL = "https://www.openstreetmap.org/favicon.ico";
+              icon = "https://www.openstreetmap.org/favicon.ico";
               definedAliases = [
                 "@openstreetmap"
                 "@osm"
@@ -174,11 +190,6 @@ in
         install_url = latestSourceURL "darkreader";
         installation_mode = "force_installed";
       };
-      "transmitter@unrelenting.technology" = {
-        default_area = "menupanel";
-        install_url = latestSourceURL "transmitter-for-transmission";
-        installation_mode = "force_installed";
-      };
       "sponsorBlocker@ajay.app" = {
         default_area = "menupanel";
         install_url = latestSourceURL "sponsorblock";
@@ -194,11 +205,6 @@ in
         install_url = latestSourceURL "ublock-origin";
         installation_mode = "force_installed";
       };
-      "{4520dc08-80f4-4b2e-982a-c17af42e5e4d}" = {
-        default_area = "menupanel";
-        install_url = latestSourceURL "tokyo-night-milav";
-        installation_mode = "force_installed";
-      };
       "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
         default_area = "menupanel";
         install_url = latestSourceURL "vimium-ff";
@@ -207,11 +213,6 @@ in
       "leechblockng@proginosko.com" = {
         default_area = "menupanel";
         install_url = latestSourceURL "leechblock-ng";
-        installation_mode = "force_installed";
-      };
-      "jordanlinkwarden@gmail.com" = {
-        default_area = "menupanel";
-        install_url = latestSourceURL "linkwarden";
         installation_mode = "force_installed";
       };
     };

@@ -2,10 +2,10 @@
 
 ## Completely broken
 - [ ] Linkwarden (maybe replace with something else?)
+- [ ] Restic backups
 - [ ] Recyclarr
     - Doesn't seem to be any errors but it doesn't actually do anything.
 - [ ] Komga OIDC
-- [ ] OpenWebUI OIDC
     - This was working, but no more
 - [ ] NixOS Auto-Upgrade doesn't appear to update the lock file or perhaps function at all
 
@@ -26,3 +26,4 @@
 - [ ] InvokeAI doesn't have support for user accounts.
 - [ ] When building with stylix, home-manager fails because some files get automatically created causing collisions
     - Could be because of COSMIC and maybe will get fixed upstream
+- [ ] LibreWolf currently doesn't seem to let you set per-profile bookmarks

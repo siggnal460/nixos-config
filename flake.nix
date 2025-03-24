@@ -40,6 +40,7 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nixified-ai.url = "github:nixified-ai/flake";
+    psxify.url = "github:siggnal460/psxify";
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -62,6 +63,7 @@
       sops-nix,
       stylix,
       stylix-unstable,
+      psxify,
       ...
     }:
 

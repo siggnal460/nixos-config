@@ -8,7 +8,7 @@
       defaultNetwork.settings.dns_enabled = true;
       autoPrune = {
         enable = true;
-        dates = "Tue *-*-* 00:00:00";
+        dates = "Tue *-*-* 00:15:00";
         flags = [ "all" ];
       };
     };
