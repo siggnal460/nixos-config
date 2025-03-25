@@ -238,14 +238,15 @@
     stateVersion = "23.11";
     autoUpgrade = {
       enable = true;
-      flake = inputs.self.outPath;
+      flake = "github:siggnal460/nixos-config#${config.networking.hostName}";
       allowReboot = true;
       persistent = true;
       randomizedDelaySec = "30min";
       flags = [
-        "--accept-flake-config"
+        "--update-input"
         "nixpkgs"
         "-L"
+        "--no-write-lock-file"
       ];
       dates = "04:00";
       rebootWindow = {
