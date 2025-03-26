@@ -220,8 +220,6 @@
               ./system/baseline/server/blender
               ./system/baseline/server/nfs
               ./system/baseline/server/beszel-agent
-              ./system/baseline/server/habittrove
-              ./system/baseline/server/linkwarden
               ./system/baseline/server/gitea
             ]
             [ ];
@@ -241,7 +239,6 @@
               ./system/baseline/server/samba
               ./system/baseline/server/netbootxyz
               ./system/baseline/server/nextcloud
-              ./system/baseline/server/encoding
               ./system/baseline/server/beszel-agent
             ]
             [ ];
