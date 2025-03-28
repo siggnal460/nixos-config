@@ -48,13 +48,14 @@ virtualization, development, etc.
 
 ## Timer Schedule
 
-| Process                   | Time          |
-| ------------------------- | ------------- |
-| Nix Store Optimization    | 0000          |
-| nh Garbage Collection     | 0015 Mondays  |
-| Podman Garbage Collection | 0015 Tuesdays |
-| Restic Backups            | 0030-0130     |
-| Podman Auto-Upgrade       | 0030-0330     |
-| ClamAV Scanning           | 0145          |
-| Nix Auto-Upgrade          | 0400-0430     |
-| Reboot Window             | 0400-0500     |
+| Process                      | Time          |
+| ---------------------------- | ------------- |
+| Nix Store Optimization       | 0000          |
+| nh Garbage Collection        | 0015 Mondays  |
+| Podman Garbage Collection    | 0015 Tuesdays |
+| Restic Backups               | 0030-0130     |
+| Podman Auto-Upgrade          | 0030-0330     |
+| ClamAV Scanning              | 0145          |
+| Nix Auto-Upgrade             | 0400-0430     |
+| Reboot Window                | 0400-0500     |
+| "Update flake.nix" GH action | 1200          |
