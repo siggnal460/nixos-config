@@ -234,26 +234,55 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  system = {
-    stateVersion = "23.11";
-    autoUpgrade = {
-      enable = true;
-      flake = "github:siggnal460/nixos-config#${config.networking.hostName}";
-      allowReboot = true;
-      persistent = true;
-      randomizedDelaySec = "30min";
-      flags = [
-        "--update-input"
-        "nixpkgs"
-        "-L"
-        "--no-write-lock-file"
-      ];
-      dates = "04:00";
-      rebootWindow = {
-        lower = "04:00";
-        upper = "05:00";
-      };
+  system.stateVersion = "23.11";
+
+  systemd.timers."pull-updates" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "0 4 * * *";
+      RandomizedDelaySec = "60min";
+      Unit = "pull-updates.service";
     };
+  };
+
+  systemd.services.pull-updates = {
+    description = "Pulls changes to system config";
+    restartIfChanged = false;
+    onSuccess = [ "rebuild.service" ];
+    path = [
+      pkgs.git
+      pkgs.openssh
+    ];
+    script = ''
+      			test "$(git branch --show-current)" = "main"
+      			git pull --ff-only
+      		'';
+    serviceConfig = {
+      WorkingDirectory = "/etc/nixos";
+      User = "siggnal460";
+      Type = "oneshot";
+    };
+  };
+
+  systemd.services.rebuild = {
+    description = "Rebuilds and activates system config";
+    restartIfChanged = false;
+    path = [
+      pkgs.nixos-rebuild
+      pkgs.systemd
+    ];
+    script = ''
+      			nixos-rebuild boot
+      			booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
+      			built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
+
+      			if [ "''${booted}" = "''${built}" ]; then
+      				nixos-rebuild switch
+      			else
+      				reboot now
+      			fi
+      		'';
+    serviceConfig.Type = "oneshot";
   };
 
   programs.nix-ld = {
