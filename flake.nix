@@ -114,6 +114,7 @@
               }
             )
             inputs.jovian-nixos.nixosModules.default
+            #inputs.psxify.packages
             sops-nix.nixosModules.sops
             stylix-unstable.nixosModules.stylix
             nix-index-database.nixosModules.nix-index

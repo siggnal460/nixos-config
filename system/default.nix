@@ -308,6 +308,7 @@
       mdformat
       nixfmt-rfc-style
       ripgrep
+      #psxify
       (writeScriptBin "nix-switch" (builtins.readFile ../bin/nix-switch.nu))
       wl-clipboard
     ];
