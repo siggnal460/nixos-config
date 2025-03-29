@@ -71,6 +71,15 @@
       mkComputerStable =
         system: configurationNix: extraModules: extraHomeModules:
         inputs.nixpkgs.lib.nixosSystem {
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [
+              # make unstable packages available via overlay
+              (final: prev: {
+                unstable = nixpkgs-unstable.legacyPackages.${prev.system};
+              })
+            ];
+          };
           specialArgs = {
             inherit inputs nixpkgs;
           };
@@ -88,6 +97,7 @@
             }
           ] ++ extraModules; # system modules
         };
+
       mkComputerUnstable =
         system: configurationNix: extraModules: extraHomeModules:
         inputs.nixpkgs-unstable.lib.nixosSystem {

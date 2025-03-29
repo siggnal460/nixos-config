@@ -1,9 +1,9 @@
 # Configs that are shared in all builds
 {
   pkgs,
+  nixpkgs-unstable,
   lib,
   config,
-  inputs,
   ...
 }:
 {
@@ -194,22 +194,22 @@
 
   stylix.fonts = {
     serif = {
-      package = pkgs.nerd-fonts.fira-code;
+      package = pkgs.unstable.nerd-fonts.fira-code;
       name = "Fira Code Serif";
     };
 
     sansSerif = {
-      package = pkgs.nerd-fonts.fira-code;
+      package = pkgs.unstable.nerd-fonts.fira-code;
       name = "Fira Code Sans";
     };
 
     monospace = {
-      package = pkgs.nerd-fonts.fira-code;
+      package = pkgs.unstable.nerd-fonts.fira-code;
       name = "Fira Code Mono";
     };
 
     emoji = {
-      package = pkgs.noto-fonts-emoji;
+      package = pkgs.unstable.noto-fonts-emoji;
       name = "Noto Color Emoji";
     };
   };

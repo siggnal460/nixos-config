@@ -7,7 +7,7 @@ let
 in
 {
   networking.firewall.allowedTCPPorts = [
-    #3890
+    3890 # lldap
     17170
     9091
   ];
@@ -192,6 +192,8 @@ in
   };
 
   sops.secrets = {
+    "authelia/gitea/oidc_client_id".owner = auth_instance;
+    "authelia/gitea/oidc_client_secret".owner = auth_instance;
     "authelia/komga/oidc_client_id".owner = auth_instance;
     "authelia/komga/oidc_client_secret".owner = auth_instance;
     "authelia/linkwarden/oidc_client_id".owner = auth_instance;
