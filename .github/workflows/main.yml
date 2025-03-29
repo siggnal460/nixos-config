@@ -19,6 +19,6 @@ jobs:
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
       - name: Merge
         run: gh pr merge --auto "${{ steps.update.outputs.pull-request-number }}" --rebase
-        with:
-          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         if: ${{ steps.update.outputs.pull-request-number != '' }}
