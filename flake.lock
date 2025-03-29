@@ -1023,11 +1023,11 @@
         "poetry2nix": "poetry2nix"
       },
       "locked": {
-        "lastModified": 1743282024,
-        "narHash": "sha256-SoMnCGwn9ei/mQrr8XqspsyNYoXCmd1UJDK0HN/Vamk=",
+        "lastModified": 1743286331,
+        "narHash": "sha256-wVjl4x2NBP76kthJIqoSKb9clEOjrs2Hl1XLh4trP9k=",
         "owner": "siggnal460",
         "repo": "psxify",
-        "rev": "ed9c17dd76048191bbfdad12032a4a1c5e05d154",
+        "rev": "567da9d0eb0c50d1ff041547c98535e8123b5102",
         "type": "github"
       },
       "original": {
