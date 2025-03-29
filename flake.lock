@@ -1023,11 +1023,11 @@
         "poetry2nix": "poetry2nix"
       },
       "locked": {
-        "lastModified": 1743286331,
-        "narHash": "sha256-wVjl4x2NBP76kthJIqoSKb9clEOjrs2Hl1XLh4trP9k=",
+        "lastModified": 1743289188,
+        "narHash": "sha256-d4BGKkdIgfjpkUmLfT3Wc3ieHTWAmMQYe1nFI8pHWIY=",
         "owner": "siggnal460",
         "repo": "psxify",
-        "rev": "567da9d0eb0c50d1ff041547c98535e8123b5102",
+        "rev": "48efdbdf43da95ece40c355701e758377ea54501",
         "type": "github"
       },
       "original": {
@@ -1150,11 +1150,11 @@
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1743272504,
-        "narHash": "sha256-ZC2BpHQTyg3ZuozBqRDwhCC/b+LiO4BreEbJaeVYyLQ=",
+        "lastModified": 1743288146,
+        "narHash": "sha256-A1BLq0BsFqVd4a4guCKTMtOsnac+2IqNoTPU7wH1f/o=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "0323253b3ee48ba132071fe626eddfcb5cbb8b6b",
+        "rev": "21b90991afd366f7bf9d2c7fd51095c7015907eb",
         "type": "github"
       },
       "original": {
