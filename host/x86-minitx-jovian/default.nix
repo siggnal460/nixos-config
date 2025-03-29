@@ -13,4 +13,9 @@
   networking = {
     hostName = "x86-minitx-jovian";
   };
+
+  jovian.hardware = {
+    has.amd.gpu = true;
+    amd.gpu.enableBacklightControl = false;
+  };
 }

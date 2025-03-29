@@ -68,6 +68,10 @@
     }:
 
     let
+      overlay-unstable = final: prev: {
+        unstable = nixpkgs-unstable.legacyPackages.${prev.system};
+      };
+
       mkComputerStable =
         system: configurationNix: extraModules: extraHomeModules:
         inputs.nixpkgs.lib.nixosSystem {
@@ -85,6 +89,12 @@
           };
           modules = [
             configurationNix
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
             sops-nix.nixosModules.sops
             stylix.nixosModules.stylix
             nix-index-database.nixosModules.nix-index
@@ -106,6 +116,13 @@
           };
           modules = [
             configurationNix
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
+            inputs.jovian-nixos.nixosModules.default
             sops-nix.nixosModules.sops
             stylix-unstable.nixosModules.stylix
             nix-index-database.nixosModules.nix-index

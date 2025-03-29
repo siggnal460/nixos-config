@@ -167,31 +167,6 @@
     };
   };
 
-  #fonts = {
-  #  packages = with pkgs; [
-  #    nerd-fonts.fira-code
-  #    noto-fonts
-  #    noto-fonts-extra
-  #    noto-fonts-cjk-sans
-  #    noto-fonts-cjk-serif # no tofu
-  #  ];
-  #  fontconfig.defaultFonts = {
-  #    serif = [
-  #      "fira-code"
-  #      "noto-fonts"
-  #    ];
-  #    emoji = [ "fira-code" ];
-  #    sansSerif = [
-  #      "fira-code"
-  #      "noto-fonts"
-  #    ];
-  #    monospace = [
-  #      "fira-code"
-  #      "noto-fonts"
-  #    ];
-  #  };
-  #};
-
   stylix.fonts = {
     serif = {
       package = pkgs.unstable.nerd-fonts.fira-code;
