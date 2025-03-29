@@ -192,6 +192,7 @@
         x86-minitx-jovian =
           mkComputerUnstable "x86_64-linux" ./host/x86-minitx-jovian
             [
+              ./system/de/cosmic
               ./system/hardware/gpu/amd
               ./system/baseline/console
             ]

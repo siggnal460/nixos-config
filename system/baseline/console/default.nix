@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ lib, ... }:
 {
   imports = [
     ../../shared/latest-kernel.nix
@@ -25,11 +25,14 @@
       user = "aaron";
     };
     steam = {
+      desktopSession = "cosmic";
       enable = true;
       autoStart = true;
       user = "aaron";
     };
   };
+
+  services.displayManager.cosmic-greeter.enable = lib.mkForce false;
 
   xdg.autostart.enable = true;
 }
