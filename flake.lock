@@ -1029,11 +1029,11 @@
         "poetry2nix": "poetry2nix"
       },
       "locked": {
-        "lastModified": 1743278280,
-        "narHash": "sha256-fBm7u9+8uYWfMN+xwhDhEerY3UuKZTaZktP7IPcbZLE=",
+        "lastModified": 1743279688,
+        "narHash": "sha256-I84UUmVE7yTs92If4+rWVS/9j5xPhQcJI4lVoPj5Lyw=",
         "owner": "siggnal460",
         "repo": "psxify",
-        "rev": "078efe25a5755538a417a498831043d65345b4a9",
+        "rev": "85a0629715b9febb4e5b1bb8715586b3e11f29a6",
         "type": "github"
       },
       "original": {
