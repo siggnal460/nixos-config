@@ -6,7 +6,7 @@
   };
 
   home-manager = {
-    backupFileExtension = "backup";
+    backupFileExtension = "hmbackup";
     sharedModules = [
       {
         programs.neovim = {

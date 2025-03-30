@@ -28,14 +28,6 @@ def print_warning [ text: string ] {
     print $"(ansi yellow)($text)(ansi reset)"
 }
 
-def format_files [ ] {
-    let nix_files = ls ...(glob **/*.{nix})
-    #let md_files = ls ...(glob **/*.{md})
-    $nix_files | each { |file| print $"Formatting ($file.name)..."; nixfmt ($file.name) }
-    ## mdformat doesn't work with tables, needs a plugin (why??)
-    #$md_files | each { |file| print $"Formatting ($file.name)..."; mdformat --wrap 100 ($file.name) }
-}
-
 def update [ flake_name: string flake_folder: string limit: bool ] {
     if $limit == true {
         #nh os switch -H $flake_name $flake_folder -- --accept-flake-config --cores build_cores -j build_jobs
@@ -106,10 +98,8 @@ def main [
 	nixos-generate-config --show-hardware-config | save --force $"/etc/nixos/host/($flake_name)/hardware-configuration.nix"
     }
 
-    print_header "FORMATTING NIX FILES"
-    print "Formatting all nix files with nixfmt..."
-    format_files
-    print_success "Files formatted!"
+    print_header "FORMATTING FILES"
+    treefmt
     print "\n"
 
     print_header "CHECKING FOR CHANGES"
@@ -131,7 +121,7 @@ def main [
     print_header "CHECKING REMOTE"
     print "Fetching from github..."
     git fetch $remote $branch
-    git pull $remote $branch
+    git pull --rebase $remote $branch
     print_success "Pull complete"
     print "\n"
 

@@ -17,7 +17,7 @@ let
     path = "${inputs.self}/images/icons/menacing.ico";
     name = "homepage-icon";
   };
-  package = pkgs.homepage-dashboard.overrideAttrs (oldAttrs: {
+  package = pkgs.homepage-dashboard.overrideAttrs (_oldAttrs: {
     postInstall = ''
       mkdir -p $out/share/homepage/public/images
       ln -s ${background} $out/share/homepage/public/images/background.jpeg
