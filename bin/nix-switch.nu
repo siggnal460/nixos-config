@@ -98,6 +98,10 @@ def main [
 	nixos-generate-config --show-hardware-config | save --force $"/etc/nixos/host/($flake_name)/hardware-configuration.nix"
     }
 
+    print_header "FORMATTING FILES"
+    treefmt
+    print "\n"
+
     print_header "CHECKING FOR CHANGES"
     if (repo_changes) {
     	git add .

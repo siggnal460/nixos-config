@@ -1,6 +1,5 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 let
-  htmlFile = ./files/index.html;
   domain = "gappyland.org";
   ldap_cfg = config.services.lldap;
 in

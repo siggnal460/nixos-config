@@ -5,8 +5,6 @@
   ...
 }:
 let
-  jellyseerrApiFile = "/var/lib/doplarr/jellyseerr_api";
-  discordApiFile = "/var/lib/doplarr/discord_api";
   auth_site = "https://auth.gappyland.org";
 in
 {

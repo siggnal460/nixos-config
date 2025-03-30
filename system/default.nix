@@ -1,7 +1,6 @@
 # Configs that are shared in all builds
 {
   pkgs,
-  nixpkgs-unstable,
   lib,
   config,
   ...
@@ -307,9 +306,13 @@
     };
     shells = with pkgs; [ nushell ]; # adds nushell to /etc/shells
     systemPackages = with pkgs; [
+      deadnix
       freshfetch
       git
+      nixfmt-rfc-style
       ripgrep
+      stylua
+      treefmt
       (writeScriptBin "nix-switch" (builtins.readFile ../bin/nix-switch.nu))
       wl-clipboard
     ];

@@ -48,15 +48,10 @@
 
   outputs =
     inputs@{
-      self,
       home-manager,
       home-manager-unstable,
       jovian-nixos,
-      nix-gaming,
       nix-index-database,
-      nixified-ai,
-      nixos-hardware,
-      nixos-cosmic,
       nixpkgs,
       nixpkgs-unstable,
       sops-nix,
@@ -66,12 +61,12 @@
     }:
 
     let
-      overlay-unstable = final: prev: {
+      overlay-unstable = _final: prev: {
         unstable = nixpkgs-unstable.legacyPackages.${prev.system};
       };
 
       mkComputerStable =
-        system: configurationNix: extraModules: extraHomeModules:
+        _system: configurationNix: extraModules: extraHomeModules:
         inputs.nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs nixpkgs;
@@ -79,7 +74,7 @@
           modules = [
             configurationNix
             (
-              { config, pkgs, ... }:
+              { ... }:
               {
                 nixpkgs.overlays = [ overlay-unstable ];
               }
@@ -98,7 +93,7 @@
         };
 
       mkComputerUnstable =
-        system: configurationNix: extraModules: extraHomeModules:
+        _system: configurationNix: extraModules: extraHomeModules:
         inputs.nixpkgs-unstable.lib.nixosSystem {
           specialArgs = {
             inherit inputs nixpkgs-unstable;
@@ -106,7 +101,7 @@
           modules = [
             configurationNix
             (
-              { config, pkgs, ... }:
+              { ... }:
               {
                 nixpkgs.overlays = [ overlay-unstable ];
               }
@@ -127,7 +122,7 @@
 
     in
     {
-			formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
       nixosConfigurations = {
         ## WORKSTATIONS ##
