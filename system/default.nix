@@ -209,7 +209,7 @@
       		        echo "Checking for master branch..."
             			test "$(git branch --show-current)" = "master"
       						echo "Pulling latest flake.lock..."
-            			git pull --ff-only
+            			git pull --ff-only origin master
             		'';
     serviceConfig = {
       WorkingDirectory = "/etc/nixos";
