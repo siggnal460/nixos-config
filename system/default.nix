@@ -221,7 +221,7 @@
   };
 
   systemd.services.pull-updates = {
-    description = "Pulls changes to system config";
+    description = "process to pull latest changes from system git repo";
     restartIfChanged = false;
     onSuccess = [ "rebuild.service" ];
     path = [
@@ -229,34 +229,39 @@
       pkgs.openssh
     ];
     script = ''
-      			test "$(git branch --show-current)" = "main"
-      			git pull --ff-only
-      		'';
+      		        echo "Checking for master branch..."
+            			test "$(git branch --show-current)" = "master"
+      						echo "Pulling latest flake.lock..."
+            			git pull --ff-only
+            		'';
     serviceConfig = {
       WorkingDirectory = "/etc/nixos";
-      User = "siggnal460";
+      User = "aaron";
       Type = "oneshot";
     };
   };
 
   systemd.services.rebuild = {
-    description = "Rebuilds and activates system config";
+    description = "process to rebuild and activate new system config";
     restartIfChanged = false;
     path = [
       pkgs.nixos-rebuild
       pkgs.systemd
     ];
     script = ''
-      			nixos-rebuild boot
-      			booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
-      			built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
+      						echo "Running \"nixos-rebuild boot\"..."
+            			nixos-rebuild boot
+            			booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
+            			built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
 
-      			if [ "''${booted}" = "''${built}" ]; then
-      				nixos-rebuild switch
-      			else
-      				reboot now
-      			fi
-      		'';
+            			if [ "''${booted}" = "''${built}" ]; then
+      						  echo "Reboot not necessary."
+            				nixos-rebuild switch
+            			else
+      						  echo "Reboot necessary. Starting now."
+            				reboot now
+            			fi
+            		'';
     serviceConfig.Type = "oneshot";
   };
 
