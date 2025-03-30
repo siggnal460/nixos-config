@@ -1,7 +1,7 @@
 {
   programs.git = {
     enable = true;
-    userName = "siggnal";
+    userName = "siggnal460";
     userEmail = "siggnal@proton.me";
     ignores = [
       "*~"
@@ -9,7 +9,6 @@
     ];
     extraConfig = {
       init.defaultBranch = "master";
-      pull.rebase = "true";
       safe.directory = "/etc/nixos";
     };
   };
