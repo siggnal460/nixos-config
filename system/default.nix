@@ -249,19 +249,19 @@
       pkgs.systemd
     ];
     script = ''
-      						echo "Running \"nixos-rebuild boot\"..."
-            			nixos-rebuild boot
-            			booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
-            			built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
+      echo "Running \"nixos-rebuild boot\"..."
+      nixos-rebuild boot
+      booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
+      built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
 
-            			if [ "''${booted}" = "''${built}" ]; then
-      						  echo "Reboot not necessary."
-            				nixos-rebuild switch
-            			else
-      						  echo "Reboot necessary. Starting now."
-            				reboot now
-            			fi
-            		'';
+      if [ "''${booted}" = "''${built}" ]; then
+        echo "Reboot not necessary."
+      	nixos-rebuild switch
+      else
+        echo "Reboot necessary. Starting now."
+      	reboot now
+      fi
+    '';
     serviceConfig.Type = "oneshot";
   };
 
