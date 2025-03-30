@@ -117,7 +117,7 @@ def main [
     print_header "CHECKING REMOTE"
     print "Fetching from github..."
     git fetch $remote $branch
-    git pull $remote $branch
+    git pull --rebase $remote $branch
     print_success "Pull complete"
     print "\n"
 
