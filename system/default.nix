@@ -167,28 +167,6 @@
     };
   };
 
-  stylix.fonts = {
-    serif = {
-      package = pkgs.unstable.nerd-fonts.fira-code;
-      name = "Fira Code Serif";
-    };
-
-    sansSerif = {
-      package = pkgs.unstable.nerd-fonts.fira-code;
-      name = "Fira Code Sans";
-    };
-
-    monospace = {
-      package = pkgs.unstable.nerd-fonts.fira-code;
-      name = "Fira Code Mono";
-    };
-
-    emoji = {
-      package = pkgs.unstable.noto-fonts-emoji;
-      name = "Noto Color Emoji";
-    };
-  };
-
   nix = {
     settings = {
       experimental-features = [
@@ -293,6 +271,27 @@
     polarity = "dark";
     image = ../images/wallpapers/tux.png;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    fonts = {
+      serif = {
+        package = pkgs.unstable.nerd-fonts.fira-code;
+        name = "Fira Code Serif";
+      };
+
+      sansSerif = {
+        package = pkgs.unstable.nerd-fonts.fira-code;
+        name = "Fira Code Sans";
+      };
+
+      monospace = {
+        package = pkgs.unstable.nerd-fonts.fira-code;
+        name = "Fira Code Mono";
+      };
+
+      emoji = {
+        package = pkgs.unstable.noto-fonts-emoji;
+        name = "Noto Color Emoji";
+      };
+    };
   };
 
   environment = {
@@ -310,10 +309,7 @@
     systemPackages = with pkgs; [
       freshfetch
       git
-      mdformat
-      nixfmt-rfc-style
       ripgrep
-      #psxify
       (writeScriptBin "nix-switch" (builtins.readFile ../bin/nix-switch.nu))
       wl-clipboard
     ];

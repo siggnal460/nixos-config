@@ -6,11 +6,11 @@
   };
 
   home-manager = {
-    backupFileExtension = "backup";
+    backupFileExtension = "hmbackup";
     sharedModules = [
       {
         programs.neovim = {
-          enable = true;
+	  enable = true;
           defaultEditor = true;
           viAlias = true;
           vimAlias = true;

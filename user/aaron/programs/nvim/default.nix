@@ -1,7 +1,8 @@
 { pkgs, lib, ... }:
 {
+  stylix.targets.neovim.enable = false;
+
   programs.neovim = {
-    enable = true;
     extraPackages = with pkgs; [
       nil
       nixfmt-rfc-style
