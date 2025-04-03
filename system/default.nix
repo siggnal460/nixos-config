@@ -191,7 +191,7 @@
   systemd.timers."pull-updates" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnCalendar = "0 4 * * *";
+      OnCalendar = "*-*-* 04:00:00";
       RandomizedDelaySec = "60min";
       Unit = "pull-updates.service";
     };

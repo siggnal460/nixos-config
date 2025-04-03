@@ -76,6 +76,7 @@
       loupe
       mpv
       openvpn
+      rustdesk
       spotube
       thunderbird
       tor-browser

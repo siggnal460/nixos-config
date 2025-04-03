@@ -235,6 +235,8 @@
               ./system/baseline/server/nfs
               ./system/baseline/server/beszel-agent
               ./system/baseline/server/gitea
+              #./system/baseline/server/wolf
+              ./system/baseline/server/rustdesk
             ]
             [ ];
 
