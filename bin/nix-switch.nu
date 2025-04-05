@@ -69,6 +69,7 @@ def main [
     }
 
     if $short {
+    	git add /etc/nixos/*
         try {
             update $flake_name $flake_folder $limit
         } catch {
@@ -104,12 +105,12 @@ def main [
 
     print_header "CHECKING FOR CHANGES"
     if (repo_changes) {
-    	git add .
+    	git add /etc/nixos/*
         print "Uncommitted changes found:"
         git diff --staged
         print "Please enter a commit message (Ctrl-C to exit without committing):"
         $commit_msg = (input)
-        git add .
+        git add /etc/nixos/*
         print_success "Added changes to buffer."
         git commit -m $commit_msg
         print_success "Committed changes."
@@ -136,12 +137,12 @@ def main [
     	} else if $commit_msg != "" {
             print "flake.lock updates found."
     	    git reset --soft HEAD~1
-    	    git add .
+    	    git add /etc/nixos/*
             git commit -m $commit_msg
             print_success "Added flake.lock changes to commit."
         } else if $commit_msg == "" {
             print "flake.lock updates found."
-       	    git add .
+       	    git add /etc/nixos/*
             $commit_msg = "Updated flake.lock"
             git commit -m $commit_msg
             print_success "Committed with \"Updated flake.lock\""
