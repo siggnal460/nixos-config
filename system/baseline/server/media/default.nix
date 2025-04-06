@@ -82,7 +82,7 @@ in
         ];
         backupPrepareCommand = "sudo podman stop jellyfin";
         backupCleanupCommand = "sudo podman start jellyfin";
-        timerConfig.OnCalendar = "*-*-* 0:30:00";
+        timerConfig.OnCalendar = "*-*-* 0:10:00";
       };
     };
   };

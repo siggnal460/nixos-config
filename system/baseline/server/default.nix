@@ -17,7 +17,7 @@
       daemon.enable = true;
       scanner = {
         enable = true;
-        interval = "*-*-* 01:45:00";
+        interval = "*-*-* 01:00:00";
         scanDirectories = [
           "/etc"
           "/home"

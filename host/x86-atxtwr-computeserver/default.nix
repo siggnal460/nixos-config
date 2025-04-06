@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -24,6 +25,26 @@
     defaultGateway = {
       address = "10.0.0.1";
       interface = "enp8s0";
+    };
+  };
+
+  systemd = {
+    timers = {
+      podman-updater = {
+        timerConfig = {
+          Unit = "podman-updater.service";
+          OnCalendar = "*-*-* 00:30:00";
+        };
+        wantedBy = [ "timers.target" ];
+      };
+    };
+    services.podman-updater = {
+      description = "Service that runs daily to update all podman containers";
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+      };
+      script = "${pkgs.sudo}/bin/sudo ${pkgs.podman}/bin/podman auto-update";
     };
   };
 }

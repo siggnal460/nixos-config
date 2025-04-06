@@ -126,7 +126,7 @@
       clean = {
         enable = true;
         extraArgs = "--keep-since 4d --keep 5";
-        dates = "Mon *-*-* 00:15:00";
+        dates = "Mon *-*-* 00:45:00";
       };
     };
     nix-index-database.comma.enable = true;
@@ -180,7 +180,7 @@
     };
     optimise = {
       automatic = true;
-      dates = [ "00:00" ];
+      dates = [ "00:30" ];
     };
   };
 
