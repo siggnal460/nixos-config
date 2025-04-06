@@ -174,7 +174,7 @@ def main [
     print "\n"
 
     print_header "SYNCING MACHINES"
-    ansible-playbook -i /etc/nixos/ansible/inventory.ini /etc/nixos/ansible/sync_hosts.yml
+    ansible-playbook -i /etc/nixos/ansible/inventory.ini /etc/nixos/ansible/sync_hosts.yml --limit=nix_machines:!(hostnamectl hostname)
 
     print_success "Update complete"
 }
