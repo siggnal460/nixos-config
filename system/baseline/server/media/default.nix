@@ -11,17 +11,16 @@ in
   imports = [ ../../../shared/podman.nix ];
 
   systemd.tmpfiles.rules = [
-    #"d /var/lib/doplarr 0400 doplarr root"
-    #"f /var/lib/doplarr/jellyseerr_api 0400 doplarr root"
-    #"f /var/lib/doplarr/discord_api 0400 doplarr root"
     "d /etc/bazarr 0770 bazarr wheel"
     "d /etc/doplarr 0770 doplarr wheel"
     "d /etc/jellyfin 0775 jellyfin wheel"
     "d /etc/jellyseerr 0770 root wheel"
     "d /etc/komga 0770 komga wheel"
     "d /etc/lidarr 0770 prowlarr wheel"
+    "d /etc/notifiarr 0770 notifiarr wheel"
     "d /etc/prowlarr 0770 prowlarr wheel"
     "d /etc/radarr 0770 radarr wheel"
+    "d /etc/radarr-anime 0770 radarr-anime wheel"
     "d /etc/readarr 0770 readarr wheel"
     "d /etc/recyclarr 0770 recyclarr wheel"
     "d /etc/sonarr 0770 sonarr wheel"
@@ -31,6 +30,7 @@ in
     "d /export/media 0775 root root"
     "d /export/media/data 0775 root media"
     "d /export/media/data/anime 0775 sonarr-anime media"
+    "d /export/media/data/anime-movies 0775 radarr media"
     "d /export/media/data/books 0775 root media"
     "d /export/media/data/books/comics 0775 root media"
     "d /export/media/data/books/manga 0775 root media"
@@ -65,24 +65,26 @@ in
       };
     };
     restic = {
-      backups.jellyfin = {
-        initialize = true;
-        user = "restic";
-        repository = "/export/backups/jellyfin";
-        passwordFile = "/run/secrets/restic-password";
-        paths = [
-          "/etc/jellyfin"
-        ];
-        exclude = [
-          "/etc/jellyfin/cache"
-        ];
-        pruneOpts = [
-          "--keep-latest"
-          "--keep-weekly 4"
-        ];
-        backupPrepareCommand = "sudo podman stop jellyfin";
-        backupCleanupCommand = "sudo podman start jellyfin";
-        timerConfig.OnCalendar = "*-*-* 0:10:00";
+      backups = {
+        jellyfin = {
+          initialize = true;
+          user = "restic";
+          repository = "/export/backups/jellyfin";
+          passwordFile = "/run/secrets/restic/jellyfin";
+          paths = [
+            "/etc/jellyfin"
+          ];
+          exclude = [
+            "/etc/jellyfin/cache"
+          ];
+          pruneOpts = [
+            "--keep-latest"
+            "--keep-weekly 4"
+          ];
+          backupPrepareCommand = "/run/current-system/sw/bin/sudo /run/current-system/sw/bin/podman stop jellyfin";
+          backupCleanupCommand = "/run/current-system/sw/bin/sudo /run/current-system/sw/bin/podman start jellyfin";
+          timerConfig.OnCalendar = "00:30";
+        };
       };
     };
   };
@@ -135,7 +137,7 @@ in
     doplarr = {
       uid = 707;
       isSystemUser = true;
-      group = "media";
+      group = "doplarr";
     };
     komga = {
       uid = 708;
@@ -152,6 +154,16 @@ in
       isSystemUser = true;
       group = "recyclarr";
     };
+    radarr-anime = {
+      uid = 714;
+      isSystemUser = true;
+      group = "media";
+    };
+    notifiarr = {
+      uid = 715;
+      isSystemUser = true;
+      group = "notifiarr";
+    };
     restic = {
       uid = 760;
       isSystemUser = true;
@@ -160,8 +172,14 @@ in
   };
 
   users.groups = {
+    doplarr = {
+      gid = 707;
+    };
     recyclarr = {
       gid = 713;
+    };
+    notifiarr = {
+      gid = 715;
     };
     restic = {
       gid = 760;
@@ -197,60 +215,130 @@ in
   };
 
   environment.etc = {
-    "recyclarr/recyclarr.yml".source = lib.mkForce config.sops.templates.recyclarr-config.path;
-    "komga/application.yml".source = lib.mkForce config.sops.templates.komga-config.path;
-  };
-
-  sops.templates.recyclarr-config = {
-    owner = "recyclarr";
-    file = (pkgs.formats.yaml { }).generate "yaml" {
-      radarr = {
-        main = {
-          base_url = "!secret ${config.sops.placeholder."recyclarr/radarr_url"}";
-          api_key = "!secret ${config.sops.placeholder."recyclarr/radarr_api"}";
-          media_naming = {
-            folder = "jellyfin";
-            movie = {
-              rename = "true";
-              standard = "jellyfin";
-            };
-          };
-          quality_definition = {
-            type = "movie";
-            preferred_ratio = "0.5";
-          };
-          quality_profiles = {
-            name = "TraSH";
-          };
-          delete_old_custom_formats = "false";
-          replace_existing_custom_formats = "false";
-          custom_formats = {
-            trash_ids = [
-              # Good
-              "570bc9ebecd92723d2d21500f4be314c" # Remaster
-              "eca37840c13c6ef2dd0262b141a5482f" # 4K Remaster
-              "e0c07d59beb37348e975a930d5e50319" # Criterion Collection
-              "9d27d9d2181838f76dee150882bdc58c" # Masters of Cinema
-              "db9b4c4b53d312a3ca5f1378f6440fc9" # Vinegar Syndrome
-              "957d0f44b592285f26449575e8b1167e" # Special Edition
-              "eecf3a857724171f968a66cb5719e152" # IMAX
-              "9f6cbff8cfe4ebbc1bde14c7b7bec0de" # IMAX Enhanced
-              # Bad
-              "b6832f586342ef70d9c128d40c07b872" # Bad dual groups
-              "90cedc1fea7ea5d11298bebd3d1d3223" # EVO (no WEBDL)
-              "ae9b7c9ebde1f3bd336a8cbd1ec4c5e5" # No RIsGroup
-              "7357cf5161efbf8c4d5d0c30b4815ee2" # Obfuscated
-              "5c44f52a8714fdd79bb4d98e2673be1f" # Retags
-              "f537cf427b64c38c8e36298f657e4828" # Scene
-            ];
-          };
-          assign_score_to = {
-            name = "TraSH";
-          };
-        };
-      };
+    "recyclarr/secrets.yml" = {
+      source = lib.mkForce config.sops.templates.recyclarr-secrets.path;
+      user = "recyclarr";
+      group = "recyclarr";
+      mode = "0400";
+    };
+    "recyclarr/recyclarr.yml" = {
+      source = ./recyclarr.yml;
+      user = "recyclarr";
+      group = "recyclarr";
+      mode = "0600";
+    };
+    "komga/application.yml" = {
+      source = lib.mkForce config.sops.templates.komga-config.path;
+      user = "komga";
+      group = "media";
+      mode = "0600";
     };
   };
+
+  sops.templates.recyclarr-secrets = {
+    owner = "recyclarr";
+    file = (pkgs.formats.yaml { }).generate "yaml" {
+      radarr-anime_url = "http://radarr-anime:7878";
+      radarr-anime_api = "${config.sops.placeholder."recyclarr/radarr-anime_api"}";
+    };
+  };
+
+  #sops.templates.recyclarr-config = {
+  #  owner = "recyclarr";
+  #  file = (pkgs.formats.yaml { }).generate "yaml" {
+  #    radarr = {
+  #      main = {
+  #        base_url = "http://host.docker.internal:7878";
+  #        api_key = "!secret ${config.sops.placeholder."recyclarr/radarr_api"}";
+  #        media_naming = {
+  #          folder = "jellyfin";
+  #          movie = {
+  #            rename = "true";
+  #            standard = "jellyfin";
+  #          };
+  #        };
+  #        quality_definition = {
+  #          type = "movie";
+  #          preferred_ratio = "0.5";
+  #        };
+  #        quality_profiles = {
+  #          name = "TraSH";
+  #        };
+  #        delete_old_custom_formats = "false";
+  #        replace_existing_custom_formats = "false";
+  #        custom_formats = {
+  #          trash_ids = [
+  #            # Good
+  #            "570bc9ebecd92723d2d21500f4be314c" # Remaster
+  #            "eca37840c13c6ef2dd0262b141a5482f" # 4K Remaster
+  #            "e0c07d59beb37348e975a930d5e50319" # Criterion Collection
+  #            "9d27d9d2181838f76dee150882bdc58c" # Masters of Cinema
+  #            "db9b4c4b53d312a3ca5f1378f6440fc9" # Vinegar Syndrome
+  #            "957d0f44b592285f26449575e8b1167e" # Special Edition
+  #            "eecf3a857724171f968a66cb5719e152" # IMAX
+  #            "9f6cbff8cfe4ebbc1bde14c7b7bec0de" # IMAX Enhanced
+  #            # Bad
+  #            "b6832f586342ef70d9c128d40c07b872" # Bad dual groups
+  #            "90cedc1fea7ea5d11298bebd3d1d3223" # EVO (no WEBDL)
+  #            "ae9b7c9ebde1f3bd336a8cbd1ec4c5e5" # No RIsGroup
+  #            "7357cf5161efbf8c4d5d0c30b4815ee2" # Obfuscated
+  #            "5c44f52a8714fdd79bb4d98e2673be1f" # Retags
+  #            "f537cf427b64c38c8e36298f657e4828" # Scene
+  #          ];
+  #        };
+  #        assign_score_to = {
+  #          name = "TraSH";
+  #        };
+  #      };
+  #    };
+
+  #    radarr-anime = {
+  #      main = {
+  #        base_url = "http://host.docker.internal:7877";
+  #        api_key = "!secret ${config.sops.placeholder."recyclarr/radarr-anime_api"}";
+  #        media_naming = {
+  #          folder = "jellyfin";
+  #          movie = {
+  #            rename = "true";
+  #            standard = "jellyfin";
+  #          };
+  #        };
+  #        quality_definition = {
+  #          type = "movie";
+  #          preferred_ratio = "0.5";
+  #        };
+  #        quality_profiles = {
+  #          name = "TraSH";
+  #        };
+  #        delete_old_custom_formats = "false";
+  #        replace_existing_custom_formats = "false";
+  #        custom_formats = {
+  #          trash_ids = [
+  #            # Good
+  #            "570bc9ebecd92723d2d21500f4be314c" # Remaster
+  #            "eca37840c13c6ef2dd0262b141a5482f" # 4K Remaster
+  #            "e0c07d59beb37348e975a930d5e50319" # Criterion Collection
+  #            "9d27d9d2181838f76dee150882bdc58c" # Masters of Cinema
+  #            "db9b4c4b53d312a3ca5f1378f6440fc9" # Vinegar Syndrome
+  #            "957d0f44b592285f26449575e8b1167e" # Special Edition
+  #            "eecf3a857724171f968a66cb5719e152" # IMAX
+  #            "9f6cbff8cfe4ebbc1bde14c7b7bec0de" # IMAX Enhanced
+  #            # Bad
+  #            "b6832f586342ef70d9c128d40c07b872" # Bad dual groups
+  #            "90cedc1fea7ea5d11298bebd3d1d3223" # EVO (no WEBDL)
+  #            "ae9b7c9ebde1f3bd336a8cbd1ec4c5e5" # No RIsGroup
+  #            "7357cf5161efbf8c4d5d0c30b4815ee2" # Obfuscated
+  #            "5c44f52a8714fdd79bb4d98e2673be1f" # Retags
+  #            "f537cf427b64c38c8e36298f657e4828" # Scene
+  #          ];
+  #        };
+  #        assign_score_to = {
+  #          name = "TraSH";
+  #        };
+  #      };
+  #		};
+  #  };
+  #};
 
   sops.templates.komga-config = {
     owner = "komga";
@@ -315,6 +403,33 @@ in
       ];
     };
 
+    notifiarr = {
+      image = "docker.io/golift/notifiarr:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      ports = [
+        "5454:5454"
+      ];
+      environmentFiles = [ "/run/secrets/notifiarr_secrets" ];
+      environment = {
+        PUID = "715";
+        PGID = "715";
+        TZ = "America/Denver";
+        DN_RADARR_0_NAME = "Radarr";
+        DN_RADARR_0_URL = "http://host.docker.internal:7878";
+      };
+      volumes = [
+        "/etc/notifiarr:/config"
+        "/var/run/utmp:/var/run/utmp"
+        "/etc/machine-id:/etc/machine-id"
+      ];
+      extraOptions = [
+        "--name=notifiarr"
+      ];
+    };
+
     recyclarr = {
       image = "ghcr.io/recyclarr/recyclarr:latest";
       autoStart = true;
@@ -353,6 +468,29 @@ in
       ];
       extraOptions = [
         "--name=radarr"
+      ];
+    };
+
+    radarr-anime = {
+      image = "lscr.io/linuxserver/radarr:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      ports = [
+        "7877:7878"
+      ];
+      environment = {
+        PUID = "714";
+        PGID = "982";
+        TZ = "America/Denver";
+      };
+      volumes = [
+        "/etc/radarr-anime:/config"
+        "/export/media:/data"
+      ];
+      extraOptions = [
+        "--name=radarr-anime"
       ];
     };
 
@@ -516,27 +654,26 @@ in
       ];
     };
 
-    #  #doplarr = {
-    #  #  image = "docker.io/fallenbagel/doplarr:latest";
-    #  #  autoStart = true;
-    #  #  labels = {
-    #  #    "io.containers.autoupdate" = "registry";
-    #  #  };
-    #  #  environment = {
-    #  #    PUID = "707";
-    #  #    PGID = "982";
-    #  #    TZ = "America/Denver";
-    #  #		FILE__DISCORD__TOKEN = "${discordApiFile}";
-    #  #		FILE__OVERSEERR__API = "${jellyseerrApiFile}";
-    #  #		OVERSEERR__URL = "http://host.docker.internal:5055";
-    #  #  };
-    #  #  volumes = [
-    #  #    "/export/media/appdata/doplarr/data:/config"
-    #  #  ];
-    #  #  extraOptions = [
-    #  #    "--name=doplarr"
-    #  #  ];
-    #  #};
+    doplarr = {
+      image = "lscr.io/linuxserver/doplarr:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      environmentFiles = [ "/run/secrets/doplarr_secrets" ];
+      environment = {
+        PUID = "707";
+        PGID = "707";
+        TZ = "America/Denver";
+        OVERSEERR__URL = "http://host.docker.internal:5055";
+      };
+      volumes = [
+        "/etc/doplarr:/config"
+      ];
+      extraOptions = [
+        "--name=doplarr"
+      ];
+    };
 
     flaresolverr = {
       image = "ghcr.io/flaresolverr/flaresolverr:latest";
@@ -577,8 +714,10 @@ in
   sops.secrets = {
     "komga/oidc_client_id".owner = "komga";
     "komga/oidc_client_secret".owner = "komga";
-    "recyclarr/radarr_url".owner = "recyclarr";
     "recyclarr/radarr_api".owner = "recyclarr";
-    "restic-password".owner = "restic";
+    "recyclarr/radarr-anime_api".owner = "recyclarr";
+    "restic/jellyfin".owner = "restic";
+    "doplarr_secrets".owner = "doplarr";
+    "notifiarr_secrets".owner = "notifiarr";
   };
 }

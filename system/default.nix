@@ -315,6 +315,7 @@
       deadnix
       freshfetch
       git
+      mdformat
       nixfmt-rfc-style
       python313
       ripgrep
