@@ -1,6 +1,7 @@
-{ pkgs, ... }:
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   swapDevices = [
     {
@@ -28,23 +29,5 @@
     };
   };
 
-  systemd = {
-    timers = {
-      podman-updater = {
-        timerConfig = {
-          Unit = "podman-updater.service";
-          OnCalendar = "*-*-* 00:30:00";
-        };
-        wantedBy = [ "timers.target" ];
-      };
-    };
-    services.podman-updater = {
-      description = "Service that runs daily to update all podman containers";
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-      };
-      script = "${pkgs.sudo}/bin/sudo ${pkgs.podman}/bin/podman auto-update";
-    };
-  };
+  systemd.timers."podman-updater".timerConfig.OnCalendar = "*-*-* 00:00:00";
 }

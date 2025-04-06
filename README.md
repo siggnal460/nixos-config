@@ -48,14 +48,14 @@ virtualization, development, etc.
 
 ## Timer Schedule
 
-| Process                       | Time      |
-| ----------------------------- | --------- |
-| Podman Auto-Upgrade (Batch 1) | 0000      |
-| Restic Backup (Jellyfin)      | 0010      |
-| Nix Store Optimization        | 0030      |
-| nh Garbage Collection         | 0045 Mon  |
-| Podman Garbage Collection     | 0045 Tue  |
-| ClamAV Scanning               | 0100      |
-| Podman Auto-Upgrade (Batch 2) | 0115      |
-| update-flake-lock GH Action   | 0330      |
-| Nix Auto-Upgrade + Reboot     | 0400-0500 |
+| Process                             | Time      |
+| ----------------------------------- | --------- |
+| Podman Auto-Upgrade (computeserver) | 0000      |
+| Restic Backup (Jellyfin)            | 0010      |
+| Nix Store Optimization              | 0030      |
+| nh Garbage Collection               | 0045 Mon  |
+| Podman Garbage Collection           | 0045 Tue  |
+| ClamAV Scanning                     | 0100      |
+| Podman Auto-Upgrade (mediaserver)   | 0115      |
+| update-flake-lock GH Action         | 0330      |
+| Nix Auto-Upgrade + Reboot           | 0400-0500 |

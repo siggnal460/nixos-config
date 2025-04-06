@@ -1,5 +1,7 @@
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   boot = {
     supportedFilesystems = [ "zfs" ];
@@ -49,4 +51,6 @@
       useTemplate = [ "backup" ];
     };
   };
+
+  systemd.timers."podman-updater".timerConfig.OnCalendar = "*-*-* 01:15:00";
 }
