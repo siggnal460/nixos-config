@@ -3,7 +3,7 @@
   services = {
     openssh = {
       enable = lib.mkForce true;
-      allowSFTP = false;
+      allowSFTP = true; # needed for ansible
       settings = {
         X11Forwarding = false;
         KbdInteractiveAuthentication = false;

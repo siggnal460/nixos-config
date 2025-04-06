@@ -316,6 +316,7 @@
       freshfetch
       git
       nixfmt-rfc-style
+      python313
       ripgrep
       stylua
       treefmt
