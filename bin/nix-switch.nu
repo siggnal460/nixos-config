@@ -49,10 +49,16 @@ def main [
     --limit (-l)                       					# Automatically limit update process to a small amount of cores/threads. Useful for expensive build processes. Amount is based on system CPU threads and RAM.
     --path (-p): string = "/etc/nixos" 					# Filepath to the folder containing the flake.nix.
     --name (-n): string                					# Use the flake with this name. Defaults to the hostname if not specified.
+    --quit-on-changes (-q)                		        # Exit the script if there are local changes. No effect when used with -s flag.
     --remote (-r): string = "origin"   					# Your origin repository name.
     --short (-s)                    					# Perform a simple nixos-rebuild switch with no interaction to git
     --url (-u): string = "git@github.com:siggnal460/nixos-config.git"   # Your origin repository SSH url, in the vein of git@github.com:<username>/<repo>.git
 ] {
+    if (ps | where name == 'nix' | length) > 0  {
+        print "There appears to already be a rebuild in place. Exiting."
+        exit 0
+    }
+
     mut commit_msg = ""
     let flake_folder = $path
     let flake_path = ($flake_folder + "/flake.nix")
@@ -69,13 +75,13 @@ def main [
     }
 
     if $short {
-    	git add /etc/nixos/*
+    	git add /etc/nixos
         try {
             update $flake_name $flake_folder $limit
         } catch {
             |err| $err.msg
-        	git reset --soft HEAD~1
-        	exit 1
+            git reset --soft HEAD~1
+            exit 1
         }
         print_success "Switch complete"
         print "\n"
@@ -95,8 +101,8 @@ def main [
     print "\n"
 
     if $hardware {
-	print_header "UPDATING HARDWARE CONFIG"
-	nixos-generate-config --show-hardware-config | save --force $"/etc/nixos/host/($flake_name)/hardware-configuration.nix"
+    	print_header "UPDATING HARDWARE CONFIG"
+    	nixos-generate-config --show-hardware-config | save --force $"/etc/nixos/host/($flake_name)/hardware-configuration.nix"
     }
 
     print_header "FORMATTING FILES"
@@ -105,12 +111,16 @@ def main [
 
     print_header "CHECKING FOR CHANGES"
     if (repo_changes) {
-    	git add /etc/nixos/*
+        if $quit_on_changes {
+            print "Changes found with --quit-on-changes flag active. Exiting."
+            exit 0
+        }
+    	git add /etc/nixos
         print "Uncommitted changes found:"
         git diff --staged
         print "Please enter a commit message (Ctrl-C to exit without committing):"
         $commit_msg = (input)
-        git add /etc/nixos/*
+        git add /etc/nixos
         print_success "Added changes to buffer."
         git commit -m $commit_msg
         print_success "Committed changes."
@@ -137,12 +147,12 @@ def main [
     	} else if $commit_msg != "" {
             print "flake.lock updates found."
     	    git reset --soft HEAD~1
-    	    git add /etc/nixos/*
+    	    git add /etc/nixos
             git commit -m $commit_msg
             print_success "Added flake.lock changes to commit."
         } else if $commit_msg == "" {
             print "flake.lock updates found."
-       	    git add /etc/nixos/*
+       	    git add /etc/nixos
             $commit_msg = "Updated flake.lock"
             git commit -m $commit_msg
             print_success "Committed with \"Updated flake.lock\""
@@ -166,6 +176,9 @@ def main [
     git remote add $remote $url
     git push $remote $branch
     print "\n"
+
+    print_header "SYNCING MACHINES"
+    ansible-playbook -i /etc/nixos/ansible/inventory.ini /etc/nixos/ansible/sync_hosts.yml
 
     print_success "Update complete"
 }

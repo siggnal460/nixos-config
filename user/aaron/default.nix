@@ -15,7 +15,7 @@
           "media"
         ];
         initialPassword = "password"; # change later
-        openssh.authorizedKeys.keys = [ "" ];
+        openssh.authorizedKeys.keyFiles = [ "/home/aaron/.ssh/id_ed25519.pub" ];
       };
     };
     groups = {

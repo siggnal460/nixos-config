@@ -8,17 +8,9 @@
         X11Forwarding = false;
         KbdInteractiveAuthentication = false;
         PermitRootLogin = "no";
-        #PasswordAuthentication = false; #need to do some work for this
+        PasswordAuthentication = false;
       };
       openFirewall = true;
-      /*
-        				extraConfig = ''
-        					AllowTcpForwarding yes
-        					AllowAgentForwarding no
-        					AllowStreamLocalForwarding no
-        					AuthenticationMethods publickey
-        				'';
-      */
     };
     cockpit = {
       enable = true;

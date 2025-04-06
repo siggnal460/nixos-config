@@ -112,12 +112,14 @@
     ];
     # these are temporary
     extraHosts = ''
-      								   127.0.0.1  x86-merkat-entry.gappyland.org x86-merkat-entry localhost
-      									 10.0.0.7   x86-rakmnt-mediaserver
-      									 10.0.0.10  x86-atxtwr-computeserver
-      									 10.0.0.11  x86-merkat-entry
-      									 10.0.0.17  x86-merkat-auth.gappyland.org x86-merkat-auth
-      								 '';
+      10.0.0.7   x86-rakmnt-mediaserver
+      10.0.0.10  x86-atxtwr-computeserver
+      10.0.0.11  x86-merkat-entry
+      10.0.0.15  x86-atxtwr-workstation
+      10.0.0.16  x86-merkat-htpc
+      10.0.0.17  x86-merkat-auth.gappyland.org x86-merkat-auth
+      10.0.0.20  x86-minitx-jovian
+    '';
   };
 
   programs = {
@@ -206,11 +208,11 @@
       pkgs.openssh
     ];
     script = ''
-      		        echo "Checking for master branch..."
-            			test "$(git branch --show-current)" = "master"
-      						echo "Pulling latest flake.lock..."
-            			git pull --ff-only origin master
-            		'';
+        echo "Checking for master branch..."
+      	test "$(git branch --show-current)" = "master"
+      	echo "Pulling latest flake.lock..."
+      	git pull --ff-only origin master
+    '';
     serviceConfig = {
       WorkingDirectory = "/etc/nixos";
       User = "aaron";
@@ -309,6 +311,7 @@
     };
     shells = with pkgs; [ nushell ]; # adds nushell to /etc/shells
     systemPackages = with pkgs; [
+      ansible
       deadnix
       freshfetch
       git
