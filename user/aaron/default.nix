@@ -15,7 +15,10 @@
           "media"
         ];
         initialPassword = "password"; # change later
-        openssh.authorizedKeys.keyFiles = [ "/home/aaron/.ssh/id_ed25519.pub" ];
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO7gqadO+NALSkM+6crvnMdCsYycZqhPVIonv8kLrKS/ aaron@x86-atxtwr-workstation"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhR18cn0PfkxNdXB86YunEimpiVst9Ca5QJYHwNeYXX aaron@x86-minitx-jovian"
+        ];
       };
     };
     groups = {
