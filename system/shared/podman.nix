@@ -8,7 +8,7 @@
       autoPrune = {
         enable = true;
         dates = "Tue *-*-* 00:45:00";
-        flags = [ "all" ];
+        flags = [ "--all" ];
       };
     };
   };
