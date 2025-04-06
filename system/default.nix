@@ -227,7 +227,7 @@
     ];
     script = ''
       echo "Running \"nixos-rebuild boot\"..."
-      nixos-rebuild boot
+      nixos-rebuild boot -j 3
       booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
       built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
 
@@ -239,7 +239,10 @@
       	reboot now
       fi
     '';
-    serviceConfig.Type = "oneshot";
+    serviceConfig = {
+      User = "aaron";
+      Type = "oneshot";
+    };
   };
 
   programs.nix-ld = {
