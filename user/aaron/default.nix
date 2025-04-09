@@ -18,6 +18,11 @@
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO7gqadO+NALSkM+6crvnMdCsYycZqhPVIonv8kLrKS/ aaron@x86-atxtwr-workstation"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhR18cn0PfkxNdXB86YunEimpiVst9Ca5QJYHwNeYXX aaron@x86-minitx-jovian"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINWVZo3hq35ogYD4avk0lMiTvybIeF4XIJcScwAxwmf3 aaron@x86-atxtwr-kenzo"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE98YnJuSgl9Swf4P1g6C4hvG5GPSTdHyXf83/GJ4LR7 aaron@nixos"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMvz32rDPSRNQlyuSXO3wvz6MlbMdiMUeJvQcgtg+5T5 aaron@x86-merkat-entrymaster"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJtq0LBHEyB6Jp6FPOyopCYBuYl7m2uaspYmEwbPwkYY aaron@x86-merkat-bedhtpc"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFWda3Zp3cPUWIPW4vgNxNbXqkzEd/h6onj9BYWvPVBm aaron@nixos"
         ];
       };
     };
