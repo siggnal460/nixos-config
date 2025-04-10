@@ -9,6 +9,8 @@
     desktopManager.gnome.enable = true;
   };
 
+  services.gnome.gnome-remote-desktop.enable = true;
+
   environment.gnome.excludePackages = (
     with pkgs;
     [

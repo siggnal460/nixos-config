@@ -229,15 +229,12 @@
             [
               ./system/hardware/gpu/nvidia
               ./system/hardware/gpu/nvidia/cuda
-              ./system/de/gnome-minimal
               ./system/baseline/server
               ./system/baseline/server/ai
               ./system/baseline/server/blender
               ./system/baseline/server/nfs
               ./system/baseline/server/beszel-agent
               ./system/baseline/server/gitea
-              #./system/baseline/server/wolf
-              ./system/baseline/server/rustdesk
               ./system/baseline/server/invidious
             ]
             [ ];
