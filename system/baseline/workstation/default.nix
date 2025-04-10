@@ -76,7 +76,6 @@
       loupe
       mpv
       openvpn
-      #rustdesk
       spotube
       thunderbird
       tor-browser
@@ -85,6 +84,7 @@
       wineWowPackages.waylandFull
       vencord
       vesktop
+      waypipe
     ];
   };
 }
