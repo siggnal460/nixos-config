@@ -86,7 +86,7 @@
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              #home-manager.useUserPackages = true;
+              home-manager.useUserPackages = true;
               imports = [ ./user ] ++ extraHomeModules;
             }
           ] ++ extraModules; # system modules
@@ -114,7 +114,7 @@
             home-manager-unstable.nixosModules.home-manager
             {
               home-manager.useUserPackages = true;
-              #home-manager.useGlobalPkgs = true;
+              home-manager.useGlobalPkgs = true;
               imports = [ ./user ] ++ extraHomeModules;
             }
           ] ++ extraModules; # system modules
@@ -200,7 +200,7 @@
               ./system/hardware/gpu/intel
               ./system/baseline/htpc
             ]
-            [ ./user/kodi ];
+            [ ./user/aaron/htpc ];
 
         ## SERVERS ##
         x86-merkat-auth =
@@ -209,7 +209,6 @@
               ./system/baseline/server
               ./system/baseline/server/auth
               ./system/baseline/server/beszel-hub
-              ./system/baseline/server/beszel-agent
             ]
             [ ];
 
@@ -219,7 +218,6 @@
               ./system/baseline/server
               ./system/baseline/server/reverse-proxy
               ./system/baseline/server/homepage
-              ./system/baseline/server/beszel-agent
               #./system/baseline/server/headscale
             ]
             [ ];
@@ -229,11 +227,11 @@
             [
               ./system/hardware/gpu/nvidia
               ./system/hardware/gpu/nvidia/cuda
+              ./system/de/gnome-minimal
               ./system/baseline/server
               ./system/baseline/server/ai
               ./system/baseline/server/blender
               ./system/baseline/server/nfs
-              ./system/baseline/server/beszel-agent
               ./system/baseline/server/gitea
               ./system/baseline/server/invidious
             ]
@@ -254,7 +252,6 @@
               ./system/baseline/server/samba
               ./system/baseline/server/netbootxyz
               ./system/baseline/server/nextcloud
-              ./system/baseline/server/beszel-agent
             ]
             [ ];
       };

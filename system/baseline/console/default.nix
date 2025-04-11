@@ -11,6 +11,8 @@
     ../../shared/networkmanager.nix
   ];
 
+  networking.networkmanager.enable = true;
+
   nixpkgs.allowUnfreePackages = [
     "steam"
     "steam-jupiter-original"

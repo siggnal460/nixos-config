@@ -140,9 +140,6 @@
     protectKernelImage = true;
     apparmor.enable = true;
     apparmor.killUnconfinedConfinables = true;
-    auditd.enable = true;
-    audit.enable = true;
-    audit.rules = [ "-a exit,always -F arch=b64 -S execve" ];
     #restrict what sudo can do to basic admin functions
     sudo = {
       enable = true;
@@ -315,7 +312,6 @@
       deadnix
       freshfetch
       git
-      mdformat
       nixfmt-rfc-style
       python313
       ripgrep

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, ... }:
 {
   imports = [
     ../../shared/plymouth.nix
@@ -9,22 +9,29 @@
     ../../shared/remotely-managed.nix
   ];
 
-  users.extraUsers.kodi.isNormalUser = true;
+  nixpkgs.config = {
+    allowUnfreePredicate =
+      pkg:
+      builtins.elem (lib.getName pkg) [
+        "steam-unwrapped"
+      ];
+  };
 
-  hardware.graphics.enable = true;
+  networking.networkmanager.enable = true;
 
-  services.cage = {
-    enable = true;
-    user = "kodi";
-    program = "${
-      pkgs.kodi-wayland.passthru.withPackages (
-        kodiPkgs: with kodiPkgs; [
-          jellyfin
-          keymap
-          invidious
-          sponsorblock
-        ]
-      )
-    }/bin/kodi-standalone";
+  hardware = {
+    steam-hardware.enable = true;
+    graphics.enable = true;
+  };
+
+  programs.sway.enable = true;
+
+  services.displayManager.defaultSession = "sway";
+
+  services.xserver.displayManager = {
+    gdm = {
+      enable = true;
+      wayland = true;
+    };
   };
 }

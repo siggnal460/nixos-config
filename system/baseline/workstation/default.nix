@@ -10,6 +10,8 @@
     ../../shared/nfs-client.nix
   ];
 
+  networking.networkmanager.enable = true;
+
   services.openssh.enable = false;
 
   programs = {
@@ -76,6 +78,7 @@
       loupe
       mpv
       openvpn
+      #rustdesk
       spotube
       thunderbird
       tor-browser
