@@ -18,7 +18,7 @@
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO7gqadO+NALSkM+6crvnMdCsYycZqhPVIonv8kLrKS/ aaron@x86-atxtwr-workstation"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhR18cn0PfkxNdXB86YunEimpiVst9Ca5QJYHwNeYXX aaron@x86-minitx-jovian"
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINWVZo3hq35ogYD4avk0lMiTvybIeF4XIJcScwAxwmf3 aaron@x86-atxtwr-kenzo"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPHWbfQRrluSlaCohXm8/Qvpx1a80N4IEGHF8koRAdDZ aaron@x86-atxtwr-computeserver"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE98YnJuSgl9Swf4P1g6C4hvG5GPSTdHyXf83/GJ4LR7 aaron@nixos"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMvz32rDPSRNQlyuSXO3wvz6MlbMdiMUeJvQcgtg+5T5 aaron@x86-merkat-entrymaster"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExo/6fWz0F9ofC/73eff34LALKalVP63bzAyiIZeJFF aaron@x86-merkat-htpc"
