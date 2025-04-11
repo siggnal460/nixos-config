@@ -1,6 +1,9 @@
 {
-  jovian.devices.steamdeck = {
-    enable = true;
-    autoUpdate = true;
+  jovian.devices = {
+    hardware.has.amd.gpu = true;
+    steamdeck = {
+      enable = true;
+      autoUpdate = true;
+    };
   };
 }
