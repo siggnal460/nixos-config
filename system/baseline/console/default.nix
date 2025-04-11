@@ -1,7 +1,6 @@
 { lib, ... }:
 {
   imports = [
-    ../../shared/latest-kernel.nix
     ../../shared/plymouth.nix
     ../../shared/plymouth-delay.nix
     ../../shared/quietboot.nix

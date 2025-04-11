@@ -118,6 +118,7 @@
       10.0.0.15  x86-atxtwr-workstation
       10.0.0.16  x86-merkat-htpc
       10.0.0.17  x86-merkat-auth.gappyland.org x86-merkat-auth
+      10.0.0.18  x86-stmdck-jovian
       10.0.0.20  x86-minitx-jovian
     '';
   };
