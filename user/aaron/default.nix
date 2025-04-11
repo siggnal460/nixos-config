@@ -20,7 +20,7 @@
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhR18cn0PfkxNdXB86YunEimpiVst9Ca5QJYHwNeYXX aaron@x86-minitx-jovian"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPHWbfQRrluSlaCohXm8/Qvpx1a80N4IEGHF8koRAdDZ aaron@x86-atxtwr-computeserver"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE98YnJuSgl9Swf4P1g6C4hvG5GPSTdHyXf83/GJ4LR7 aaron@nixos"
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMvz32rDPSRNQlyuSXO3wvz6MlbMdiMUeJvQcgtg+5T5 aaron@x86-merkat-entrymaster"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGJ3ENb2iqe0ZgY+31q4+alGbWdFW5IEI3pznl8gBfAW aaron@x86-merkat-entry"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExo/6fWz0F9ofC/73eff34LALKalVP63bzAyiIZeJFF aaron@x86-merkat-htpc"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFWda3Zp3cPUWIPW4vgNxNbXqkzEd/h6onj9BYWvPVBm aaron@nixos"
         ];
