@@ -24,7 +24,6 @@
     steamos.useSteamOSConfig = true;
     decky-loader = {
       enable = true;
-      user = "aaron";
     };
     steam = {
       desktopSession = "cosmic";
