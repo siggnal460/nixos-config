@@ -189,12 +189,6 @@ in
             };
           }
           {
-            Linkwarden = {
-              icon = "linkwarden.png";
-              href = "https://linkwarden.gappyland.org";
-            };
-          }
-          {
             LLDAP = {
               icon = "freeipa.svg";
               href = "https://users.gappyland.org";
