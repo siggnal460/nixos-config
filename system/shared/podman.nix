@@ -29,9 +29,10 @@
       description = "Service that runs daily to update all podman containers";
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
+        User = "root";
         Type = "oneshot";
       };
-      script = "${pkgs.sudo}/bin/sudo ${pkgs.podman}/bin/podman auto-update";
+      script = "${pkgs.podman}/bin/podman auto-update";
     };
   };
 }

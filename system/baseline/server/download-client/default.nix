@@ -3,6 +3,7 @@
     "d /export/media/torrents 0770 transmission media"
     "d /export/media/torrents/complete 0770 transmission media"
     "d /export/media/torrents/complete/anime 0770 transmission media"
+    "d /export/media/torrents/complete/anime-movies 0770 transmission media"
     "d /export/media/torrents/complete/books 0770 transmission media"
     "d /export/media/torrents/complete/tvshows 0770 transmission media"
     "d /export/media/torrents/complete/movies 0770 transmission media"

@@ -222,7 +222,13 @@ in
       mode = "0400";
     };
     "recyclarr/recyclarr.yml" = {
-      source = ./recyclarr.yml;
+      source = ./recyclarr/recyclarr.yml;
+      user = "recyclarr";
+      group = "recyclarr";
+      mode = "0600";
+    };
+    "recyclarr/includes/anime.yml" = {
+      source = ./recyclarr/includes/anime.yml;
       user = "recyclarr";
       group = "recyclarr";
       mode = "0600";
@@ -239,58 +245,9 @@ in
     owner = "recyclarr";
     file = (pkgs.formats.yaml { }).generate "yaml" {
       radarr-anime_url = "http://radarr-anime:7878";
-      radarr-anime_api = "${config.sops.placeholder."recyclarr/radarr-anime_api"}";
+      radarr-anime_apikey = "${config.sops.placeholder."recyclarr/radarr-anime_apikey"}";
     };
   };
-
-  #sops.templates.recyclarr-config = {
-  #  owner = "recyclarr";
-  #  file = (pkgs.formats.yaml { }).generate "yaml" {
-  #    radarr = {
-  #      main = {
-  #        base_url = "http://host.docker.internal:7878";
-  #        api_key = "!secret ${config.sops.placeholder."recyclarr/radarr_api"}";
-  #        media_naming = {
-  #          folder = "jellyfin";
-  #          movie = {
-  #            rename = "true";
-  #            standard = "jellyfin";
-  #          };
-  #        };
-  #        quality_definition = {
-  #          type = "movie";
-  #          preferred_ratio = "0.5";
-  #        };
-  #        quality_profiles = {
-  #          name = "TraSH";
-  #        };
-  #        delete_old_custom_formats = "false";
-  #        replace_existing_custom_formats = "false";
-  #        custom_formats = {
-  #          trash_ids = [
-  #            # Good
-  #            "570bc9ebecd92723d2d21500f4be314c" # Remaster
-  #            "eca37840c13c6ef2dd0262b141a5482f" # 4K Remaster
-  #            "e0c07d59beb37348e975a930d5e50319" # Criterion Collection
-  #            "9d27d9d2181838f76dee150882bdc58c" # Masters of Cinema
-  #            "db9b4c4b53d312a3ca5f1378f6440fc9" # Vinegar Syndrome
-  #            "957d0f44b592285f26449575e8b1167e" # Special Edition
-  #            "eecf3a857724171f968a66cb5719e152" # IMAX
-  #            "9f6cbff8cfe4ebbc1bde14c7b7bec0de" # IMAX Enhanced
-  #            # Bad
-  #            "b6832f586342ef70d9c128d40c07b872" # Bad dual groups
-  #            "90cedc1fea7ea5d11298bebd3d1d3223" # EVO (no WEBDL)
-  #            "ae9b7c9ebde1f3bd336a8cbd1ec4c5e5" # No RIsGroup
-  #            "7357cf5161efbf8c4d5d0c30b4815ee2" # Obfuscated
-  #            "5c44f52a8714fdd79bb4d98e2673be1f" # Retags
-  #            "f537cf427b64c38c8e36298f657e4828" # Scene
-  #          ];
-  #        };
-  #        assign_score_to = {
-  #          name = "TraSH";
-  #        };
-  #      };
-  #    };
 
   #    radarr-anime = {
   #      main = {
@@ -714,8 +671,8 @@ in
   sops.secrets = {
     "komga/oidc_client_id".owner = "komga";
     "komga/oidc_client_secret".owner = "komga";
-    "recyclarr/radarr_api".owner = "recyclarr";
-    "recyclarr/radarr-anime_api".owner = "recyclarr";
+    "recyclarr/radarr_apikey".owner = "recyclarr";
+    "recyclarr/radarr-anime_apikey".owner = "recyclarr";
     "restic/jellyfin".owner = "restic";
     "doplarr_secrets".owner = "doplarr";
     "notifiarr_secrets".owner = "notifiarr";
