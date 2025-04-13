@@ -112,14 +112,15 @@
     ];
     # these are temporary
     extraHosts = ''
-      10.0.0.7   x86-rakmnt-mediaserver
-      10.0.0.10  x86-atxtwr-computeserver
-      10.0.0.11  x86-merkat-entry
-      10.0.0.15  x86-atxtwr-workstation
-      10.0.0.16  x86-merkat-bedhtpc
-      10.0.0.17  x86-merkat-auth.gappyland.org x86-merkat-auth
-      10.0.0.18  x86-stmdck-jovian
-      10.0.0.20  x86-minitx-jovian
+            10.0.0.7   x86-rakmnt-mediaserver
+            10.0.0.10  x86-atxtwr-computeserver
+            10.0.0.11  x86-merkat-entry
+            10.0.0.15  x86-atxtwr-workstation
+            10.0.0.16  x86-merkat-bedhtpc
+            10.0.0.17  x86-merkat-auth.gappyland.org x86-merkat-auth
+            10.0.0.18  x86-stmdck-jovian
+            10.0.0.20  x86-minitx-jovian
+      			10.0.0.23  x86-merkat-lrhtpc
     '';
   };
 
