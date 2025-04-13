@@ -4,7 +4,6 @@
 - [ ] Restic backups
 - [ ] Komga OIDC
     - This was working, but no more
-- [ ] Fix Ansible script to keep machines in sync
 
 ## Working but not ideal; maybe fixable
 - [ ] ComfyUI and InvokeAI do not share a common model folder
@@ -19,6 +18,8 @@
 - [ ] Switch everything to uutils?
 - [ ] Retroarch on the second desktop for HTPC
     - Possible to bind a controller button to switch desktops?
+- [ ] NFS-Mounted and backed-up home directory
+    - [ ] This will fix Ansible script to keep machines in sync
 
 ## Waiting on something upstream to happen
 - [ ] Two image-generation programs
