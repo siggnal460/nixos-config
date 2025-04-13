@@ -195,8 +195,16 @@
             [ ./user/aaron/console ];
 
         ## HTPC ##
-        x86-merkat-htpc =
-          mkComputerStable "x86_64-linux" ./host/x86-merkat-htpc
+        x86-merkat-bedhtpc =
+          mkComputerStable "x86_64-linux" ./host/x86-merkat-bedhtpc
+            [
+              ./system/hardware/gpu/intel
+              ./system/baseline/htpc
+            ]
+            [ ./user/aaron/htpc ];
+
+        x86-merkat-lrhtpc =
+          mkComputerStable "x86_64-linux" ./host/x86-merkat-lrhtpc
             [
               ./system/hardware/gpu/intel
               ./system/baseline/htpc

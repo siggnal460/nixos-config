@@ -9,6 +9,6 @@
   ];
 
   networking = {
-    hostName = "x86-merkat-htpc";
+    hostName = "x86-merkat-lrhtpc";
   };
 }
