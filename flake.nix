@@ -236,7 +236,6 @@
             [
               ./system/hardware/gpu/nvidia
               ./system/hardware/gpu/nvidia/cuda
-              ./system/de/gnome-minimal
               ./system/baseline/server
               ./system/baseline/server/ai
               ./system/baseline/server/blender

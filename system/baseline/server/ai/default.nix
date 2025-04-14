@@ -31,6 +31,10 @@
         "io.containers.autoupdate" = "registry";
       };
       environmentFiles = [ "/run/secrets/invokeai_secrets" ];
+      environment = {
+        NVIDIA_DRIVER_CAPABILITIES = "all";
+        NVIDIA_VISIBLE_DEVICES = "all";
+      };
       volumes = [ "/var/lib/invokeai:/invokeai" ];
       ports = [ "9091:9090" ];
       extraOptions = [
