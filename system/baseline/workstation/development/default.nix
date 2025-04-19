@@ -7,7 +7,7 @@
   services.ollama = {
     enable = true;
     loadModels = [
-      "qwq:32b"
+      "gemma3:27b"
     ];
   };
 

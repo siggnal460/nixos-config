@@ -13,6 +13,7 @@
           "wheel"
           "networkmanager"
           "media"
+          "ai"
         ];
         initialPassword = "password"; # change later
         openssh.authorizedKeys.keys = [
@@ -35,8 +36,13 @@
     };
   };
 
-  users.groups.media = {
-    gid = 982;
+  users.groups = {
+    media = {
+      gid = 982;
+    };
+    ai = {
+      gid = 780;
+    };
   };
 
   systemd = {
@@ -62,6 +68,11 @@
     };
 
     sops.age.generateKey = true;
+
+    stylix = {
+      autoEnable = true;
+      targets.gtk.enable = false; # https://github.com/danth/stylix/issues/1093
+    };
 
     accounts.email.accounts.aaron = {
       address = "siggnal@proton.me";
