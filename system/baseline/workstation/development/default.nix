@@ -8,6 +8,7 @@
     enable = true;
     loadModels = [
       "gemma3:27b"
+      "gemma3:12b"
     ];
   };
 
