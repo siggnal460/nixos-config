@@ -193,6 +193,7 @@
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "*-*-* 04:00:00";
+      Persistent = "true";
       RandomizedDelaySec = "60min";
       Unit = "pull-updates.service";
     };
@@ -227,21 +228,25 @@
       pkgs.systemd
     ];
     script = ''
-      echo "Running \"nixos-rebuild boot\"..."
-      nixos-rebuild boot -j 3
-      booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
-      built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
+            echo "Beginning rebuild service."
+      			current_hour=$(date +%H)
+            echo "Running \"nixos-rebuild boot\"..."
+            nixos-rebuild boot -j 3
+            booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
+            built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
 
-      if [ "''${booted}" = "''${built}" ]; then
-        echo "Reboot not necessary."
-      	nixos-rebuild switch
-      else
-        echo "Reboot necessary. Starting now."
-      	reboot now
-      fi
+            if [ "''${booted}" = "''${built}" ]; then
+              echo "Reboot not necessary."
+            	nixos-rebuild switch
+            elif [ "$current_hour" -ge 4 ] && [ "$current_hour" -lt 5 ]; then
+              echo "Reboot necessary and within window. Starting now."
+            	reboot now
+      			else
+      				echo "Reboot is necessary, but it was not within the reboot window of 0400 and 0500 so it was skipped."
+            fi
     '';
     serviceConfig = {
-      User = "aaron";
+      User = "root";
       Type = "oneshot";
     };
   };

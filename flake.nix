@@ -178,7 +178,6 @@
         x86-minitx-jovian =
           mkComputerUnstable "x86_64-linux" ./host/x86-minitx-jovian
             [
-              ./system/de/cosmic
               ./system/hardware/gpu/amd
               ./system/baseline/console
             ]
@@ -187,7 +186,6 @@
         x86-stmdck-jovian =
           mkComputerUnstable "x86_64-linux" ./host/x86-stmdck-jovian
             [
-              ./system/de/cosmic
               ./system/hardware/gpu/amd
               ./system/hardware/steamdeck
               ./system/baseline/console
