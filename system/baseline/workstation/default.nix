@@ -10,6 +10,10 @@
     ../../shared/nfs-client.nix
   ];
 
+  environment.sessionVariables = rec {
+    NIGHTLY_REFRESH = "always-poweroff";
+  };
+
   networking.networkmanager.enable = true;
 
   services.openssh.enable = false;

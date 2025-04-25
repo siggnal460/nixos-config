@@ -4,6 +4,10 @@
     ../../shared/remotely-managed.nix
   ];
 
+  environment.sessionVariables = {
+    NIGHTLY_REFRESH = "reboot";
+  };
+
   networking.wireless.enable = false;
 
   systemd.tmpfiles.rules = [

@@ -58,4 +58,9 @@ virtualization, development, etc.
 | ClamAV Scanning                     | 0100      |
 | Podman Auto-Upgrade (mediaserver)   | 0115      |
 | update-flake-lock GH Action         | 0330      |
-| Nix Auto-Upgrade + Reboot           | 0400-0500 |
+| Nix Auto-Upgrade + Reboot           | 0400-0445 |
+| Poweroff/reboot window              | 0400-0500 |
+
+## Environmental Variables
+
+- NIGHTLY_REFRESH: determines behavior of the machine when nightly updates occur. Either "reboot-when-needed", or "always-poweroff"

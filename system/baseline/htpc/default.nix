@@ -9,6 +9,10 @@
     ../../shared/remotely-managed.nix
   ];
 
+  environment.sessionVariables = {
+    NIGHTLY_REFRESH = "always-poweroff";
+  };
+
   nixpkgs.config = {
     allowUnfreePredicate =
       pkg:

@@ -10,6 +10,10 @@
     ../../shared/networkmanager.nix
   ];
 
+  environment.sessionVariables = {
+    NIGHTLY_REFRESH = "always-poweroff";
+  };
+
   networking.networkmanager.enable = true;
 
   nixpkgs.allowUnfreePackages = [
