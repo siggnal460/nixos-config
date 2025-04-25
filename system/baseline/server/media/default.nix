@@ -44,7 +44,10 @@ in
 
   services = {
     nfs.server = {
-      exports = ''/export/media 10.0.0.15(rw,nohide,insecure,no_subtree_check)'';
+      exports = ''
+        			  /export/media 10.0.0.15(rw,nohide,insecure,no_subtree_check)
+                /export/media 10.0.0.10(rw,nohide,insecure,no_subtree_check)
+        		  '';
     };
     fail2ban = {
       jails = {
