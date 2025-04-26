@@ -231,7 +231,7 @@
             [ ];
 
         x86-atxtwr-computeserver =
-          mkComputerUnstable "x86_64-linux" ./host/x86-atxtwr-computeserver
+          mkComputerStable "x86_64-linux" ./host/x86-atxtwr-computeserver
             [
               ./system/hardware/gpu/nvidia
               ./system/hardware/gpu/nvidia/cuda
@@ -241,6 +241,7 @@
               ./system/baseline/server/nfs
               ./system/baseline/server/gitea
               ./system/baseline/server/invidious
+              ./system/shared/nfs-client.nix
             ]
             [ ];
 

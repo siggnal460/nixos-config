@@ -1,4 +1,5 @@
 # Remote AI content generation
+{ pkgs, ... }:
 {
   imports = [
     ../../../shared/latest-kernel.nix
@@ -7,7 +8,9 @@
 
   systemd.tmpfiles.rules = [
     "d /var/lib/invokeai 0774 root users"
-    "d /var/lib/comfyui 0774 root users"
+    "d /var/lib/comfyui 0774 comfyui ai"
+    "d /var/lib/comfyui/custom_nodes 0774 comfyui ai"
+    "d /var/lib/comfyui/input 0774 comfyui ai"
     "d /var/lib/ollama 0774 root users"
     "d /var/lib/open-webui/data 0770 root users"
     "d /var/lib/openedai-speech/voices 0770 root users"
@@ -16,8 +19,50 @@
     "d /var/lib/sillytavern/config 0770 root users"
     "d /var/lib/sillytavern/plugins 0770 root users"
 
-    "d /export/ai 0770 root users"
+    "d /export/ai/models/checkpoints 0774 root ai"
+    "d /export/ai/models/clip 0774 root ai"
+    "d /export/ai/models/clip_vision 0774 root ai"
+    "d /export/ai/models/configs 0774 root ai"
+    "d /export/ai/models/controlnet 0774 root ai"
+    "d /export/ai/models/diffusers 0774 root ai"
+    "d /export/ai/models/diffusion_models 0774 root ai"
+    "d /export/ai/models/embeddings 0774 root ai"
+    "d /export/ai/models/fooocus_expansion 0774 root ai"
+    "d /export/ai/models/gligen 0774 root ai"
+    "d /export/ai/models/hypernetworks 0774 root ai"
+    "d /export/ai/models/inpaint 0774 root ai"
+    "d /export/ai/models/ipadapter 0774 root ai"
+    "d /export/ai/models/loras 0774 root ai"
+    "d /export/ai/models/photomaker 0774 root ai"
+    "d /export/ai/models/prompt_expansion 0774 root ai"
+    "d /export/ai/models/safety_checker 0774 root ai"
+    "d /export/ai/models/sam 0774 root ai"
+    "d /export/ai/models/style_models 0774 root ai"
+    "d /export/ai/models/text_encoders 0774 root ai"
+    "d /export/ai/models/unet 0774 root ai"
+    "d /export/ai/models/upscale_models 0774 root ai"
+    "d /export/ai/models/vae 0774 root ai"
+    "d /export/ai/models/vae_approx 0774 root ai"
+
+    "d /export/ai 0774 root ai"
+    "d /export/ai/models 0774 root ai"
+    "d /export/ai/output 0774 comfyui ai"
+    "d /export/ai/input 0774 comfyui ai"
+    "d /export/ai/workflows 0774 comfyui ai"
   ];
+
+  users = {
+    users.comfyui = {
+      uid = 780;
+      isSystemUser = true;
+      group = "ai";
+    };
+    groups = {
+      ai = {
+        gid = 780;
+      };
+    };
+  };
 
   services.nfs.server = {
     exports = ''/export/ai 10.0.0.15(rw,nohide,insecure,no_subtree_check)'';
@@ -156,22 +201,31 @@
     };
 
     ## Doesn't work rn
-    #comfyui = {
-    #  image = "docker.io/yanwk/comfyui-boot:cu121";
-    #  autoStart = true;
-    #  labels = {
-    #    "io.containers.autoupdate" = "registry";
-    #  };
-    #  ports = [ "8188:8188" ];
-    #  volumes = [
-    #    "/var/lib/comfyui:/home/runner"
-    #  ];
-    #  extraOptions = [
-    #    "--name=comfyui"
-    #    "--gpus=all"
-    #    "--group-add=users"
-    #  ];
-    #};
+    comfyui = {
+      image = "ghcr.io/lecode-official/comfyui-docker:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      ports = [ "8188:8188" ];
+      volumes = [
+        "/export/ai/models:/opt/comfyui/models:rw"
+        "/export/ai/output:/opt/comfyui/output:rw"
+        "/export/ai/input:/opt/comfyui/input:rw"
+        "/export/ai/workflows:/opt/comfyui/user/default/workflows:rw"
+        "/var/lib/comfyui/custom_nodes:/opt/comfyui/custom_nodes:rw"
+      ];
+      environment = {
+        USER_ID = "780";
+        GROUP_ID = "780";
+        NVIDIA_DRIVER_CAPABILITIES = "all";
+        NVIDIA_VISIBLE_DEVICES = "all";
+      };
+      extraOptions = [
+        "--name=comfyui"
+        "--gpus=all"
+      ];
+    };
 
     fluxgym = {
       image = "docker.io/thelocallab/fluxgym-flux-lora-training";
@@ -187,6 +241,10 @@
       ];
     };
   };
+
+  services.flatpak.enable = true;
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   sops.secrets = {
     "invokeai_secrets".owner = "root";

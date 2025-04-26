@@ -4,7 +4,6 @@
 
   users = {
     users."invidious" = {
-      enable = true;
       isSystemUser = true;
       group = "invidious";
     };
