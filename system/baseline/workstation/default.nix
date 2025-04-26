@@ -72,6 +72,7 @@
       anki
       calibre
       element-desktop
+      eog
       deluge
       firefox
       gimp
@@ -79,7 +80,7 @@
       gparted
       jellyfin-media-player
       libreoffice
-      loupe
+      #loupe
       mpv
       openvpn
       #rustdesk
@@ -87,11 +88,15 @@
       thunderbird
       tor-browser
       usbimager
+      image-roll
       wl-clipboard
       wineWowPackages.waylandFull
       vencord
       vesktop
       waypipe
+      qiv
+      phototonic
+      kdePackages.gwenview
     ];
   };
 }
