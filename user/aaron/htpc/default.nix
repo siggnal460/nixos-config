@@ -4,7 +4,7 @@
     programs = {
       nushell.extraConfig = ''
         				if not ("WAYLAND_DISPLAY" in $env) and ("XDG_VTNR" in $env) and ($env.XDG_VTNR == 1) {
-        				    sway
+        						sway
         				}
         			'';
       kodi = {
