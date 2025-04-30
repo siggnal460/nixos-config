@@ -12,6 +12,9 @@
     ];
   };
 
+  programs.adb.enable = true;
+  users.users.aaron.extraGroups = [ "adbusers" ];
+
   environment.systemPackages = with pkgs; [
     cargo
     gcc
