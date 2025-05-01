@@ -1,6 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
+
+  stylix = {
+    base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/nord.yaml";
+  };
 
   networking = {
     hostName = "x86-laptop-galago";

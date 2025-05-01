@@ -6,7 +6,6 @@
   imports = [
     ../../shared/plymouth.nix
     ../../shared/pipewire.nix
-    ../../shared/bluetooth.nix
     ../../shared/nfs-client.nix
   ];
 

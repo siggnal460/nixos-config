@@ -1,6 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
+
+  stylix = {
+    base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+  };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 

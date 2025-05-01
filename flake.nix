@@ -126,16 +126,14 @@
 
       nixosConfigurations = {
         ## WORKSTATIONS ##
-        x86-galago-galago =
-          mkComputerUnstable "x86_64-linux" ./host/x86-laptop-galago # machine specific configuration
+        x86-laptop-galago =
+          mkComputerStable "x86_64-linux" ./host/x86-laptop-galago # machine specific configuration
             [
               #system-wide modules
               ./system/hardware/gpu/intel
               ./system/hardware/thunderbolt
               ./system/de/cosmic
               ./system/baseline/workstation
-              ./system/baseline/workstation/gamedev
-              ./system/baseline/workstation/vm-host
             ]
             [
               #user-specific modules

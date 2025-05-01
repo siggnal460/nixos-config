@@ -26,6 +26,7 @@
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGa7ILHCAxlkQI1c5jnwMIaVN2+bQ1GXeukbER5fzBxX aaron@x86-merkat-lrhtpc"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBGy+YGfa+dCd7S9Jm6hXWW+TQqgjdPIUlP2+ijZTCqc aaron@x86-rakmnt-mediaserver"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII7eGbYxgJi+4wDmKWPxg0lnWDET8Lmns8TfnCyaG/6r aaron@x86-stmdck-jovian"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO6qoMeTk0TOemjL41fTreiTkuql+7or1lQ4dFuPy+Xu aaron@x86-laptop-galago"
         ];
       };
     };
@@ -70,6 +71,7 @@
     sops.age.generateKey = true;
 
     stylix = {
+      enable = true;
       autoEnable = true;
       targets.gtk.enable = false; # https://github.com/danth/stylix/issues/1093
     };
