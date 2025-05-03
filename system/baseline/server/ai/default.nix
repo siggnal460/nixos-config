@@ -16,7 +16,7 @@
     "d /var/lib/sillytavern/config 0770 root users"
     "d /var/lib/sillytavern/plugins 0770 root users"
 
-    "d /export/ai 0774 root users"
+    "d /export/ai 0770 root users"
   ];
 
   services.nfs.server = {

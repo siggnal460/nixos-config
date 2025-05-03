@@ -1,37 +1,4 @@
 {
-  boot.initrd.systemd.tmpfiles.settings = {
-    "10-nfs-mounts" = {
-      "/mnt/ai" = {
-        d = {
-          mode = "0770";
-          user = "root";
-          group = "users";
-        };
-      };
-      "/mnt/blender" = {
-        d = {
-          mode = "0770";
-          user = "root";
-          group = "users";
-        };
-      };
-      "/mnt/media" = {
-        d = {
-          mode = "0770";
-          user = "root";
-          group = "users";
-        };
-      };
-      "/mnt/emulatorjs" = {
-        d = {
-          mode = "0770";
-          user = "root";
-          group = "users";
-        };
-      };
-    };
-  };
-
   boot.initrd = {
     supportedFilesystems = [
       "nfs"
@@ -43,8 +10,16 @@
     ];
   };
 
+  systemd.tmpfiles.rules = [
+    "d /mnt 0770 root users"
+    "d /mnt/ai 0770 root ai"
+    "d /mnt/blender 0770 root users"
+    "d /mnt/media 0770 root media"
+    "d /mnt/emulatorjs 0770 root wheel"
+  ];
+
   fileSystems."/mnt/ai" = {
-    device = "10.0.0.10:/export/ai";
+    device = "x86-atxtwr-computeserver:/export/ai";
     fsType = "nfs4";
     options = [
       "x-systemd.automount"
@@ -52,7 +27,7 @@
     ];
   };
   fileSystems."/mnt/blender" = {
-    device = "10.0.0.10:/export/blender";
+    device = "x86-atxtwr-computeserver:/export/blender";
     fsType = "nfs4";
     options = [
       "x-systemd.automount"
@@ -60,7 +35,7 @@
     ];
   };
   fileSystems."/mnt/media" = {
-    device = "10.0.0.7:/export/media";
+    device = "x86-rakmnt-mediaserver:/export/media";
     fsType = "nfs4";
     options = [
       "x-systemd.automount"
@@ -68,7 +43,7 @@
     ];
   };
   fileSystems."/mnt/emulatorjs" = {
-    device = "10.0.0.7:/export/emulatorjs";
+    device = "x86-rakmnt-mediaserver:/export/emulatorjs";
     fsType = "nfs4";
     options = [
       "x-systemd.automount"
