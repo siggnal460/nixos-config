@@ -1,10 +1,6 @@
 {
   imports = [ ./aaron ];
 
-  users.groups = {
-    media = { };
-  };
-
   home-manager = {
     backupFileExtension = "hmbackup";
     sharedModules = [

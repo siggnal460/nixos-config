@@ -83,11 +83,12 @@
             stylix.nixosModules.stylix
             nix-index-database.nixosModules.nix-index
             ./system
+            ./user
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              imports = [ ./user ] ++ extraHomeModules;
+              imports = [ ] ++ extraHomeModules;
             }
           ] ++ extraModules; # system modules
         };
@@ -111,11 +112,12 @@
             stylix-unstable.nixosModules.stylix
             nix-index-database.nixosModules.nix-index
             ./system
+            ./user
             home-manager-unstable.nixosModules.home-manager
             {
               home-manager.useUserPackages = true;
               home-manager.useGlobalPkgs = true;
-              imports = [ ./user ] ++ extraHomeModules;
+              imports = [ ] ++ extraHomeModules;
             }
           ] ++ extraModules; # system modules
         };

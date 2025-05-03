@@ -28,7 +28,6 @@
   services = {
     openssh = {
       enable = lib.mkForce true;
-      authorizedKeysInHomedir = true;
       allowSFTP = true; # needed for ansible
       settings = {
         X11Forwarding = false;
