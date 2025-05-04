@@ -1,11 +1,14 @@
 - name: Sync /etc/nixos repo changes to all machines
-  hosts: nix_machines
-  become: yes # Use sudo to run the command
+  hosts: nix_servers
+  become: yes
   tasks:
-    - name: Run nix-switch -q
-      command: nix-switch -q
-      register: result
+    - name: Start pull-updates service
+      systemd:
+        name: pull-updates
+        state: started
 
-    - name: Display output
-      debug:
-        var: result.stdout
+    - name: Check the status of pull-updates service
+      systemd:
+        name: pull-updates
+        state: started
+      register: pull_updates_status

@@ -210,7 +210,7 @@
     script = ''
         echo "Checking for master branch..."
       	test "$(git branch --show-current)" = "master"
-      	echo "Pulling latest flake.lock..."
+      	echo "Pulling latest changes..."
       	git pull --ff-only origin master
     '';
     serviceConfig = {
@@ -228,34 +228,35 @@
       pkgs.systemd
     ];
     script = ''
-                  echo "Beginning rebuild service."
-            			current_hour=$(date +%H)
+      echo "Beginning rebuild service."
+      current_hour=$(date +%H)
 
-      						if [ "$NIGHTLY_REFRESH" ] = "always-poweroff" ]; then
-      							echo "Switching to new config..."
-      						  nixos-rebuild switch
-      							poweroff now
-      						fi
+      if [ "$NIGHTLY_REFRESH" ] = "always-poweroff" ]; then
+      	echo "Switching to new config..."
+        nixos-rebuild switch
+      	poweroff now
+      fi
 
-      						echo "Running \"nixos-rebuild boot\"..."
-                  nixos-rebuild boot -j 3
-                  booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
-                  built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
+      echo "Running \"nixos-rebuild boot\"..."
+      nixos-rebuild boot -j 3
+      booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
+      built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
 
-                  if [ "''${booted}" = "''${built}" ]; then
-                    echo "Reboot not necessary."
-                  	nixos-rebuild switch
-                  elif [ "$NIGHTLY_REFRESH" ] = "reboot-if-needed" ] && [ "$current_hour" -ge 4 ] && [ "$current_hour" -lt 5 ]; then
-                    echo "Reboot necessary and within window. Starting now."
-                  	reboot now
-      						elif [ "$NIGHTLY_REFRESH" ] != "reboot-if-needed" ]; then
-      							echo "Environmental variable NIGHTLY_REFRESH was not set to an appropriate value (always-poweroff or reboot-if-needed). Action will not be taken."
-            			else
-            				echo "Refresh is necessary, but it was not within the reboot window of 0400 and 0500 so it was skipped."
-                  fi
+      if [ "''${booted}" = "''${built}" ]; then
+        echo "Reboot not necessary."
+      	nixos-rebuild switch
+      elif [ "$NIGHTLY_REFRESH" ] = "reboot-if-needed" ] && [ "$current_hour" -ge 4 ] && [ "$current_hour" -lt 5 ]; then
+        echo "Reboot necessary and within window. Starting now."
+      	reboot now
+      elif [ "$NIGHTLY_REFRESH" ] != "reboot-if-needed" ]; then
+      	echo "Environmental variable NIGHTLY_REFRESH was not set to an appropriate value (always-poweroff or reboot-if-needed). Action will not be taken."
+      else
+      	echo "Refresh is necessary, but it was not within the reboot window of 0400 and 0500 so it was skipped."
+      fi
     '';
     serviceConfig = {
-      User = "root";
+      WorkingDirectory = "/etc/nixos";
+      User = "aaron";
       Type = "oneshot";
     };
   };
