@@ -46,6 +46,8 @@ virtualization, development, etc.
     etc.
   - shared: Modules that have functionality which is shared among other modules.
 
+Note that /etc/nixos and all recursive files should be owned by root:wheel to maximize security and for the auto-update service to work.
+
 ## Timer Schedule
 
 | Process                             | Time      |

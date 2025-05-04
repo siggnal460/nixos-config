@@ -5,7 +5,7 @@
   ];
 
   environment.sessionVariables = {
-    NIGHTLY_REFRESH = "reboot";
+    NIGHTLY_REFRESH = "reboot-if-needed";
   };
 
   networking.wireless.enable = false;

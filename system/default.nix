@@ -112,15 +112,15 @@
     ];
     # these are temporary
     extraHosts = ''
-            10.0.0.7   x86-rakmnt-mediaserver
-            10.0.0.10  x86-atxtwr-computeserver
-            10.0.0.11  x86-merkat-entry
-            10.0.0.15  x86-atxtwr-workstation
-            10.0.0.16  x86-merkat-bedhtpc
-            10.0.0.17  x86-merkat-auth.gappyland.org x86-merkat-auth
-            10.0.0.18  x86-stmdck-jovian
-            10.0.0.20  x86-minitx-jovian
-      			10.0.0.23  x86-merkat-lrhtpc
+      10.0.0.7   x86-rakmnt-mediaserver
+      10.0.0.10  x86-atxtwr-computeserver
+      10.0.0.11  x86-merkat-entry
+      10.0.0.15  x86-atxtwr-workstation
+      10.0.0.16  x86-merkat-bedhtpc
+      10.0.0.17  x86-merkat-auth.gappyland.org x86-merkat-auth
+      10.0.0.18  x86-stmdck-jovian
+      10.0.0.20  x86-minitx-jovian
+      10.0.0.23  x86-merkat-lrhtpc
     '';
   };
 
@@ -200,7 +200,7 @@
   };
 
   systemd.services.pull-updates = {
-    description = "process to pull latest changes from system git repo";
+    description = "Pulling of latest changes from the upstream git repo";
     restartIfChanged = false;
     onSuccess = [ "rebuild.service" ];
     path = [
@@ -221,7 +221,7 @@
   };
 
   systemd.services.rebuild = {
-    description = "process to rebuild and activate new system config";
+    description = "Rebuild and activation of newly pulled system config";
     restartIfChanged = false;
     path = [
       pkgs.nixos-rebuild
@@ -231,32 +231,34 @@
       echo "Beginning rebuild service."
       current_hour=$(date +%H)
 
-      if [ "$NIGHTLY_REFRESH" ] = "always-poweroff" ]; then
+      if [ "$NIGHTLY_REFRESH" = "always-poweroff" ]; then
       	echo "Switching to new config..."
-        nixos-rebuild switch
+        nixos-rebuild switch --accept-flake-config
       	poweroff now
       fi
 
       echo "Running \"nixos-rebuild boot\"..."
-      nixos-rebuild boot -j 3
+      nixos-rebuild boot -j 3 --accept-flake-config
       booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
       built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
 
       if [ "''${booted}" = "''${built}" ]; then
         echo "Reboot not necessary."
-      	nixos-rebuild switch
-      elif [ "$NIGHTLY_REFRESH" ] = "reboot-if-needed" ] && [ "$current_hour" -ge 4 ] && [ "$current_hour" -lt 5 ]; then
+      	nixos-rebuild switch --accept-flake-config
+      elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ] && [ "$current_hour" -ge 4 ] && [ "$current_hour" -lt 5 ]; then
         echo "Reboot necessary and within window. Starting now."
       	reboot now
-      elif [ "$NIGHTLY_REFRESH" ] != "reboot-if-needed" ]; then
+      elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ]; then
+      	echo "Refresh is necessary, but it was not within the reboot window of 0400 and 0500 so it was skipped."
+      elif [ "$NIGHTLY_REFRESH" != "reboot-if-needed" ]; then
       	echo "Environmental variable NIGHTLY_REFRESH was not set to an appropriate value (always-poweroff or reboot-if-needed). Action will not be taken."
       else
-      	echo "Refresh is necessary, but it was not within the reboot window of 0400 and 0500 so it was skipped."
+      	echo "No action taken."
       fi
     '';
     serviceConfig = {
       WorkingDirectory = "/etc/nixos";
-      User = "aaron";
+      User = "root";
       Type = "oneshot";
     };
   };
