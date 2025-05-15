@@ -42,10 +42,6 @@
     };
   };
 
-  systemd = {
-    tmpfiles.rules = [ "d /home/aaron/Projects 0700 aaron aaron" ];
-  };
-
   nix.settings.trusted-users = [ "aaron" ];
 
   home-manager.users.aaron = {
