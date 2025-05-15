@@ -2,7 +2,6 @@
 { pkgs, ... }:
 {
   imports = [
-    ../../../shared/latest-kernel.nix
     ../../../shared/podman.nix
   ];
 
@@ -65,7 +64,7 @@
   };
 
   services.nfs.server = {
-    exports = ''/export/ai 10.0.0.15(rw,nohide,insecure,no_subtree_check)'';
+    exports = ''/export/ai x86-atxtwr-workstation(rw,nohide,insecure,no_subtree_check)'';
   };
 
   virtualisation.oci-containers.containers = {
