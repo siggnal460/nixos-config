@@ -1,16 +1,11 @@
 { pkgs, inputs, ... }:
 {
   imports = [
-    #./latest-kernel.nix
     inputs.nix-gaming.nixosModules.pipewireLowLatency
     inputs.nix-gaming.nixosModules.platformOptimizations
   ];
 
   services = {
-    #scx = {
-    #  enable = true;
-    #  scheduler = "scx_lavd";
-    #};
     pipewire.lowLatency = {
       enable = true;
       quantum = 64;
@@ -24,7 +19,7 @@
 
   systemd.services.flatpak-app-installer = {
     wantedBy = [ "multi-user.target" ];
-    After = [ "flatpak-install" ];
+    after = [ "flatpak-install.service" ];
     path = [ pkgs.flatpak ];
     script = ''
       flatpak install -y --noninteractive flathub com.valvesoftware.Steam//stable

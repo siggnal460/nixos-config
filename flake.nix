@@ -154,12 +154,13 @@
         x86-atxtwr-workstation =
           mkComputerUnstable "x86_64-linux" ./host/x86-atxtwr-workstation
             [
-              ./system/hardware/gpu/amd
-              ./system/hardware/gpu/amd/rocm
-              ./system/de/cosmic
+              ./system/hardware/gpu/nvidia
+              ./system/hardware/gpu/nvidia/cuda
+              ./system/hardware/gpu/nvidia/workstation
+              ./system/de/plasma
               ./system/baseline/workstation
               ./system/baseline/workstation/gaming
-              ./system/baseline/workstation/gamedev-amd
+              ./system/baseline/workstation/gamedev-nvidia
               ./system/baseline/workstation/development
             ]
             [ ./user/aaron/workstation ];

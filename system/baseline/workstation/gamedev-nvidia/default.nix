@@ -1,7 +1,5 @@
 { pkgs, ... }:
 {
-  imports = [ ../../../shared/blender-nvidia ];
-
   #TODO ADD BLENDER LATER
   environment.systemPackages = with pkgs; [
     audacity

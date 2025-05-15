@@ -72,7 +72,6 @@
   environment = {
     systemPackages = with pkgs; [
       anki
-      calibre
       element-desktop
       eog
       deluge
