@@ -116,7 +116,7 @@
       10.0.0.7   x86-rakmnt-mediaserver
       10.0.0.10  x86-atxtwr-computeserver
       10.0.0.11  x86-merkat-entry
-      10.0.0.15  x86-atxtwr-workstation
+      10.0.0.13  x86-atxtwr-workstation
       10.0.0.16  x86-merkat-bedhtpc
       10.0.0.18  x86-stmdck-jovian
       10.0.0.20  x86-minitx-jovian
@@ -190,8 +190,6 @@
   services.openssh.knownHosts = {
 		"x86-rakmnt-mediaserver".publicKey =
 			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBGy+YGfa+dCd7S9Jm6hXWW+TQqgjdPIUlP2+ijZTCqc aaron@x86-rakmnt-mediaserver";
-		"x86-atxtwr-computeserver".publicKey =
-			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPHWbfQRrluSlaCohXm8/Qvpx1a80N4IEGHF8koRAdDZ aaron@x86-atxtwr-computeserver";
 		"x86-merkat-auth".publicKey =
 			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILudmn/T9/m1Sb1jzDN/WX5lroyoUhZw3amSEWhFbPWk aaron@x86-merkat-auth";
 		"x86-merkat-entry".publicKey =
