@@ -6,7 +6,7 @@
     base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
   };
 
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking = {
     hostName = "x86-atxtwr-workstation";
@@ -18,10 +18,18 @@
 
   systemd.tpm2.enable = false;
 
+	services.hardware.openrgb.enable = true;
+
+	hardware.openrazer = {
+	  enable = true;
+		users = [ "aaron" ];
+	};
+
   environment = {
     systemPackages = with pkgs; [
       system76-keyboard-configurator
       piper
+			razergenie
     ];
   };
 }

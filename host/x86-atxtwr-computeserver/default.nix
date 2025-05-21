@@ -2,7 +2,7 @@
   imports = [
     ./hardware-configuration.nix
   ];
-
+	
   swapDevices = [
     {
       device = "/swapfile";
