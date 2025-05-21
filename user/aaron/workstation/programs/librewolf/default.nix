@@ -180,11 +180,6 @@ in
     };
 
     policies.ExtensionSettings = {
-      "{4520dc08-80f4-4b2e-982a-c17af42e5e4d}" = {
-        default_area = "menupanel";
-        install_url = latestSourceURL "tokyo-night-milav";
-        installation_mode = "force_installed";
-      };
       "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
         default_area = "menupanel";
         install_url = latestSourceURL "bitwarden-password-manager";
