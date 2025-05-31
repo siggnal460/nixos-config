@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  imports = [ ../../../shared/comfyui.nix ];
+
   #TODO ADD BLENDER LATER
   environment.systemPackages = with pkgs; [
     audacity

@@ -7,8 +7,7 @@
   services.ollama = {
     enable = true;
     loadModels = [
-      "gemma3:27b"
-      "gemma3:12b"
+			"devstral:latest"
     ];
   };
 
@@ -22,6 +21,6 @@
     nil
     nixd
     rust-analyzer
-    zed-editor
+    zed-editor-fhs
   ];
 }
