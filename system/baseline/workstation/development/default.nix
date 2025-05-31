@@ -7,7 +7,7 @@
   services.ollama = {
     enable = true;
     loadModels = [
-			"devstral:latest"
+      "devstral:latest"
     ];
   };
 

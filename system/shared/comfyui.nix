@@ -9,7 +9,7 @@
     "d /var/lib/comfyui/output 0770 comfyui ai"
     "d /var/lib/comfyui/workflows 0770 comfyui ai"
     "d /var/lib/comfyui/custom_nodes 0770 comfyui ai"
-	];
+  ];
 
   users = {
     users.comfyui = {
@@ -24,29 +24,29 @@
     };
   };
 
-	virtualisation.oci-containers.containers = {
-		comfyui = {
-			image = "ghcr.io/siggnal460/comfyui-container-cuda:latest";
+  virtualisation.oci-containers.containers = {
+    comfyui = {
+      image = "ghcr.io/siggnal460/comfyui-container-cuda:latest";
       #autoStart = true;
       labels = {
         "io.containers.autoupdate" = "registry";
       };
-			ports = [ "8188:8188" ];
-			volumes = [
-				"/var/lib/comfyui/models:/app/models:rw"
-				"/var/lib/comfyui/input:/app/input:rw"
-				"/var/lib/comfyui/output:/app/output:rw"
-				"/var/lib/comfyui/workflows:/app/user/default/workflows:rw"
-				"/var/lib/comfyui/custom_nodes:/app/custom_nodes:rw"
-			];
-			environment = {
-				PUID = "780";
-				PGID = "780";
-			};
-			extraOptions = [
-				"--name=comfyui"
-				"--gpus=all"
-			];
-		};
-	};
+      ports = [ "8188:8188" ];
+      volumes = [
+        "/var/lib/comfyui/models:/app/models:rw"
+        "/var/lib/comfyui/input:/app/input:rw"
+        "/var/lib/comfyui/output:/app/output:rw"
+        "/var/lib/comfyui/workflows:/app/user/default/workflows:rw"
+        "/var/lib/comfyui/custom_nodes:/app/custom_nodes:rw"
+      ];
+      environment = {
+        PUID = "780";
+        PGID = "780";
+      };
+      extraOptions = [
+        "--name=comfyui"
+        "--gpus=all"
+      ];
+    };
+  };
 }
