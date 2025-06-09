@@ -203,6 +203,11 @@
   };
 
   system.stateVersion = "23.11";
+  systemd = {
+    tmpfiles.rules = [
+      "Z /etc/nixos 0770 root wheel"
+		];
+	};
 
   systemd.timers."pull-updates" = {
     wantedBy = [ "timers.target" ];

@@ -2,6 +2,8 @@
   imports = [ ./podman.nix ];
 
   systemd.tmpfiles.rules = [
+    "d /home/aaron/AI 0700 aaron aaron"
+    "L+ /home/aaron/AI/comfyui /var/lib/comfyui"
     "Z /var/lib/comfyui 0770 comfyui ai"
     "d /var/lib/comfyui 0770 comfyui ai"
     "d /var/lib/comfyui/models 0770 comfyui ai"
@@ -27,7 +29,7 @@
   virtualisation.oci-containers.containers = {
     comfyui = {
       image = "ghcr.io/siggnal460/comfyui-container-cuda:latest";
-      #autoStart = true;
+      autoStart = true;
       labels = {
         "io.containers.autoupdate" = "registry";
       };

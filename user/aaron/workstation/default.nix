@@ -3,12 +3,6 @@
 
   systemd = {
     tmpfiles.rules = [
-      "d /home/aaron/AI 0700 aaron aaron"
-      "d /home/aaron/AI/comfyui 0700 aaron aaron"
-      "d /home/aaron/AI/comfyui/input 0700 aaron aaron"
-      "d /home/aaron/AI/comfyui/output 0700 aaron aaron"
-      "d /home/aaron/AI/comfyui/models 0700 aaron aaron"
-      "d /home/aaron/AI/comfyui/workflows 0700 aaron aaron"
       "d /home/aaron/Blender 0700 aaron aaron"
       "d /home/aaron/Blender/addons 0700 aaron aaron"
       "d /home/aaron/Blender/models 0700 aaron aaron"
@@ -17,9 +11,22 @@
       "d /home/aaron/Blender/models/objects 0700 aaron aaron"
       "d /home/aaron/Blender/environments 0700 aaron aaron"
       "d /home/aaron/Projects 0700 aaron aaron"
-      "d /home/aaron/Projects/go 0700 aaron aaron"
-      "d /home/aaron/Projects/python 0700 aaron aaron"
-      "d /home/aaron/Projects/lua 0700 aaron aaron"
+      "d /home/aaron/Games 0700 aaron aaron"
+      "d /home/aaron/Games/2ds 0700 aaron aaron"
+      "d /home/aaron/Games/3ds 0700 aaron aaron"
+      "d /home/aaron/Games/gb 0700 aaron aaron"
+      "d /home/aaron/Games/gbc 0700 aaron aaron"
+      "d /home/aaron/Games/gba 0700 aaron aaron"
+      "d /home/aaron/Games/gc 0700 aaron aaron"
+      "d /home/aaron/Games/n64 0700 aaron aaron"
+      "d /home/aaron/Games/nes 0700 aaron aaron"
+      "d /home/aaron/Games/ps1 0700 aaron aaron"
+      "d /home/aaron/Games/ps2 0700 aaron aaron"
+      "d /home/aaron/Games/ps3 0700 aaron aaron"
+      "d /home/aaron/Games/psp 0700 aaron aaron"
+      "d /home/aaron/Games/snes 0700 aaron aaron"
+      "d /home/aaron/Games/wii 0700 aaron aaron"
+      "d /home/aaron/Games/wiiu 0700 aaron aaron"
     ];
   };
 

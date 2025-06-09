@@ -10,6 +10,32 @@ in
 
     policies = {
       Authentication = true;
+
+      Cookies.Allow = [
+				"https://www.amazon.com"
+        "https://civit.ai"
+				"https://duckduckgo.com"
+        "https://github.com"
+        "https://accounts.proton.me"
+        "https://proton.me"
+        "https://www.youtube.com"
+				# gappyland
+        "https://gappyland.org"
+				"https://media.gappyland.org"
+				"https://books.gappyland.org"
+				"https://requests.gappyland.org"
+				"https://textgen.gappyland.org"
+				"https://imagegen.gappyland.org"
+				"https://users.gappyland.org"
+				"https://gitea.gappyland.org"
+				"https://monitoring.gappyland.org"
+				"https://home.gappyland.org"
+				"https://auth.gappyland.org"
+				# local
+        "https://x86-rakmnt-mediaserver"
+        "http://x86-rakmnt-mediaserver"
+      ];
+
       DisableAccounts = true;
       DisableFirefoxAccounts = true;
       DisableFirefoxScreenshots = true;
@@ -17,6 +43,7 @@ in
       DisablePocket = true;
       DisableTelemetry = true;
       DisplayBookmarksToolbar = "newtab";
+			DNSOverHTTPS.Enabled = true;
 
       EnableTrackingProtection = {
         Cryptomining = true;
@@ -39,22 +66,6 @@ in
         "browser.topsites.contile.enabled" = false;
       };
 
-      Cookies.Allow = [
-        "auth.gappyland.org"
-        "media.gappyland.org"
-        "requests.gappyland.org"
-        "x86-rakmnt-mediaserver"
-        "x86-rakmnt-mediaserver:6767"
-        "x86-rakmnt-mediaserver:8188"
-        "x86-rakmnt-mediaserver:7860"
-        "x86-rakmnt-mediaserver:9696"
-        "x86-rakmnt-mediaserver:7878"
-        "x86-rakmnt-mediaserver:8787"
-        "x86-rakmnt-mediaserver:4000"
-        "x86-rakmnt-mediaserver:8989"
-        "x86-rakmnt-mediaserver:8988"
-        "x86-rakmnt-mediaserver:9091"
-      ];
     };
 
     profiles = {
@@ -62,65 +73,69 @@ in
         id = 0;
         name = "${config.home.username}";
         isDefault = true;
-        #bookmarks = {
-        #  force = true;
-        #  settings = [
-        #    {
-        #      name = "Amazon";
-        #      url = "https://amazon.com";
-        #    }
-        #    {
-        #      name = "Local Servers";
-        #      toolbar = true;
-        #      bookmarks = [
-        #        {
-        #          name = "Beszel";
-        #          url = "https://x86-rakmnt-mediaserver:6767";
-        #        }
-        #        {
-        #          name = "ComfyUI";
-        #          url = "https://x86-atxtwr-computeserver:8188";
-        #        }
-        #        {
-        #          name = "FluxGym";
-        #          url = "https://x86-atxtwr-computeserver:7860";
-        #        }
-        #        {
-        #          name = "Nextcloud";
-        #          url = "https://x86-rakmnt-mediaserver";
-        #        }
-        #        {
-        #          name = "Prowlarr";
-        #          url = "https://x86-rakmnt-mediaserver:9696";
-        #        }
-        #        {
-        #          name = "Radarr";
-        #          url = "https://x86-rakmnt-mediaserver:7878";
-        #        }
-        #        {
-        #          name = "Readarr";
-        #          url = "https://x86-rakmnt-mediaserver:8787";
-        #        }
-        #        {
-        #          name = "SillyTavern";
-        #          url = "https://x86-atxtwr-computeserver:4000";
-        #        }
-        #        {
-        #          name = "Sonarr";
-        #          url = "https://x86-rakmnt-mediaserver:8989";
-        #        }
-        #        {
-        #          name = "Sonarr-Anime";
-        #          url = "https://x86-rakmnt-mediaserver:8988";
-        #        }
-        #        {
-        #          name = "Transmission";
-        #          url = "https://x86-rakmnt-mediaserver:9091";
-        #        }
-        #      ];
-        #    }
-        #  ];
-        #};
+        bookmarks = {
+          force = true;
+          settings = [
+            {
+              name = "Local Servers";
+              toolbar = true;
+              bookmarks = [
+                {
+                  name = "Beszel";
+                  url = "https://x86-rakmnt-mediaserver:6767";
+                }
+                {
+                  name = "ComfyUI";
+                  url = "https://x86-atxtwr-computeserver:8188";
+                }
+                {
+                  name = "FluxGym";
+                  url = "https://x86-atxtwr-computeserver:7860";
+                }
+                {
+                  name = "Nextcloud";
+                  url = "https://x86-rakmnt-mediaserver";
+                }
+                {
+                  name = "Prowlarr";
+                  url = "https://x86-rakmnt-mediaserver:9696";
+                }
+                {
+                  name = "Radarr";
+                  url = "https://x86-rakmnt-mediaserver:7878";
+                }
+                {
+                  name = "Readarr";
+                  url = "https://x86-rakmnt-mediaserver:8787";
+                }
+                {
+                  name = "SillyTavern";
+                  url = "https://x86-atxtwr-computeserver:4000";
+                }
+                {
+                  name = "Sonarr";
+                  url = "https://x86-rakmnt-mediaserver:8989";
+                }
+                {
+                  name = "Sonarr-Anime";
+                  url = "https://x86-rakmnt-mediaserver:8988";
+                }
+                {
+                  name = "Transmission";
+                  url = "https://x86-rakmnt-mediaserver:9091";
+                }
+              ];
+            }
+            {
+              name = "Amazon";
+              url = "https://amazon.com";
+            }
+            {
+              name = "Wikipedia";
+              url = "https://en.wikipedia.org";
+            }
+          ];
+        };
 
         search = {
           force = true;
