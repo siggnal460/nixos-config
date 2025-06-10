@@ -18,6 +18,7 @@ in
         "https://github.com"
         "https://accounts.proton.me"
         "https://proton.me"
+				"https://www.reddit.com"
         "https://www.youtube.com"
 				# gappyland
         "https://gappyland.org"
@@ -37,7 +38,7 @@ in
       ];
 
       DisableAccounts = true;
-      DisableFirefoxAccounts = true;
+      DisableFirefoxAccounts = false;
       DisableFirefoxScreenshots = true;
       DisableFirefoxStudies = true;
       DisablePocket = true;
@@ -53,6 +54,11 @@ in
       };
 
       Homepage.URL = "https://gappyland.org";
+
+			HttpAllowlist = [
+			  "http://www.routerlogin.com"
+			];
+
       NoDefaultBookmarks = true;
       OfferToSaveLogins = false;
       OverrideFirstRunPage = "";
@@ -65,7 +71,6 @@ in
         "browser.newtabpage.pinned" = "";
         "browser.topsites.contile.enabled" = false;
       };
-
     };
 
     profiles = {
@@ -231,5 +236,9 @@ in
         installation_mode = "force_installed";
       };
     };
+
+		settings = {
+		  "identity.fxaccounts.enabled" = true;
+		};
   };
 }
