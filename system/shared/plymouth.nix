@@ -3,11 +3,10 @@
     kernelParams = [
       "quiet"
       "splash"
-      "rd.systemd.show_status=false"
-      "udev.log_level=0"
-      "udev.log_priority=3"
-      "boot.shell_on_fail"
+      "systemd.show_status=auto"
+      "rd.udev.log_level=2"
     ];
+		consoleLogLevel = 2;
     initrd.verbose = false;
     plymouth = {
       enable = true;

@@ -20,6 +20,7 @@ in
         "https://proton.me"
 				"https://www.reddit.com"
         "https://www.youtube.com"
+				"https://discourse.nixos.org"
 				# gappyland
         "https://gappyland.org"
 				"https://media.gappyland.org"

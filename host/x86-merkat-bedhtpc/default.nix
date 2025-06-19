@@ -1,12 +1,10 @@
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+	  ./hardware-configuration.nix
+		../../system/shared/plymouth-tv.nix
+	];
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 128 * 1024;
-    }
-  ];
+	zramSwap.enable = true;
 
   networking = {
     hostName = "x86-merkat-bedhtpc";

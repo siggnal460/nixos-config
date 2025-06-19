@@ -2,7 +2,6 @@
 {
   imports = [
     ../../shared/plymouth.nix
-    ../../shared/plymouth-delay.nix
     ../../shared/quietboot.nix
     ../../shared/pipewire.nix
     ../../shared/bluetooth.nix

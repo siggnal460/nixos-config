@@ -6,7 +6,7 @@
     base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
   };
 
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
+	zramSwap.enable = true;
 
   networking = {
     hostName = "x86-atxtwr-workstation";
@@ -16,7 +16,10 @@
 
   services.ratbagd.enable = true;
 
-  systemd.tpm2.enable = false;
+  fileSystems."/mnt/nvme0n1" = {
+	  device = "/dev/disk/by-uuid/5b778bef-b3af-4710-9d44-6424b693dc29";
+    fsType = "ext4";
+  };
 
   environment = {
     systemPackages = with pkgs; [

@@ -1,6 +1,6 @@
 {
   boot.plymouth.extraConfig = ''
-    ShowDelay=7
+    ShowDelay=4
     DeviceScale=3
   '';
 }

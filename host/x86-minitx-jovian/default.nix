@@ -1,5 +1,10 @@
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+	  ./hardware-configuration.nix
+		../../system/shared/plymouth-tv.nix
+	];
+
+	zramSwap.enable = true;
 
   boot = {
     #kernelPackages = lib.mkForce pkgs.pkgs.linuxPackages;

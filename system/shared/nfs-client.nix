@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   boot.initrd = {
     supportedFilesystems = [
@@ -19,32 +20,32 @@
   ];
 
   fileSystems."/mnt/ai" = {
-    device = "x86-atxtwr-computeserver:/export/ai";
-    fsType = "nfs4";
+    device = lib.mkForce "x86-atxtwr-computeserver:/export/ai";
+    fsType = lib.mkForce "nfs4";
     options = [
       "x-systemd.automount"
       "_netdev"
     ];
   };
   fileSystems."/mnt/blender" = {
-    device = "x86-atxtwr-computeserver:/export/blender";
-    fsType = "nfs4";
+    device = lib.mkForce "x86-atxtwr-computeserver:/export/blender";
+    fsType = lib.mkForce "nfs4";
     options = [
       "x-systemd.automount"
       "_netdev"
     ];
   };
   fileSystems."/mnt/media" = {
-    device = "x86-rakmnt-mediaserver:/export/media";
-    fsType = "nfs4";
+    device = lib.mkForce "x86-rakmnt-mediaserver:/export/media";
+    fsType = lib.mkForce "nfs4";
     options = [
       "x-systemd.automount"
       "_netdev"
     ];
   };
   fileSystems."/mnt/emulatorjs" = {
-    device = "x86-rakmnt-mediaserver:/export/emulatorjs";
-    fsType = "nfs4";
+    device = lib.mkForce "x86-rakmnt-mediaserver:/export/emulatorjs";
+    fsType = lib.mkForce "nfs4";
     options = [
       "x-systemd.automount"
       "_netdev"
