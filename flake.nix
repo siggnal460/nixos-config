@@ -19,10 +19,10 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager-unstable = {
@@ -33,7 +33,7 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix.url = "github:danth/stylix/release-24.11";
+    stylix.url = "github:danth/stylix/release-25.05";
     stylix-unstable.url = "github:danth/stylix";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     jovian-nixos.url = "github:Jovian-Experiments/Jovian-NixOS";
@@ -152,7 +152,7 @@
             [ ./user/aaron/workstation ];
 
         x86-atxtwr-workstation =
-          mkComputerUnstable "x86_64-linux" ./host/x86-atxtwr-workstation
+          mkComputerStable "x86_64-linux" ./host/x86-atxtwr-workstation
             [
               ./system/hardware/gpu/nvidia
               ./system/hardware/gpu/nvidia/cuda

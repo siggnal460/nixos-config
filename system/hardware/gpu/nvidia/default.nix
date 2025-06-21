@@ -15,6 +15,7 @@
       "nvidia_drm.fbdev=1"
     ];
     blacklistedKernelModules = [ "nouveau" ];
+		#extraModulePackages = [ config.boot.kernelPackages.nvidiaPackages.stable ]; # This breaks the drivers, but makes plymouth work
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -27,7 +28,7 @@
       modesetting.enable = true;
       powerManagement.finegrained = false;
       open = true;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
   };
 }
