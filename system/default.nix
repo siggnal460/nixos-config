@@ -112,7 +112,7 @@
     ];
     # these are temporary
     extraHosts = ''
-      10.0.0.5   x86-merkat-auth.gappyland.org x86-merkat-auth
+      192.168.1.3   x86-merkat-auth.gappyland.org x86-merkat-auth
       10.0.0.7   x86-rakmnt-mediaserver
       10.0.0.10  x86-atxtwr-computeserver
       10.0.0.11  x86-merkat-entry
@@ -206,8 +206,8 @@
   systemd = {
     tmpfiles.rules = [
       "Z /etc/nixos 0770 root wheel"
-		];
-	};
+    ];
+  };
 
   systemd.timers."pull-updates" = {
     wantedBy = [ "timers.target" ];

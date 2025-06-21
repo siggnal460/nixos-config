@@ -12,28 +12,28 @@ in
       Authentication = true;
 
       Cookies.Allow = [
-				"https://www.amazon.com"
+        "https://www.amazon.com"
         "https://civit.ai"
-				"https://duckduckgo.com"
+        "https://duckduckgo.com"
         "https://github.com"
         "https://accounts.proton.me"
         "https://proton.me"
-				"https://www.reddit.com"
+        "https://www.reddit.com"
         "https://www.youtube.com"
-				"https://discourse.nixos.org"
-				# gappyland
+        "https://discourse.nixos.org"
+        # gappyland
         "https://gappyland.org"
-				"https://media.gappyland.org"
-				"https://books.gappyland.org"
-				"https://requests.gappyland.org"
-				"https://textgen.gappyland.org"
-				"https://imagegen.gappyland.org"
-				"https://users.gappyland.org"
-				"https://gitea.gappyland.org"
-				"https://monitoring.gappyland.org"
-				"https://home.gappyland.org"
-				"https://auth.gappyland.org"
-				# local
+        "https://media.gappyland.org"
+        "https://books.gappyland.org"
+        "https://requests.gappyland.org"
+        "https://textgen.gappyland.org"
+        "https://imagegen.gappyland.org"
+        "https://users.gappyland.org"
+        "https://gitea.gappyland.org"
+        "https://monitoring.gappyland.org"
+        "https://home.gappyland.org"
+        "https://auth.gappyland.org"
+        # local
         "https://x86-rakmnt-mediaserver"
         "http://x86-rakmnt-mediaserver"
       ];
@@ -45,7 +45,7 @@ in
       DisablePocket = true;
       DisableTelemetry = true;
       DisplayBookmarksToolbar = "newtab";
-			DNSOverHTTPS.Enabled = true;
+      DNSOverHTTPS.Enabled = true;
 
       EnableTrackingProtection = {
         Cryptomining = true;
@@ -56,9 +56,9 @@ in
 
       Homepage.URL = "https://gappyland.org";
 
-			HttpAllowlist = [
-			  "http://www.routerlogin.com"
-			];
+      HttpAllowlist = [
+        "http://www.routerlogin.com"
+      ];
 
       NoDefaultBookmarks = true;
       OfferToSaveLogins = false;
@@ -238,8 +238,8 @@ in
       };
     };
 
-		settings = {
-		  "identity.fxaccounts.enabled" = true;
-		};
+    settings = {
+      "identity.fxaccounts.enabled" = true;
+    };
   };
 }

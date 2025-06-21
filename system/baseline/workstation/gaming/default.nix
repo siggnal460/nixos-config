@@ -22,7 +22,7 @@
   environment.systemPackages = with pkgs; [
     heroic
     obs-studio
-	  pcsx2
+    pcsx2
     phoronix-test-suite
   ];
 }
