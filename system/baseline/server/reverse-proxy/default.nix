@@ -5,7 +5,7 @@ let
 in
 {
   networking.firewall.allowedTCPPorts = [
-    80
+    #80
     443
   ];
 
