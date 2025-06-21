@@ -13,19 +13,19 @@
   networking = {
     hostId = "bda395e9";
     hostName = "x86-rakmnt-mediaserver";
-    interfaces.enp42s0 = {
-      useDHCP = false;
-      ipv4.addresses = [
-        {
-          address = "10.0.0.7";
-          prefixLength = 12;
-        }
-      ];
-    };
-    defaultGateway = {
-      address = "10.0.0.1";
-      interface = "enp42s0";
-    };
+    #interfaces.enp42s0 = {
+    #  useDHCP = false;
+    #  ipv4.addresses = [
+    #    {
+    #      address = "10.0.0.7";
+    #      prefixLength = 12;
+    #    }
+    #  ];
+    #};
+    #defaultGateway = {
+    #  address = "10.0.0.1";
+    #  interface = "enp42s0";
+    #};
   };
 
   services.zfs.autoScrub = {

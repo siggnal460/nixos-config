@@ -113,7 +113,7 @@
     # these are temporary
     extraHosts = ''
       192.168.1.3   x86-merkat-auth.gappyland.org x86-merkat-auth
-      10.0.0.7   x86-rakmnt-mediaserver
+      192.168.1.13   x86-rakmnt-mediaserver
       10.0.0.10  x86-atxtwr-computeserver
       192.168.1.5  x86-merkat-entry
       10.0.0.13  x86-atxtwr-workstation
@@ -251,6 +251,10 @@
       echo "Beginning rebuild service."
       current_hour=$(date +%H)
 
+      echo "Hostname: $HOSTNAME"
+      echo "NIGHTLY_REFRESH: $NIGHTLY_REFRESH"
+      echo "Current Hour: $current_hour"
+
       if [ "$NIGHTLY_REFRESH" = "always-poweroff" ]; then
       	echo "Switching to new config..."
         nixos-rebuild switch --accept-flake-config
@@ -265,13 +269,13 @@
       if [ "''${booted}" = "''${built}" ]; then
         echo "Reboot not necessary."
       	nixos-rebuild switch --accept-flake-config
-      elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ] && [ "$current_hour" -ge 4 ] && [ "$current_hour" -lt 5 ]; then
+      elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ] && [ "$current_hour" -ge 1 ] && [ "$current_hour" -lt 5 ]; then
         echo "Reboot necessary and within window. Starting now."
       	reboot now
       elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ]; then
       	echo "Refresh is necessary, but it was not within the reboot window of 0400 and 0500 so it was skipped."
       elif [ "$NIGHTLY_REFRESH" != "reboot-if-needed" ]; then
-      	echo "Environmental variable NIGHTLY_REFRESH was not set to an appropriate value (always-poweroff or reboot-if-needed). Action will not be taken."
+      	echo 'Environmental variable NIGHTLY_REFRESH was not set to an appropriate value ("always-poweroff" or "reboot-if-needed"). Action will not be taken.'
       else
       	echo "No action taken."
       fi
