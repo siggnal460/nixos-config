@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ../../shared/plymouth.nix
@@ -37,4 +37,8 @@
       wayland = true;
     };
   };
+
+	environment.systemPackages = [
+	  pkgs.kodiPackages.inputstream-adaptive
+	];
 }
