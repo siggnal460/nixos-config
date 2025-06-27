@@ -38,13 +38,14 @@ in
         "http://x86-rakmnt-mediaserver"
       ];
 
-      DisableAccounts = true;
+      DisableAccounts = false;
       DisableFirefoxAccounts = false;
       DisableFirefoxScreenshots = true;
       DisableFirefoxStudies = true;
       DisablePocket = true;
+			DisableProfileImport = true;
       DisableTelemetry = true;
-      DisplayBookmarksToolbar = "newtab";
+      DisplayBookmarksToolbar = "never";
       DNSOverHTTPS.Enabled = true;
 
       EnableTrackingProtection = {
@@ -58,12 +59,14 @@ in
 
       HttpAllowlist = [
         "http://www.routerlogin.com"
+        "http://www.routerlogin.net"
       ];
 
-      NoDefaultBookmarks = true;
+      NoDefaultBookmarks = false;
       OfferToSaveLogins = false;
       OverrideFirstRunPage = "";
       OverridePostUpdatePage = "";
+			PasswordManagerEnabled = false;
 
       Preferences = {
         "browser.newtabpage.activity-stream.showSponsored" = false;
@@ -72,6 +75,8 @@ in
         "browser.newtabpage.pinned" = "";
         "browser.topsites.contile.enabled" = false;
       };
+
+			SkipTermsOfUser = true;
     };
 
     profiles = {
@@ -84,7 +89,6 @@ in
           settings = [
             {
               name = "Local Servers";
-              toolbar = true;
               bookmarks = [
                 {
                   name = "Beszel";
@@ -205,6 +209,7 @@ in
         default_area = "menupanel";
         install_url = latestSourceURL "bitwarden-password-manager";
         installation_mode = "force_installed";
+				private_browsing = true;
       };
       "addon@darkreader.org" = {
         default_area = "menupanel";
@@ -225,6 +230,7 @@ in
         default_area = "menupanel";
         install_url = latestSourceURL "ublock-origin";
         installation_mode = "force_installed";
+				private_browsing = true;
       };
       "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
         default_area = "menupanel";
@@ -235,6 +241,7 @@ in
         default_area = "menupanel";
         install_url = latestSourceURL "leechblock-ng";
         installation_mode = "force_installed";
+				private_browsing = true;
       };
     };
 
