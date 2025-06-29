@@ -216,7 +216,6 @@
             [
               ./system/baseline/server
               ./system/baseline/server/auth
-              ./system/baseline/server/beszel-hub
             ]
             [ ];
 
@@ -227,6 +226,15 @@
               ./system/baseline/server/reverse-proxy
               ./system/baseline/server/homepage
               #./system/baseline/server/headscale
+            ]
+            [ ];
+
+        x86-merkat-monitoring =
+          mkComputerStable "x86_64-linux" ./host/x86-merkat-monitoring
+            [
+              ./system/baseline/server
+              ./system/baseline/server/glance
+              ./system/baseline/server/beszel-hub
             ]
             [ ];
 
@@ -241,6 +249,7 @@
               ./system/baseline/server/nfs
               ./system/baseline/server/gitea
               ./system/baseline/server/invidious
+              #./system/baseline/server/streaming
               ./system/shared/nfs-client.nix
             ]
             [ ];
@@ -252,7 +261,6 @@
               ./system/hardware/gpu/nvidia/cuda
               ./system/baseline/server
               ./system/baseline/server/openvpn-client
-              #./system/baseline/server/streaming
               ./system/baseline/server/media
               ./system/baseline/server/emulatorjs
               ./system/baseline/server/download-client
