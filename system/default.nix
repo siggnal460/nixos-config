@@ -203,6 +203,7 @@
   };
 
   system.stateVersion = "23.11";
+
   systemd = {
     tmpfiles.rules = [
       "Z /etc/nixos 0770 root wheel"
@@ -213,8 +214,7 @@
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "*-*-* 04:00:00";
-      Persistent = "true";
-      RandomizedDelaySec = "45min";
+      RandomizedDelaySec = "30min";
       Unit = "pull-updates.service";
     };
   };
@@ -261,7 +261,7 @@
       if [ "$NIGHTLY_REFRESH" = "always-poweroff" ]; then
         echo "Running \"nixos-rebuild switch\"..."
         nixos-rebuild switch --accept-flake-config
-        if [ "$current_hour" -ge 1 ] && [ "$current_hour" -lt 5 ]; then
+        if [ "$current_hour" -ge 3 ] && [ "$current_hour" -lt 6 ]; then
       	  echo "Within poweroff window. Goodbye!"
       	  poweroff
 				else
@@ -271,7 +271,7 @@
         echo "Reboot not necessary."
         echo "Running \"nixos-rebuild switch\"..."
       	nixos-rebuild switch --accept-flake-config
-      elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ] && [ "$current_hour" -ge 1 ] && [ "$current_hour" -lt 5 ]; then
+      elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ] && [ "$current_hour" -ge 3 ] && [ "$current_hour" -lt  5 ]; then
         echo "Reboot necessary and within reboot window. Rebooting now."
       	reboot now
       elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ]; then

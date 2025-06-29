@@ -52,17 +52,14 @@ Note that /etc/nixos and all recursive files should be owned by root:wheel to ma
 
 | Process                             | Time      |
 | ----------------------------------- | --------- |
-| Podman Auto-Upgrade (computeserver) | 0000      |
-| Restic Backup (Jellyfin)            | 0010      |
-| Nix Store Optimization              | 0030      |
-| nh Garbage Collection               | 0045 Mon  |
-| Podman Garbage Collection           | 0045 Tue  |
-| ClamAV Scanning                     | 0100      |
-| Podman Auto-Upgrade (mediaserver)   | 0115      |
+| Podman auto-upgrade (computeserver) | 0000      |
+| restic backup (Jellyfin)            | 0010      |
+| nix store optimization              | 0030      |
+| nh garbage collection               | 0045 Mon  |
+| Podman garbage collection           | 0045 Tue  |
+| ClamAV scanning                     | 0100      |
+| Podman auto-upgrade (mediaserver)   | 0115      |
 | update-flake-lock GH Action         | 0330      |
-| Nix Auto-Upgrade + Reboot           | 0400-0445 |
-| Poweroff/reboot window              | 0400-0500 |
+| NixOS auto-upgrade window           | 0400-0430 |
+| poweroff/reboot window              | 0400-0500 |
 
-## Environmental Variables
-
-- NIGHTLY_REFRESH: determines behavior of the machine when nightly updates occur. Either "reboot-when-needed", or "always-poweroff"
