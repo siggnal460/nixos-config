@@ -14,7 +14,7 @@
           exts.sponsorblock
           exts.libretro
           exts.upnext
-					exts.inputstream-adaptive
+          exts.inputstream-adaptive
         ]);
         addonSettings = {
           "plugin.video.invidious" = {

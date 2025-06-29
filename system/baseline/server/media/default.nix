@@ -348,7 +348,7 @@ in
         PGID = "982";
         TZ = "America/Denver";
         NVIDIA_DRIVER_CAPABILITIES = "all";
-        NVIDIA_VISIBLE_DEVICES = "1";
+        NVIDIA_VISIBLE_DEVICES = "all";
       };
       volumes = [
         "/etc/jellyfin:/config"
@@ -356,7 +356,7 @@ in
       ];
       extraOptions = [
         "--name=jellyfin"
-        "--gpus=1"
+        "--gpus=all"
       ];
     };
 

@@ -30,13 +30,13 @@ in
   services.homepage-dashboard = {
     enable = true;
     package = package;
-		allowedHosts = "gappyland.org";
+    allowedHosts = "gappyland.org";
     openFirewall = true;
 
     customCSS = ''
-        #revalidate {
-    	  display: none;
-      }
+          #revalidate {
+      	  display: none;
+        }
     '';
 
     settings = {

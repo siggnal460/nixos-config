@@ -38,7 +38,7 @@
     };
   };
 
-	environment.systemPackages = [
-	  pkgs.kodiPackages.inputstream-adaptive
-	];
+  environment.systemPackages = [
+    pkgs.kodiPackages.inputstream-adaptive
+  ];
 }
