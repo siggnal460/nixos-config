@@ -261,7 +261,7 @@
       if [ "$NIGHTLY_REFRESH" = "always-poweroff" ]; then
         echo "Running \"nixos-rebuild switch\"..."
         nixos-rebuild switch --accept-flake-config
-        if [ "$current_hour" -ge 3 ] && [ "$current_hour" -lt 6 ]; then
+        if [ "$current_hour" -ge 3 ] && [ "$current_hour" -lt 5 ]; then
       	  echo "Within poweroff window. Goodbye!"
       	  poweroff
 				else
