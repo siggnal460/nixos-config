@@ -4,9 +4,9 @@
     ../../shared/remotely-managed.nix
   ];
 
-  environment.sessionVariables = {
-    NIGHTLY_REFRESH = "reboot-if-needed";
-  };
+  systemd.services.rebuild.environment = {
+	  NIGHTLY_REFRESH = "reboot-if-needed";
+	};
 
   networking.wireless.enable = false;
 

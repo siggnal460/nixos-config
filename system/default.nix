@@ -251,33 +251,35 @@
       echo "Beginning rebuild service."
       current_hour=$(date +%H)
 
-      echo "Hostname: $HOSTNAME"
-      echo "NIGHTLY_REFRESH: $NIGHTLY_REFRESH"
-      echo "Current Hour: $current_hour"
-
-      if [ "$NIGHTLY_REFRESH" = "always-poweroff" ]; then
-      	echo "Switching to new config..."
-        nixos-rebuild switch --accept-flake-config
-      	poweroff now
-      fi
+      echo "Rebuild Information - Hostname: $HOSTNAME ; NIGHTLY_REFRESH: $NIGHTLY_REFRESH ; Current Hour: $current_hour"
 
       echo "Running \"nixos-rebuild boot\"..."
       nixos-rebuild boot -j 3 --accept-flake-config
       booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
       built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
 
-      if [ "''${booted}" = "''${built}" ]; then
+      if [ "$NIGHTLY_REFRESH" = "always-poweroff" ]; then
+        echo "Running \"nixos-rebuild switch\"..."
+        nixos-rebuild switch --accept-flake-config
+        if [ "$current_hour" -ge 1 ] && [ "$current_hour" -lt 5 ]; then
+      	  echo "Within poweroff window. Goodbye!"
+      	  poweroff
+				else
+      	  echo "Not within power cycle window of 0200-0500, skipping poweroff."
+				fi
+      elif [ "''${booted}" = "''${built}" ]; then
         echo "Reboot not necessary."
+        echo "Running \"nixos-rebuild switch\"..."
       	nixos-rebuild switch --accept-flake-config
       elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ] && [ "$current_hour" -ge 1 ] && [ "$current_hour" -lt 5 ]; then
-        echo "Reboot necessary and within window. Starting now."
+        echo "Reboot necessary and within reboot window. Rebooting now."
       	reboot now
       elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ]; then
-      	echo "Refresh is necessary, but it was not within the reboot window of 0400 and 0500 so it was skipped."
+      	echo "Refresh is necessary, but it was not within the power cycle window of 0200 and 0500 so it was skipped."
       elif [ "$NIGHTLY_REFRESH" != "reboot-if-needed" ]; then
       	echo 'Environmental variable NIGHTLY_REFRESH was not set to an appropriate value ("always-poweroff" or "reboot-if-needed"). Action will not be taken.'
       else
-      	echo "No action taken."
+      	echo "An unknown error occured and no action was taken."
       fi
     '';
     serviceConfig = {

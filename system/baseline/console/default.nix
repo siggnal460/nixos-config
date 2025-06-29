@@ -9,9 +9,9 @@
     ../../shared/networkmanager.nix
   ];
 
-  environment.sessionVariables = {
-    NIGHTLY_REFRESH = "always-poweroff";
-  };
+  systemd.services.rebuild.environment = {
+	  NIGHTLY_REFRESH = "always-poweroff";
+	};
 
   networking.networkmanager.enable = true;
 
