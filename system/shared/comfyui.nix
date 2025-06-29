@@ -3,7 +3,7 @@
 
   systemd.tmpfiles.rules = [
     "d /home/aaron/AI 0700 aaron aaron"
-    "L+ /home/aaron/AI/comfyui /var/lib/comfyui"
+    "L+ - - - - /home/aaron/AI/comfyui /var/lib/comfyui"
     "Z /var/lib/comfyui 0770 comfyui ai"
     "d /var/lib/comfyui 0770 comfyui ai"
     "d /var/lib/comfyui/custom_nodes 0770 comfyui ai"

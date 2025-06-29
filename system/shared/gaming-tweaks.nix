@@ -5,6 +5,10 @@
     inputs.nix-gaming.nixosModules.platformOptimizations
   ];
 
+  systemd.tmpfiles.rules = [
+    "L+ /home/aaron/Games/steam - - - - /home/aaron/.var/app/com.valvesoftware.Steam/.steam/steam/steamapps/common"
+	];
+
   services = {
     pipewire.lowLatency = {
       enable = true;
