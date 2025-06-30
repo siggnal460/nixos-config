@@ -215,8 +215,10 @@
   };
 
   systemd.timers."pull-updates" = {
+    description = "nightly timer between 0400-0430 for pulling of latest changes";
     wantedBy = [ "timers.target" ];
     timerConfig = {
+		  Persistent = true;
       OnCalendar = "*-*-* 04:00:00";
       RandomizedDelaySec = "30min";
       Unit = "pull-updates.service";
@@ -224,7 +226,7 @@
   };
 
   systemd.services.pull-updates = {
-    description = "Pulling of latest changes from the upstream git repo";
+    description = "pulling of latest changes from the upstream git repo";
     restartIfChanged = false;
     onSuccess = [ "rebuild.service" ];
     path = [
@@ -245,7 +247,7 @@
   };
 
   systemd.services.rebuild = {
-    description = "Rebuild and activation of newly pulled system config";
+    description = "rebuild and activation of newly pulled system config, reboots or powers off as necessary";
     restartIfChanged = false;
     path = [
       pkgs.nixos-rebuild

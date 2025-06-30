@@ -210,38 +210,45 @@ in
         install_url = latestSourceURL "bitwarden-password-manager";
         installation_mode = "force_installed";
         private_browsing = true;
+				locked = true;
       };
       "addon@darkreader.org" = {
         default_area = "menupanel";
         install_url = latestSourceURL "darkreader";
         installation_mode = "force_installed";
+				locked = true;
       };
       "sponsorBlocker@ajay.app" = {
         default_area = "menupanel";
         install_url = latestSourceURL "sponsorblock";
         installation_mode = "force_installed";
+				locked = true;
       };
       "cb-remover@search.mozilla.org" = {
         default_area = "menupanel";
         install_url = latestSourceURL "clickbait-remover-for-youtube";
         installation_mode = "force_installed";
+				locked = true;
       };
       "uBlock0@raymondhill.net" = {
         default_area = "menupanel";
         install_url = latestSourceURL "ublock-origin";
         installation_mode = "force_installed";
         private_browsing = true;
+				locked = true;
       };
       "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
         default_area = "menupanel";
         install_url = latestSourceURL "vimium-ff";
         installation_mode = "force_installed";
+				locked = true;
       };
       "leechblockng@proginosko.com" = {
         default_area = "menupanel";
         install_url = latestSourceURL "leechblock-ng";
         installation_mode = "force_installed";
         private_browsing = true;
+				locked = true;
       };
     };
 

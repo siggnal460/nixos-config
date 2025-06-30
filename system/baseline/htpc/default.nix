@@ -1,7 +1,8 @@
 { lib, pkgs, ... }:
 let
-  sddmTheme = import ./sddm-theme.nix {inherit pkgs;};
-in {
+  sddmTheme = import ./sddm-theme.nix { inherit pkgs; };
+in
+{
   imports = [
     ../../shared/plymouth-tv.nix
     ../../shared/pipewire.nix
@@ -10,8 +11,8 @@ in {
   ];
 
   systemd.services.rebuild.environment = {
-	  NIGHTLY_REFRESH = "always-poweroff";
-	};
+    NIGHTLY_REFRESH = "always-poweroff";
+  };
 
   nixpkgs.config = {
     allowUnfreePredicate =
@@ -36,8 +37,8 @@ in {
     sddm = {
       enable = true;
       wayland.enable = true;
-			enableHidpi = true;
-			theme = "${sddmTheme}";
+      enableHidpi = true;
+      theme = "${sddmTheme}";
     };
   };
 
