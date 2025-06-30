@@ -6,8 +6,6 @@
     base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
   };
 
-  zramSwap.enable = true;
-
   networking = {
     hostName = "x86-atxtwr-workstation";
   };

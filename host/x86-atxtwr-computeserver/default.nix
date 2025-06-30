@@ -3,13 +3,6 @@
     ./hardware-configuration.nix
   ];
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 128 * 1024;
-    }
-  ];
-
   sops.defaultSopsFile = ../../secrets/x86-atxtwr-computeserver/secrets.yaml;
 
   networking = {

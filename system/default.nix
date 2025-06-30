@@ -11,6 +11,10 @@
     ./extras/options.nix
   ];
 
+  stylix.targets.plymouth.enable = false;
+
+  zramSwap.enable = true;
+
   boot = {
     tmp.useTmpfs = lib.mkDefault true;
     tmp.cleanOnBoot = lib.mkDefault (!config.boot.tmp.useTmpfs);

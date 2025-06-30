@@ -1,8 +1,7 @@
 { lib, ... }:
 {
   imports = [
-    ../../shared/plymouth.nix
-    ../../shared/quietboot.nix
+    ../../shared/plymouth-tv.nix
     ../../shared/pipewire.nix
     ../../shared/bluetooth.nix
     ../../shared/remotely-managed.nix

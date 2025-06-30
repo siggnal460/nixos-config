@@ -25,16 +25,24 @@
       };
     };
 
-    services.gammastep = {
-      enable = true;
-      dawnTime = "5:15";
-      duskTime = "19:00-20:30";
-      settings = {
-        general = {
-          adjustment-method = "wayland";
-        };
-      };
-    };
+    services = {
+		  gammastep = {
+				enable = true;
+				dawnTime = "5:15";
+				duskTime = "19:00-20:30";
+				settings = {
+					general = {
+						adjustment-method = "wayland";
+					};
+				};
+			};
+			swayidle = {
+			  enable = true;
+				timeouts = [
+				  { timeout = 1200; command = "${pkgs.systemd}/bin/systemctl suspend"; }
+				];
+			};
+		};
 
     wayland.windowManager.sway = {
       enable = true;

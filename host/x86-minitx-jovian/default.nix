@@ -4,8 +4,6 @@
     ../../system/shared/plymouth-tv.nix
   ];
 
-  zramSwap.enable = true;
-
   boot = {
     #kernelPackages = lib.mkForce pkgs.pkgs.linuxPackages;
     #extraModulePackages = with config.boot.kernelPackages; [ r8125 ];

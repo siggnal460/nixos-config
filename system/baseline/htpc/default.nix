@@ -1,8 +1,9 @@
 { lib, pkgs, ... }:
-{
+let
+  sddmTheme = import ./sddm-theme.nix {inherit pkgs;};
+in {
   imports = [
-    ../../shared/plymouth.nix
-    ../../shared/quietboot.nix
+    ../../shared/plymouth-tv.nix
     ../../shared/pipewire.nix
     ../../shared/bluetooth.nix
     ../../shared/remotely-managed.nix
@@ -31,14 +32,18 @@
 
   services.displayManager.defaultSession = "sway";
 
-  services.xserver.displayManager = {
-    gdm = {
+  services.displayManager = {
+    sddm = {
       enable = true;
-      wayland = true;
+      wayland.enable = true;
+			enableHidpi = true;
+			theme = "${sddmTheme}";
     };
   };
 
-  environment.systemPackages = [
-    pkgs.kodiPackages.inputstream-adaptive
+  environment.systemPackages = with pkgs; [
+    kodiPackages.inputstream-adaptive
+    libsForQt5.qt5.qtquickcontrols2
+    libsForQt5.qt5.qtgraphicaleffects
   ];
 }
