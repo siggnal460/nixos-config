@@ -37,8 +37,8 @@ in
     sddm = {
       enable = true;
       wayland.enable = true;
-			enableHidpi = true;
-			theme = "${sddmTheme}";
+      enableHidpi = true;
+      theme = "${sddmTheme}";
     };
   };
 
