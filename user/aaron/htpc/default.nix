@@ -7,13 +7,13 @@
 
     programs = {
       nushell.extraConfig = ''
-        			  if not ("WAYLAND_DISPLAY" in $env) and ("XDG_VTNR" in $env) and ($env.XDG_VTNR == 1) {
-        			      sway
-        		    }
-        			'';
+        if not ("WAYLAND_DISPLAY" in $env) and ("XDG_VTNR" in $env) and ($env.XDG_VTNR == 1) {
+          sway
+        }
+      '';
       kodi = {
         enable = true;
-        package = pkgs.kodi.withPackages (exts: [
+        package = pkgs.kodi-wayland.withPackages (exts: [
           exts.jellyfin
           exts.sponsorblock
           exts.libretro
