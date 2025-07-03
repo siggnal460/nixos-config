@@ -120,7 +120,7 @@
       192.168.1.13  x86-rakmnt-mediaserver
       10.0.0.10  x86-atxtwr-computeserver
       192.168.1.5   x86-merkat-entry
-      10.0.0.13  x86-atxtwr-workstation
+      192.168.1.6  x86-atxtwr-workstation
       192.168.1.11  x86-merkat-bedhtpc
       10.0.0.18  x86-stmdck-jovian
       10.0.0.20  x86-minitx-jovian
