@@ -29,19 +29,11 @@ def print_warning [ text: string ] {
 }
 
 def update [ flake_name: string flake_folder: string limit: bool ] {
-try {
     if $limit == true {
         #nh os switch -H $flake_name $flake_folder -- --accept-flake-config --cores build_cores -j build_jobs
     	print "Limit not yet implemented"
     } else {
         nh os switch -H $flake_name $flake_folder -- --accept-flake-config
-    }
-    } catch {
-        |err| $err.msg
-        if (repo_changes) {
-       	git reset --soft HEAD~1
-    	}
-    	exit 1
     }
 }
 
