@@ -229,6 +229,17 @@
             ]
             [ ];
 
+        x86-rasbpi-downloadclient =
+          mkComputerStable "x86_64-linux" ./host/x86-rasbpi-downloadclient
+            [
+              ./system/hardware/rpi4
+              ./system/baseline/server
+              ./system/baseline/server/openvpn-client
+              ./system/baseline/server/download-client
+            ]
+            [ ];
+
+
         x86-merkat-monitoring =
           mkComputerStable "x86_64-linux" ./host/x86-merkat-monitoring
             [
