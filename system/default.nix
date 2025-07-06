@@ -192,12 +192,10 @@
   security.sudo.wheelNeedsPassword = false;
 
   services.openssh.knownHosts = {
+    "x86-merkat-entry".publicKey =
+	    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGJ3ENb2iqe0ZgY+31q4+alGbWdFW5IEI3pznl8gBfAW aaron@x86-merkat-entry";
     "x86-rakmnt-mediaserver".publicKey =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBGy+YGfa+dCd7S9Jm6hXWW+TQqgjdPIUlP2+ijZTCqc aaron@x86-rakmnt-mediaserver";
-    "x86-merkat-auth".publicKey =
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILudmn/T9/m1Sb1jzDN/WX5lroyoUhZw3amSEWhFbPWk aaron@x86-merkat-auth";
-    "x86-merkat-entry".publicKey =
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGJ3ENb2iqe0ZgY+31q4+alGbWdFW5IEI3pznl8gBfAW aaron@x86-merkat-entry";
     "x86-minitx-jovian".publicKey =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINeYyHUVTW8PW6ipa+meN0DDlB6HXmAbHEnhfxdan+IW aaron@x86-minitx-jovian";
     "x86-stmdck-jovian".publicKey =
