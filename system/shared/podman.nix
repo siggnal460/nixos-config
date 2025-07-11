@@ -26,7 +26,7 @@
       };
     };
     services.podman-updater = {
-      description = "Service that runs daily to update all podman containers";
+      description = "Podman Container Daily Updater";
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         User = "root";

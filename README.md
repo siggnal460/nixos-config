@@ -59,6 +59,7 @@ Note that /etc/nixos and all recursive files should be owned by root:wheel to ma
 | Podman garbage collection           | 0045 Tue  |
 | ClamAV scanning                     | 0100      |
 | Podman auto-upgrade (mediaserver)   | 0115      |
+| Podman auto-upgrade (downloadclient)| 0230      |
 | update-flake-lock GH Action         | 0330      |
 | NixOS auto-upgrade window           | 0400-0430 |
 | poweroff/reboot window              | 0400-0500 |

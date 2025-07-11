@@ -1,42 +1,44 @@
-{ pkgs, ... }:
+{ config, ... }:
 {
   services.openvpn = {
     restartAfterSleep = true;
     servers = {
       client = {
         autoStart = true;
-        updateResolvConf = false;
+        updateResolvConf = true;
         config = ''
-          	client
-          	dev tun
-          	remote europe3.vpn.airdns.org 443
-          	resolv-retry infinite
-          	pull-filter ignore "dhcp-option DNS"
-          	dhcp-option DNS 8.8.8.8
-          	nobind
-          	persist-key
-          	persist-tun
-          	auth-nocache
-          	verb 3
-          	explicit-exit-notify 5
-          	rcvbuf 262144
-          	sndbuf 262144
-          	push-peer-info
-          	setenv UV_IPV6 yes
-          	ca "/root/.vpn/ca.crt"
-          	cert "/root/.vpn/aaron.crt"
-          	key "/root/.vpn/aaron.key"
-          	remote-cert-tls server
-          	comp-lzo no
-          	data-ciphers AES-256-GCM:AES-256-CBC:AES-192-GCM:AES-192-CBC:AES-128-GCM:AES-128-CBC
-          	data-ciphers-fallback AES-256-CBC
-          	proto udp
-          	tls-crypt "/root/.vpn/tls-crypt.key"
-          	auth SHA512
+					client
+	        dev tun
+	        resolv-retry infinite
+	        nobind
+	        persist-key
+	        persist-tun
+	        verb 3
+	        remote-cert-tls server
+	        ping 10
+	        ping-restart 60
+	        sndbuf 524288
+	        rcvbuf 524288
+	        cipher AES-256-GCM
+	        tls-cipher TLS-DHE-RSA-WITH-AES-256-GCM-SHA384
+	        proto udp
+	        auth-user-pass ${config.sops.secrets."openvpn/mullvad_userpass".path}
+	        ca ${config.sops.secrets."openvpn/mullvad_ca".path}
+	        script-security 2
+	        fast-io
+	        remote-random
+	        remote 185.65.134.71 1302 # nl-ams-ovpn-001
+	        remote 185.65.134.75 1302 # nl-ams-ovpn-005
+	        remote 185.65.134.73 1302 # nl-ams-ovpn-003
+	        remote 185.65.134.74 1302 # nl-ams-ovpn-004
+	        remote 185.65.134.72 1302 # nl-ams-ovpn-002
         '';
-        up = "echo nameserver $nameserver | ${pkgs.openresolv}/sbin/resolvconf -m 0 -a $dev";
-        down = "${pkgs.openresolv}/sbin/resolvconf -d $dev";
       };
     };
   };
+
+  sops.secrets = {
+    "openvpn/mullvad_ca".owner = "root";
+    "openvpn/mullvad_userpass".owner = "root";
+	};
 }

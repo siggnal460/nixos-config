@@ -52,6 +52,7 @@
       home-manager-unstable,
       jovian-nixos,
       nix-index-database,
+      nixos-hardware,
       nixpkgs,
       nixpkgs-unstable,
       sops-nix,
@@ -229,13 +230,14 @@
             ]
             [ ];
 
-        x86-rasbpi-downloadclient =
-          mkComputerStable "x86_64-linux" ./host/x86-rasbpi-downloadclient
+        arm-raspi4-downloadclient =
+          mkComputerStable "aarch64-linux" ./host/arm-raspi4-downloadclient
             [
-              ./system/hardware/rpi4
+              nixos-hardware.nixosModules.raspberry-pi-4
+              ./system/hardware/raspi4
               ./system/baseline/server
-              ./system/baseline/server/openvpn-client
-              ./system/baseline/server/download-client
+              #./system/baseline/server/openvpn-client
+              #./system/baseline/server/download-client
             ]
             [ ];
 

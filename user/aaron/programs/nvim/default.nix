@@ -1,7 +1,5 @@
 { pkgs, lib, ... }:
 {
-  stylix.targets.neovim.enable = false;
-
   programs.neovim = {
     extraPackages = with pkgs; [
       nil

@@ -1,12 +1,11 @@
-{ pkgs, ... }:
 {
   imports = [
     ../../shared/remotely-managed.nix
   ];
 
   systemd.services.rebuild.environment = {
-	  NIGHTLY_REFRESH = "reboot-if-needed";
-	};
+    NIGHTLY_REFRESH = "reboot-if-needed";
+  };
 
   networking.wireless.enable = false;
 
@@ -37,8 +36,4 @@
     enable = false;
     powerOnBoot = false;
   };
-
-  environment.systemPackages = [
-    pkgs.waypipe
-  ];
 }

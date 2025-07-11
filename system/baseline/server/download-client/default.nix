@@ -13,17 +13,17 @@
     "d /export/media/usenet/completed/Anime 0770 nzbget media"
     "d /export/media/usenet/completed/Movies 0770 nzbget media"
     "d /export/media/usenet/completed/Series 0770 nzbget media"
-    "d /export/media/youtube 0770 pinchflat media"
+    #"d /export/media/youtube 0770 pinchflat media"
     "d /etc/deluge 0750 deluge wheel"
     "d /etc/nzbget 0750 nzbget wheel"
-    "d /etc/pinchflat 0750 pinchflat wheel"
+    #"d /etc/pinchflat 0750 pinchflat wheel"
   ];
 
   imports = [ ../../../shared/podman.nix ];
 
-  networking.firewall.allowedTCPPorts = [ 51413 ];
+  #networking.firewall.allowedTCPPorts = [ 51413 ];
 
-  networking.firewall.allowedUDPPorts = [ 51413 ];
+  #networking.firewall.allowedUDPPorts = [ 51413 ];
 
   services.clamav.scanner.scanDirectories = [
     "/export/media/torrents"
@@ -41,36 +41,36 @@
       isSystemUser = true;
       group = "media";
     };
-    pinchflat = {
-      uid = 712;
-      isSystemUser = true;
-      group = "media";
-    };
+    #pinchflat = {
+    #  uid = 712;
+    #  isSystemUser = true;
+    #  group = "media";
+    #};
   };
 
   virtualisation.oci-containers.containers = {
-    pinchflat = {
-      image = "ghcr.io/kieraneglin/pinchflat:latest";
-      autoStart = true;
-      labels = {
-        "io.containers.autoupdate" = "registry";
-      };
-      ports = [
-        "8945:8945"
-      ];
-      environment = {
-        PUID = "712";
-        PGID = "982";
-        TZ = "America/Denver";
-      };
-      volumes = [
-        "/export/media/youtube:/downloads"
-        "/etc/pinchflat:/config"
-      ];
-      extraOptions = [
-        "--name=pinchflat"
-      ];
-    };
+    #pinchflat = {
+    #  image = "ghcr.io/kieraneglin/pinchflat:latest";
+    #  autoStart = true;
+    #  labels = {
+    #    "io.containers.autoupdate" = "registry";
+    #  };
+    #  ports = [
+    #    "8945:8945"
+    #  ];
+    #  environment = {
+    #    PUID = "712";
+    #    PGID = "982";
+    #    TZ = "America/Denver";
+    #  };
+    #  volumes = [
+    #    "/export/media/youtube:/downloads"
+    #    "/etc/pinchflat:/config"
+    #  ];
+    #  extraOptions = [
+    #    "--name=pinchflat"
+    #  ];
+    #};
 
     deluge = {
       image = "lscr.io/linuxserver/deluge:latest";

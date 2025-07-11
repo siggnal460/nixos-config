@@ -3,8 +3,6 @@
     ./hardware-configuration.nix
   ];
 
-  sops.defaultSopsFile = ../../secrets/x86-atxtwr-computeserver/secrets.yaml;
-
   networking = {
     hostName = "x86-atxtwr-computeserver";
     interfaces.enp8s0 = {
