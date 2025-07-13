@@ -62,10 +62,10 @@
     wantedBy = [ "multi-user.target" ];
     path = [ pkgs.flatpak ];
     script = ''
-            flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-            flatpak uninstall --unused -y --noninteractive
-      			flatpak install -y --noninteractive flathub com.discordapp.Discord
-            flatpak update -y
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+      flatpak uninstall --unused -y --noninteractive
+      flatpak install -y --noninteractive flathub com.discordapp.Discord
+      flatpak update -y
     '';
   };
 
@@ -84,8 +84,6 @@
       #loupe
       mpv
       openvpn
-      #rustdesk
-      spotube
       thunderbird
       tor-browser
       usbimager
