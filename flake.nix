@@ -235,7 +235,6 @@
             ]
             [ ];
 
-
         x86-merkat-monitoring =
           mkComputerStable "x86_64-linux" ./host/x86-merkat-monitoring
             [
