@@ -1,10 +1,17 @@
+let
+  hostname = "x86-atxtwr-computeserver";
+in
 {
   imports = [
     ./hardware-configuration.nix
   ];
 
+  sops = {
+    defaultSopsFile = ../../secrets/${hostname}/secrets.yaml;
+  };
+
   networking = {
-    hostName = "x86-atxtwr-computeserver";
+    hostName = hostname;
     #interfaces.enp8s0 = {
     #  useDHCP = false;
     #  ipv4.addresses = [
