@@ -63,10 +63,8 @@
     path = [ pkgs.flatpak ];
     script = ''
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-			flatpak remote-add --if-not-exists kdeapps https://distribute.kde.org/flatpak-apps-testing/
       flatpak uninstall --unused -y --noninteractive
       flatpak install -y --noninteractive flathub com.discordapp.Discord
-      flatpak install -y --noninteractive flathub https://cdn.kde.org/flatpak/xwaylandvideobridge-nightly/org.kde.xwaylandvideobridge.flatpakref
       flatpak update -y
     '';
   };
@@ -80,7 +78,6 @@
       gimp
       gnupg
       jellyfin-media-player
-			kdePackages.xwaylandvideobridge
       libreoffice
       loupe
       mpv

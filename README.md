@@ -1,7 +1,6 @@
 # nixos-config
 
-My personal nixos-config. Contains a wide variety of modules for security hardening, gaming, AI,
-virtualization, development, etc.
+My personal nixos-config. Contains a wide variety of modules for security hardening, gaming, AI, virtualization, development, etc.
 
 ## Structure
 
@@ -63,4 +62,8 @@ Note that /etc/nixos and all recursive files should be owned by root:wheel to ma
 | update-flake-lock GH Action         | 0330      |
 | NixOS auto-upgrade window           | 0400-0430 |
 | poweroff/reboot window              | 0400-0500 |
+
+## Known Issues
+
+- on COSMIC DE when using the `nfs-client` module, if the servers are not properly exporting the shares it will case all sorts of odd bugs from Flatpak apps not working to causing the file manager to hang.
 
