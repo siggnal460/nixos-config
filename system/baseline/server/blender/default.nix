@@ -10,7 +10,7 @@
   ];
 
   services.nfs.server = {
-    exports = ''/export/blender 10.0.0.15/12(rw,sync,no_subtree_check,insecure,nohide)'';
+    exports = ''/export/blender x86-atxtwr-workstation(rw,sync,no_subtree_check,insecure,nohide)'';
   };
 
   environment.systemPackages = [ (pkgs.blender.override { cudaSupport = true; }) ];

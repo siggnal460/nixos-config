@@ -256,7 +256,7 @@
               ./system/baseline/server/gitea
               ./system/baseline/server/invidious
               #./system/baseline/server/streaming
-              ./system/shared/nfs-client.nix
+              #./system/shared/nfs-client.nix
             ]
             [ ];
 
