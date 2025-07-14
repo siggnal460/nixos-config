@@ -73,29 +73,22 @@
     systemPackages = with pkgs; [
       anki
       element-desktop
-      eog
       deluge
       firefox
       gimp
       gnupg
-      gparted
       jellyfin-media-player
+			kdePackages.xwaylandvideobridge
       libreoffice
-      #loupe
+      loupe
       mpv
       openvpn
       thunderbird
       tor-browser
       usbimager
-      image-roll
       wl-clipboard
       wineWowPackages.waylandFull
-      vencord
-      vesktop
       waypipe
-      qiv
-      phototonic
-      kdePackages.gwenview
     ];
   };
 }
