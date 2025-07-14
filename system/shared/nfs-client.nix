@@ -1,9 +1,15 @@
 { lib, ... }:
 let
   mountOptions = [
-	  "bg,intr,hard"
-		"retrans=1,retry=0"
+	  #"bg"
+		#"intr"
+		#"hard"
+		#"retrans=1"
+		#"retry=0"
+		#"timeo=30"
     "x-systemd.automount"
+		"noauto"
+		"x-systemd.idle-timeout=60"
     "_netdev"
 	];
 in
@@ -20,29 +26,29 @@ in
   };
 
   systemd.tmpfiles.rules = [
-    "d /mnt 0770 root users"
-    "d /mnt/ai 0770 root ai"
-    "d /mnt/blender 0770 root users"
-    "d /mnt/media 0770 root media"
-    "d /mnt/emulatorjs 0770 root wheel"
+    "d /nfs 0770 root users"
+    "d /nfs/ai 0770 root ai"
+    "d /nfs/blender 0770 root users"
+    "d /nfs/media 0770 root media"
+    "d /nfs/emulatorjs 0770 root wheel"
   ];
 
-  fileSystems."/mnt/ai" = {
+  fileSystems."/nfs/ai" = {
     device = lib.mkForce "x86-atxtwr-computeserver:/export/ai";
     fsType = lib.mkForce "nfs4";
     options = mountOptions;
   };
-  fileSystems."/mnt/blender" = {
+  fileSystems."/nfs/blender" = {
     device = lib.mkForce "x86-atxtwr-computeserver:/export/blender";
     fsType = lib.mkForce "nfs4";
     options = mountOptions;
   };
-  fileSystems."/mnt/media" = {
+  fileSystems."/nfs/media" = {
     device = lib.mkForce "x86-rakmnt-mediaserver:/export/media";
     fsType = lib.mkForce "nfs4";
     options = mountOptions;
   };
-  fileSystems."/mnt/emulatorjs" = {
+  fileSystems."/nfs/emulatorjs" = {
     device = lib.mkForce "x86-rakmnt-mediaserver:/export/emulatorjs";
     fsType = lib.mkForce "nfs4";
     options = mountOptions;
