@@ -10,7 +10,7 @@ vim.opt.relativenumber = true
 vim.opt.cursorline = true -- highlight cursor line
 vim.opt.splitbelow = true -- open new vertical split bottom
 vim.opt.splitright = true -- open new horizontal splits right
-vim.opt.termguicolors = true -- enabl 24-bit RGB color in the TUI
+vim.opt.termguicolors = true -- enable 24-bit RGB color in the TUI
 
 -- Searching
 vim.opt.incsearch = true -- search as characters are entered
@@ -18,27 +18,15 @@ vim.opt.hlsearch = false -- do not highlight matches vim.opt.ignorecase = true
 vim.opt.smartcase = true -- make case sensitive if uppercase
 
 -- Theme
-vim.cmd([[colorscheme tokyonight]])
+vim.cmd.colorscheme("tokyonight")
 
 -- Transparency
-vim.cmd([[
-  highlight Normal guibg=none
-  highlight NonText guibg=none
-  highlight Normal ctermbg=none
-  highlight NonText ctermbg=none
-]])
+vim.cmd.highlight({ "Normal", "guibg=none" })
+vim.cmd.highlight({ "NonText", "guibg=none" })
+vim.cmd.highlight({ "Normal", "ctermbg=none" })
+vim.cmd.highlight({ "NonText", "ctermbg=none" })
 
 -- LSPs
-lspconfig.nil_ls.setup({
-	settings = {
-		Nil = {
-			formatting = {
-				command = { "nixfmt" },
-			},
-		},
-	},
-})
-
 lspconfig.lua_ls.setup({
 	settings = {
 		Lua = {

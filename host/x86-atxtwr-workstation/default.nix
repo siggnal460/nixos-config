@@ -1,10 +1,6 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
-
-  stylix = {
-    base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-  };
 
   networking = {
     hostName = "x86-atxtwr-workstation";

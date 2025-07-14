@@ -3,7 +3,7 @@
   imports = [ ./hardware-configuration.nix ];
 
   stylix = {
-    base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/nord.yaml";
+    base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/nord.yaml";
   };
 
   networking = {
