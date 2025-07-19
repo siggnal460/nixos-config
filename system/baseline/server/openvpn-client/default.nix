@@ -1,5 +1,9 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
+  systemd.services.rebuild.environment = lib.mkForce {
+    NIGHTLY_REFRESH = "reboot-always"; # We want to reset the VPN every night + a download client server does not need to be HA
+  };
+
   services.openvpn = {
     restartAfterSleep = true;
     servers = {

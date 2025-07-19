@@ -11,7 +11,7 @@ in
   ];
 
   systemd.services.rebuild.environment = {
-    NIGHTLY_REFRESH = "always-poweroff";
+    NIGHTLY_REFRESH = "poweroff-always";
   };
 
   nixpkgs.config = {

@@ -9,7 +9,7 @@
   ];
 
   systemd.services.rebuild.environment = {
-    NIGHTLY_REFRESH = "always-poweroff";
+    NIGHTLY_REFRESH = "poweroff-always";
   };
 
   networking.networkmanager.enable = true;

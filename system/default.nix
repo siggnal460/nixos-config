@@ -255,6 +255,9 @@
     script = ''
       echo "Beginning rebuild service."
       current_hour=$(date +%H)
+      if [ "$current_hour" -ge 3 ] && [ "$current_hour" -lt 5 ]; then
+			  power_cycle="TRUE"
+			fi
 
       echo "Rebuild Information - Hostname: $HOSTNAME ; NIGHTLY_REFRESH: $NIGHTLY_REFRESH ; Current Hour: $current_hour"
 
@@ -263,28 +266,41 @@
       booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
       built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
 
-      if [ "$NIGHTLY_REFRESH" = "always-poweroff" ]; then
+      if [ "$NIGHTLY_REFRESH" = "poweroff-always" ]; then
         echo "Running \"nixos-rebuild switch\"..."
         nixos-rebuild switch --accept-flake-config
-        if [ "$current_hour" -ge 3 ] && [ "$current_hour" -lt 5 ]; then
+        if [ "$power_cycle" = "TRUE" ]; then
       	  echo "Within poweroff window. Goodbye!"
       	  poweroff
 				else
-      	  echo "Not within power cycle window of 0200-0500, skipping poweroff."
+      	  echo "Not within power cycle window of 0400-0500, skipping poweroff."
 				fi
-      elif [ "''${booted}" = "''${built}" ]; then
-        echo "Reboot not necessary."
+
+      elif [ "$NIGHTLY_REFRESH" = "reboot-always" ]; then
         echo "Running \"nixos-rebuild switch\"..."
       	nixos-rebuild switch --accept-flake-config
-      elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ] && [ "$current_hour" -ge 3 ] && [ "$current_hour" -lt  5 ]; then
-        echo "Reboot necessary and within reboot window. Rebooting now."
-      	reboot now
+        if [ "$power_cycle" == "TRUE" ]; then
+					echo "Machine set to always reboot and it is within the power cycle window. Rebooting now."
+					reboot now
+				else
+      	  echo "Not within power cycle window of 0400-0500, skipping reboot."
+				fi
+
       elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ]; then
-      	echo "Refresh is necessary, but it was not within the power cycle window of 0200 and 0500 so it was skipped."
-      elif [ "$NIGHTLY_REFRESH" != "reboot-if-needed" ]; then
-      	echo 'Environmental variable NIGHTLY_REFRESH was not set to an appropriate value ("always-poweroff" or "reboot-if-needed"). Action will not be taken.'
+				if [ "''${booted}" = "''${built}" ]; then
+					echo "Reboot not necessary."
+					echo "Running \"nixos-rebuild switch\"..."
+					nixos-rebuild switch --accept-flake-config
+				elif [ "$power_cycle" == "TRUE"]; then
+					echo "Reboot necessary and within reboot window. Rebooting now."
+					reboot now
+				else
+					echo "Refresh is necessary, but it was not within the power cycle window of 0400 and 0500 so it was skipped."
+				fi
+
       else
-      	echo "An unknown error occured and no action was taken."
+      	echo 'Environmental variable NIGHTLY_REFRESH was not set to an appropriate value ("poweroff-always", "reboot-always" or "reboot-if-needed"). Action will not be taken.'
+
       fi
     '';
     serviceConfig = {
