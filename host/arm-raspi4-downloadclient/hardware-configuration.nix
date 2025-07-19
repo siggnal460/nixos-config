@@ -4,18 +4,36 @@
 { lib, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "usbhid" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
-      fsType = "ext4";
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
+    fsType = "ext4";
+  };
+
+  fileSystems."/var/lib/containers/storage/overlay" = {
+    device = "/var/lib/containers/storage/overlay";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
+  fileSystems."/var/lib/containers/storage/overlay-containers/d31649f157eaf7efc0f99787e65828d8369e365315b6c07c86d3409336d39770/userdata/shm" =
+    {
+      device = "shm";
+      fsType = "tmpfs";
+    };
+
+  fileSystems."/var/lib/containers/storage/overlay/3bbfb46c8312a83a3f16285041501d99e1cf4f1560032c14049bd18e3f3699f0/merged" =
+    {
+      device = "overlay";
+      fsType = "overlay";
     };
 
   swapDevices = [ ];
@@ -29,5 +47,4 @@
   # networking.interfaces.wlan0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
 }
