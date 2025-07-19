@@ -2,7 +2,7 @@ $env.config = {
   show_banner: false,
   edit_mode: vi,
 }
-freshfetch
+macchina
 
 def chk-file-fs [ file: string ] {
   df -P -T $file | tail -n +2 | awk '{print $2}'

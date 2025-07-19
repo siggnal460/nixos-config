@@ -379,7 +379,7 @@
     systemPackages = with pkgs; [
       ansible
       deadnix
-      freshfetch
+      macchina
       git
       nixfmt-rfc-style
       python313
