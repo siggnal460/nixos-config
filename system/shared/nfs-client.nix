@@ -1,12 +1,6 @@
 { lib, ... }:
 let
   mountOptions = [
-	  #"bg"
-		#"intr"
-		#"hard"
-		#"retrans=1"
-		#"retry=0"
-		#"timeo=30"
     "x-systemd.automount"
 		"noauto"
 		"x-systemd.idle-timeout=60"
@@ -16,11 +10,11 @@ in
 {
   boot.initrd = {
     supportedFilesystems = [
-      "nfs"
+      #"nfs"
       "nfs4"
     ];
     kernelModules = [
-      "nfs"
+      #"nfs"
       "nfs4"
     ];
   };
@@ -30,7 +24,7 @@ in
     "d /nfs/ai 0770 root ai"
     "d /nfs/blender 0770 root users"
     "d /nfs/media 0770 root media"
-    "d /nfs/emulatorjs 0770 root wheel"
+    #"d /nfs/emulatorjs 0770 root wheel"
   ];
 
   fileSystems."/nfs/ai" = {
@@ -48,9 +42,9 @@ in
     fsType = lib.mkForce "nfs4";
     options = mountOptions;
   };
-  fileSystems."/nfs/emulatorjs" = {
-    device = lib.mkForce "x86-rakmnt-mediaserver:/export/emulatorjs";
-    fsType = lib.mkForce "nfs4";
-    options = mountOptions;
-  };
+  #fileSystems."/nfs/emulatorjs" = {
+  #  device = lib.mkForce "x86-rakmnt-mediaserver:/export/emulatorjs";
+  #  fsType = lib.mkForce "nfs4";
+  #  options = mountOptions;
+  #};
 }

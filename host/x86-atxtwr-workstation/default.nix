@@ -6,8 +6,6 @@
     hostName = "x86-atxtwr-workstation";
   };
 
-  boot.tmp.tmpfsSize = "95%";
-
   services.ratbagd.enable = true;
 
   fileSystems."/mnt/nvme0n1" = {
