@@ -2,10 +2,10 @@
 {
   swapDevices = [ {
     device = "/var/lib/swapfile";
-    size = 4*1024;
+    size = 5*1024; # pushes the 2GB model to 8GB total including zram, necessary for builds to not fail
   } ];
 
-  nix.settings.cores = 3;
+  nix.settings.cores = 2;
 
   boot = {
     initrd.systemd.enableTpm2 = false;
@@ -19,7 +19,7 @@
     };
   };
 
-  services.clamav = { # too much RAM
+  services.clamav = { # way too much RAM
     daemon.enable = lib.mkForce false;
     updater.enable = lib.mkForce false;
     fangfrisch.enable = lib.mkForce false;

@@ -16,8 +16,11 @@
   zramSwap.enable = true;
 
   boot = {
-    tmp.useTmpfs = lib.mkDefault true;
-    tmp.cleanOnBoot = lib.mkDefault (!config.boot.tmp.useTmpfs);
+    tmp = {
+      useTmpfs = lib.mkDefault true;
+      cleanOnBoot = lib.mkDefault (!config.boot.tmp.useTmpfs);
+      tmpfsSize = "75%"; # builds often fail because it's too small by default
+    };
     initrd.systemd.enable = true;
     loader = {
       systemd-boot = {
@@ -194,7 +197,7 @@
 
   services.openssh.knownHosts = {
     "x86-merkat-entry".publicKey =
-	    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGJ3ENb2iqe0ZgY+31q4+alGbWdFW5IEI3pznl8gBfAW aaron@x86-merkat-entry";
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGJ3ENb2iqe0ZgY+31q4+alGbWdFW5IEI3pznl8gBfAW aaron@x86-merkat-entry";
     "x86-rakmnt-mediaserver".publicKey =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBGy+YGfa+dCd7S9Jm6hXWW+TQqgjdPIUlP2+ijZTCqc aaron@x86-rakmnt-mediaserver";
     "x86-minitx-jovian".publicKey =
@@ -217,7 +220,7 @@
     description = "nightly timer between 0400-0430 for pulling of latest changes";
     wantedBy = [ "timers.target" ];
     timerConfig = {
-		  Persistent = true;
+      Persistent = true;
       OnCalendar = "*-*-* 04:00:00";
       RandomizedDelaySec = "30min";
       Unit = "pull-updates.service";
@@ -253,55 +256,55 @@
       pkgs.systemd
     ];
     script = ''
-      echo "Beginning rebuild service."
-      current_hour=$(date +%H)
-      if [ "$current_hour" -ge 3 ] && [ "$current_hour" -lt 5 ]; then
-			  power_cycle="TRUE"
-			fi
+            echo "Beginning rebuild service."
+            current_hour=$(date +%H)
+            if [ "$current_hour" -ge 3 ] && [ "$current_hour" -lt 5 ]; then
+      			  power_cycle="TRUE"
+      			fi
 
-      echo "Rebuild Information - Hostname: $HOSTNAME ; NIGHTLY_REFRESH: $NIGHTLY_REFRESH ; Current Hour: $current_hour"
+            echo "Rebuild Information - Hostname: $HOSTNAME ; NIGHTLY_REFRESH: $NIGHTLY_REFRESH ; Current Hour: $current_hour"
 
-      echo "Running \"nixos-rebuild boot\"..."
-      nixos-rebuild boot -j 3 --accept-flake-config
-      booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
-      built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
+            echo "Running \"nixos-rebuild boot\"..."
+            nixos-rebuild boot -j 3 --accept-flake-config
+            booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
+            built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
 
-      if [ "$NIGHTLY_REFRESH" = "poweroff-always" ]; then
-        echo "Running \"nixos-rebuild switch\"..."
-        nixos-rebuild switch --accept-flake-config
-        if [ "$power_cycle" = "TRUE" ]; then
-      	  echo "Within poweroff window. Goodbye!"
-      	  poweroff
-				else
-      	  echo "Not within power cycle window of 0400-0500, skipping poweroff."
-				fi
+            if [ "$NIGHTLY_REFRESH" = "poweroff-always" ]; then
+              echo "Running \"nixos-rebuild switch\"..."
+              nixos-rebuild switch --accept-flake-config
+              if [ "$power_cycle" = "TRUE" ]; then
+            	  echo "Within poweroff window. Goodbye!"
+            	  poweroff
+      				else
+            	  echo "Not within power cycle window of 0400-0500, skipping poweroff."
+      				fi
 
-      elif [ "$NIGHTLY_REFRESH" = "reboot-always" ]; then
-        echo "Running \"nixos-rebuild switch\"..."
-      	nixos-rebuild switch --accept-flake-config
-        if [ "$power_cycle" == "TRUE" ]; then
-					echo "Machine set to always reboot and it is within the power cycle window. Rebooting now."
-					reboot now
-				else
-      	  echo "Not within power cycle window of 0400-0500, skipping reboot."
-				fi
+            elif [ "$NIGHTLY_REFRESH" = "reboot-always" ]; then
+              echo "Running \"nixos-rebuild switch\"..."
+            	nixos-rebuild switch --accept-flake-config
+              if [ "$power_cycle" == "TRUE" ]; then
+      					echo "Machine set to always reboot and it is within the power cycle window. Rebooting now."
+      					reboot now
+      				else
+            	  echo "Not within power cycle window of 0400-0500, skipping reboot."
+      				fi
 
-      elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ]; then
-				if [ "''${booted}" = "''${built}" ]; then
-					echo "Reboot not necessary."
-					echo "Running \"nixos-rebuild switch\"..."
-					nixos-rebuild switch --accept-flake-config
-				elif [ "$power_cycle" == "TRUE"]; then
-					echo "Reboot necessary and within reboot window. Rebooting now."
-					reboot now
-				else
-					echo "Refresh is necessary, but it was not within the power cycle window of 0400 and 0500 so it was skipped."
-				fi
+            elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ]; then
+      				if [ "''${booted}" = "''${built}" ]; then
+      					echo "Reboot not necessary."
+      					echo "Running \"nixos-rebuild switch\"..."
+      					nixos-rebuild switch --accept-flake-config
+      				elif [ "$power_cycle" == "TRUE"]; then
+      					echo "Reboot necessary and within reboot window. Rebooting now."
+      					reboot now
+      				else
+      					echo "Refresh is necessary, but it was not within the power cycle window of 0400 and 0500 so it was skipped."
+      				fi
 
-      else
-      	echo 'Environmental variable NIGHTLY_REFRESH was not set to an appropriate value ("poweroff-always", "reboot-always" or "reboot-if-needed"). Action will not be taken.'
+            else
+            	echo 'Environmental variable NIGHTLY_REFRESH was not set to an appropriate value ("poweroff-always", "reboot-always" or "reboot-if-needed"). Action will not be taken.'
 
-      fi
+            fi
     '';
     serviceConfig = {
       WorkingDirectory = "/etc/nixos";
