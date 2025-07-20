@@ -19,6 +19,7 @@
 
   programs = {
     evince.enable = true;
+		thunderbird.enable = true;
     #firejail.enable = true;
     gnupg.agent = {
       # gpg keys
@@ -40,6 +41,7 @@
     printing.drivers = [ pkgs.brlaser ];
     fwupd.enable = true; # for upgrading firmware
     pcscd.enable = true; # needed for gpg keys
+	  flatpak.enable = true;
     /*
       		doesn't do anything on wayland I think
       				libinput.mouse = {
@@ -56,8 +58,6 @@
     */
   };
 
-  services.flatpak.enable = true;
-
   systemd.services.flatpak-install = {
     wantedBy = [ "multi-user.target" ];
     path = [ pkgs.flatpak ];
@@ -73,18 +73,15 @@
     systemPackages = with pkgs; [
       anki
       element-desktop
-      deluge
       firefox
       gimp
       gnupg
       jellyfin-media-player
       libreoffice
-      loupe
       mpv
       openvpn
-      thunderbird
+			protonmail-bridge-gui
       tor-browser
-      usbimager
       wl-clipboard
       wineWowPackages.waylandFull
       waypipe

@@ -14,6 +14,7 @@ in
       Cookies.Allow = [
         "https://www.amazon.com"
         "https://civit.ai"
+				"https://open.spotify.com"
         "https://duckduckgo.com"
         "https://github.com"
         "https://accounts.proton.me"
