@@ -8,7 +8,7 @@
   nix.settings.cores = 2;
 
   boot = {
-    initrd.systemd.enableTpm2 = false;
+		initrd.systemd.tpm2.enable = false;
     loader = {
       grub.enable = lib.mkForce false;
       systemd-boot.enable = lib.mkForce false;
