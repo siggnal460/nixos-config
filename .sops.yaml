@@ -3,12 +3,12 @@ keys:
   - &user_aaron_mediaserver age1lthnsqvt38rm6ylhpacgm2ryhnzmhpnwc6xa2s22ntkl7fyxhggqx0qj4h
   - &user_aaron_auth age1ve39m3j55pw94j3at72yxupfjsra4z8mrysf2eqtm65dk4hemcfqxtsej7
   - &user_aaron_computeserver age13gcre65vt0n8s4llxe7dxjfw94cpy757avr8ldr6jkwwhy0l0ems3saq0s
-  - &user_aaron_downloadclient age1eyq7j57hh068ec5r79nepll64j0r2relfp033ltj7328y9jngcmqa5dky9
+  - &user_aaron_downloadclient age122rl9egshd2x9h6k0sqg4zplhkv99e3nkuy3s2295nnhhy8jz5rswstpxn
   - &server_gamingpc age1w4yhe66tlnhwl7vkrqlqtd0f3g6z4qjv3l9eklzm27yyl900gyns4es40n
   - &server_mediaserver age1cjk0vwkckvurf5fpltnlaa6vv0mjjgcm97xfwcatdz3ffgna6gwq9nnz7r
   - &server_auth age1m36enhql42snlt2v0fgv6dtmwzv2qtte7vgzudnzvp0rakhu0deqhkexrt
   - &server_computeserver age1hm20lsugmn7mclnrcp9yngme73x4mwyz4jxkmad2lm7mwcvgza2qvtuq7g
-  - &server_downloadclient age1cucr8wzfrssd2xgssdp08deemr6t8mcsu082d05r9ct78f4huuhqmwmphg
+  - &server_downloadclient age15nktpja4qrhz6tyt2yepky4xgk0caqj42s9sle53dda83d3295rsey93ey
 creation_rules:
   - path_regex: secrets/secrets.yaml$
     key_groups:

@@ -230,7 +230,7 @@
               nixos-hardware.nixosModules.raspberry-pi-4
               ./system/hardware/raspi4
               ./system/baseline/server
-              #./system/baseline/server/openvpn-client
+              ./system/baseline/server/openvpn-client
               #./system/baseline/server/download-client
             ]
             [ ];
