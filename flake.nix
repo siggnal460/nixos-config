@@ -231,7 +231,7 @@
               ./system/hardware/raspi4
               ./system/baseline/server
               ./system/baseline/server/openvpn-client
-              #./system/baseline/server/download-client
+              ./system/baseline/server/torrent-client
             ]
             [ ];
 

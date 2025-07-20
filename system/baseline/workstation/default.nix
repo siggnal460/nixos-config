@@ -2,6 +2,14 @@
   pkgs,
   ...
 }:
+let
+  mountOptions = [
+    "x-systemd.automount"
+		"noauto"
+		"x-systemd.idle-timeout=60"
+    "_netdev"
+	];
+in
 {
   imports = [
     ../../shared/plymouth.nix
@@ -9,9 +17,35 @@
     ../../shared/nfs-client.nix
   ];
 
-  systemd.services.rebuild.environment = {
-    NIGHTLY_REFRESH = "poweroff-always";
-  };
+  systemd = {
+    services.rebuild.environment = {
+      NIGHTLY_REFRESH = "poweroff-always";
+    };
+
+	  tmpfiles.rules = [
+      "d /nfs/ai 0770 root ai"
+      "d /nfs/blender 0770 root users"
+      "d /nfs/media 0770 root media"
+    ];
+	};
+
+  fileSystems = {
+	  "/nfs/ai" = {
+      device = lib.mkForce "x86-atxtwr-computeserver:/export/ai";
+      fsType = lib.mkForce "nfs4";
+      options = mountOptions;
+    };
+    "/nfs/blender" = {
+      device = lib.mkForce "x86-atxtwr-computeserver:/export/blender";
+      fsType = lib.mkForce "nfs4";
+      options = mountOptions;
+    };
+    "/nfs/media" = {
+      device = lib.mkForce "x86-rakmnt-mediaserver:/export/media";
+      fsType = lib.mkForce "nfs4";
+      options = mountOptions;
+    };
+	};
 
   networking.networkmanager.enable = true;
 

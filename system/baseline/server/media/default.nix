@@ -18,6 +18,7 @@ in
     "d /etc/komga 0770 komga wheel"
     "d /etc/lidarr 0770 prowlarr wheel"
     "d /etc/notifiarr 0770 notifiarr wheel"
+    "d /etc/nzbget 0750 nzbget wheel"
     "d /etc/prowlarr 0770 prowlarr wheel"
     "d /etc/radarr 0770 radarr wheel"
     "d /etc/radarr-anime 0770 radarr-anime wheel"
@@ -40,11 +41,21 @@ in
     "d /export/media/data/music 0775 root media"
     "d /export/media/data/tvshows 0775 sonarr media"
     "d /export/media/data/workouts 0775 sonarr media"
+    "d /export/media/usenet 0770 nzbget media"
+    "d /export/media/usenet/completed 0770 nzbget media"
+    "d /export/media/usenet/completed/Anime 0770 nzbget media"
+    "d /export/media/usenet/completed/Movies 0770 nzbget media"
+    "d /export/media/usenet/completed/Series 0770 nzbget media"
   ];
 
   services = {
+    clamav.scanner.scanDirectories = [
+      "/export/media/torrents"
+      "/export/media/usenet"
+    ];
+
     nfs.server = {
-      exports = ''/export/media x86-atxtwr-workstation(rw,nohide,insecure,no_subtree_check)'';
+      exports = ''/export/media 192.168.1.0/24(rw,nohide,insecure,no_subtree_check)'';
     };
     fail2ban = {
       jails = {
@@ -146,6 +157,11 @@ in
     };
     readarr = {
       uid = 709;
+      isSystemUser = true;
+      group = "media";
+    };
+    nzbget = {
+      uid = 711;
       isSystemUser = true;
       group = "media";
     };
@@ -518,6 +534,29 @@ in
       ];
       extraOptions = [
         "--name=bazarr"
+      ];
+    };
+
+    nzbget = {
+      image = "lscr.io/linuxserver/nzbget:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      ports = [
+        "6789:6789"
+      ];
+      environment = {
+        PUID = "711";
+        PGID = "982";
+        TZ = "America/Denver";
+      };
+      volumes = [
+        "/export/media/usenet:/data/usenet"
+        "/etc/nzbget:/config"
+      ];
+      extraOptions = [
+        "--name=nzbget"
       ];
     };
 
