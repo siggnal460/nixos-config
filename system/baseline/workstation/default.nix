@@ -112,6 +112,7 @@ in
       gnupg
       jellyfin-media-player
       libreoffice
+			logseq
       mpv
       openvpn
 			protonmail-bridge-gui
