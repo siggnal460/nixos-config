@@ -266,10 +266,8 @@
               ./system/hardware/gpu/nvidia
               ./system/hardware/gpu/nvidia/cuda
               ./system/baseline/server
-              ./system/baseline/server/openvpn-client
               ./system/baseline/server/media
               ./system/baseline/server/emulatorjs
-              ./system/baseline/server/download-client
               ./system/baseline/server/nfs
               ./system/baseline/server/samba
               ./system/baseline/server/netbootxyz
