@@ -1,3 +1,4 @@
+{ lib, ... }:
 let
   hostname = "x86-atxtwr-computeserver";
 in
@@ -27,5 +28,5 @@ in
     #};
   };
 
-  systemd.timers."podman-updater".timerConfig.OnCalendar = "*-*-* 00:00:00";
+  systemd.timers."podman-updater".timerConfig.OnCalendar = lib.mkForce "*-*-* 00:00:00";
 }

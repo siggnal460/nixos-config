@@ -1,3 +1,4 @@
+{ lib, ... }:
 let
   hostname = "arm-raspi4-downloadclient";
 in
@@ -11,5 +12,5 @@ in
     domain = "gappyland.org";
   };
 
-  systemd.timers."podman-updater".timerConfig.OnCalendar = "*-*-* 02:30:00";
+  systemd.timers."podman-updater".timerConfig.OnCalendar = lib.mkForce "*-*-* 02:30:00";
 }

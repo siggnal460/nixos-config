@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   virtualisation = {
     containers.enable = true;
@@ -21,6 +21,7 @@
       podman-updater = {
         timerConfig = {
           Unit = "podman-updater.service";
+					OnCalendar = lib.mkDefault "*-*-* 10:45:00";
         };
         wantedBy = [ "timers.target" ];
       };

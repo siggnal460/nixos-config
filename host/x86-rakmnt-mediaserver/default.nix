@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -52,5 +53,5 @@
     };
   };
 
-  systemd.timers."podman-updater".timerConfig.OnCalendar = "*-*-* 01:15:00";
+  systemd.timers."podman-updater".timerConfig.OnCalendar = lib.mkForce "*-*-* 01:15:00";
 }

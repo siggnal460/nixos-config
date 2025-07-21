@@ -51,6 +51,7 @@ Note that /etc/nixos and all recursive files should be owned by root:wheel to ma
 
 | Process                             | Time      |
 | ----------------------------------- | --------- |
+| Podman auto-upgrade (default)       | 1045      |
 | Podman auto-upgrade (computeserver) | 0000      |
 | restic backup (Jellyfin)            | 0010      |
 | nix store optimization              | 0030      |
@@ -65,5 +66,5 @@ Note that /etc/nixos and all recursive files should be owned by root:wheel to ma
 
 ## Known Issues
 
-- on COSMIC DE when using the `nfs-client` module, if the servers are not properly exporting the shares it will case all sorts of odd bugs from Flatpak apps not working to causing the file manager to hang.
+- On COSMIC DE when using the `nfs-client` module, if the servers are not properly exporting the shares it will case all sorts of odd bugs from Flatpak apps not working to causing the file manager to hang.
 
