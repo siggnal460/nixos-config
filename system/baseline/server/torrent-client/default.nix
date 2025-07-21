@@ -2,12 +2,17 @@
 let
   mountOptions = [
     "x-systemd.automount"
-		"noauto"
-		"x-systemd.idle-timeout=60"
+    "noauto"
+    "x-systemd.idle-timeout=60"
     "_netdev"
-	];
+  ];
 in
 {
+  imports = [
+    ../../../shared/podman.nix
+    ../../../shared/nfs-client.nix
+  ];
+
   systemd.tmpfiles.rules = [
     "d /etc/deluge 0750 deluge wheel"
     "d /nfs/media 0774 root root"
@@ -20,16 +25,6 @@ in
     "d /nfs/media/torrents/complete/movies 0770 deluge media"
     "d /nfs/media/torrents/incomplete 0770 deluge media"
   ];
-
-  imports = [
-	  ../../../shared/podman.nix
-	  ../../../shared/nfs-client.nix
-	];
-
-  networking.firewall = { # remember to enable port forwarding in router
-	  allowedTCPPorts = [ 6881 ];
-    allowedUDPPorts = [ 6881 ];
-	};
 
   fileSystems."/nfs/media" = {
     device = lib.mkForce "x86-rakmnt-mediaserver:/export/media";
@@ -54,7 +49,7 @@ in
       };
       ports = [
         "8112:8112"
-        "6881:6881"
+        "6881:6881" # forward 6881 in the router
         "6881:6881/udp"
       ];
       environment = {

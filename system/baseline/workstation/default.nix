@@ -1,15 +1,15 @@
 {
   pkgs,
-	lib,
+  lib,
   ...
 }:
 let
   mountOptions = [
     "x-systemd.automount"
-		"noauto"
-		"x-systemd.idle-timeout=60"
+    "noauto"
+    "x-systemd.idle-timeout=60"
     "_netdev"
-	];
+  ];
 in
 {
   imports = [
@@ -23,15 +23,15 @@ in
       NIGHTLY_REFRESH = "poweroff-always";
     };
 
-	  tmpfiles.rules = [
+    tmpfiles.rules = [
       "d /nfs/ai 0770 root ai"
       "d /nfs/blender 0770 root users"
       "d /nfs/media 0770 root media"
     ];
-	};
+  };
 
   fileSystems = {
-	  "/nfs/ai" = {
+    "/nfs/ai" = {
       device = lib.mkForce "x86-atxtwr-computeserver:/export/ai";
       fsType = lib.mkForce "nfs4";
       options = mountOptions;
@@ -46,7 +46,7 @@ in
       fsType = lib.mkForce "nfs4";
       options = mountOptions;
     };
-	};
+  };
 
   networking.networkmanager.enable = true;
 
@@ -54,7 +54,7 @@ in
 
   programs = {
     evince.enable = true;
-		thunderbird.enable = true;
+    thunderbird.enable = true;
     #firejail.enable = true;
     gnupg.agent = {
       # gpg keys
@@ -76,7 +76,7 @@ in
     printing.drivers = [ pkgs.brlaser ];
     fwupd.enable = true; # for upgrading firmware
     pcscd.enable = true; # needed for gpg keys
-	  flatpak.enable = true;
+    flatpak.enable = true;
     /*
       		doesn't do anything on wayland I think
       				libinput.mouse = {
@@ -113,10 +113,10 @@ in
       gnupg
       jellyfin-media-player
       libreoffice
-			logseq
+      logseq
       mpv
       openvpn
-			protonmail-bridge-gui
+      protonmail-bridge-gui
       tor-browser
       wl-clipboard
       wineWowPackages.waylandFull
