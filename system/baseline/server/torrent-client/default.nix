@@ -27,8 +27,8 @@ in
 	];
 
   networking.firewall = { # remember to enable port forwarding in router
-	  allowedTCPPorts = [ 49154 ];
-    allowedUDPPorts = [ 49154 ];
+	  allowedTCPPorts = [ 6881 ];
+    allowedUDPPorts = [ 6881 ];
 	};
 
   fileSystems."/nfs/media" = {
@@ -54,8 +54,8 @@ in
       };
       ports = [
         "8112:8112"
-        "49154:6881"
-        "49154:6881/udp"
+        "6881:6881"
+        "6881:6881/udp"
       ];
       environment = {
         PUID = "710";
@@ -63,7 +63,7 @@ in
         TZ = "America/Denver";
       };
       volumes = [
-        "/export/media/torrents:/downloads"
+        "/nfs/media/torrents:/downloads"
         "/etc/deluge:/config"
       ];
       extraOptions = [
