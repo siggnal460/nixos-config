@@ -1,22 +1,30 @@
 # nixos-config
 
-My personal nixos-config. Contains a wide variety of modules for security hardening, gaming, AI, virtualization, development, etc.
+My personal nixos-config. The flakes are not meant to be used directly without significant tweaks.
 
 ## Structure
 
 ```
+├── ansible
 ├── bin
 ├── images
 ├── user
 |   ├── <user folders>
 ├── host
 |   ├── <host folders>
+├── secrets
+|   ├── <host folders>
 ├── system
 |   ├── baseline
 |   |   ├── server
+|   |   |   ├── <submodules>
 |   |   ├── workstation
+|   |   |   ├── <submodules>
 |   |   ├── console
+|   |   |   ├── <submodules>
 |   |   ├── htpc
+|   |   |   ├── <submodules>
+|   ├── de
 |   ├── extras
 |   ├── hardware
 |   |   ├── arch
@@ -27,25 +35,23 @@ My personal nixos-config. Contains a wide variety of modules for security harden
 |   |   ├── laptop
 |   |   ├── steamdeck
 |   ├── shared
+|   ├── wm
 ```
 
+- **ansible**: WIP Ansible workflow which will update all machines on update.
 - **bin**: Contains any custom scripts I've made. These are added to the Nix store and system PATH.
-  - nix-switch: Convenience nushell script for updating the system, formatting each file with
-    nixfmt, and keeping it in sync with a remote repo.
-- **images**: Collection of wallpapers.
+  - nix-switch: Convenience nushell script for updating the system, formatting each file with nixfmt, and keeping it in sync with a remote repo.
+- **images**: Various images such as wallpapers, icons, etc.
 - **user**: Per-user configs. Mostly home-manager modules.
-- **hosts**: Host-specific modules. For things such as setting hostnames and static IPs. Also
-  contains each system's hardware-configuration.nix.
+- **hosts**: Host-specific modules. For things such as setting hostnames and static IPs. Also contains each system's hardware-configuration.nix.
+- **secrets**: Per-host sops-nix yaml secret files.
 - **system**: System-wide modules.
-  - baseline: There are baseline configs for server, workstation, gaming-console and HTPC that can
-    get you up-and-running quickly. In each baseline are also submodules pertaining to that baseline
-    for more specialized functionality.
+  - baseline: There are baseline configs for server, workstation, gaming-console and HTPC. In each baseline are also submodules pertaining to that baseline for more specialized functionality.
+  - de: My curated desktop environment setups.
   - extras: Additional nix tools I've made.
-  - hardware: Modules for certain hardware setups, e.g. graphics card drivers, SteamDeck firmware,
-    etc.
+  - hardware: Modules for certain hardware setups, e.g. graphics card drivers, SteamDeck firmware, etc.
   - shared: Modules that have functionality which is shared among other modules.
-
-Note that /etc/nixos and all recursive files should be owned by root:wheel to maximize security and for the auto-update service to work.
+  - wm: My curated window manager setups.
 
 ## Timer Schedule
 
@@ -66,5 +72,5 @@ Note that /etc/nixos and all recursive files should be owned by root:wheel to ma
 
 ## Known Issues
 
-- On COSMIC DE when using the `nfs-client` module, if the servers are not properly exporting the shares it will case all sorts of odd bugs from Flatpak apps not working to causing the file manager to hang.
+- On COSMIC DE, if the servers are not properly exporting the shares it will case all sorts of odd bugs from Flatpak apps not working to causing the file manager to hang.
 
