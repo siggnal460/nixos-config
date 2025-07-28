@@ -92,48 +92,76 @@ in
               name = "Local Servers";
               bookmarks = [
                 {
+                  name = "Bazarr";
+                  url = "http://x86-rakmnt-mediaserver:6767";
+                }
+                {
                   name = "Beszel";
-                  url = "https://x86-rakmnt-mediaserver:6767";
+                  url = "http://x86-rakmnt-mediaserver:8090";
                 }
                 {
                   name = "ComfyUI";
-                  url = "https://x86-atxtwr-computeserver:8188";
+                  url = "http://x86-atxtwr-computeserver:8188";
+                }
+                {
+                  name = "Deluge";
+                  url = "http://arm-raspi4-downloadclient:8112";
                 }
                 {
                   name = "FluxGym";
-                  url = "https://x86-atxtwr-computeserver:7860";
+                  url = "http://x86-atxtwr-computeserver:7860";
+                }
+                {
+                  name = "Jellyfin";
+                  url = "http://x86-rakmnt-mediaserver:8096";
+                }
+                {
+                  name = "Jellyseerr";
+                  url = "http://x86-rakmnt-mediaserver:5055";
+                }
+                {
+                  name = "Komga";
+                  url = "http://x86-rakmnt-mediaserver:25600";
                 }
                 {
                   name = "Nextcloud";
-                  url = "https://x86-rakmnt-mediaserver";
+                  url = "http://x86-rakmnt-mediaserver";
+                }
+                {
+                  name = "NZBGet";
+                  url = "http://x86-rakmnt-mediaserver:6789";
                 }
                 {
                   name = "Prowlarr";
-                  url = "https://x86-rakmnt-mediaserver:9696";
+                  url = "http://x86-rakmnt-mediaserver:9696";
                 }
                 {
                   name = "Radarr";
-                  url = "https://x86-rakmnt-mediaserver:7878";
+                  url = "http://x86-rakmnt-mediaserver:7878";
                 }
                 {
                   name = "Readarr";
-                  url = "https://x86-rakmnt-mediaserver:8787";
+                  url = "http://x86-rakmnt-mediaserver:8787";
+                }
+                {
+                  name = "Readarr-Anime";
+                  url = "http://x86-rakmnt-mediaserver:8788";
                 }
                 {
                   name = "SillyTavern";
-                  url = "https://x86-atxtwr-computeserver:4000";
+                  url = "http://x86-atxtwr-computeserver:4000";
                 }
                 {
                   name = "Sonarr";
-                  url = "https://x86-rakmnt-mediaserver:8989";
+                  url = "http://x86-rakmnt-mediaserver:8989";
                 }
                 {
                   name = "Sonarr-Anime";
-                  url = "https://x86-rakmnt-mediaserver:8988";
+                  url = "http://x86-rakmnt-mediaserver:8988";
                 }
                 {
                   name = "Transmission";
-                  url = "https://x86-rakmnt-mediaserver:9091";
+                  url = "http://x86-rakmnt-mediaserver:9091";
                 }
               ];
             }

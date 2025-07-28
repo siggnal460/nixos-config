@@ -34,6 +34,7 @@
     imports = [
       ./programs/mpv
       ./programs/librewolf
+      ./programs/hyprland
     ];
 
     accounts.email.accounts.aaron.thunderbird.enable = true;
