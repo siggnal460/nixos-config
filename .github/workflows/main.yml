@@ -10,13 +10,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Cache Nix Store
-        uses: actions/cache@v3
-        with:
-          path: /nix/store
-          key: ${{ runner.os }}-nix-store
-          restore-keys: |
-            ${{ runner.os }}-nix-store
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
       - name: Update flake.lock
@@ -24,15 +17,6 @@ jobs:
         uses: DeterminateSystems/update-flake-lock@main
         with:
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
-      - name: Check PR status
-        run: |
-          pr_status=$(gh pr view "${{ steps.update.outputs.pull-request-number }}" --json state -q '.state')
-          if [ "$pr_status" != "OPEN" ]; then
-            echo "Pull request is not open. Exiting."
-            exit 1
-          fi
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
       - name: Merge
         run: gh pr merge --auto "${{ steps.update.outputs.pull-request-number }}" --rebase
         env:
