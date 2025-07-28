@@ -19,7 +19,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
       - name: Check PR status
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{secrets.GH_TOKEN_FOR_UPDATES}}
         run: |
           pr_status=$(gh pr view "${{ steps.update.outputs.pull-request-number }}" --json state -q '.state')
           if [ "$pr_status" != "OPEN" ]; then
