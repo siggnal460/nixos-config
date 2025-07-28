@@ -5,9 +5,23 @@
     inputs.nix-gaming.nixosModules.platformOptimizations
   ];
 
+	users.groups = {
+		games = {
+			gid = 770;
+		};
+	};
+
   systemd.tmpfiles.rules = [
-    "L+ /home/aaron/Games/steam - - - - /home/aaron/.var/app/com.valvesoftware.Steam/.steam/steam/steamapps/common"
+    "d /nfs/games 0775 root games"
 	];
+
+  fileSystems = {
+    "/nfs/games" = {
+      device = lib.mkForce "x86-rakmnt-mediaserver:/export/games";
+      fsType = lib.mkForce "nfs4";
+      options = mountOptions;
+    };
+	};
 
   services = {
     pipewire.lowLatency = {
@@ -21,7 +35,7 @@
 
   programs.steam.platformOptimizations.enable = true;
 
-  systemd.services.flatpak-app-installer = {
+  systemd.services.flatpak-gaming-tweaks = {
     wantedBy = [ "multi-user.target" ];
     after = [ "flatpak-install.service" ];
     path = [ pkgs.flatpak ];
@@ -30,7 +44,7 @@
       flatpak install -y --noninteractive flathub org.freedesktop.Platform.VulkanLayer.MangoHud//24.08
       flatpak install -y --noninteractive flathub dev.goats.xivlauncher
       flatpak override --env=MANGOHUD=1 com.valvesoftware.Steam
-      flatpak override --env=MANGOHUD_CONFIG=fps_limit=175 com.valvesoftware.Steam
+			flatpak override --filesystem=/nfs/games com.valvesoftware.Steam 
     '';
   };
 }

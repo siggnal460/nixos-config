@@ -19,8 +19,9 @@
           "networkmanager"
           "media"
           "ai"
+					"games"
         ];
-        initialPassword = "@C4ntG23ss!"; # relevent only if not installing nix through official installer, change later
+        initialPassword = "@C4ntG23ss!"; # change later
         openssh.authorizedKeys.keys = [ # TODO 
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPT4DSBvZkQUqrHa6H/58WI/D7CNi+Tf0keXMN5GXq0F aaron@x86-atxtwr-workstation"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO6qoMeTk0TOemjL41fTreiTkuql+7or1lQ4dFuPy+Xu aaron@x86-laptop-galago"
@@ -40,7 +41,10 @@
     ai = {
       gid = 780;
     };
-  };
+		games = {
+			gid = 770;
+		};
+	};
 
   nix.settings.trusted-users = [ "aaron" ];
 
