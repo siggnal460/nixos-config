@@ -11,12 +11,12 @@
     loader = {
       timeout = 0;
     };
-	  plymouth = {
+    plymouth = {
       enable = true;
-		  extraConfig = ''
+      extraConfig = ''
         ShowDelay=2
         DeviceScale=2
       '';
-		};
-	};
+    };
+  };
 }

@@ -22,7 +22,8 @@
     amd.gpu.enableBacklightControl = false;
   };
 
-  systemd.services.flatpak-console-tweaks = { # this has a 120hz TV
+  systemd.services.flatpak-console-tweaks = {
+    # this has a 120hz TV
     wantedBy = [ "multi-user.target" ];
     after = [ "flatpak-gaming-tweaks.service" ];
     path = [ pkgs.flatpak ];

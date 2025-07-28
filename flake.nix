@@ -85,7 +85,8 @@
               home-manager.useUserPackages = true;
               imports = [ ] ++ extraHomeModules;
             }
-          ] ++ extraModules; # system modules
+          ]
+          ++ extraModules; # system modules
         };
 
       mkComputerUnstable =
@@ -114,7 +115,8 @@
               home-manager.useGlobalPkgs = true;
               imports = [ ] ++ extraHomeModules;
             }
-          ] ++ extraModules; # system modules
+          ]
+          ++ extraModules; # system modules
         };
 
     in

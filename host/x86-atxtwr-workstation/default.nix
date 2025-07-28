@@ -20,7 +20,8 @@
     ];
   };
 
-  systemd.services.flatpak-workstation-tweaks = { # this has a 175hz monitor
+  systemd.services.flatpak-workstation-tweaks = {
+    # this has a 175hz monitor
     wantedBy = [ "multi-user.target" ];
     after = [ "flatpak-gaming-tweaks.service" ];
     path = [ pkgs.flatpak ];

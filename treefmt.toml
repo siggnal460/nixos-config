@@ -4,8 +4,8 @@ includes = ["*.lua"]
 
 [formatter.nixfmt-rfc-style]
 command = "nixfmt"
+options = ["--indent=2", "--verify"]
 includes = ["*.nix"]
-excludes = ["*.nix*"]
 
 [formatter.deadnix]
 command = "deadnix"

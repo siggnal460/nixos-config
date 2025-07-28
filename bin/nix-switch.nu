@@ -100,7 +100,7 @@ def main [
     }
 
     print_header "FORMATTING FILES"
-    do -i {treefmt}
+    do -i {sudo treefmt}
     print "\n"
 
     print_header "CHECKING FOR CHANGES"

@@ -18,7 +18,7 @@
     cargo
     gcc
     go
-		gopls
+    gopls
     nil
     nixd
     rust-analyzer

@@ -1,4 +1,9 @@
-{ pkgs, inputs, lib, ... }:
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 let
   mountOptions = [
     "x-systemd.automount"
@@ -14,15 +19,15 @@ in
     ./nfs-client.nix
   ];
 
-	users.groups = {
-		games = {
-			gid = 770;
-		};
-	};
+  users.groups = {
+    games = {
+      gid = 770;
+    };
+  };
 
   systemd.tmpfiles.rules = [
     "d /nfs/games 0775 root games"
-	];
+  ];
 
   fileSystems = {
     "/nfs/games" = {
@@ -30,7 +35,7 @@ in
       fsType = lib.mkForce "nfs4";
       options = mountOptions;
     };
-	};
+  };
 
   services = {
     pipewire.lowLatency = {

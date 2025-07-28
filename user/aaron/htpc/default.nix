@@ -1,9 +1,9 @@
 { pkgs, ... }:
 {
   home-manager.users.aaron = {
-		home.packages = with pkgs; [
-		  sway-audio-idle-inhibit
-		];
+    home.packages = with pkgs; [
+      sway-audio-idle-inhibit
+    ];
 
     programs = {
       nushell.extraConfig = ''
@@ -30,23 +30,26 @@
     };
 
     services = {
-		  gammastep = {
-				enable = true;
-				dawnTime = "5:15";
-				duskTime = "19:00-20:30";
-				settings = {
-					general = {
-						adjustment-method = "wayland";
-					};
-				};
-			};
-			swayidle = {
-			  enable = true;
-				timeouts = [
-				  { timeout = 1200; command = "${pkgs.systemd}/bin/systemctl suspend"; }
-				];
-			};
-		};
+      gammastep = {
+        enable = true;
+        dawnTime = "5:15";
+        duskTime = "19:00-20:30";
+        settings = {
+          general = {
+            adjustment-method = "wayland";
+          };
+        };
+      };
+      swayidle = {
+        enable = true;
+        timeouts = [
+          {
+            timeout = 1200;
+            command = "${pkgs.systemd}/bin/systemctl suspend";
+          }
+        ];
+      };
+    };
 
     wayland.windowManager.sway = {
       enable = true;

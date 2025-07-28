@@ -21,7 +21,7 @@
       podman-updater = {
         timerConfig = {
           Unit = "podman-updater.service";
-					OnCalendar = lib.mkDefault "*-*-* 10:45:00";
+          OnCalendar = lib.mkDefault "*-*-* 10:45:00";
         };
         wantedBy = [ "timers.target" ];
       };

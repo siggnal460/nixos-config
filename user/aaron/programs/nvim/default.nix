@@ -8,7 +8,7 @@
     ];
     plugins = with pkgs.vimPlugins; [
       nvim-lspconfig
-			tokyonight-nvim
+      tokyonight-nvim
     ];
     extraLuaConfig = lib.fileContents ./config/init.lua;
   };
