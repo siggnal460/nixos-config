@@ -11,6 +11,7 @@ in
   imports = [
     inputs.nix-gaming.nixosModules.pipewireLowLatency
     inputs.nix-gaming.nixosModules.platformOptimizations
+    ./nfs-client.nix
   ];
 
 	users.groups = {
@@ -52,7 +53,7 @@ in
       flatpak install -y --noninteractive flathub org.freedesktop.Platform.VulkanLayer.MangoHud//24.08
       flatpak install -y --noninteractive flathub dev.goats.xivlauncher
       flatpak override --env=MANGOHUD=1 com.valvesoftware.Steam
-			flatpak override --filesystem=/nfs/games com.valvesoftware.Steam 
+      flatpak override --filesystem=/nfs/games com.valvesoftware.Steam 
     '';
   };
 }

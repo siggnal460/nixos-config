@@ -181,7 +181,7 @@
             [ ./user/aaron/console ];
 
         x86-legigo-jovian =
-          mkComputerUnstable "x86_64-linux" ./host/x86-legngo-jovian
+          mkComputerUnstable "x86_64-linux" ./host/x86-legigo-jovian
             [
               ./system/hardware/gpu/amd
               ./system/baseline/console
