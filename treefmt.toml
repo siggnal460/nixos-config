@@ -1,15 +1,13 @@
 [formatter.stylua]
 command = "stylua"
-excludes = []
 includes = ["*.lua"]
-options = []
 
 [formatter.nixfmt-rfc-style]
 command = "nixfmt"
 includes = ["*.nix"]
+excludes = ["*.nix*"]
 
 [formatter.deadnix]
 command = "deadnix"
-excludes = []
 includes = ["*.nix"]
 options = ["--edit"]
