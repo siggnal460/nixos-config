@@ -1,4 +1,12 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, lib, ... }:
+let
+  mountOptions = [
+    "x-systemd.automount"
+    "noauto"
+    "x-systemd.idle-timeout=60"
+    "_netdev"
+  ];
+in
 {
   imports = [
     inputs.nix-gaming.nixosModules.pipewireLowLatency

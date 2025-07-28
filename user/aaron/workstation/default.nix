@@ -13,6 +13,7 @@
       "d /home/aaron/Projects 0700 aaron aaron"
       "d /home/aaron/Games 0700 aaron aaron"
 			"L+ /home/aaron/Games/steam - - - - /home/aaron/.var/app/com.valvesoftware.Steam/.steam/steam/steamapps/common"
+			"L+ /home/aaron/Games/gog - - - - /nfs/games/gog"
 			"L+ /home/aaron/Games/2ds - - - - /nfs/games/roms/2ds"
 			"L+ /home/aaron/Games/3ds - - - - /nfs/games/roms/3ds"
 			"L+ /home/aaron/Games/gb - - - - /nfs/games/roms/gb"
