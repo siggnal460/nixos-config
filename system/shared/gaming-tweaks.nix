@@ -11,6 +11,7 @@ let
     "x-systemd.idle-timeout=60"
     "_netdev"
   ];
+	retroarchSteamFolder = "/home/aaron/.local/share/Steam/steamapps/common/RetroArch"
 in
 {
   imports = [
@@ -27,7 +28,9 @@ in
 
   systemd.tmpfiles.rules = [
     "d /nfs/games 0775 root games"
-  ];
+    "d ${retroarchSteamFolder}/system/bios 0775 aaron users"
+    "d ${retroarchSteamFolder}/downloads/roms 0775 aaron users"
+	];
 
   fileSystems = {
     "/nfs/games" = {
@@ -35,7 +38,15 @@ in
       fsType = lib.mkForce "nfs4";
       options = mountOptions;
     };
-  };
+    "${retroarchSteamFolder}/system/bios" = { #RetroArch Steam has odd sandboxing, so you need a bind mount
+      device = lib.mkForce "/nfs/games/bios";
+      options = [ "bind" ];
+    };
+    "${retroarchSteamFolder}/downloads/roms" = {
+      device = lib.mkForce "/nfs/games/roms";
+      options = [ "bind" ];
+    };
+	};
 
   services = {
     pipewire.lowLatency = {
