@@ -41,6 +41,11 @@
     fsType = "autofs";
   };
 
+  fileSystems."/nfs/games" = {
+    device = "systemd-1";
+    fsType = "autofs";
+  };
+
   fileSystems."/nfs/media" = {
     device = "systemd-1";
     fsType = "autofs";
@@ -55,7 +60,7 @@
     ];
   };
 
-  fileSystems."/mnt/nvme0n1" = {
+  fileSystems."/mnt/nvme1n1" = {
     device = "/dev/disk/by-uuid/5b778bef-b3af-4710-9d44-6424b693dc29";
     fsType = "ext4";
   };
