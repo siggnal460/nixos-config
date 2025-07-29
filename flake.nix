@@ -6,13 +6,11 @@
       "https://cache.nixos.org/"
       "https://nix-community.cachix.org"
       "https://nix-gaming.cachix.org"
-      "https://ai.cachix.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-      "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
     ];
   };
 
@@ -37,7 +35,6 @@
     jovian-nixos.url = "github:Jovian-Experiments/Jovian-NixOS";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-index-database.url = "github:Mic92/nix-index-database";
-    nixified-ai.url = "github:nixified-ai/flake";
   };
 
   outputs =
