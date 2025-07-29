@@ -9,6 +9,6 @@
   };
 
   systemd.tmpfiles.rules = [
-    "d /nfs 0770 root users"
+    "d /nfs 0775 root users"
   ];
 }

@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 {
   imports = [
     ../../shared/plymouth-tv.nix
@@ -6,6 +6,7 @@
     ../../shared/bluetooth.nix
     ../../shared/remotely-managed.nix
     ../../shared/networkmanager.nix
+    ../../shared/gaming-tweaks.nix
   ];
 
   systemd.services.rebuild.environment = {
@@ -35,9 +36,7 @@
   };
 
   services.xserver.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  services.displayManager.cosmic-greeter.enable = lib.mkForce false;
+  services.desktopManager.gnome.enable = true;
 
   xdg.autostart.enable = true;
 }
