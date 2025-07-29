@@ -28,8 +28,8 @@ in
 
   systemd.tmpfiles.rules = [
     "d /nfs/games 0775 root games"
-    "d ${retroarchSteamFolder}/system/bios 0775 aaron users"
-    "d ${retroarchSteamFolder}/downloads/roms 0775 aaron users"
+    "d ${retroarchSteamFolder}/system 0775 aaron users"
+    "d /srv/roms 0775 aaron users"
   ];
 
   fileSystems = {
@@ -38,12 +38,12 @@ in
       fsType = lib.mkForce "nfs4";
       options = mountOptions;
     };
-    "${retroarchSteamFolder}/system/bios" = {
-      # RetroArch Steam has odd sandboxing, so you need a bind mount
+    "${retroarchSteamFolder}/system" = {
       device = lib.mkForce "/nfs/games/bios";
       options = [ "bind" ];
     };
-    "${retroarchSteamFolder}/downloads/roms" = {
+    "/srv/roms" = {
+      # This location makes no sense for this, but RetroArch Steam has odd sandboxing so you need a bind mount somewhere and this is the only sensible place to put it
       device = lib.mkForce "/nfs/games/roms";
       options = [ "bind" ];
     };
@@ -66,6 +66,7 @@ in
     after = [ "flatpak-install.service" ];
     path = [ pkgs.flatpak ];
     script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
       flatpak install -y --noninteractive flathub com.valvesoftware.Steam//stable
       flatpak install -y --noninteractive flathub org.freedesktop.Platform.VulkanLayer.MangoHud//24.08
       flatpak install -y --noninteractive flathub dev.goats.xivlauncher
