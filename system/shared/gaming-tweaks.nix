@@ -12,7 +12,6 @@ let
     "_netdev"
     "bg"
   ];
-  retroarchSteamFolder = "/home/aaron/.local/share/Steam/steamapps/common/RetroArch";
 in
 {
   imports = [
@@ -29,7 +28,7 @@ in
 
   systemd.tmpfiles.rules = [
     "d /nfs/games 0775 root games"
-    "d ${retroarchSteamFolder}/system 0775 aaron users"
+    "d /srv/system 0775 aaron users"
     "d /srv/roms 0775 aaron users"
   ];
 
@@ -39,7 +38,7 @@ in
       fsType = lib.mkForce "nfs4";
       options = mountOptions;
     };
-    "${retroarchSteamFolder}/system" = {
+    "/srv/system" = {
       device = lib.mkForce "/nfs/games/bios";
       options = [ "bind" ];
     };
