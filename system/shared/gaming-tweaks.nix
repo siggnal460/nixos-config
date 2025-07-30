@@ -8,8 +8,9 @@ let
   mountOptions = [
     "x-systemd.automount"
     "noauto"
-    "x-systemd.idle-timeout=60"
+    "x-systemd.idle-timeout=1800"
     "_netdev"
+    "bg"
   ];
   retroarchSteamFolder = "/home/aaron/.local/share/Steam/steamapps/common/RetroArch";
 in
