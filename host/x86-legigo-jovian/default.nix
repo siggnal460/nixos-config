@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -6,5 +6,5 @@
     hostName = "x86-legigo-jovian";
   };
 
-  config.gappyland.jovian = true;
+  gappyland.jovian = true;
 }

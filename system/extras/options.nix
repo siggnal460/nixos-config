@@ -21,7 +21,6 @@
   };
 
   config = {
-    gappyland.jovian = false;
     nixpkgs.config.allowUnfreePredicate =
       pkg: builtins.elem (lib.getName pkg) config.nixpkgs.allowUnfreePackages;
   };
