@@ -65,8 +65,6 @@ in
             exe = "vkcube";
             multiplier = 4;
           }
-        ];
-        game = [
           {
             exe = "retroarch";
             multiplier = 3;
