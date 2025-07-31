@@ -49,6 +49,10 @@
         "$mainMod, M, exit"
         "$mainMod, E, exec, $fileManager"
         "$mainMod, R, exec, $menu"
+        "$mainMod, left, movefocus, l"
+        "$mainMod, right, movefocus, h"
+        "$mainMod, up, movefocus, k"
+        "$mainMod, down, movefocus, j"
       ];
 
       decoration = {

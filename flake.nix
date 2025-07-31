@@ -34,6 +34,10 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     jovian-nixos.url = "github:Jovian-Experiments/Jovian-NixOS";
     nix-gaming.url = "github:fufexan/nix-gaming";
+    lsfg-vk-flake = {
+      url = "github:pabloaul/lsfg-vk-flake/main";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     nix-index-database.url = "github:Mic92/nix-index-database";
   };
 

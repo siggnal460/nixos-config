@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   lib,
+  config,
   ...
 }:
 let
@@ -17,6 +18,7 @@ in
   imports = [
     inputs.nix-gaming.nixosModules.pipewireLowLatency
     inputs.nix-gaming.nixosModules.platformOptimizations
+    inputs.lsfg-vk-flake.nixosModules.default
     ./nfs-client.nix
   ];
 
@@ -50,6 +52,10 @@ in
   };
 
   services = {
+    lsfg-vk = {
+      enable = true;
+      ui.enable = false;
+    };
     pipewire.lowLatency = {
       enable = true;
       quantum = 64;
@@ -61,7 +67,7 @@ in
 
   programs.steam.platformOptimizations.enable = true;
 
-  systemd.services.flatpak-gaming-tweaks = {
+  systemd.services.flatpak-gaming-tweaks = lib.mkIf config.gappyland.jovian {
     wantedBy = [ "multi-user.target" ];
     after = [ "flatpak-install.service" ];
     path = [ pkgs.flatpak ];
@@ -71,6 +77,7 @@ in
       flatpak install -y --noninteractive flathub org.freedesktop.Platform.VulkanLayer.MangoHud//24.08
       flatpak install -y --noninteractive flathub dev.goats.xivlauncher
       flatpak override --env=MANGOHUD=1 com.valvesoftware.Steam
+      flatpak override --env=ENABLE_LSFG=1 com.valvesoftware.Steam
       flatpak override --filesystem=/nfs/games com.valvesoftware.Steam 
     '';
   };
