@@ -1,11 +1,4 @@
-{ config, pkgs, ... }:
-let
-  losslessDll =
-    if (config.gappyland.jovian) then
-      "/home/aaron/.steam/steam/SteamApps/common/Lossless Scaling/Lossless.dll"
-    else
-      "/home/aaron/.var/app/com.valvesoftware.Steam/.steam/steam/steamapps/common/Lossless Scaling/Lossless.dll";
-in
+{ config, ... }:
 {
   users.users.aaron.extraGroups = [ "libvirtd" ];
 
@@ -53,25 +46,6 @@ in
       ./programs/librewolf
       ./programs/hyprland
     ];
-
-    home.file."/.config/lsfg-vk/conf.toml" = {
-      source = (pkgs.formats.toml { }).generate "lsfg-vk-configuration" {
-        version = 1;
-        global = {
-          dll = losslessDll;
-        };
-        game = [
-          {
-            exe = "vkcube";
-            multiplier = 4;
-          }
-          {
-            exe = "retroarch";
-            multiplier = 3;
-          }
-        ];
-      };
-    };
 
     accounts.email.accounts.aaron.thunderbird.enable = true;
 
