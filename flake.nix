@@ -159,8 +159,6 @@
               ./system/hardware/gpu/nvidia
               ./system/hardware/gpu/nvidia/cuda
               ./system/hardware/gpu/nvidia/workstation
-              ./system/de/cosmic
-              ./system/wm/hyprland
               ./system/baseline/workstation
               ./system/baseline/workstation/gaming
               ./system/baseline/workstation/gamedev-nvidia

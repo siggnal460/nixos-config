@@ -16,15 +16,14 @@ My personal nixos-config. The flakes are not meant to be used directly without s
 |   ├── <host folders>
 ├── system
 |   ├── baseline
-|   |   ├── server
-|   |   |   ├── <submodules>
-|   |   ├── workstation
-|   |   |   ├── <submodules>
 |   |   ├── console
 |   |   |   ├── <submodules>
 |   |   ├── htpc
 |   |   |   ├── <submodules>
-|   ├── de
+|   |   ├── server
+|   |   |   ├── <submodules>
+|   |   ├── workstation
+|   |   |   ├── <submodules>
 |   ├── extras
 |   ├── hardware
 |   |   ├── arch
@@ -35,7 +34,6 @@ My personal nixos-config. The flakes are not meant to be used directly without s
 |   |   ├── laptop
 |   |   ├── steamdeck
 |   ├── shared
-|   ├── wm
 ```
 
 - **ansible**: WIP Ansible workflow which will update all machines on update.
@@ -46,12 +44,14 @@ My personal nixos-config. The flakes are not meant to be used directly without s
 - **hosts**: Host-specific modules. For things such as setting hostnames and static IPs. Also contains each system's hardware-configuration.nix.
 - **secrets**: Per-host sops-nix yaml secret files.
 - **system**: System-wide modules.
-  - baseline: There are baseline configs for server, workstation, gaming-console and HTPC. In each baseline are also submodules pertaining to that baseline for more specialized functionality.
-  - de: My curated desktop environment setups.
+  - baseline: Outlines of basic computer archetypes. In each baseline are also submodules pertaining to that archetype for more specialized functionality.
+    - console: Gaming console using Jovian and gamescope as the default interface.
+    - htpc: Home Theater PC using Kodi as the default interface.
+    - server: Headless, remotely-accessed machines running services.
+    - workstation: Machines that are directly accessed via mouse and keyboard.
   - extras: Additional nix tools I've made.
   - hardware: Modules for certain hardware setups, e.g. graphics card drivers, SteamDeck firmware, etc.
   - shared: Modules that have functionality which is shared among other modules.
-  - wm: My curated window manager setups.
 
 ## Timer Schedule
 

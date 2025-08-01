@@ -1,3 +1,4 @@
+# I use COSMIC, GNOME, and Hyprland as my desktops and GDM as my display manager
 {
   pkgs,
   lib,
@@ -53,30 +54,40 @@ in
   services.openssh.enable = false;
 
   programs = {
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+      withUWSM = true;
+    };
     evince.enable = true;
+    seahorse.enable = true;
+    gnome-disks.enable = true;
+    uwsm = {
+      enable = true;
+      waylandCompositors.cosmic = {
+        prettyName = "COSMIC";
+        comment = "System76's COSMIC Desktop Environment";
+        binPath = "/run/current-system/sw/bin/cosmic-session";
+      };
+    };
     thunderbird.enable = true;
-    #firejail.enable = true;
     gnupg.agent = {
       # gpg keys
       enable = true;
       enableSSHSupport = true;
     };
-    #firejail = {
-    #  wrappedBinaries = {
-    #    firefox = {
-    #      executable = "${pkgs.lib.getBin pkgs.firefox}/bin/firefox";
-    #      profile = "${pkgs.firejail}/etc/firejail/firefox.profile";
-    #    };
-    #  };
-    #};
   };
 
   services = {
-    printing.enable = true; # will need to specify your drivers
+    xserver.enable = true;
+    xserver.desktopManager.gnome.enable = true;
+    xserver.displayManager.gdm.enable = true;
+    printing.enable = true;
     printing.drivers = [ pkgs.brlaser ];
     fwupd.enable = true; # for upgrading firmware
     pcscd.enable = true; # needed for gpg keys
     flatpak.enable = true;
+    udev.packages = with pkgs; [ gnome-settings-daemon ]; # for gnome extensions
     /*
       		doesn't do anything on wayland I think
       				libinput.mouse = {
@@ -105,22 +116,46 @@ in
   };
 
   environment = {
+    gnome.excludePackages = (
+      with pkgs;
+      [
+        atomix # puzzle game
+        cheese # webcam tool
+        epiphany # web browser
+        geary # email reader
+        gedit # text editor
+        gnome-characters
+        gnome-music
+        gnome-photos
+        gnome-terminal
+        gnome-tour
+        hitori # sudoku game
+        iagno # go game
+        tali # poker game
+        totem # video player
+      ]
+    );
     systemPackages = with pkgs; [
       anki
+      deluge
       element-desktop
       firefox
       gimp
+      gnomeExtensions.appindicator
       gnupg
       jellyfin-media-player
       libreoffice
       logseq
+      loupe
       mpv
       openvpn
       protonmail-bridge-gui
       tor-browser
+      wayland-utils
       wl-clipboard
       wineWowPackages.waylandFull
       waypipe
+      usbimager
     ];
   };
 }
