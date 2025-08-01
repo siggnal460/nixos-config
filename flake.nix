@@ -32,7 +32,10 @@
     stylix.url = "github:danth/stylix/release-25.05";
     stylix-unstable.url = "github:danth/stylix";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    jovian-nixos.url = "github:Jovian-Experiments/Jovian-NixOS";
+    jovian-nixos = {
+      url = "github:Jovian-Experiments/Jovian-NixOS";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     nix-gaming.url = "github:fufexan/nix-gaming";
     lsfg-vk-flake = {
       url = "github:pabloaul/lsfg-vk-flake/main";
@@ -75,6 +78,7 @@
                 nixpkgs.overlays = [ overlay-unstable ];
               }
             )
+            inputs.jovian-nixos.nixosModules.default
             sops-nix.nixosModules.sops
             stylix.nixosModules.stylix
             nix-index-database.nixosModules.nix-index
