@@ -83,10 +83,15 @@ in
             exe = "vkcube";
             multiplier = 4;
           }
-          {
-            exe = "retroarch";
-            multiplier = 3;
-          }
+          #{ # for use with "LSFG_PROCESS"
+          #  exe = "lsfg";
+          #  multiplier = 2;
+          #}
+          #{
+          #  exe = "retroarch";
+          #  multiplier = 2;
+          #}
+        ];
         ];
       };
     };

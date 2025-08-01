@@ -388,7 +388,7 @@
       stylua
       treefmt
       (writeScriptBin "nix-switch" (builtins.readFile ../bin/nix-switch.nu))
-      (writeScriptBin "find-game-exe-name" (builtins.readFile ../bin/find-game-exe-name.sh))
+      (writeScriptBin "ls-vulkan-proc" (builtins.readFile ../bin/ls-vulkan-proc.sh))
       wl-clipboard
     ];
   };
