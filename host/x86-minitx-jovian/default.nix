@@ -17,9 +17,11 @@
     hostName = "x86-minitx-jovian";
   };
 
-  jovian.hardware = {
-    has.amd.gpu = true;
-    amd.gpu.enableBacklightControl = false;
-    steamdeck.enable = false;
+  jovian = {
+    devices.steamdeck.enable = false;
+    hardware = {
+      has.amd.gpu = true;
+      amd.gpu.enableBacklightControl = false;
+    };
   };
 }
