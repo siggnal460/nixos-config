@@ -20,13 +20,14 @@
     ];
   };
 
-  systemd.services.flatpak-workstation-tweaks = {
+  systemd.services.flatpak-host-tweaks = {
     # this has a 175hz monitor
     wantedBy = [ "multi-user.target" ];
-    after = [ "flatpak-gaming-tweaks.service" ];
+    after = [ "flatpak-gaming-setup.service" ];
     path = [ pkgs.flatpak ];
     script = ''
-      flatpak override --env=MANGOHUD_CONFIG=fps_limit=175 com.valvesoftware.Steam
+            flatpak override --env=DXVK_FRAME_RATE=175 com.valvesoftware.Steam && \
+      			  echo "Setting max framerate for DXVK"
     '';
   };
 }

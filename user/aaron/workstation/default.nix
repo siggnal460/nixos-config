@@ -45,6 +45,7 @@
       ./programs/mpv
       ./programs/librewolf
       ./programs/hyprland
+      ./programs/mangohud
     ];
 
     accounts.email.accounts.aaron.thunderbird.enable = true;

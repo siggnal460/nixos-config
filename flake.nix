@@ -164,7 +164,10 @@
               ./system/baseline/workstation/gamedev-nvidia
               ./system/baseline/workstation/development
             ]
-            [ ./user/aaron/workstation ];
+            [
+              ./user/aaron/host/x86-atxtwr-workstation
+              ./user/aaron/workstation
+            ];
 
         ## TABLETS ##
         x86-tablet-starlite =
@@ -191,7 +194,10 @@
               ./system/hardware/gpu/amd
               ./system/baseline/console
             ]
-            [ ./user/aaron/console ];
+            [
+              ./user/aaron/host/x86-legigo-jovian
+              ./user/aaron/console
+            ];
 
         x86-stmdck-jovian =
           mkComputerUnstable "x86_64-linux" ./host/x86-stmdck-jovian
