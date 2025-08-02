@@ -2,6 +2,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }:
 let
@@ -114,6 +115,8 @@ in
       flatpak update -y
     '';
   };
+
+  hardware.nvidia.nvidiaSettings = lib.mkIf (builtins.elem "nvidia" config.boot.initrd.kernelModules) true;
 
   environment = {
     gnome.excludePackages = (

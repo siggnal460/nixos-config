@@ -44,7 +44,7 @@ My personal nixos-config. The flakes are not meant to be used directly without s
 - **hosts**: Host-specific modules. For things such as setting hostnames and static IPs. Also contains each system's hardware-configuration.nix.
 - **secrets**: Per-host sops-nix yaml secret files.
 - **system**: System-wide modules.
-  - baseline: Outlines of basic computer archetypes. In each baseline are also submodules pertaining to that archetype for more specialized functionality.
+  - baseline: Outlines of basic computer archetypes. In each baseline are also submodules pertaining to that archetype for more specialized functionality. Only one baseline should be used per machine, and submodules are only meant to work within that baseline.
     - console: Gaming console using Jovian and gamescope as the default interface.
     - htpc: Home Theater PC using Kodi as the default interface.
     - server: Headless, remotely-accessed machines running services.

@@ -158,10 +158,9 @@
             [
               ./system/hardware/gpu/nvidia
               ./system/hardware/gpu/nvidia/cuda
-              ./system/hardware/gpu/nvidia/workstation
               ./system/baseline/workstation
               ./system/baseline/workstation/gaming
-              ./system/baseline/workstation/gamedev-nvidia
+              ./system/baseline/workstation/gamedev
               ./system/baseline/workstation/development
             ]
             [
