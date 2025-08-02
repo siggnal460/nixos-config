@@ -20,15 +20,6 @@
   jovian.hardware = {
     has.amd.gpu = true;
     amd.gpu.enableBacklightControl = false;
-  };
-
-  systemd.services.flatpak-console-tweaks = {
-    # this has a 120hz TV
-    wantedBy = [ "multi-user.target" ];
-    after = [ "flatpak-gaming-tweaks.service" ];
-    path = [ pkgs.flatpak ];
-    script = ''
-      flatpak override --env=MANGOHUD_CONFIG=fps_limit=120 com.valvesoftware.Steam
-    '';
+    steamdeck.enable = false;
   };
 }

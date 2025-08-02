@@ -51,7 +51,7 @@ My personal nixos-config. The flakes are not meant to be used directly without s
     - workstation: Machines that are directly accessed via mouse and keyboard.
   - extras: Additional nix tools I've made.
   - hardware: Modules for certain hardware setups, e.g. graphics card drivers, SteamDeck firmware, etc.
-  - shared: Modules that have functionality which is shared among other modules.
+  - shared: Modules that have functionality which is shared among other modules. These are not meant to be imported into the flake directly.
 
 ## Timer Schedule
 

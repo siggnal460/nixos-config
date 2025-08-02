@@ -1,14 +1,6 @@
 { lib, config, ... }:
 {
   options = {
-    gappyland = {
-      jovian = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        example = true;
-        description = "If the machine uses the Steam from Jovian (as opposed to flatpak Steam) as it's primary Steam interface. Determines how certain files are symlinked.";
-      };
-    };
     nixpkgs.allowUnfreePackages = lib.mkOption {
       type = with lib.types; listOf str;
       default = [ ];

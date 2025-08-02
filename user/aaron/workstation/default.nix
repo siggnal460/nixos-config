@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 {
   users.users.aaron.extraGroups = [ "libvirtd" ];
 
@@ -28,17 +28,8 @@
     "L+ /home/aaron/Games/snex - - - - /nfs/games/roms/snes"
     "L+ /home/aaron/Games/wii - - - - /nfs/games/roms/wii"
     "L+ /home/aaron/Games/wiiu - - - - /nfs/games/roms/wiiu"
-  ]
-  ++ (
-    if config.gappyland.jovian then
-      [
-        "L+ /home/aaron/Games/steam - - - - /home/aaron/.steam/steam/SteamApps/common"
-      ]
-    else
-      [
-        "L+ /home/aaron/Games/steam - - - - /home/aaron/.var/app/com.valvesoftware.Steam/.steam/steam/steamapps/common"
-      ]
-  );
+    "L+ /home/aaron/Games/steam - - - - /home/aaron/.var/app/com.valvesoftware.Steam/.steam/steam/steamapps/common"
+  ];
 
   home-manager.users.aaron = {
     imports = [

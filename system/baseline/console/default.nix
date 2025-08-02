@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ../../shared/plymouth-tv.nix
+    ../../shared/plymouth-quiet.nix
     ../../shared/pipewire.nix
     ../../shared/bluetooth.nix
     ../../shared/remotely-managed.nix
@@ -35,8 +35,7 @@
     };
   };
 
-  services.xserver.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   xdg.autostart.enable = true;
 }

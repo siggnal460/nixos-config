@@ -6,5 +6,9 @@
     hostName = "x86-legigo-jovian";
   };
 
-  gappyland.jovian = true;
+  jovian.hardware = {
+    has.amd.gpu = true;
+    amd.gpu.enableBacklightControl = true;
+    steamdeck.enable = false;
+  };
 }

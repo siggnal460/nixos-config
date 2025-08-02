@@ -23,7 +23,7 @@
   systemd.services.flatpak-host-tweaks = {
     # this has a 175hz monitor
     wantedBy = [ "multi-user.target" ];
-    after = [ "flatpak-gaming-setup.service" ];
+    requires = [ "flatpak-gaming-setup.service" ];
     path = [ pkgs.flatpak ];
     script = ''
             flatpak override --env=DXVK_FRAME_RATE=175 com.valvesoftware.Steam && \
