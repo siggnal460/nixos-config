@@ -52,8 +52,6 @@ in
 
   networking.networkmanager.enable = true;
 
-  services.openssh.enable = false;
-
   programs = {
     hyprland = {
       enable = true;
@@ -80,6 +78,8 @@ in
   };
 
   services = {
+    desktopManager.cosmic.enable = true;
+    openssh.enable = false;
     xserver.enable = true;
     xserver.desktopManager.gnome.enable = true;
     xserver.displayManager.gdm.enable = true;

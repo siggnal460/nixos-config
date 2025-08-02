@@ -136,7 +136,6 @@
               #system-wide modules
               ./system/hardware/gpu/intel
               ./system/hardware/thunderbolt
-              ./system/de/cosmic
               ./system/baseline/workstation
             ]
             [
