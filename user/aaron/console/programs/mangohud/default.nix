@@ -8,7 +8,7 @@
     MANGOHUD_CONFIGFILE = "/home/aaron/.config/MangoHud/MangoHud.conf";
   };
   systemd.user.sessionVariables = {
-    MANGOHUD_CONFIGFILE = "/home/aaron/.config/MangoHud/MangoHus.conf";
+    MANGOHUD_CONFIGFILE = "/home/aaron/.config/MangoHud/MangoHud.conf";
   };
 
   home.file."/.config/MangoHud" = {

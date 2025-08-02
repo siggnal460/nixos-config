@@ -31,6 +31,10 @@
     };
   };
 
+  systemd.tmpfiles.rules = [
+    "d /home/aaron 0744 aaron aaron"
+  ];
+
   users.groups = {
     aaron = {
       gid = config.users.users.aaron.uid;

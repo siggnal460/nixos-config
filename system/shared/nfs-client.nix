@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   boot.initrd = {
     supportedFilesystems = [
@@ -11,4 +12,6 @@
   systemd.tmpfiles.rules = [
     "d /nfs 0775 root users"
   ];
+
+  services.rpcbind.enable = lib.mkForce false; # unnecessary for NFSv4.
 }
