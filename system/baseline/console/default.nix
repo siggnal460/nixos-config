@@ -1,4 +1,3 @@
-{ ... }:
 {
   imports = [
     ../../shared/plymouth-quiet.nix
@@ -35,7 +34,13 @@
     };
   };
 
-  services.desktopManager.gnome.enable = true;
+  services = {
+    desktopManager.gnome.enable = true;
+    lsfg-vk = {
+      enable = lib.mkIf (config.jovian.steam.enable) true;
+      ui.enable = false;
+    };
+	};
 
   xdg.autostart.enable = true;
 }
