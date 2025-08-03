@@ -1,10 +1,8 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
-  environment.systemPackages =
-    with pkgs;
-    [
-      audacity
-      ardour
-      godot_4
-    ]
+  environment.systemPackages = with pkgs; [
+    audacity
+    ardour
+    godot_4
+  ];
 }

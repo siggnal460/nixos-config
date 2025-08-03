@@ -40,7 +40,7 @@
       enable = lib.mkIf (config.jovian.steam.enable) true;
       ui.enable = false;
     };
-	};
+  };
 
   xdg.autostart.enable = true;
 }
