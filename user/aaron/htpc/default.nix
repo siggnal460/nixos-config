@@ -1,16 +1,71 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
+let
+  modifier = "Control";
+  latestSourceURL = name: "https://addons.mozilla.org/firefox/downloads/latest/${name}/latest.xpi";
+in
 {
   home-manager.users.aaron = {
-    home.packages = with pkgs; [
-      sway-audio-idle-inhibit
-    ];
+    home.pointerCursor = {
+      gtk.enable = true;
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
+      size = 72;
+    };
+
+    stylix.targets.librewolf.profileNames = [ "yt-kiosk" ];
 
     programs = {
+      librewolf = {
+        enable = true;
+        policies = {
+          Cookies.Allow = [ "https://www.youtube.com" ];
+
+          Preferences = {
+            "browser.tabs.inTitlebar" = false;
+            "kiosk.mode" = true;
+            "kiosk.url" = "https://www.youtube.com";
+          };
+          policies.ExtensionSettings = {
+            "sponsorBlocker@ajay.app" = {
+              default_area = "menupanel";
+              install_url = latestSourceURL "sponsorblock";
+              installation_mode = "force_installed";
+              locked = true;
+            };
+            "cb-remover@search.mozilla.org" = {
+              default_area = "menupanel";
+              install_url = latestSourceURL "clickbait-remover-for-youtube";
+              installation_mode = "force_installed";
+              locked = true;
+            };
+            "uBlock0@raymondhill.net" = {
+              default_area = "menupanel";
+              install_url = latestSourceURL "ublock-origin";
+              installation_mode = "force_installed";
+              private_browsing = true;
+              locked = true;
+            };
+          };
+        };
+      };
+
+      swaylock = {
+        enable = true;
+        settings = {
+          font-size = 72;
+          indicator-idle-visible = true;
+          indicator-radius = 100;
+          line-color = "ffffff";
+          show-failed-attempts = true;
+        };
+      };
+
       nushell.extraConfig = ''
         if not ("WAYLAND_DISPLAY" in $env) and ("XDG_VTNR" in $env) and ($env.XDG_VTNR == 1) {
           sway
         }
       '';
+
       kodi = {
         enable = true;
         package = pkgs.kodi-wayland.withPackages (exts: [
@@ -40,12 +95,20 @@
           };
         };
       };
+
       swayidle = {
         enable = true;
+        extraArgs = [ "-w" ];
+        events = [
+          {
+            event = "before-sleep";
+            command = "${pkgs.swaylock}/bin/swaylock -fF";
+          }
+        ];
         timeouts = [
           {
-            timeout = 1200;
-            command = "${pkgs.systemd}/bin/systemctl suspend";
+            timeout = 1200; # 20min
+            command = "${pkgs.systemd}/bin/systemctl sleep";
           }
         ];
       };
@@ -55,13 +118,20 @@
       enable = true;
       config = {
         assigns = {
-          "0: kodi" = [ { class = "^kodi$"; } ];
+          "1: kodi" = [ { app_id = "kodi"; } ];
+          "2: librewolf" = [ { app_id = "librewolf"; } ];
         };
         bars = [ ];
-        modifier = "Control";
+        defaultWorkspace = "1";
+        focus.newWindow = "none";
+        keybindings = {
+          "${modifier}+1" = "workspace number 1";
+          "${modifier}+2" = "workspace number 2";
+        };
+        modifier = "${modifier}";
         seat = {
           "*" = {
-            hide_cursor = "100";
+            hide_cursor = "2000"; # 2s
           };
         };
         startup = [
@@ -69,11 +139,22 @@
             command = "kodi --fullscreen";
             always = true;
           }
-          { command = "sway-audio-idle-inhibit"; }
+          {
+            command = "librewolf --profile ~/.librewolf/yt-kiosk --kiosk https://www.youtube.com ";
+            always = true;
+          }
         ];
         window = {
           border = 0;
           titlebar = false;
+          commands = [
+            {
+              command = "fullscreen enable";
+              criteria = {
+                app_id = "librewolf";
+              };
+            }
+          ];
         };
       };
     };

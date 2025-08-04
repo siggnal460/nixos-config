@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ../../shared/plymouth-tv.nix
+    ../../shared/plymouth-quiet.nix
     ../../shared/pipewire.nix
     ../../shared/bluetooth.nix
     ../../shared/remotely-managed.nix
@@ -13,9 +13,15 @@
 
   networking.networkmanager.enable = true;
 
-  programs.sway.enable = true;
+  programs.sway = {
+    enable = true;
+    xwayland.enable = false;
+  };
 
-  services.displayManager.defaultSession = "sway";
+  services.displayManager = {
+    cosmic-greeter.enable = true;
+    defaultSession = "sway";
+  };
 
   environment.systemPackages = with pkgs; [
     kodiPackages.inputstream-adaptive
