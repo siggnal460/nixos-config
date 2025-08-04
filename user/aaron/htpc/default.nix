@@ -9,10 +9,30 @@ in
       gtk.enable = true;
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
-      size = 72;
+      size = 96;
     };
 
     stylix.targets.librewolf.profileNames = [ "yt-kiosk" ];
+    stylix.targets.swaylock.useWallpaper = false;
+
+    xdg.desktopEntries = {
+      youtube = {
+        name = "YouTube";
+        genericName = "LibreWolf YouTube Kiosk";
+        exec = "librewolf --profile /home/aaron/.librewolf/yt-kiosk --kiosk https://www.youtube.com %U";
+        terminal = false;
+        icon = ../../../images/icons/arrow.svg;
+        categories = [
+          "Application"
+          "Network"
+          "WebBrowser"
+        ];
+        mimeType = [
+          "text/html"
+          "text/xml"
+        ];
+      };
+    };
 
     programs = {
       librewolf = {
@@ -52,13 +72,15 @@ in
       swaylock = {
         enable = true;
         settings = {
-          font-size = 72;
-          indicator-idle-visible = true;
+          image = ../../../images/lockscreen/bus.jpg;
           indicator-radius = 100;
-          line-color = "ffffff";
+          indicator-thickness = 20;
+          font-size = 96;
           show-failed-attempts = true;
         };
       };
+
+      fuzzel.enable = true;
 
       nushell.extraConfig = ''
         if not ("WAYLAND_DISPLAY" in $env) and ("XDG_VTNR" in $env) and ($env.XDG_VTNR == 1) {
@@ -107,6 +129,10 @@ in
         ];
         timeouts = [
           {
+            timeout = 600; # 10min
+            command = "${pkgs.swaylock}/bin/swaylock -f -c 000000";
+          }
+          {
             timeout = 1200; # 20min
             command = "${pkgs.systemd}/bin/systemctl sleep";
           }
@@ -127,6 +153,7 @@ in
         keybindings = {
           "${modifier}+1" = "workspace number 1";
           "${modifier}+2" = "workspace number 2";
+          "${modifier}+f" = "fuzzel";
         };
         modifier = "${modifier}";
         seat = {

@@ -18,8 +18,14 @@
     xwayland.enable = false;
   };
 
+  services.xserver.displayManager = {
+    gdm = {
+      enable = true;
+      wayland = true;
+    };
+  };
+
   services.displayManager = {
-    cosmic-greeter.enable = true;
     defaultSession = "sway";
   };
 
