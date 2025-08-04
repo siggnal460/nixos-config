@@ -340,7 +340,7 @@
     enable = true;
     autoEnable = true;
     polarity = "dark";
-    image = ../images/wallpapers/nix-snowflake.png;
+    image = ../images/wallpapers/tokyo-aerial.jpg;
     base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     fonts = {
       serif = {
