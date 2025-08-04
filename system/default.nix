@@ -11,7 +11,7 @@
     ./extras/options.nix
   ];
 
-  stylix.targets.plymouth.enable = false;
+  stylix.targets.plymouth.enable = false; # not a fan of the stylix one
 
   zramSwap.enable = true;
 
@@ -340,7 +340,7 @@
     enable = true;
     autoEnable = true;
     polarity = "dark";
-    image = ../images/wallpapers/tux.png;
+    image = ../images/wallpapers/nix-snowflake.png;
     base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     fonts = {
       serif = {
