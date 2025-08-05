@@ -39,13 +39,9 @@ in
         enable = true;
         policies = {
           Cookies.Allow = [ "https://www.youtube.com" ];
+          DisplayBookmarksToolbar = "never";
 
-          Preferences = {
-            "browser.tabs.inTitlebar" = false;
-            "kiosk.mode" = true;
-            "kiosk.url" = "https://www.youtube.com";
-          };
-          policies.ExtensionSettings = {
+          ExtensionSettings = {
             "sponsorBlocker@ajay.app" = {
               default_area = "menupanel";
               install_url = latestSourceURL "sponsorblock";
@@ -65,6 +61,12 @@ in
               private_browsing = true;
               locked = true;
             };
+          };
+
+          Preferences = {
+            "browser.tabs.inTitlebar" = false;
+            "kiosk.mode" = true;
+            "kiosk.url" = "https://www.youtube.com";
           };
         };
       };
