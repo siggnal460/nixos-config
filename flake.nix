@@ -162,6 +162,7 @@
               ./system/baseline/workstation/gaming
               ./system/baseline/workstation/gamedev
               ./system/baseline/workstation/development
+              ./system/baseline/workstation/vm-host
             ]
             [
               ./user/aaron/host/x86-atxtwr-workstation

@@ -9,5 +9,4 @@
       virtiofsd # for sharing folders w/ a virtual machine
     ];
   };
-
 }
