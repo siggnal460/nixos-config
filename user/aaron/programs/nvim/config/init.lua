@@ -12,6 +12,7 @@ vim.opt.cursorline = true -- highlight cursor line
 vim.opt.splitbelow = true -- open new vertical split bottom
 vim.opt.splitright = true -- open new horizontal splits right
 vim.opt.termguicolors = true -- enable 24-bit RGB color in the TUI
+vim.opt.fillchars:append { vert = "┃" } -- thickens the dividing line with panes
 
 -- Searching
 vim.opt.incsearch = true -- search as characters are entered
