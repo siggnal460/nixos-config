@@ -388,6 +388,7 @@
       stylua
       treefmt
       (writeScriptBin "nix-switch" (builtins.readFile ../bin/nix-switch.nu))
+      (writeScriptBin "comfy-dev" (builtins.readFile ../bin/comfy-dev.nu))
       (writeScriptBin "ls-vulkan-proc" (builtins.readFile ../bin/ls-vulkan-proc.sh))
       wl-clipboard
     ];
