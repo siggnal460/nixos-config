@@ -19,16 +19,23 @@ vim.opt.incsearch = true -- search as characters are entered
 vim.opt.hlsearch = false -- do not highlight matches vim.opt.ignorecase = true
 vim.opt.smartcase = true -- make case sensitive if uppercase
 
--- Theme
-vim.cmd.colorscheme("tokyonight")
-
 -- Transparency
 vim.cmd.highlight({ "Normal", "guibg=none" })
-vim.cmd.highlight({ "NormalNC", "guibg=none" })
-vim.cmd.highlight({ "NonText", "guibg=none" })
+vim.cmd.highlight({ "NormalNC", "guibg=none" }) -- for split panes
 vim.cmd.highlight({ "Normal", "ctermbg=none" })
 vim.cmd.highlight({ "NormalNC", "ctermbg=none" })
-vim.cmd.highlight({ "NonText", "ctermbg=none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+require("tokyonight").setup({
+  transparent = true,
+  styles = {
+    sidebars = "transparent",
+    floats = "transparent",
+  },
+})
+
+-- Theme
+vim.cmd.colorscheme("tokyonight")
 
 -- Autocommands
 vim.api.nvim_create_autocmd({"InsertEnter"}, {
@@ -45,7 +52,6 @@ vim.api.nvim_create_autocmd({"InsertLeave"}, { -- Relative numbers in Normal Mod
     end
 })
 
-
 -- LSPs
 lspconfig.lua_ls.setup({
 	settings = {
@@ -55,6 +61,27 @@ lspconfig.lua_ls.setup({
 			},
 		},
 	},
+})
+
+-- Plugins
+require("oil").setup({
+  view_options = { show_hidden = true },
+  default_file_explorer = true,
+  float = {
+    padding = 8,
+    max_width = 100,
+    max_height = 30,
+    border = "single",
+    win_options = { winblend = 0, }, --transparency
+  },
+  keymaps = {
+    ["<CR>"] = "actions.select",
+		["<C-v>"] = "actions.select_vsplit",
+    ["<C-s>"] = "actions.select_split",
+    ["-"]    = "actions.parent",
+    ["_"]    = "actions.open_cwd",
+    ["q"]    = "actions.close",
+  },
 })
 
 -- Per language settings
@@ -71,3 +98,9 @@ vim.api.nvim_create_autocmd("FileType", {
 		end
 	end,
 })
+
+-- Keymaps
+vim.keymap.set("n", "-", function()
+  require("oil").open_float() -- opens oil in floating window by default
+end, { desc = "Open Oil in floating window" })
+
