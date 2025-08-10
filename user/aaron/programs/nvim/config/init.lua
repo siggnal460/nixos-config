@@ -72,9 +72,9 @@ lspconfig.nixd.setup({})
 lspconfig.nushell.setup({})
 
 -- Treesitter
-require("nvim-treesitter.configs").setup {
-	highlight = { enable = true };
-}
+require("nvim-treesitter.configs").setup({
+	highlight = { enable = true },
+})
 
 -- Oil
 require("oil").setup({
@@ -105,7 +105,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		if ft == "python" then
 			vim.opt.tabstop = 4
 			vim.opt.shiftwidth = 4
-		elseif ft == "lua" or ft == "nix" then
+		elseif ft == "lua" or ft == "nix" or ft == "nu" then
 			vim.opt.tabstop = 2
 			vim.opt.shiftwidth = 2
 		end
