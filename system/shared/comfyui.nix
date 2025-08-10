@@ -41,7 +41,6 @@
         "/var/lib/comfyui/models:/app/models:rw"
         "/var/lib/comfyui/output:/app/output:rw"
         "/var/lib/comfyui/user:/app/user/default:rw"
-        "/var/lib/comfyui/workflows:/app/user/default/workflows:rw"
       ];
       environment = {
         PUID = "780";
