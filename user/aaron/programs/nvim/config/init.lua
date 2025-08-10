@@ -6,6 +6,7 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.mouse = "a" -- allow the mouse to be used in Nvim
 
 -- UI config
+vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true -- highlight cursor line
 vim.opt.splitbelow = true -- open new vertical split bottom
@@ -27,6 +28,22 @@ vim.cmd.highlight({ "NonText", "guibg=none" })
 vim.cmd.highlight({ "Normal", "ctermbg=none" })
 vim.cmd.highlight({ "NormalNC", "ctermbg=none" })
 vim.cmd.highlight({ "NonText", "ctermbg=none" })
+
+-- Autocommands
+vim.api.nvim_create_autocmd({"InsertEnter"}, {
+    pattern = "*",
+    callback = function()
+        vim.opt.relativenumber = false
+    end
+})
+
+vim.api.nvim_create_autocmd({"InsertLeave"}, { -- Relative numbers in Normal Mode
+    pattern = "*",
+    callback = function()
+        vim.opt.relativenumber = true
+    end
+})
+
 
 -- LSPs
 lspconfig.lua_ls.setup({
