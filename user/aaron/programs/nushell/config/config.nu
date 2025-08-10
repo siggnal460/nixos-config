@@ -8,6 +8,11 @@ def chk-file-fs [ file: string ] {
   df -P -T $file | tail -n +2 | awk '{print $2}'
 }
 
+def gac [message: string] {
+  git add -A
+  git commit -m $message
+}
+
 def create_left_prompt [] {
     starship prompt --cmd-duration $env.CMD_DURATION_MS $'--status=($env.LAST_EXIT_CODE)'
 }
