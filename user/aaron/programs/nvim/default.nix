@@ -5,6 +5,8 @@
   programs.neovim = {
     extraPackages = with pkgs; [
       lua-language-server
+			pyright
+			nixd
     ];
     plugins = with pkgs.vimPlugins; [
       nvim-lspconfig

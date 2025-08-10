@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd({"InsertLeave"}, { -- Relative numbers in Normal Mod
     end
 })
 
--- LSPs
+-- lspconfig
 lspconfig.lua_ls.setup({
 	settings = {
 		Lua = {
@@ -63,7 +63,11 @@ lspconfig.lua_ls.setup({
 	},
 })
 
--- Plugins
+lspconfig.pyright.setup{}
+
+lspconfig.nixd.setup{}
+
+-- Oil
 require("oil").setup({
   view_options = { show_hidden = true },
   default_file_explorer = true,

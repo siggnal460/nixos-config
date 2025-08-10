@@ -19,8 +19,6 @@
     gcc
     go
     gopls
-    nil
-    nixd
     rust-analyzer
     zed-editor-fhs
   ];
