@@ -12,7 +12,7 @@ vim.opt.cursorline = true -- highlight cursor line
 vim.opt.splitbelow = true -- open new vertical split bottom
 vim.opt.splitright = true -- open new horizontal splits right
 vim.opt.termguicolors = true -- enable 24-bit RGB color in the TUI
-vim.opt.fillchars:append { vert = "┃" } -- thickens the dividing line with panes
+vim.opt.fillchars:append({ vert = "┃" }) -- thickens the dividing line with panes
 
 -- Searching
 vim.opt.incsearch = true -- search as characters are entered
@@ -26,30 +26,32 @@ vim.cmd.highlight({ "Normal", "ctermbg=none" })
 vim.cmd.highlight({ "NormalNC", "ctermbg=none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+
+-- TokyoNight
 require("tokyonight").setup({
-  transparent = true,
-  styles = {
-    sidebars = "transparent",
-    floats = "transparent",
-  },
+	transparent = true,
+	styles = {
+		sidebars = "transparent",
+		floats = "transparent",
+	},
 })
 
 -- Theme
 vim.cmd.colorscheme("tokyonight")
 
 -- Autocommands
-vim.api.nvim_create_autocmd({"InsertEnter"}, {
-    pattern = "*",
-    callback = function()
-        vim.opt.relativenumber = false
-    end
+vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+	pattern = "*",
+	callback = function()
+		vim.opt.relativenumber = false
+	end,
 })
 
-vim.api.nvim_create_autocmd({"InsertLeave"}, { -- Relative numbers in Normal Mode
-    pattern = "*",
-    callback = function()
-        vim.opt.relativenumber = true
-    end
+vim.api.nvim_create_autocmd({ "InsertLeave" }, { -- Relative numbers in Normal Mode
+	pattern = "*",
+	callback = function()
+		vim.opt.relativenumber = true
+	end,
 })
 
 -- lspconfig
@@ -63,29 +65,36 @@ lspconfig.lua_ls.setup({
 	},
 })
 
-lspconfig.pyright.setup{}
+lspconfig.pyright.setup({})
 
-lspconfig.nixd.setup{}
+lspconfig.nixd.setup({})
+
+lspconfig.nushell.setup({})
+
+-- Treesitter
+require("nvim-treesitter.configs").setup {
+	highlight = { enable = true };
+}
 
 -- Oil
 require("oil").setup({
-  view_options = { show_hidden = true },
-  default_file_explorer = true,
-  float = {
-    padding = 8,
-    max_width = 100,
-    max_height = 30,
-    border = "single",
-    win_options = { winblend = 0, }, --transparency
-  },
-  keymaps = {
-    ["<CR>"] = "actions.select",
+	view_options = { show_hidden = true },
+	default_file_explorer = true,
+	float = {
+		padding = 8,
+		max_width = 100,
+		max_height = 30,
+		border = "single",
+		win_options = { winblend = 0 }, --transparency
+	},
+	keymaps = {
+		["<CR>"] = "actions.select",
 		["<C-v>"] = "actions.select_vsplit",
-    ["<C-s>"] = "actions.select_split",
-    ["-"]    = "actions.parent",
-    ["_"]    = "actions.open_cwd",
-    ["q"]    = "actions.close",
-  },
+		["<C-s>"] = "actions.select_split",
+		["-"] = "actions.parent",
+		["_"] = "actions.open_cwd",
+		["q"] = "actions.close",
+	},
 })
 
 -- Per language settings
@@ -105,6 +114,5 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Keymaps
 vim.keymap.set("n", "-", function()
-  require("oil").open_float() -- opens oil in floating window by default
+	require("oil").open_float() -- opens oil in floating window by default
 end, { desc = "Open Oil in floating window" })
-
