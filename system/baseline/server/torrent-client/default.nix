@@ -2,9 +2,12 @@
 let
   mountOptions = [
     "x-systemd.automount"
+    "x-systemd.device-timeout=2s"
+    "x-systemd.mount-timeout=2s"
+    "x-systemd.idle-timeout=600" # 10min
+    "bg"
     "noauto"
-    "x-systemd.idle-timeout=60"
-    "_netdev"
+    "nofail"
   ];
 in
 {
