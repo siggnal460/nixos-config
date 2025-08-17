@@ -340,7 +340,7 @@
     enable = true;
     autoEnable = true;
     polarity = "dark";
-    image = ../images/wallpapers/tokyo-aerial.jpg;
+    image = ../images/wallpapers/pink_temple.png;
     base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     fonts = {
       serif = {
@@ -380,6 +380,7 @@
     systemPackages = with pkgs; [
       ansible
       deadnix
+      distrobox
       macchina
       git
       nixfmt-rfc-style
@@ -388,9 +389,9 @@
       stylua
       treefmt
       (writeScriptBin "nix-switch" (builtins.readFile ../bin/nix-switch.nu))
-      (writeScriptBin "comfy-dev" (builtins.readFile ../bin/comfy-dev.nu))
       (writeScriptBin "ls-vulkan-proc" (builtins.readFile ../bin/ls-vulkan-proc.sh))
       wl-clipboard
+      eslint
     ];
   };
 }

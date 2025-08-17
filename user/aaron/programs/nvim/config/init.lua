@@ -13,7 +13,6 @@ vim.opt.splitbelow = true -- open new vertical split bottom
 vim.opt.splitright = true -- open new horizontal splits right
 vim.opt.termguicolors = true -- enable 24-bit RGB color in the TUI
 vim.opt.fillchars:append({ vert = "┃" }) -- thickens the dividing line with panes
-
 -- Searching
 vim.opt.incsearch = true -- search as characters are entered
 vim.opt.hlsearch = false -- do not highlight matches vim.opt.ignorecase = true
@@ -54,6 +53,9 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, { -- Relative numbers in Normal M
 	end,
 })
 
+-- scrollbar
+require("scrollbar").setup({})
+
 -- lspconfig
 lspconfig.lua_ls.setup({
 	settings = {
@@ -70,6 +72,8 @@ lspconfig.pyright.setup({})
 lspconfig.nixd.setup({})
 
 lspconfig.nushell.setup({})
+
+vim.lsp.enable("eslint")
 
 -- Treesitter
 require("nvim-treesitter.configs").setup({

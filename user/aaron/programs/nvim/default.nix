@@ -8,9 +8,10 @@
       pyright
       nixd
       nushell # for the lsp, which doesn't work anyway
+      nodePackages.vscode-langservers-extracted
     ];
     plugins = with pkgs.vimPlugins; [
-      Shade-nvim
+      nvim-scrollbar
       nvim-lspconfig
       nvim-treesitter
       (nvim-treesitter.withPlugins (_: [
