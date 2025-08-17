@@ -345,17 +345,17 @@
     fonts = {
       serif = {
         package = pkgs.unstable.nerd-fonts.fira-code;
-        name = "Fira Code Serif";
+        name = "FiraCode Nerd Font";
       };
 
       sansSerif = {
         package = pkgs.unstable.nerd-fonts.fira-code;
-        name = "Fira Code Sans";
+        name = "FiraCode Nerd Font";
       };
 
       monospace = {
         package = pkgs.unstable.nerd-fonts.fira-code;
-        name = "Fira Code Mono";
+        name = "FiraCode Nerd Font Mono";
       };
 
       emoji = {
