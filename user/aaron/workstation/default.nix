@@ -40,7 +40,7 @@
     ];
 
     accounts.email.accounts.aaron.thunderbird.enable = true;
-    
+
     programs.wezterm.enable = true;
 
     dconf.settings = {

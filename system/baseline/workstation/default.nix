@@ -104,7 +104,7 @@ in
   hardware.nvidia.nvidiaSettings = lib.mkIf (builtins.elem "nvidia" config.boot.initrd.kernelModules) true;
 
   environment = {
-   systemPackages = with pkgs; [
+    systemPackages = with pkgs; [
       anki
       deluge
       element-desktop

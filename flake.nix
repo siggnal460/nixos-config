@@ -182,7 +182,7 @@
               ./user/aaron/host/vm
               ./user/aaron/workstation
             ];
- 
+
         ## TABLETS ##
         x86-tablet-starlite =
           mkComputerUnstable "x86_64-linux" ./host/x86-tablet-starlite
