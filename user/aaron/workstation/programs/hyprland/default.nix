@@ -7,7 +7,7 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      "$terminal" = "cosmic-term";
+      "$terminal" = "wezterm";
       "$filemanager" = "cosmic-files";
       "$menu" = "wofi --show drun";
       "$mainMod" = "SUPER";

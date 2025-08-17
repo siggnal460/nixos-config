@@ -24,8 +24,8 @@
     initrd.systemd.enable = true;
     loader = {
       systemd-boot = {
-        enable = true;
-        configurationLimit = 4;
+        enable = lib.mkDefault true;
+        configurationLimit = lib.mkDefault 4;
         editor = false;
       };
       efi.canTouchEfiVariables = true;

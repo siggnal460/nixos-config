@@ -1,4 +1,3 @@
-# I use COSMIC, GNOME, and Hyprland as my desktops and GDM as my display manager
 {
   pkgs,
   lib,
@@ -56,22 +55,9 @@ in
   networking.networkmanager.enable = true;
 
   programs = {
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-      withUWSM = true;
-    };
     evince.enable = true;
     seahorse.enable = true;
     gnome-disks.enable = true;
-    uwsm = {
-      enable = true;
-      waylandCompositors.cosmic = {
-        prettyName = "COSMIC";
-        comment = "System76's COSMIC Desktop Environment";
-        binPath = "/run/current-system/sw/bin/cosmic-session";
-      };
-    };
     thunderbird.enable = true;
     gnupg.agent = {
       # gpg keys
@@ -81,11 +67,7 @@ in
   };
 
   services = {
-    desktopManager.cosmic.enable = true;
     openssh.enable = false;
-    xserver.enable = true;
-    xserver.desktopManager.gnome.enable = true;
-    xserver.displayManager.gdm.enable = true;
     printing.enable = true;
     printing.drivers = [ pkgs.brlaser ];
     fwupd.enable = true; # for upgrading firmware
@@ -122,26 +104,7 @@ in
   hardware.nvidia.nvidiaSettings = lib.mkIf (builtins.elem "nvidia" config.boot.initrd.kernelModules) true;
 
   environment = {
-    gnome.excludePackages = (
-      with pkgs;
-      [
-        atomix # puzzle game
-        cheese # webcam tool
-        epiphany # web browser
-        geary # email reader
-        gedit # text editor
-        gnome-characters
-        gnome-music
-        gnome-photos
-        gnome-terminal
-        gnome-tour
-        hitori # sudoku game
-        iagno # go game
-        tali # poker game
-        totem # video player
-      ]
-    );
-    systemPackages = with pkgs; [
+   systemPackages = with pkgs; [
       anki
       deluge
       element-desktop
@@ -158,6 +121,7 @@ in
       protonmail-bridge-gui
       tor-browser
       wayland-utils
+      wezterm
       wl-clipboard
       wineWowPackages.waylandFull
       waypipe

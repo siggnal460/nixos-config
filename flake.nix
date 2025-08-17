@@ -155,6 +155,8 @@
         x86-atxtwr-workstation =
           mkComputerStable "x86_64-linux" ./host/x86-atxtwr-workstation
             [
+              ./system/de/cosmic
+              ./system/wm/hyprland
               ./system/hardware/gpu/nvidia
               ./system/hardware/gpu/nvidia/cuda
               ./system/baseline/workstation
@@ -168,7 +170,19 @@
               ./user/aaron/host/x86-atxtwr-workstation
               ./user/aaron/workstation
             ];
-
+        ## VIRTUAL MACHINES ##
+        vm =
+          mkComputerStable "x86_64-linux" ./host/vm
+            [
+              ./system/wm/hyprland
+              ./system/baseline/workstation
+              ./system/baseline/workstation/vm-guest
+            ]
+            [
+              ./user/aaron/host/vm
+              ./user/aaron/workstation
+            ];
+ 
         ## TABLETS ##
         x86-tablet-starlite =
           mkComputerUnstable "x86_64-linux" ./host/x86-tablet-starlite
