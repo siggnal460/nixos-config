@@ -1,11 +1,11 @@
 {
   programs = {
     wofi.enable = true;
-    waybar.enable = true;
   };
 
   wayland.windowManager.hyprland = {
     enable = true;
+    systemd.variables = [ "-all" ];
     settings = {
       "$terminal" = "wezterm";
       "$filemanager" = "cosmic-files";
@@ -48,18 +48,27 @@
         "$mainMod, C, killactive"
         "$mainMod, M, exit"
         "$mainMod, E, exec, $fileManager"
+        "$mainMod, V, togglefloating"
+        "$mainMod, F, fullscreen, 0"
         "$mainMod, R, exec, $menu"
-        "$mainMod, left, movefocus, l"
-        "$mainMod, right, movefocus, h"
-        "$mainMod, up, movefocus, k"
-        "$mainMod, down, movefocus, j"
+        "$mainMod, h, movefocus, l"
+        "$mainMod, l, movefocus, r"
+        "$mainMod, k, movefocus, u"
+        "$mainMod, j, movefocus, d"
+        "$mainMod SHIFT, S, exec, grimblast copy area"
+        "$mainMod SHIFT, h, movewindow, l"
+        "$mainMod SHIFT, l, movewindow, r"
+        "$mainMod SHIFT, k, movewindow, u"
+        "$mainMod SHIFT, j, movewindow, d"
+        "$mainMod CTRL, h, workspace, -1"
+        "$mainMod CTRL, l, workspace, +1"
       ];
 
       decoration = {
         rounding = 10;
         rounding_power = 2;
-        active_opacity = 0.98;
-        inactive_opacity = 0.99;
+        active_opacity = 0.90;
+        inactive_opacity = 0.80;
         shadow = {
           enabled = true;
           range = 4;
@@ -67,11 +76,23 @@
         };
         blur = {
           enabled = true;
-          size = 3;
-          passes = 1;
-          vibrancy = 0.1696;
+          size = 10;
+          passes = 3;
+          new_optimizations = true;
+          ignore_opacity = true;
+          noise = 0;
+          brightness = 0.90;
         };
       };
+
+      env = [
+        "XCURSOR_SIZE,24"
+        "HYPRCURSOR_SIZE,24"
+      ];
+
+      exec-once = [
+        "waybar & hyprpaper"
+      ];
 
       general = {
         gaps_in = 5;
@@ -82,13 +103,44 @@
         layout = "dwindle";
       };
 
-      env = [
-        "XCURSOR_SIZE,24"
-        "HYPRCURSOR_SIZE,24"
+      layerrule = [
+        "blur, waybar"
+        "blur, wofi"
       ];
 
-      exec-once = [
-        "waybar & hyprpaper"
+      windowrule = [
+        "opacity 1.00 override 0.95 override, class:^(librewolf)$"
+
+        "workspace name:Gaming, class:^(steam)$"
+        "opacity 1.00 override, class:^(steam)$"
+        "maximize, class:^(steam)$"
+
+        "workspace name:Blender, class:^(discord)$"
+        "opacity 1.00 override, class:^(discord)$"
+        "maximize, class:^(discord)$"
+
+        "workspace name:Development, class:^(dev.zed.Zed)$"
+        "opacity 1.00 override, class:^(dev.zed.Zed)$"
+        "maximize, class:^(dev.zed.Zed)$"
+
+        "workspace name:Blender, class:^(blender)$"
+        "opacity 1.00 override, class:^(blender)$"
+        "maximize, class:^(blender)$"
+
+        "workspace name:Jellyfin, class:^(com.github.iwalton3.jellyfin-media-player)$"
+        "opacity 1.00 override, class:^(com.github.iwalton3.jellyfin-media-player)$"
+        "maximize, class:^(com.github.iwalton3.jellyfin-media-player)$"
+      ];
+
+      workspace = [
+        "f[0], rounding:false, bordersize:0, gapsout:0, persistent:false"
+        "f[1], rounding:false, bordersize:0, gapsout:0, persistent:false"
+        "name:General, default:true, persistent:true"
+        "name:Gaming"
+        "name:Chat"
+        "name:Blender"
+        "name:Development"
+        "name:Jellyfin"
       ];
     };
   };

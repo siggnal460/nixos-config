@@ -36,6 +36,7 @@
       ./programs/mpv
       ./programs/librewolf
       ./programs/hyprland
+      ./programs/waybar
       ./programs/mangohud
     ];
 
