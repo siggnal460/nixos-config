@@ -14,5 +14,6 @@
 
   environment.systemPackages = [
     pkgs.grimblast
+    pkgs.pavucontrol
   ];
 }

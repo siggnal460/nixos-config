@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   programs = {
     wofi.enable = true;
@@ -5,7 +6,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.variables = [ "-all" ];
+    systemd.variables = [ "--all" ];
     settings = {
       "$terminal" = "wezterm";
       "$filemanager" = "cosmic-files";
@@ -55,20 +56,21 @@
         "$mainMod, l, movefocus, r"
         "$mainMod, k, movefocus, u"
         "$mainMod, j, movefocus, d"
+        "$mainMod SHIFT, Z, exec, hyprctl reload"
         "$mainMod SHIFT, S, exec, grimblast copy area"
         "$mainMod SHIFT, h, movewindow, l"
         "$mainMod SHIFT, l, movewindow, r"
         "$mainMod SHIFT, k, movewindow, u"
         "$mainMod SHIFT, j, movewindow, d"
-        "$mainMod CTRL, h, workspace, -1"
-        "$mainMod CTRL, l, workspace, +1"
+        "$mainMod CTRL, h, workspace, m-1"
+        "$mainMod CTRL, l, workspace, m+1"
       ];
 
       decoration = {
-        rounding = 10;
+        rounding = 16;
         rounding_power = 2;
-        active_opacity = 0.90;
-        inactive_opacity = 0.80;
+        active_opacity = 1.00;
+        inactive_opacity = 0.95;
         shadow = {
           enabled = true;
           range = 4;
@@ -101,46 +103,43 @@
         resize_on_border = false;
         allow_tearing = true;
         layout = "dwindle";
+        "col.active_border" = lib.mkForce "0x7aa2f7ff";
       };
 
       layerrule = [
-        "blur, waybar"
+        "blur, waybar, ignorealpha"
         "blur, wofi"
       ];
 
       windowrule = [
-        "opacity 1.00 override 0.95 override, class:^(librewolf)$"
+        "workspace name:Steam, class:^(steam)$"
+        "float, class:^(steam)$, title:(Friends List)"
 
-        "workspace name:Gaming, class:^(steam)$"
-        "opacity 1.00 override, class:^(steam)$"
-        "maximize, class:^(steam)$"
+        "workspace name:Discord, class:^(discord)$"
 
-        "workspace name:Blender, class:^(discord)$"
-        "opacity 1.00 override, class:^(discord)$"
-        "maximize, class:^(discord)$"
-
-        "workspace name:Development, class:^(dev.zed.Zed)$"
-        "opacity 1.00 override, class:^(dev.zed.Zed)$"
-        "maximize, class:^(dev.zed.Zed)$"
+        "workspace name:Development, class:^.*(Zed).*$"
 
         "workspace name:Blender, class:^(blender)$"
-        "opacity 1.00 override, class:^(blender)$"
-        "maximize, class:^(blender)$"
 
-        "workspace name:Jellyfin, class:^(com.github.iwalton3.jellyfin-media-player)$"
-        "opacity 1.00 override, class:^(com.github.iwalton3.jellyfin-media-player)$"
-        "maximize, class:^(com.github.iwalton3.jellyfin-media-player)$"
+        "float, class:^.*(pavucontrol).*$"
+
+        "workspace name:Jellyfin, class:^.*(jellyfin-media-player).*$"
+
+        "workspace name:Gamedev, class:^(godot)$"
+
+        "opacity 0.90 override 0.80 override 0.95 override, class:^.*(wezterm).*$"
       ];
 
       workspace = [
         "f[0], rounding:false, bordersize:0, gapsout:0, persistent:false"
         "f[1], rounding:false, bordersize:0, gapsout:0, persistent:false"
-        "name:General, default:true, persistent:true"
-        "name:Gaming"
-        "name:Chat"
+        "name:General"
+        "name:Steam"
+        "name:Discord"
         "name:Blender"
         "name:Development"
         "name:Jellyfin"
+        "name:Gamedev"
       ];
     };
   };
