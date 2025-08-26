@@ -140,9 +140,11 @@
       windowrule = [
 			  ### IMPLICIT RULES ###
         "opacity 1.0 override 0.50 override, floating:1"
+        "center, floating:1"
         "workspace 1, class:.*"
 
 			  ### TAGS ###
+        "opacity 1.0 override 1.0 override 1.0 override, tag:video*"
         "float, tag:video*"
         "content video, tag:video*"
         "center, tag:video*"
@@ -167,12 +169,15 @@
 
 				## LIBREWOLF ##
         "tile, class:^(librewolf)$"
-        "float, title:^(.*)(Bitwarden)(.*)$, class:^(librewolf)$" # doesn't work, 100% should work
+        "tag float-horizontal-medium, title:^(.*)(Bitwarden)(.*)$, class:^(librewolf)$" # doesn't work, 100% should work
 				"tag float-horizontal-medium, title:^(Enter)(.*)$, class:^(librewolf)$"
 
 				## STEAM ##
-        "workspace 2 silent, class:^(steam)(.*)$"
+        "workspace 2, class:^(steam)(.*)$"
+        "workspace 2 silent, class:^(steam)$, title:^(Steam)$"
+        "workspace 2 silent, class:^(steam)$, title:^(Steam)(.*)$"
         "noinitialfocus, class:^(steam)$, title:^(Steam)$"
+        "noinitialfocus, class:^(steam)$, title:^(Sign)(.*)$"
 				"tag float-vertical-small, class:^(steam)$, title:^(Friends List)$"
         "tag video, class:^(steam)$, title:^(Recordings & Screenshots)$"
 

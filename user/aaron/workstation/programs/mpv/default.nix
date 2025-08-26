@@ -1,7 +1,7 @@
 {
   # jellyfinmediaplayer can use an mpv.conf as well
 	systemd.user.tmpfiles.rules = [
-	  "L+ ~/.config/mpv/mpv.conf - - - - ~/.local/share/jellyfinmediaplayer/mpv.conf"
+	  "L+ %h/.config/mpv/mpv.conf - - - - %h/.local/share/jellyfinmediaplayer/mpv.conf"
 	];
 
   programs.mpv = {
