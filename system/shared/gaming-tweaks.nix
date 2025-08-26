@@ -85,6 +85,10 @@ in
       quantum = 64;
       rate = 48000;
     };
+		lsfg-vk = {
+		  enable = true;
+			ui.enable = true;
+		};
   };
 
   hardware.steam-hardware.enable = true;

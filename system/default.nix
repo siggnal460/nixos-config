@@ -113,10 +113,6 @@
     stevenblack.enable = true;
     firewall.allowedTCPPorts = [ ];
     firewall.allowedUDPPorts = [ ];
-    nameservers = [
-      "8.8.8.8"
-      "8.8.8.4"
-    ];
     # these are temporary
     extraHosts = ''
       192.168.1.3   x86-merkat-auth.gappyland.org x86-merkat-auth
@@ -218,7 +214,7 @@
   };
 
   systemd.timers."pull-updates" = {
-    description = "nightly timer between 0400-0430 for pulling of latest changes";
+    description = "Nightly timer between 0400-0430 for pulling of latest changes";
     wantedBy = [ "timers.target" ];
     timerConfig = {
       Persistent = true;
@@ -229,7 +225,7 @@
   };
 
   systemd.services.pull-updates = {
-    description = "pulling of latest changes from the upstream git repo";
+    description = "Pulling of latest changes from the upstream git repo";
     restartIfChanged = false;
     onSuccess = [ "rebuild.service" ];
     path = [
@@ -255,13 +251,17 @@
     path = [
       pkgs.nixos-rebuild
       pkgs.systemd
+			pkgs.libnotify
     ];
     script = ''
             echo "Beginning rebuild service."
             current_hour=$(date +%H)
             if [ "$current_hour" -ge 3 ] && [ "$current_hour" -lt 5 ]; then
       			  power_cycle="TRUE"
-      			fi
+							notify-send -u critical \"Autoupdate Power Cycle\" \"It is within the power cycle window. Machine may reboot or poweroff soon!\"
+      			else
+							notify-send \"Autoupdate\" \"An autoupdate process was initiated. Expect slightly degraded performance.\"
+						fi
 
             echo "Rebuild Information - Hostname: $HOSTNAME ; NIGHTLY_REFRESH: $NIGHTLY_REFRESH ; Current Hour: $current_hour"
 
@@ -275,9 +275,12 @@
               nixos-rebuild switch --accept-flake-config
               if [ "$power_cycle" = "TRUE" ]; then
             	  echo "Within poweroff window. Goodbye!"
+								notify-send -u critical \"Autoupdate Power Cycle\" \"It is within the power cycle window. Machine will poweroff in 20s!\"
+								sleep 20s
             	  poweroff
       				else
             	  echo "Not within power cycle window of 0400-0500, skipping poweroff."
+								notify-send \"Power Cycle Skipped\" \"The autoupdate process requires a power cycle but it was outside the time window to do so.\"
       				fi
 
             elif [ "$NIGHTLY_REFRESH" = "reboot-always" ]; then
@@ -285,9 +288,12 @@
             	nixos-rebuild switch --accept-flake-config
               if [ "$power_cycle" == "TRUE" ]; then
       					echo "Machine set to always reboot and it is within the power cycle window. Rebooting now."
+								notify-send -u critical \"Autoupdate Power Cycle\" \"It is within the power cycle window. Machine will reboot in 20s!\"
+								sleep 20s
       					reboot now
       				else
             	  echo "Not within power cycle window of 0400-0500, skipping reboot."
+								notify-send \"Power Cycle Skipped\" \"The autoupdate process requires a power cycle but it was outside the time window to do so.\"
       				fi
 
             elif [ "$NIGHTLY_REFRESH" = "reboot-if-needed" ]; then
@@ -297,13 +303,17 @@
       					nixos-rebuild switch --accept-flake-config
       				elif [ "$power_cycle" == "TRUE"]; then
       					echo "Reboot necessary and within reboot window. Rebooting now."
+								notify-send -u critical \"Autoupdate Power Cycle\" \"It is within the power cycle window. Machine will reboot in 20s!\"
+								sleep 20s
       					reboot now
       				else
       					echo "Refresh is necessary, but it was not within the power cycle window of 0400 and 0500 so it was skipped."
+								notify-send \"Power Cycle Skipped\" \"The autoupdate process requires a power cycle but it was outside the time window to do so.\"
       				fi
 
             else
             	echo 'Environmental variable NIGHTLY_REFRESH was not set to an appropriate value ("poweroff-always", "reboot-always" or "reboot-if-needed"). Action will not be taken.'
+				      notify-send -u critical \"Autoupdate Error\" \"There was an issue with the rebuild service. Check logs.\"
 
             fi
     '';

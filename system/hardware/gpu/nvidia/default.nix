@@ -5,8 +5,9 @@
   boot = {
     initrd.kernelModules = [
       "nvidia"
-      "nvidia-modeset"
-      "nvidia-drm"
+      "nvidia_modeset"
+      "nvidia_drm"
+			"nvidia_uvm"
     ];
     kernelParams = [
       "module_blacklist=i915"

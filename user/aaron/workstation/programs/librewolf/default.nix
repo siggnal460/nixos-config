@@ -46,7 +46,7 @@ in
       DisablePocket = true;
       DisableProfileImport = true;
       DisableTelemetry = true;
-      DisplayBookmarksToolbar = "never";
+      DisplayBookmarksToolbar = "newtab";
       DNSOverHTTPS.Enabled = true;
 
       EnableTrackingProtection = {
@@ -75,6 +75,7 @@ in
         "browser.newtabpage.activity-stream.system.showSponsored" = false;
         "browser.newtabpage.pinned" = "";
         "browser.topsites.contile.enabled" = false;
+        "sidebar.revamp" = false;
       };
 
       SkipTermsOfUser = true;

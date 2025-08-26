@@ -109,16 +109,7 @@ in
     };
 
     services = {
-      gammastep = {
-        enable = true;
-        dawnTime = "5:15";
-        duskTime = "19:00-20:30";
-        settings = {
-          general = {
-            adjustment-method = "wayland";
-          };
-        };
-      };
+      gammastep.enable = true;
 
       swayidle = {
         enable = true;

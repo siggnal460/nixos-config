@@ -1,0 +1,110 @@
+{
+  "bar.customModules.storage.paths": [
+    "/"
+  ],
+  "theme.font.name": "FiraCode Nerd Font",
+  "theme.font.label": "FiraCode Nerd Font",
+  "theme.font.size": "1.2rem",
+  "theme.bar.floating": true,
+  "theme.bar.buttons.enableBorders": true,
+  "theme.bar.border.location": "none",
+  "theme.bar.enableShadow": false,
+  "menus.clock.time.military": true,
+  "menus.clock.time.hideSeconds": true,
+  "menus.clock.weather.location": "Riverdale",
+  "menus.power.showLabel": true,
+  "theme.bar.buttons.modules.cpu.enableBorder": false,
+  "bar.launcher.icon": "",
+  "bar.launcher.autoDetectIcon": false,
+  "bar.layouts": {
+    "*": {
+      "left": [
+        "dashboard",
+        "notifications",
+        "workspaces"
+      ],
+      "middle": [
+        "windowtitle",
+        "media"
+      ],
+      "right": [
+        "volume",
+        "microphone",
+        "network",
+        "bluetooth",
+        "systray",
+        "clock"
+      ]
+    }
+  },
+  "bar.workspaces.show_icons": false,
+  "bar.workspaces.show_numbered": false,
+  "bar.workspaces.monitorSpecific": true,
+  "bar.workspaces.showWsIcons": true,
+  "bar.workspaces.showApplicationIcons": true,
+  "theme.bar.buttons.network.enableBorder": false,
+  "menus.media.hideAlbum": true,
+  "menus.media.noMediaText": "No Media Currently Playing",
+  "wallpaper.pywal": false,
+  "theme.bar.menus.monochrome": false,
+  "wallpaper.enable": true,
+  "theme.bar.menus.opacity": 100,
+  "theme.matugen_settings.mode": "dark",
+  "theme.bar.transparent": true,
+  "theme.bar.scaling": 70,
+  "bar.windowtitle.custom_title": true,
+  "bar.windowtitle.title_map": [
+    [
+      "LibreWolf",
+      "",
+      "Librewolf"
+    ]
+  ],
+  "bar.windowtitle.class_name": true,
+  "bar.windowtitle.label": true,
+  "bar.windowtitle.truncation": true,
+  "theme.bar.buttons.windowtitle.enableBorder": false,
+  "menus.dashboard.stats.enable_gpu": false,
+  "menus.dashboard.shortcuts.left.shortcut1.command": "librewolf",
+  "menus.dashboard.shortcuts.left.shortcut1.tooltip": "Librewolf",
+  "menus.dashboard.shortcuts.left.shortcut3.tooltip": "Dissent",
+  "menus.dashboard.shortcuts.left.shortcut3.command": "dissent",
+  "menus.dashboard.shortcuts.left.shortcut1.icon": "",
+  "theme.bar.opacity": 100,
+  "theme.bar.buttons.opacity": 70,
+  "theme.bar.buttons.dashboard.enableBorder": false,
+  "theme.osd.enable": true,
+  "bar.workspaces.spacing": 2,
+  "bar.workspaces.applicationIconMap": {
+    "class:librewolf": ""
+  },
+  "bar.media.truncation_size": 40,
+  "bar.media.show_active_only": true,
+  "bar.media.show_label": true,
+  "bar.media.truncation": true,
+  "menus.media.displayTime": false,
+  "bar.customModules.netstat.label": true,
+  "theme.bar.location": "top",
+  "theme.bar.buttons.borderSize": "0.05em",
+  "menus.transition": "crossfade",
+  "tear": true,
+  "theme.bar.margin_bottom": "0em",
+  "bar.customModules.netstat.dynamicIcon": false,
+  "bar.workspaces.showAllActive": true,
+  "bar.workspaces.applicationIconOncePerWorkspace": true,
+  "theme.bar.menus.menu.notifications.scaling": 70,
+  "theme.bar.menus.menu.clock.scaling": 70,
+  "theme.bar.menus.menu.battery.scaling": 70,
+  "theme.bar.menus.menu.bluetooth.scaling": 70,
+  "theme.bar.menus.menu.power.scaling": 70,
+  "theme.bar.menus.menu.network.scaling": 70,
+  "theme.bar.menus.menu.volume.scaling": 70,
+  "theme.bar.menus.menu.media.scaling": 70,
+  "theme.bar.menus.menu.dashboard.confirmation_scaling": 70,
+  "theme.bar.menus.menu.dashboard.scaling": 70,
+  "theme.osd.scaling": 70,
+  "theme.notification.scaling": 90,
+  "theme.tooltip.scaling": 70,
+  "theme.bar.menus.popover.scaling": 70,
+  "bar.systray.customIcons": {}
+}

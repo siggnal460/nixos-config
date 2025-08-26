@@ -4,12 +4,16 @@
     wofi.enable = true;
   };
 
+	services.gammastep.enable = true;
+
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.variables = [ "--all" ];
+		systemd.enable = false;
+    #systemd.variables = [ "--all" ];
     settings = {
       "$terminal" = "wezterm";
-      "$filemanager" = "cosmic-files";
+      "$browser" = "librewolf";
+      "$fileManager" = "cosmic-files";
       "$menu" = "wofi --show drun";
       "$mainMod" = "SUPER";
 
@@ -45,6 +49,7 @@
       };
 
       bind = [
+        ", Print, exec, grimblast copy screen"
         "$mainMod, Q, exec, $terminal"
         "$mainMod, C, killactive"
         "$mainMod, M, exit"
@@ -52,6 +57,7 @@
         "$mainMod, V, togglefloating"
         "$mainMod, F, fullscreen, 0"
         "$mainMod, R, exec, $menu"
+        "$mainMod, B, exec, $browser"
         "$mainMod, h, movefocus, l"
         "$mainMod, l, movefocus, r"
         "$mainMod, k, movefocus, u"
@@ -62,9 +68,21 @@
         "$mainMod SHIFT, l, movewindow, r"
         "$mainMod SHIFT, k, movewindow, u"
         "$mainMod SHIFT, j, movewindow, d"
+        "$mainMod SHIFT, 1, movetoworkspace, 1"
+        "$mainMod SHIFT, 2, movetoworkspace, 2"
+        "$mainMod SHIFT, 3, movetoworkspace, 3"
+        "$mainMod SHIFT, 4, movetoworkspace, 4"
+        "$mainMod SHIFT, 5, movetoworkspace, 5"
+        "$mainMod CTRL SHIFT, h, movetoworkspace, m-1"
+        "$mainMod CTRL SHIFT, l, movetoworkspace, m+1"
         "$mainMod CTRL, h, workspace, m-1"
         "$mainMod CTRL, l, workspace, m+1"
       ];
+
+      bindm = [
+				"$mainMod, mouse:272, movewindow"
+				"$mainMod, mouse:273, resizeactive"
+			];
 
       decoration = {
         rounding = 16;
@@ -90,10 +108,13 @@
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,24"
+				"XDG_SESSION_TYPE,wayland"
       ];
 
       exec-once = [
         "waybar & hyprpaper"
+				"flatpak run com.discordapp.Discord"
+				"flatpak run com.valvesoftware.Steam"
       ];
 
       general = {
@@ -106,40 +127,87 @@
         "col.active_border" = lib.mkForce "0x7aa2f7ff";
       };
 
+			dwindle = {
+			  pseudotile = "yes";
+				force_split = 2;
+			};
+
       layerrule = [
         "blur, waybar, ignorealpha"
-        "blur, wofi"
+        "blur, wofi, ignorealpha"
       ];
 
       windowrule = [
-        "workspace name:Steam, class:^(steam)$"
-        "float, class:^(steam)$, title:(Friends List)"
+			  ### IMPLICIT RULES ###
+        "opacity 1.0 override 0.50 override, floating:1"
+        "workspace 1, class:.*"
 
-        "workspace name:Discord, class:^(discord)$"
+			  ### TAGS ###
+        "float, tag:video*"
+        "content video, tag:video*"
+        "center, tag:video*"
+        "size 1600 900, tag:video*"
 
-        "workspace name:Development, class:^.*(Zed).*$"
+        "float, tag:float-horizontal-medium*"
+        "center, tag:float-horizontal-medium*"
+        "size 1296 810, tag:float-horizontal-medium*"
 
-        "workspace name:Blender, class:^(blender)$"
+        "float, tag:float-horizontal-big*"
+        "center, tag:float-horizontal-big*"
+        "size 1728 1080, tag:float-horizontal-big*"
 
-        "float, class:^.*(pavucontrol).*$"
+        "float, tag:float-vertical-small*"
+        "center, tag:float-vertical-small*"
+        "size 540 864, tag:float-vertical-small*"
 
-        "workspace name:Jellyfin, class:^.*(jellyfin-media-player).*$"
+			  ### CONTENT ###
+				"opacity 1.0 override, content:photo"
+				"opacity 1.0 override, content:video"
+				"opacity 1.0 override, content:game"
 
-        "workspace name:Gamedev, class:^(godot)$"
+				## LIBREWOLF ##
+        "tile, class:^(librewolf)$"
+        "float, title:^(.*)(Bitwarden)(.*)$, class:^(librewolf)$" # doesn't work, 100% should work
+				"tag float-horizontal-medium, title:^(Enter)(.*)$, class:^(librewolf)$"
 
-        "opacity 0.90 override 0.80 override 0.95 override, class:^.*(wezterm).*$"
+				## STEAM ##
+        "workspace 2 silent, class:^(steam)(.*)$"
+        "noinitialfocus, class:^(steam)$, title:^(Steam)$"
+				"tag float-vertical-small, class:^(steam)$, title:^(Friends List)$"
+        "tag video, class:^(steam)$, title:^(Recordings & Screenshots)$"
+
+				## COSMIC FILES ##
+        "tag float-horizontal-big, class:^.*(CosmicFiles).*$, title:^.*(COSMIC Files).*$"
+
+				## MPV ##
+        "tag video, class:^(mpv)$"
+
+				## DISCORD ##
+        "workspace 3 silent, class:^(discord)$"
+        "noinitialfocus, class:^(discord)$"
+
+				## ZED ##
+        "workspace 4, class:^.*(Zed).*$"
+
+				## BLENDER ##
+        "workspace 5, class:^(blender)$"
+
+				## PAVUCONTROL ##
+        "tag float-horizontal-medium, class:^.*(pavucontrol).*$"
+
+				## GODOT ##
+        "workspace 6, class:^(godot)$"
+
+				## WEZTERM ##
+        "opacity 0.90 override 0.80 override 1.00 override, class:^.*(wezterm).*$"
+        "opacity 0.75 override 0.25 override, class:^.*(wezterm).*$, floating:1"
+        "tag float-horizontal-medium, class:^.*(wezterm).*$"
       ];
 
       workspace = [
+			  "1, default:true, persistent:true"
         "f[0], rounding:false, bordersize:0, gapsout:0, persistent:false"
         "f[1], rounding:false, bordersize:0, gapsout:0, persistent:false"
-        "name:General"
-        "name:Steam"
-        "name:Discord"
-        "name:Blender"
-        "name:Development"
-        "name:Jellyfin"
-        "name:Gamedev"
       ];
     };
   };
