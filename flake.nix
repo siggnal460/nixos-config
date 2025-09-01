@@ -170,6 +170,7 @@
             [
               ./user/aaron/host/x86-atxtwr-workstation
               ./user/aaron/workstation
+              ./user/aaron/workstation/wm/hyprland
             ];
         ## VIRTUAL MACHINES ##
         vm =

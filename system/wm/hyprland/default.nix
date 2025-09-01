@@ -8,6 +8,8 @@
     };
   };
 
+  security.pam.services.hyprlock = { };
+
   environment.systemPackages = [
     pkgs.grimblast
   ];

@@ -35,7 +35,7 @@ in
 
   fileSystems = {
     "/srv/games" = {
-      # Steam RetroArch's weird sanboxing make this the only place we can mount this unfortunately
+      # Steam RetroArch's weird sandboxing make this the only place we can mount this unfortunately
       device = lib.mkForce "x86-rakmnt-mediaserver:/export/games";
       fsType = lib.mkForce "nfs4";
       options = mountOptions;
