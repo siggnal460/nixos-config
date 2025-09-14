@@ -78,7 +78,7 @@
                 nixpkgs.overlays = [ overlay-unstable ];
               }
             )
-            inputs.jovian-nixos.nixosModules.default
+            #inputs.jovian-nixos.nixosModules.default
             sops-nix.nixosModules.sops
             stylix.nixosModules.stylix
             nix-index-database.nixosModules.nix-index
@@ -237,7 +237,8 @@
               ./system/hardware/gpu/intel
               ./system/baseline/htpc
             ]
-            [ ./user/aaron/htpc ];
+            [ ./user/aaron/htpc
+						];
 
         ## SERVERS ##
         x86-merkat-auth =

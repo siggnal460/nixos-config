@@ -77,6 +77,18 @@
       targets.gtk.enable = false; # https://github.com/danth/stylix/issues/1093
     };
 
+    services = {
+      gammastep = {
+        dawnTime = "5:00-6:45";
+        duskTime = "18:45-21:45";
+        settings = {
+          general = {
+            adjustment-method = "wayland";
+          };
+        };
+      };
+		};
+
     accounts.email.accounts.aaron = {
       address = "siggnal@proton.me";
       primary = true;

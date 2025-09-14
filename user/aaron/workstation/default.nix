@@ -45,18 +45,6 @@
 
     programs.wezterm.enable = true;
 
-    services = {
-      gammastep = {
-        dawnTime = "5:00-6:45";
-        duskTime = "18:45-21:45";
-        settings = {
-          general = {
-            adjustment-method = "wayland";
-          };
-        };
-      };
-		};
-
     dconf.settings = {
       # connects virt-manager to qemu
       "org/virt-manager/virt-manager/connections" = {
