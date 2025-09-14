@@ -107,7 +107,7 @@ in
     systemPackages = with pkgs; [
       anki
       deluge
-			dissent
+      dissent
       element-desktop
       firefox
       gimp

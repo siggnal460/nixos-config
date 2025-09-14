@@ -87,7 +87,7 @@
           };
         };
       };
-		};
+    };
 
     accounts.email.accounts.aaron = {
       address = "siggnal@proton.me";

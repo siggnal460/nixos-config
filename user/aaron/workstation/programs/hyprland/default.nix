@@ -4,11 +4,11 @@
     wofi.enable = true;
   };
 
-	services.gammastep.enable = true;
+  services.gammastep.enable = true;
 
   wayland.windowManager.hyprland = {
     enable = true;
-		systemd.enable = false;
+    systemd.enable = false;
     #systemd.variables = [ "--all" ];
     settings = {
       "$terminal" = "wezterm";
@@ -80,9 +80,9 @@
       ];
 
       bindm = [
-				"$mainMod, mouse:272, movewindow"
-				"$mainMod, mouse:273, resizeactive"
-			];
+        "$mainMod, mouse:272, movewindow"
+        "$mainMod, mouse:273, resizeactive"
+      ];
 
       decoration = {
         rounding = 16;
@@ -108,13 +108,13 @@
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,24"
-				"XDG_SESSION_TYPE,wayland"
+        "XDG_SESSION_TYPE,wayland"
       ];
 
       exec-once = [
         "waybar & hyprpaper"
-				"flatpak run com.discordapp.Discord"
-				"flatpak run com.valvesoftware.Steam"
+        "flatpak run com.discordapp.Discord"
+        "flatpak run com.valvesoftware.Steam"
       ];
 
       general = {
@@ -127,10 +127,10 @@
         "col.active_border" = lib.mkForce "0x7aa2f7ff";
       };
 
-			dwindle = {
-			  pseudotile = "yes";
-				force_split = 2;
-			};
+      dwindle = {
+        pseudotile = "yes";
+        force_split = 2;
+      };
 
       layerrule = [
         "blur, waybar, ignorealpha"
@@ -138,12 +138,12 @@
       ];
 
       windowrule = [
-			  ### IMPLICIT RULES ###
+        ### IMPLICIT RULES ###
         "opacity 1.0 override 0.50 override, floating:1"
         "center, floating:1"
         "workspace 1, class:.*"
 
-			  ### TAGS ###
+        ### TAGS ###
         "opacity 1.0 override 1.0 override 1.0 override, tag:video*"
         "float, tag:video*"
         "content video, tag:video*"
@@ -162,55 +162,55 @@
         "center, tag:float-vertical-small*"
         "size 540 864, tag:float-vertical-small*"
 
-			  ### CONTENT ###
-				"opacity 1.0 override, content:photo"
-				"opacity 1.0 override, content:video"
-				"opacity 1.0 override, content:game"
+        ### CONTENT ###
+        "opacity 1.0 override, content:photo"
+        "opacity 1.0 override, content:video"
+        "opacity 1.0 override, content:game"
 
-				## LIBREWOLF ##
+        ## LIBREWOLF ##
         "tile, class:^(librewolf)$"
         "tag float-horizontal-medium, title:^(.*)(Bitwarden)(.*)$, class:^(librewolf)$" # doesn't work, 100% should work
-				"tag float-horizontal-medium, title:^(Enter)(.*)$, class:^(librewolf)$"
+        "tag float-horizontal-medium, title:^(Enter)(.*)$, class:^(librewolf)$"
 
-				## STEAM ##
+        ## STEAM ##
         "workspace 2, class:^(steam)(.*)$"
         "workspace 2 silent, class:^(steam)$, title:^(Steam)$"
         "workspace 2 silent, class:^(steam)$, title:^(Steam)(.*)$"
         "noinitialfocus, class:^(steam)$, title:^(Steam)$"
         "noinitialfocus, class:^(steam)$, title:^(Sign)(.*)$"
-				"tag float-vertical-small, class:^(steam)$, title:^(Friends List)$"
+        "tag float-vertical-small, class:^(steam)$, title:^(Friends List)$"
         "tag video, class:^(steam)$, title:^(Recordings & Screenshots)$"
 
-				## COSMIC FILES ##
+        ## COSMIC FILES ##
         "tag float-horizontal-big, class:^.*(CosmicFiles).*$, title:^.*(COSMIC Files).*$"
 
-				## MPV ##
+        ## MPV ##
         "tag video, class:^(mpv)$"
 
-				## DISCORD ##
+        ## DISCORD ##
         "workspace 3 silent, class:^(discord)$"
         "noinitialfocus, class:^(discord)$"
 
-				## ZED ##
+        ## ZED ##
         "workspace 4, class:^.*(Zed).*$"
 
-				## BLENDER ##
+        ## BLENDER ##
         "workspace 5, class:^(blender)$"
 
-				## PAVUCONTROL ##
+        ## PAVUCONTROL ##
         "tag float-horizontal-medium, class:^.*(pavucontrol).*$"
 
-				## GODOT ##
+        ## GODOT ##
         "workspace 6, class:^(godot)$"
 
-				## WEZTERM ##
+        ## WEZTERM ##
         "opacity 0.90 override 0.80 override 1.00 override, class:^.*(wezterm).*$"
         "opacity 0.75 override 0.25 override, class:^.*(wezterm).*$, floating:1"
         "tag float-horizontal-medium, class:^.*(wezterm).*$"
       ];
 
       workspace = [
-			  "1, default:true, persistent:true"
+        "1, default:true, persistent:true"
         "f[0], rounding:false, bordersize:0, gapsout:0, persistent:false"
         "f[1], rounding:false, bordersize:0, gapsout:0, persistent:false"
       ];

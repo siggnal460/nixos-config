@@ -237,8 +237,9 @@
               ./system/hardware/gpu/intel
               ./system/baseline/htpc
             ]
-            [ ./user/aaron/htpc
-						];
+            [
+              ./user/aaron/htpc
+            ];
 
         ## SERVERS ##
         x86-merkat-auth =

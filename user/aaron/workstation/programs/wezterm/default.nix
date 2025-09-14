@@ -1,6 +1,6 @@
 {
   programs.wezterm = {
-	  enable = true;
-		extraConfig = builtins.readFile ./config/wezterm.lua;
-	};
+    enable = true;
+    extraConfig = builtins.readFile ./config/wezterm.lua;
+  };
 }
