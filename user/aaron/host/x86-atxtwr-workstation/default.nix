@@ -19,8 +19,10 @@ in
 {
   home-manager.users.aaron = {
     wayland.windowManager.hyprland.settings = {
-      monitor = "DP-1, 2560x1440@239.97, 0x0, 1";
-      #monitor = "DP-1, 3440x1440@175, 0x0, 1";
+      monitor = [
+        "DP-1, 3440x1440@240.08501, 0x0, 1"
+        "DP-2, 2560x1440@239.97, 440x-1440, 1"
+      ];
       env = [ ] ++ nvidia_env;
     };
 

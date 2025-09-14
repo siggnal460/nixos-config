@@ -207,6 +207,9 @@
         ## GODOT ##
         "workspace 6, class:^(godot)$"
 
+        ## JELLYFIN MEDIA PLAYER ##
+        "tag video, class:^.*(jellyfin-media-player)$"
+
         ## WEZTERM ##
         "opacity 0.90 override 0.80 override 1.00 override, class:^.*(wezterm).*$"
         "opacity 0.75 override 0.25 override, class:^.*(wezterm).*$, floating:1"
@@ -214,7 +217,9 @@
       ];
 
       workspace = [
-        "1, default:true, persistent:true"
+        "1, monitor:DP-1, default:true, persistent:true"
+        "2, monitor:DP-1"
+        "3, monitor:DP-2"
         "f[0], rounding:false, bordersize:0, gapsout:0, persistent:false"
         "f[1], rounding:false, bordersize:0, gapsout:0, persistent:false"
       ];
