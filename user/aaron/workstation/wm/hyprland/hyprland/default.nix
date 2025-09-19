@@ -1,9 +1,5 @@
 { lib, ... }:
 {
-  programs = {
-    wofi.enable = true;
-  };
-
   services.gammastep.enable = true;
   programs.wofi.enable = true;
 
