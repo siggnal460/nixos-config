@@ -27,7 +27,7 @@ in
           "Video"
         ];
       };
-      steam = {
+      gamescope = {
         name = "Gamescope";
         genericName = "Steam Gamescope Session";
         exec = "gamescope-session %U";
@@ -45,7 +45,11 @@ in
         enable = true;
         settings = {
           allow_images = true;
-          image_size = 96;
+          image_size = 128;
+          no_actions = true;
+          hide_search = true;
+          hide_scroll = true;
+          columns = 1;
         };
       };
       librewolf = {
@@ -156,6 +160,12 @@ in
           "$mainMod, M, exit"
           "$mainMod, F, fullscreen, 0"
           "$mainMod, R, exec, $menu"
+          "$mainMod SHIFT, 1, movetoworkspace, 1"
+          "$mainMod SHIFT, 2, movetoworkspace, 2"
+          "$mainMod SHIFT, 3, movetoworkspace, 3"
+          "$mainMod SHIFT, 4, movetoworkspace, 4"
+          "$mainMod SHIFT, 5, movetoworkspace, 5"
+          "$mainMod CTRL SHIFT, h, movetoworkspace, m-1"
         ];
 
         env = [
