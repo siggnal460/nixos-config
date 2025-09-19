@@ -78,7 +78,6 @@
                 nixpkgs.overlays = [ overlay-unstable ];
               }
             )
-            #inputs.jovian-nixos.nixosModules.default
             sops-nix.nixosModules.sops
             stylix.nixosModules.stylix
             nix-index-database.nixosModules.nix-index

@@ -1,4 +1,10 @@
 {
+  inputs,
+  lib,
+  config,
+  ...
+}:
+{
   imports = [
     ../../shared/plymouth-quiet.nix
     ../../shared/pipewire.nix
@@ -6,6 +12,7 @@
     ../../shared/remotely-managed.nix
     ../../shared/networkmanager.nix
     ../../shared/gaming-tweaks.nix
+    inputs.jovian-nixos.nixosModules.default
   ];
 
   systemd.services.rebuild.environment = {

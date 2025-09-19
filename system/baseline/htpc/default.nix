@@ -1,10 +1,17 @@
 { pkgs, ... }:
 {
   imports = [
+    ../../wm/hyprland
+    ../../shared/gaming-tweaks.nix
     ../../shared/plymouth-quiet.nix
     ../../shared/pipewire.nix
     ../../shared/bluetooth.nix
     ../../shared/remotely-managed.nix
+  ];
+
+  nixpkgs.allowUnfreePackages = [
+    "steam"
+    "steam-unwrapped"
   ];
 
   systemd.services.rebuild.environment = {
@@ -13,20 +20,8 @@
 
   networking.networkmanager.enable = true;
 
-  programs.sway = {
-    enable = true;
-    xwayland.enable = false;
-  };
-
-  services.xserver.displayManager = {
-    gdm = {
-      enable = true;
-      wayland = true;
-    };
-  };
-
   services.displayManager = {
-    defaultSession = "sway";
+    defaultSession = "hyprland-uwsm";
   };
 
   environment.systemPackages = with pkgs; [
@@ -34,4 +29,14 @@
     libsForQt5.qt5.qtquickcontrols2
     libsForQt5.qt5.qtgraphicaleffects
   ];
+
+  programs.steam = {
+    enable = true;
+    extest.enable = true;
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
+    gamescopeSession.enable = true;
+  };
+
 }
