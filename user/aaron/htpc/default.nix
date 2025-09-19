@@ -160,12 +160,13 @@ in
           "$mainMod, M, exit"
           "$mainMod, F, fullscreen, 0"
           "$mainMod, R, exec, $menu"
-          "$mainMod SHIFT, 1, movetoworkspace, 1"
-          "$mainMod SHIFT, 2, movetoworkspace, 2"
-          "$mainMod SHIFT, 3, movetoworkspace, 3"
-          "$mainMod SHIFT, 4, movetoworkspace, 4"
-          "$mainMod SHIFT, 5, movetoworkspace, 5"
-          "$mainMod CTRL SHIFT, h, movetoworkspace, m-1"
+          "$mainMod CTRL, right, workspace, m+1"
+          "$mainMod CTRL, left, workspace, m-1"
+          "$mainMod, 1, workspace, 1"
+          "$mainMod, 2, workspace, 2"
+          "$mainMod, 3, workspace, 3"
+          "$mainMod, 4, workspace, 4"
+          "$mainMod, 5, workspace, 5"
         ];
 
         env = [
@@ -175,7 +176,7 @@ in
         ];
 
         windowrule = [
-          "fullscreen, class:*"
+          "fullscreen, class:.*"
           "workspace 1, class:^(kodi)(.*)$"
           "workspace 2, class:^(steam)(.*)$"
           "workspace 3, class:^(librewolf)(.*)$"
