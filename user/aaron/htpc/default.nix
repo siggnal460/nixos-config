@@ -28,7 +28,7 @@ in
         ];
       };
       steam = {
-        name = "Steam";
+        name = "Gamescope";
         genericName = "Steam Gamescope Session";
         exec = "gamescope-session %U";
         terminal = false;
@@ -41,7 +41,13 @@ in
     };
 
     programs = {
-      wofi.enable = true;
+      wofi = {
+        enable = true;
+        settings = {
+          allow_images = true;
+          image_size = 96;
+        };
+      };
       librewolf = {
         enable = true;
         policies = {

@@ -38,5 +38,4 @@
     ];
     gamescopeSession.enable = true;
   };
-
 }
