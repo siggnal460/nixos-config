@@ -101,6 +101,11 @@ in
     '';
   };
 
+	xdg.portal = {
+	  enable = true;
+		extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+	};
+
   hardware.nvidia.nvidiaSettings = lib.mkIf (builtins.elem "nvidia" config.boot.initrd.kernelModules) true;
 
   environment = {
