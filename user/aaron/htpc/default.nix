@@ -113,7 +113,7 @@ in
     programs = {
       rofi = {
         enable = true;
-        package = pkgs.rofi-wayland;
+        #package = pkgs.rofi-wayland;
         extraConfig = {
           show-icons = true;
           icon-theme = "Papirus-Dark";

@@ -196,14 +196,6 @@
             [ ./user/aaron/workstation ];
 
         ## CONSOLES ##
-        x86-minitx-jovian =
-          mkComputerUnstable "x86_64-linux" ./host/x86-minitx-jovian
-            [
-              ./system/hardware/gpu/amd
-              ./system/baseline/console
-            ]
-            [ ./user/aaron/console ];
-
         x86-legigo-jovian =
           mkComputerUnstable "x86_64-linux" ./host/x86-legigo-jovian
             [
@@ -225,6 +217,17 @@
             [ ./user/aaron/console ];
 
         ## HTPC ##
+        x86-minitx-lrhtpc =
+          mkComputerStable "x86_64-linux" ./host/x86-minitx-lrhtpc
+            [
+              ./system/hardware/gpu/amd
+              ./system/baseline/htpc
+            ]
+            [
+              ./user/aaron/host/x86-minitx-lrhtpc
+              ./user/aaron/htpc
+            ];
+
         x86-merkat-bedhtpc =
           mkComputerStable "x86_64-linux" ./host/x86-merkat-bedhtpc
             [
@@ -233,16 +236,6 @@
             ]
             [
               ./user/aaron/host/x86-merkat-bedhtpc
-              ./user/aaron/htpc
-            ];
-
-        x86-merkat-lrhtpc =
-          mkComputerStable "x86_64-linux" ./host/x86-merkat-lrhtpc
-            [
-              ./system/hardware/gpu/intel
-              ./system/baseline/htpc
-            ]
-            [
               ./user/aaron/htpc
             ];
 
