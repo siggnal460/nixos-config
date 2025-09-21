@@ -19,6 +19,34 @@ in
         name = "Steam";
         noDisplay = true;
       };
+      nvim = {
+        name = "Neovim wrapper";
+        noDisplay = true;
+      };
+      cups = {
+        name = "Manage Printing";
+        noDisplay = true;
+      };
+      gammastep-indicator = {
+        name = "Gammastep Indicator";
+        noDisplay = true;
+      };
+      kvantummanager = {
+        name = "Kvantum Manager";
+        noDisplay = true;
+      };
+      librewolf = {
+        name = "LibreWolf";
+        noDisplay = true;
+      };
+      rofi = {
+        name = "Rofi";
+        noDisplay = true;
+      };
+      rofi-theme-selector = {
+        name = "Rofi Theme Selector";
+        noDisplay = true;
+      };
       blueman-adapters = {
         name = "Bluetooth Adapters";
         noDisplay = true;
@@ -51,6 +79,10 @@ in
         name = "Portal";
         noDisplay = true;
       };
+      wezterm = {
+        name = "WezTerm";
+        noDisplay = true;
+      };
       youtube = {
         name = "YouTube";
         genericName = "LibreWolf YouTube Kiosk";
@@ -63,10 +95,10 @@ in
           "Video"
         ];
       };
-      gamescope = {
-        name = "Gamescope";
-        genericName = "Steam Gamescope Session";
-        exec = "gamescope %U";
+      steam-bpm = {
+        name = "Steam BPM";
+        genericName = "Steam Big Picture Mode";
+        exec = "steam -start steam://open/bigpicture %U";
         terminal = false;
         icon = ../../../images/icons/steam.png;
         categories = [
@@ -213,10 +245,15 @@ in
 
         windowrule = [
           "fullscreen, class:.*"
-          "workspace 1, class:^(Kodi)(.*)$"
-          "workspace 2, class:^(steam)(.*)$"
-          "workspace 3, class:^(librewolf)(.*)$"
+          "workspace 1, class:.*"
+          "workspace 2, class:^(Kodi)(.*)$"
+          "workspace 3, class:^(steam)(.*)$"
+          "workspace 4, class:^(librewolf)(.*)$"
         ];
+
+				xwayland = {
+				  force_zero_scaling = true;
+				};
       };
     };
   };
