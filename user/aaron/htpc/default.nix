@@ -97,10 +97,10 @@ in
       };
       steam-bpm = {
         name = "Steam BPM";
-        genericName = "Steam Big Picture Mode";
+        genericName = "Big Picture Mode";
         exec = "steam -start steam://open/bigpicture %U";
         terminal = false;
-        icon = ../../../images/icons/steam.png;
+        icon = ../../../images/icons/steam.svg;
         categories = [
           "Application"
           "Game"
