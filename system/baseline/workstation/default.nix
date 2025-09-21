@@ -67,12 +67,10 @@ in
   };
 
   services = {
-    xserver.displayManager = {
-      gdm = {
-        enable = true;
-        wayland = true;
-      };
-    };
+		xserver.displayManager.gdm = {
+			enable = true;
+			wayland = true;
+		};
     openssh.enable = false;
     printing.enable = true;
     printing.drivers = [ pkgs.brlaser ];

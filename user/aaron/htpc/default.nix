@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   latestSourceURL = name: "https://addons.mozilla.org/firefox/downloads/latest/${name}/latest.xpi";
 in
@@ -19,14 +19,38 @@ in
         name = "Steam";
         noDisplay = true;
       };
-      #blueman-adapters.noDisplay = true;
-      #blueman-manager.noDisplay = true;
-      #lsfg-vk-ui.noDisplay = true;
-      #nixos-manual.noDisplay = true;
-      #qt5ct.noDisplay = true;
-      #qt6ct.noDisplay = true;
-      #uuctl.noDisplay = true;
-      #xdg-desktop-portal-gtk.noDisplay = true;
+      blueman-adapters = {
+        name = "Bluetooth Adapters";
+        noDisplay = true;
+      };
+      blueman-manager = {
+        name = "Bluetooth Manager";
+        noDisplay = true;
+      };
+      "gay.pancake.lsfg-vk-ui" = {
+        name = "lsfg-vk Configuration Window";
+        noDisplay = true;
+      };
+      nixos-manual = {
+        name = "NixOS Manual";
+        noDisplay = true;
+      };
+      qt5ct = {
+        name = "Qt5 Settings";
+        noDisplay = true;
+      };
+      qt6ct = {
+        name = "Qt6 Settings";
+        noDisplay = true;
+      };
+      uuctl = {
+        name = "User unit manager";
+        noDisplay = true;
+      };
+      xdg-desktop-portal-gtk = {
+        name = "Portal";
+        noDisplay = true;
+      };
       youtube = {
         name = "YouTube";
         genericName = "LibreWolf YouTube Kiosk";
@@ -42,7 +66,7 @@ in
       gamescope = {
         name = "Gamescope";
         genericName = "Steam Gamescope Session";
-        exec = "gamescope-session %U";
+        exec = "gamescope %U";
         terminal = false;
         icon = ../../../images/icons/steam.png;
         categories = [
@@ -57,10 +81,10 @@ in
         enable = true;
         package = pkgs.rofi-wayland; # or pkgs.rofi for X11
         extraConfig = {
-          modi = "drun";
           show-icons = true;
-          sidebar-mode = true;
+					icon-theme = "Papirus-Dark";
         };
+				#theme = lib.mkForce ./rofi/theme.rasi;
       };
       librewolf = {
         enable = true;
@@ -159,7 +183,7 @@ in
       systemd.enable = false;
       settings = {
         "$terminal" = "wezterm";
-        "$menu" = "rofi -show run";
+        "$menu" = "rofi -show drun";
         "$switcher" = "rofi -show window";
         "$mainMod" = "CTRL";
 
@@ -189,7 +213,7 @@ in
 
         windowrule = [
           "fullscreen, class:.*"
-          "workspace 1, class:^(kodi)(.*)$"
+          "workspace 1, class:^(Kodi)(.*)$"
           "workspace 2, class:^(steam)(.*)$"
           "workspace 3, class:^(librewolf)(.*)$"
         ];

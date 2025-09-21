@@ -1,0 +1,7 @@
+element {
+    children: [ element-icon ];
+}
+
+element-icon {
+    size: 3.5em;
+}

@@ -13,9 +13,4 @@
       settings."org/gnome/desktop/interface".scaling-factor = lib.gvariant.mkUint32 3;
     }
   ];
-
-  home-manager.users.aaron.wayland.windowManager.sway.config.output.HDMI-A-2 = {
-    scale = "3";
-    mode = "3840x2160@60Hz";
-  };
 }
