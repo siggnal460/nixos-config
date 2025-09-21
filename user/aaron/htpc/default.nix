@@ -1,9 +1,11 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   latestSourceURL = name: "https://addons.mozilla.org/firefox/downloads/latest/${name}/latest.xpi";
 in
 {
   home-manager.users.aaron = {
+    imports = [ ../workstation/programs/wezterm ];
+
     home.pointerCursor = {
       gtk.enable = true;
       package = pkgs.bibata-cursors;
@@ -114,7 +116,7 @@ in
         package = pkgs.rofi-wayland;
         extraConfig = {
           show-icons = true;
-					icon-theme = "Papirus-Dark";
+          icon-theme = "Papirus-Dark";
         };
       };
       librewolf = {
@@ -248,9 +250,9 @@ in
           "workspace 4, class:^(librewolf)(.*)$"
         ];
 
-				xwayland = {
-				  force_zero_scaling = true;
-				};
+        xwayland = {
+          force_zero_scaling = true;
+        };
       };
     };
   };

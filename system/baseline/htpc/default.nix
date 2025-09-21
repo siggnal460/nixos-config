@@ -21,10 +21,10 @@
   networking.networkmanager.enable = true;
 
   services.xserver.displayManager = {
-		gdm = {
-			enable = true;
-			wayland = true;
-		};
+    gdm = {
+      enable = true;
+      wayland = true;
+    };
     defaultSession = "hyprland-uwsm";
   };
 
