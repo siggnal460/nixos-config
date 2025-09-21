@@ -15,6 +15,18 @@ in
     stylix.targets.swaylock.useWallpaper = false;
 
     xdg.desktopEntries = {
+      steam = {
+        name = "Steam";
+        noDisplay = true;
+      };
+      #blueman-adapters.noDisplay = true;
+      #blueman-manager.noDisplay = true;
+      #lsfg-vk-ui.noDisplay = true;
+      #nixos-manual.noDisplay = true;
+      #qt5ct.noDisplay = true;
+      #qt6ct.noDisplay = true;
+      #uuctl.noDisplay = true;
+      #xdg-desktop-portal-gtk.noDisplay = true;
       youtube = {
         name = "YouTube";
         genericName = "LibreWolf YouTube Kiosk";

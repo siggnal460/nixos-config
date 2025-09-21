@@ -231,7 +231,10 @@
               ./system/hardware/gpu/intel
               ./system/baseline/htpc
             ]
-            [ ./user/aaron/htpc ];
+            [
+              ./user/aaron/host/x86-merkat-bedhtpc
+              ./user/aaron/htpc
+            ];
 
         x86-merkat-lrhtpc =
           mkComputerStable "x86_64-linux" ./host/x86-merkat-lrhtpc

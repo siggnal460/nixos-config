@@ -25,6 +25,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    wezterm
     kodiPackages.inputstream-adaptive
     libsForQt5.qt5.qtquickcontrols2
     libsForQt5.qt5.qtgraphicaleffects
