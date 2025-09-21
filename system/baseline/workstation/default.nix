@@ -35,16 +35,16 @@ in
   };
 
   fileSystems = {
-    "/nfs/ai" = {
-      device = lib.mkForce "x86-atxtwr-computeserver:/export/ai";
-      fsType = lib.mkForce "nfs4";
-      options = mountOptions;
-    };
-    "/nfs/blender" = {
-      device = lib.mkForce "x86-atxtwr-computeserver:/export/blender";
-      fsType = lib.mkForce "nfs4";
-      options = mountOptions;
-    };
+    #"/nfs/ai" = {
+    #  device = lib.mkForce "x86-atxtwr-computeserver:/export/ai";
+    #  fsType = lib.mkForce "nfs4";
+    #  options = mountOptions;
+    #};
+    #"/nfs/blender" = {
+    #  device = lib.mkForce "x86-atxtwr-computeserver:/export/blender";
+    #  fsType = lib.mkForce "nfs4";
+    #  options = mountOptions;
+    #};
     "/nfs/media" = {
       device = lib.mkForce "x86-rakmnt-mediaserver:/export/media";
       fsType = lib.mkForce "nfs4";
@@ -67,6 +67,12 @@ in
   };
 
   services = {
+    xserver.displayManager = {
+      gdm = {
+        enable = true;
+        wayland = true;
+      };
+    };
     openssh.enable = false;
     printing.enable = true;
     printing.drivers = [ pkgs.brlaser ];

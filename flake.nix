@@ -142,6 +142,7 @@
             [
               #user-specific modules
               ./user/aaron/workstation
+              ./user/aaron/host/x86-laptop-galago
             ];
 
         x86-laptop-thinkpad =
