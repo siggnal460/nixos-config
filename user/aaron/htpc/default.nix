@@ -111,12 +111,11 @@ in
     programs = {
       rofi = {
         enable = true;
-        package = pkgs.rofi-wayland; # or pkgs.rofi for X11
+        package = pkgs.rofi-wayland;
         extraConfig = {
           show-icons = true;
 					icon-theme = "Papirus-Dark";
         };
-				#theme = lib.mkForce ./rofi/theme.rasi;
       };
       librewolf = {
         enable = true;
@@ -165,8 +164,6 @@ in
         };
       };
 
-      fuzzel.enable = true;
-
       kodi = {
         enable = true;
         package = pkgs.kodi-wayland.withPackages (exts: [
@@ -200,7 +197,7 @@ in
         timeouts = [
           {
             timeout = 600; # 10min
-            command = "${pkgs.swaylock}/bin/swaylock -f -c 000000";
+            command = "${pkgs.swaylock}/bin/swaylock -f -c 000000"; # Change color to black
           }
           {
             timeout = 1200; # 20min
