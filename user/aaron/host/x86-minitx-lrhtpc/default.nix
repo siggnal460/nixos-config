@@ -2,8 +2,6 @@
   home-manager.users.aaron = {
     wayland.windowManager.hyprland.settings = {
       monitor = "HDMI-A-2, 3840x2160@60.00, 0x0, 3, bitdepth, 10, cm, hdr";
-    };
-  };
 
       services.swayidle = {
         extraArgs = [ "-w" ];
@@ -25,4 +23,5 @@
         ];
       };
     };
+  };
 }
