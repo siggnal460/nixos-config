@@ -186,27 +186,7 @@ in
 
     services = {
       gammastep.enable = true;
-
-      swayidle = {
-        enable = true;
-        extraArgs = [ "-w" ];
-        events = [
-          {
-            event = "before-sleep";
-            command = "${pkgs.swaylock}/bin/swaylock -fF";
-          }
-        ];
-        timeouts = [
-          {
-            timeout = 600; # 10min
-            command = "${pkgs.swaylock}/bin/swaylock -f -c 000000"; # Change color to black
-          }
-          {
-            timeout = 1200; # 20min
-            command = "${pkgs.systemd}/bin/systemctl sleep";
-          }
-        ];
-      };
+      swayidle.enable = true;
     };
 
     wayland.windowManager.hyprland = {
@@ -237,7 +217,8 @@ in
         ];
 
         env = [
-          "XCURSOR_SIZE,96"
+          "GDK_SCALE,3"
+          "XCURSOR_SIZE,64"
           "HYPRCURSOR_SIZE,96"
           "XDG_SESSION_TYPE,wayland"
         ];
