@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   home-manager.users.aaron = {
     wayland.windowManager.hyprland.settings = {
