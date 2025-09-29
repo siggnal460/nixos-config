@@ -117,7 +117,7 @@ in
       anki
       deluge
       element-desktop
-      #firefox
+      firefox
       gimp
       gnomeExtensions.appindicator
       gnupg
@@ -128,6 +128,7 @@ in
       mpv
       openvpn
       protonmail-bridge-gui
+      tidal-hifi
       tor-browser
       wayland-utils
       wezterm

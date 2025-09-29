@@ -195,6 +195,9 @@
         "workspace 3 silent, class:^(discord)$"
         "noinitialfocus, class:^(discord)$"
 
+        ## TIDAL ##
+        "workspace 3, class:^(tidal-hifi)$"
+
         ## ZED ##
         "workspace 4, class:^.*(Zed).*$"
 
