@@ -6,7 +6,7 @@
   # for xwayland?
   services.xserver = {
     enable = true;
-    videoDrivers = [ "amdgpu" ];{J
+    videoDrivers = [ "amdgpu" ];
   };
 
   hardware.graphics = {
