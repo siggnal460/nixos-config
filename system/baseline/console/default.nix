@@ -45,7 +45,7 @@
     desktopManager.gnome.enable = true;
     lsfg-vk = {
       enable = lib.mkIf (config.jovian.steam.enable) true;
-      ui.enable = false;
+      ui.enable = lib.mkForce false;
     };
   };
 

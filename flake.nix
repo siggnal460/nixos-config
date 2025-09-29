@@ -48,7 +48,6 @@
     inputs@{
       home-manager,
       home-manager-unstable,
-      jovian-nixos,
       nix-index-database,
       nixos-hardware,
       nixpkgs,
@@ -216,18 +215,17 @@
             ]
             [ ./user/aaron/console ];
 
-        ## HTPC ##
-        x86-minitx-lrhtpc =
-          mkComputerStable "x86_64-linux" ./host/x86-minitx-lrhtpc
+        x86-minitx-jovian =
+          mkComputerUnstable "x86_64-linux" ./host/x86-minitx-jovian
             [
               ./system/hardware/gpu/amd
-              ./system/baseline/htpc
+              ./system/baseline/console
             ]
             [
-              ./user/aaron/host/x86-minitx-lrhtpc
-              ./user/aaron/htpc
+              ./user/aaron/console
             ];
 
+        ## HTPC ##
         x86-merkat-bedhtpc =
           mkComputerStable "x86_64-linux" ./host/x86-merkat-bedhtpc
             [
