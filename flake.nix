@@ -273,6 +273,7 @@
               nixos-hardware.nixosModules.raspberry-pi-4
               ./system/hardware/raspi4
               ./system/baseline/server
+              ./system/baseline/server/homeassistant
             ]
             [ ];
 

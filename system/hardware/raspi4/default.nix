@@ -7,7 +7,10 @@
     }
   ];
 
-  nix.settings.cores = 2;
+  nix.settings = {
+    cores = 2;
+    max-jobs = 2;
+  };
 
   boot = {
     initrd.systemd.tpm2.enable = false;
