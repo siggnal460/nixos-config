@@ -124,6 +124,7 @@
       192.168.1.42  x86-atxtwr-computeserver
       192.168.1.29  arm-raspi4-downloadclient
       192.168.0.14  x86-minitx-jovian
+      192.168.1.22  arm-raspi4-home
       10.0.0.18     x86-stmdck-jovian
       10.0.0.23     x86-merkat-lrhtpc
     '';

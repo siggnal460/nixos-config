@@ -267,6 +267,15 @@
             ]
             [ ];
 
+        arm-raspi4-home =
+          mkComputerStable "aarch64-linux" ./host/arm-raspi4-home
+            [
+              nixos-hardware.nixosModules.raspberry-pi-4
+              ./system/hardware/raspi4
+              ./system/baseline/server
+            ]
+            [ ];
+
         x86-merkat-monitoring =
           mkComputerStable "x86_64-linux" ./host/x86-merkat-monitoring
             [
