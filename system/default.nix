@@ -199,12 +199,6 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGJ3ENb2iqe0ZgY+31q4+alGbWdFW5IEI3pznl8gBfAW aaron@x86-merkat-entry";
     "x86-rakmnt-mediaserver".publicKey =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBGy+YGfa+dCd7S9Jm6hXWW+TQqgjdPIUlP2+ijZTCqc aaron@x86-rakmnt-mediaserver";
-    "x86-minitx-jovian".publicKey =
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINeYyHUVTW8PW6ipa+meN0DDlB6HXmAbHEnhfxdan+IW aaron@x86-minitx-jovian";
-    "x86-stmdck-jovian".publicKey =
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII7eGbYxgJi+4wDmKWPxg0lnWDET8Lmns8TfnCyaG/6r aaron@x86-stmdck-jovian";
-    "x86-merkat-htpc".publicKey =
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExo/6fWz0F9ofC/73eff34LALKalVP63bzAyiIZeJFF aaron@x86-merkat-htpc";
   };
 
   system.stateVersion = "23.11";
@@ -363,22 +357,22 @@
     base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     fonts = {
       serif = {
-        package = pkgs.unstable.nerd-fonts.fira-code;
+        package = pkgs.nerd-fonts.fira-code;
         name = "FiraCode Nerd Font";
       };
 
       sansSerif = {
-        package = pkgs.unstable.nerd-fonts.fira-code;
+        package = pkgs.nerd-fonts.fira-code;
         name = "FiraCode Nerd Font";
       };
 
       monospace = {
-        package = pkgs.unstable.nerd-fonts.fira-code;
+        package = pkgs.nerd-fonts.fira-code;
         name = "FiraCode Nerd Font Mono";
       };
 
       emoji = {
-        package = pkgs.unstable.noto-fonts-emoji;
+        package = pkgs.noto-fonts-emoji;
         name = "Noto Color Emoji";
       };
     };

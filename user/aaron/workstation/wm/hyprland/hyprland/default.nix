@@ -6,7 +6,6 @@
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = false;
-    #systemd.variables = [ "--all" ];
     settings = {
       "$terminal" = "wezterm";
       "$browser" = "librewolf";

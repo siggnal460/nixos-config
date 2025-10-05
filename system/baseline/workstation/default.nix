@@ -117,7 +117,6 @@ in
       anki
       deluge
       element-desktop
-      firefox
       gimp
       gnomeExtensions.appindicator
       gnupg
