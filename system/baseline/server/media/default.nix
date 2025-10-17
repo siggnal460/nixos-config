@@ -13,6 +13,7 @@ in
   systemd.tmpfiles.rules = [
     "d /etc/bazarr 0770 bazarr wheel"
     "d /etc/doplarr 0770 doplarr wheel"
+    "d /etc/ersatz 0770 ersatz wheel"
     "d /etc/jellyfin 0775 jellyfin wheel"
     "d /etc/jellyseerr 0770 root wheel"
     "d /etc/komga 0770 komga wheel"
@@ -181,6 +182,11 @@ in
       uid = 715;
       isSystemUser = true;
       group = "notifiarr";
+    };
+    ersatz = {
+      uid = 716;
+      isSystemUser = true;
+      group = "media";
     };
     restic = {
       uid = 760;
@@ -690,21 +696,26 @@ in
       ];
     };
 
-    wizarr = {
-      image = "ghcr.io/wizarrrr/wizarr:latest";
+    ersatz = {
+      image = "ghcr.io/ersatztv/ersatztv:latest";
       autoStart = true;
       labels = {
         "io.containers.autoupdate" = "registry";
       };
       environment = {
-        PUID = "712";
-        PGID = "712";
+        PUID = "716";
+        PGID = "982";
       };
       ports = [
-        "5690:5690"
+        "8409:8409"
       ];
       volumes = [
-        "/etc/wizarr:/data/database"
+        "/etc/ersatz:/config"
+        "/export/media:/export/media:ro"
+      ];
+      extraOptions = [
+        "--name=ersatz"
+        "--gpus=all"
       ];
     };
   };
