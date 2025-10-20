@@ -15,6 +15,9 @@ in
     "d /etc/doplarr 0770 doplarr wheel"
     "d /etc/ersatz 0770 ersatz wheel"
     "d /etc/jellyfin 0775 jellyfin wheel"
+    "d /etc/jellyfin/zap2xml 0775 jellyfin wheel"
+    "d /etc/jellyfin/zap2xml/ogden_ota 0775 jellyfin wheel"
+    "d /etc/jellyfin/zap2xml/la_ota 0775 jellyfin wheel"
     "d /etc/jellyseerr 0770 root wheel"
     "d /etc/komga 0770 komga wheel"
     "d /etc/lidarr 0770 prowlarr wheel"
@@ -356,7 +359,7 @@ in
 
   virtualisation.oci-containers.containers = {
     jellyfin = {
-      image = "lscr.io/linuxserver/jellyfin:latest";
+      image = "lscr.io/linuxserver/jellyfin:10.10.7";
       autoStart = true;
       labels = {
         "io.containers.autoupdate" = "registry";
@@ -716,6 +719,42 @@ in
       extraOptions = [
         "--name=ersatz"
         "--gpus=all"
+      ];
+    };
+
+    zap2xml-ogden-ota = {
+      image = "ghcr.io/jef/zap2xml:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      environment = {
+        LINEUP_ID = "USA-OTA84405";
+        OUTPUT_FILE = "/xmltv/xmltv.xml";
+      };
+      volumes = [
+        "/etc/jellyfin/zap2xml/ogden_ota:/xmltv"
+      ];
+      extraOptions = [
+        "--name=zap2xml-ogden-ota"
+      ];
+    };
+
+    zap2xml-la-ota = {
+      image = "ghcr.io/jef/zap2xml:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      environment = {
+        LINEUP_ID = "USA-DITV803-X";
+        OUTPUT_FILE = "/xmltv/xmltv.xml";
+      };
+      volumes = [
+        "/etc/jellyfin/zap2xml/la_ota:/xmltv"
+      ];
+      extraOptions = [
+        "--name=zap2xml-la-ota"
       ];
     };
   };
