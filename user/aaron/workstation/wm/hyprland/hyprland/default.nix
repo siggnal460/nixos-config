@@ -204,7 +204,7 @@
         "workspace 5, class:^(blender)$"
 
         ## GODOT ##
-        "workspace 6, class:^(godot)$"
+        "workspace 6, class:^.*(godotengine).*$"
 
         ## JELLYFIN MEDIA PLAYER ##
         "tag video, class:^.*(jellyfin-media-player)$"
@@ -219,6 +219,7 @@
         "1, monitor:DP-1, default:true, persistent:true"
         "2, monitor:DP-1"
         "3, monitor:DP-2"
+        "6, monitor:DP-1"
         "f[0], rounding:false, bordersize:0, gapsout:0, persistent:false"
         "f[1], rounding:false, bordersize:0, gapsout:0, persistent:false"
       ];

@@ -5,7 +5,7 @@
   # TODO REPLACE LATER
   environment.systemPackages = [ pkgs.cudaPackages.cudatoolkit ];
 
-  nixpkgs.config.cudaSupport = true;
+  #nixpkgs.config.cudaSupport = true; # Causes some knarly rebuils
 
   hardware.nvidia-container-toolkit.enable = true;
 

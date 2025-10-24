@@ -58,7 +58,7 @@ in
     evince.enable = true;
     seahorse.enable = true;
     gnome-disks.enable = true;
-    thunderbird.enable = true;
+    #thunderbird.enable = true;
     gnupg.agent = {
       # gpg keys
       enable = true;
@@ -117,6 +117,7 @@ in
       anki
       deluge
       element-desktop
+      #firefox
       gimp
       gnomeExtensions.appindicator
       gnupg
@@ -127,7 +128,6 @@ in
       mpv
       openvpn
       protonmail-bridge-gui
-      tidal-hifi
       tor-browser
       wayland-utils
       wezterm
