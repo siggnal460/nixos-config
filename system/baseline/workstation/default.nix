@@ -116,6 +116,7 @@ in
     systemPackages = with pkgs; [
       anki
       deluge
+      easyeffects
       element-desktop
       #firefox
       gimp

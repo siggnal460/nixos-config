@@ -24,6 +24,7 @@ in
         "https://discourse.nixos.org"
         # gappyland
         "https://gappyland.org"
+        "https://home.gappyland.org"
         "https://media.gappyland.org"
         "https://books.gappyland.org"
         "https://requests.gappyland.org"
