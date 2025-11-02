@@ -5,7 +5,7 @@ in
 {
   imports = [ ./hardware-configuration.nix ];
 
-  #sops.defaultSopsFile = ../../secrets/${hostname}/secrets.yaml;
+  sops.defaultSopsFile = ../../secrets/${hostname}/secrets.yaml;
 
   networking = {
     hostName = hostname;
