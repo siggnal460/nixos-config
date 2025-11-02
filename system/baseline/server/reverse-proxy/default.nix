@@ -72,6 +72,12 @@ in
         reverse_proxy x86-atxtwr-computeserver:3003
       '';
 
+      "home.${domain}".extraConfig = ''
+        import auth
+
+        reverse_proxy arm-raspi4-home:8123
+      '';
+
       "cloud.${domain}".extraConfig = ''
         import auth
 

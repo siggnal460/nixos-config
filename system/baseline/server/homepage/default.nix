@@ -187,6 +187,7 @@ in
           {
             HomeAssistant = {
               icon = "home-assistant.svg";
+              href = "https://home.gappyland.org/auth/oidc/welcome";
             };
           }
           {
