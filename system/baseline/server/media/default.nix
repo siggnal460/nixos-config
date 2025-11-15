@@ -41,7 +41,7 @@ in
     "d /export/media/data/books/manga 0775 root media"
     "d /export/media/data/books/regular 0775 root media"
     "d /export/media/data/courses 0775 root media"
-    "d /export/media/data/intros 0744 jellyfin media"
+    "d /export/media/data/intros 0774 jellyfin media"
     "d /export/media/data/movies 0775 radarr media"
     "d /export/media/data/music 0775 root media"
     "d /export/media/data/podcasts 0775 root media"
