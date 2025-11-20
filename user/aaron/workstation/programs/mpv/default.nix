@@ -7,6 +7,9 @@
   programs.mpv = {
     enable = true;
     defaultProfiles = [ "gpu-hq" ];
+    scriptOpts = {
+      autoload = { };
+    };
     config = {
       hwdec = "auto";
       profile = "gpu-hq";
@@ -18,5 +21,9 @@
       border = "no";
       save-position-on-quit = "yes";
     };
+    extraInput = ''
+      			PGUP playlist-prev
+      			PGDWN playlist-next
+      		'';
   };
 }
