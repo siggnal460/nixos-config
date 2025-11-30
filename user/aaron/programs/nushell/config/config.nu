@@ -8,6 +8,11 @@ def chk-file-fs [ file: string ] {
   df -P -T $file | tail -n +2 | awk '{print $2}'
 }
 
+def mount_games [ ] {
+	cryptsetup --type luks open /dev/sdb encrypted
+	mount -t ext4 /dev/mapper/encrypted /mnt/encrypted
+}
+
 def gac [message: string] {
   git add -A
   git commit -m $message

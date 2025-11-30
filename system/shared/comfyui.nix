@@ -29,7 +29,7 @@
 
   virtualisation.oci-containers.containers = {
     comfyui = {
-      image = "ghcr.io/siggnal460/comfyui-container-cuda:latest";
+      image = "ghcr.io/siggnal460/comfyui-container-cuda:v2.7";
       autoStart = true;
       labels = {
         "io.containers.autoupdate" = "registry";

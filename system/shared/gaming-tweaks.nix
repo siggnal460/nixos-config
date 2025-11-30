@@ -16,7 +16,7 @@ let
 in
 {
   imports = [
-    inputs.nix-gaming.nixosModules.pipewireLowLatency
+    #inputs.nix-gaming.nixosModules.pipewireLowLatency
     inputs.nix-gaming.nixosModules.platformOptimizations
     inputs.lsfg-vk-flake.nixosModules.default
     ./nfs-client.nix
@@ -80,11 +80,11 @@ in
   ];
 
   services = {
-    pipewire.lowLatency = {
-      enable = true;
-      quantum = 64;
-      rate = 48000;
-    };
+    #pipewire.lowLatency = {
+    # enable = true;
+    # quantum = 64;
+    # rate = 48000;
+    #;
     lsfg-vk = {
       enable = true;
       ui.enable = true;

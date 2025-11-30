@@ -22,6 +22,16 @@ in
     ../../shared/nfs-client.nix
   ];
 
+  networking.firewall = rec {
+    allowedTCPPortRanges = [
+      {
+        from = 1714;
+        to = 1764;
+      }
+    ];
+    allowedUDPPortRanges = allowedTCPPortRanges;
+  };
+
   systemd = {
     services.rebuild.environment = {
       NIGHTLY_REFRESH = "poweroff-always";
@@ -111,6 +121,7 @@ in
   };
 
   hardware.nvidia.nvidiaSettings = lib.mkIf (builtins.elem "nvidia" config.boot.initrd.kernelModules) true;
+  programs.kdeconnect.enable = true;
 
   environment = {
     systemPackages = with pkgs; [
@@ -118,7 +129,7 @@ in
       deluge
       easyeffects
       element-desktop
-      #firefox
+      firefox
       gimp
       gnomeExtensions.appindicator
       gnupg
