@@ -360,7 +360,7 @@ in
 
   virtualisation.oci-containers.containers = {
     jellyfin = {
-      image = "lscr.io/linuxserver/jellyfin:10.10.7";
+      image = "lscr.io/linuxserver/jellyfin:latest";
       autoStart = true;
       labels = {
         "io.containers.autoupdate" = "registry";
