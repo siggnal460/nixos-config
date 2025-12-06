@@ -6,6 +6,10 @@
 
   services.ollama = {
     enable = true;
+    host = "0.0.0.0";
+    environmentVariables = {
+      OLLAMA_HOST = "0.0.0.0:11434";
+    };
     loadModels = [
       "devstral:latest"
     ];

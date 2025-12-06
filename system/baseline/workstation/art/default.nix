@@ -12,7 +12,6 @@
       krita
       handbrake
       libresprite
-      makehuman
       upscayl
     ]
     ++ (

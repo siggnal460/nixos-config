@@ -75,9 +75,8 @@ in
       enableSSHSupport = true;
     };
   };
-
   services = {
-    xserver.displayManager.gdm = {
+    displayManager.gdm = {
       enable = true;
       wayland = true;
     };
@@ -133,7 +132,7 @@ in
       gimp
       gnomeExtensions.appindicator
       gnupg
-      jellyfin-media-player
+      #jellyfin-media-player
       libreoffice
       logseq
       loupe

@@ -1,13 +1,13 @@
 {
   programs.git = {
     enable = true;
-    userName = "siggnal460";
-    userEmail = "siggnal@proton.me";
     ignores = [
       "*~"
       "*.swp"
     ];
-    extraConfig = {
+    settings = {
+      user.name = "siggnal460";
+      user.email = "siggnal@proton.me";
       init.defaultBranch = "master";
       safe.directory = "/etc/nixos";
     };
