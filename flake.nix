@@ -136,7 +136,6 @@
               ./system/hardware/thunderbolt
               ./system/baseline/workstation
               ./system/de/cosmic
-              ./system/wm/hyprland
             ]
             [
               #user-specific modules
