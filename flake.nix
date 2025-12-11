@@ -232,8 +232,16 @@
               ./system/hardware/gpu/intel
               ./system/baseline/htpc
             ]
+            [ ./user/aaron/htpc ];
+
+        x86-merkat-workout =
+          mkComputerStable "x86_64-linux" ./host/x86-merkat-workout
             [
-              ./user/aaron/host/x86-merkat-bedhtpc
+              ./system/hardware/gpu/intel
+              ./system/baseline/htpc
+              ./system/baseline/htpc/workout
+            ]
+            [
               ./user/aaron/htpc
             ];
 
