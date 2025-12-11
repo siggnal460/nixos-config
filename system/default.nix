@@ -115,19 +115,18 @@
     firewall.allowedUDPPorts = [ ];
     # these are temporary
     extraHosts = ''
+      192.168.0.14  x86-minitx-jovian
+      192.168.0.22  arm-raspi4-home
+      192.168.0.35  x86-merkat-workout
       192.168.1.3   x86-merkat-auth.gappyland.org x86-merkat-auth
-      192.168.1.13  x86-rakmnt-mediaserver
       192.168.1.5   x86-merkat-entry
       192.168.1.6   x86-atxtwr-workstation
       192.168.1.8   x86-legigo-jovian
       192.168.1.11  x86-merkat-bedhtpc
-      192.168.0.35  x86-merkat-lrhtpc
-      192.168.1.42  x86-atxtwr-computeserver
+      192.168.1.13  x86-rakmnt-mediaserver
       192.168.1.29  arm-raspi4-downloadclient
-      192.168.0.14  x86-minitx-jovian
-      192.168.0.22  arm-raspi4-home
+      192.168.1.42  x86-atxtwr-computeserver
       10.0.0.18     x86-stmdck-jovian
-      10.0.0.23     x86-merkat-lrhtpc
     '';
   };
 
