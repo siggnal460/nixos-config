@@ -4,7 +4,7 @@
   ];
 
   networking = {
-    hostName = "x86-merkat-lrhtpc";
+    hostName = "x86-merkat-workout";
   };
 
   hardware.system76.enableAll = true;
