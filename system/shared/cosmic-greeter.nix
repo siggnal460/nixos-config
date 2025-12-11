@@ -1,5 +1,5 @@
 {
   services = {
-    desktopManager.cosmic-greeter.enable = true;
+    displayManager.cosmic-greeter.enable = true;
   };
 }
