@@ -7,6 +7,7 @@
     ../../shared/pipewire.nix
     ../../shared/bluetooth.nix
     ../../shared/remotely-managed.nix
+    ../../shared/cosmic-greeter.nix
   ];
 
   nixpkgs.allowUnfreePackages = [
@@ -19,14 +20,6 @@
   };
 
   networking.networkmanager.enable = true;
-
-  services.xserver.displayManager = {
-    gdm = {
-      enable = true;
-      wayland = true;
-    };
-    defaultSession = "hyprland-uwsm";
-  };
 
   environment.systemPackages = with pkgs; [
     wezterm

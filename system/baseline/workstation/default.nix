@@ -20,6 +20,7 @@ in
     ../../shared/plymouth-verbose.nix
     ../../shared/pipewire.nix
     ../../shared/nfs-client.nix
+    ../../shared/cosmic-greeter.nix
   ];
 
   networking.firewall = rec {
