@@ -3,6 +3,6 @@
   environment.systemPackages = with pkgs; [
     audacity
     ardour
-    godot_4
+    godot
   ];
 }

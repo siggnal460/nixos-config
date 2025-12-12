@@ -156,7 +156,6 @@
           mkComputerStable "x86_64-linux" ./host/x86-atxtwr-workstation
             [
               ./system/de/cosmic
-              ./system/wm/hyprland
               ./system/hardware/gpu/nvidia
               ./system/hardware/gpu/nvidia/cuda
               ./system/baseline/workstation
@@ -169,7 +168,6 @@
             [
               ./user/aaron/host/x86-atxtwr-workstation
               ./user/aaron/workstation
-              ./user/aaron/workstation/wm/hyprland
             ];
         ## VIRTUAL MACHINES ##
         vm =

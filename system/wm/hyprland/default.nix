@@ -10,7 +10,9 @@
 
   security.pam.services.hyprlock = { };
 
-  environment.systemPackages = [
-    pkgs.grimblast
-  ];
+  xdg.portal = {
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+    ];
+  };
 }

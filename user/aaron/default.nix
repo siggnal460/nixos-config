@@ -74,7 +74,7 @@
     stylix = {
       enable = true;
       autoEnable = true;
-      targets.gtk.enable = false; # https://github.com/danth/stylix/issues/1093
+      targets.gtk.flatpakSupport.enable = false; # https://github.com/danth/stylix/issues/1093
     };
 
     services = {

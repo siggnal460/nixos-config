@@ -77,6 +77,9 @@ in
     };
   };
   services = {
+    displayManager.cosmic-greeter = {
+      enable = true;
+    };
     openssh.enable = false;
     printing.enable = true;
     printing.drivers = [ pkgs.brlaser ];
@@ -113,7 +116,15 @@ in
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config = {
+      common = {
+        default = [ "cosmic" ];
+      };
+    };
   };
 
   hardware.nvidia.nvidiaSettings = lib.mkIf (builtins.elem "nvidia" config.boot.initrd.kernelModules) true;
