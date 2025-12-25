@@ -61,8 +61,8 @@
           ];
           start_time = "6:45";
           stop_time = "21:00";
-          start_colortemp = 40000;
-          stop_colortemp = 1000;
+          start_colortemp = 6500;
+          stop_colortemp = 2200;
           disable_brightness_adjust = true;
           transition = 14400;
         };

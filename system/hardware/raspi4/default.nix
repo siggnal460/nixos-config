@@ -8,8 +8,8 @@
   ];
 
   nix.settings = {
-    cores = 2;
-    max-jobs = 2;
+    cores = 1;
+    max-jobs = 1;
   };
 
   boot = {
