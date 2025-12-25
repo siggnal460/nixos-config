@@ -13,7 +13,6 @@
     ../../shared/gaming-tweaks.nix
     ../../de/cosmic
     inputs.jovian-nixos.nixosModules.default
-    inputs.lsfg-vk-flake.nixosModules.default
   ];
 
   systemd.services.rebuild.environment = {
