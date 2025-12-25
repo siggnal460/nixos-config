@@ -136,11 +136,12 @@ in
       deluge
       easyeffects
       element-desktop
-      firefox
+      #firefox
       gimp
       gnomeExtensions.appindicator
       gnupg
       #jellyfin-media-player
+			libation
       libreoffice
       logseq
       loupe
