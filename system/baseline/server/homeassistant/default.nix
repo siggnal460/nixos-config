@@ -59,12 +59,12 @@
             "light.master_bathroom"
             "light.master_bedroom"
           ];
-          start_time = "6:45";
-          stop_time = "21:00";
+          start_time = "6:00";
+          stop_time = "20:00";
           start_colortemp = 6500;
-          stop_colortemp = 2200;
+          stop_colortemp = 2500;
           disable_brightness_adjust = true;
-          transition = 14400;
+          transition = 14400; # 4 hrs
         };
 
         # Add UI-defined configs to declaritive setup
