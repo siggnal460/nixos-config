@@ -12,7 +12,7 @@
       autoload = { };
     };
     config = {
-			screenshot-directory="/home/aaron/Pictures/mpv-screenshots";
+      screenshot-directory = "/home/aaron/Pictures/mpv-screenshots";
       hwdec = "auto";
       profile = "gpu-hq";
       vo = "gpu-next";

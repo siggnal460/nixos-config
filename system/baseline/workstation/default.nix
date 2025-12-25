@@ -141,7 +141,7 @@ in
       gnomeExtensions.appindicator
       gnupg
       #jellyfin-media-player
-			libation
+      libation
       libreoffice
       logseq
       loupe
