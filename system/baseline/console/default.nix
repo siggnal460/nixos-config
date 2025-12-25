@@ -12,14 +12,14 @@
     ../../shared/remotely-managed.nix
     ../../shared/networkmanager.nix
     ../../shared/gaming-tweaks.nix
+    ../../de/cosmic
     inputs.jovian-nixos.nixosModules.default
+    inputs.lsfg-vk-flake.nixosModules.default
   ];
 
   systemd.services.rebuild.environment = {
     NIGHTLY_REFRESH = "poweroff-always";
   };
-
-  networking.networkmanager.enable = true;
 
   nixpkgs.allowUnfreePackages = [
     "steam"
@@ -34,7 +34,7 @@
       enable = true;
     };
     steam = {
-      desktopSession = "gnome";
+      desktopSession = "cosmic-uwsm";
       enable = true;
       autoStart = true;
       user = "aaron";
@@ -42,7 +42,6 @@
   };
 
   services = {
-    desktopManager.gnome.enable = true;
     lsfg-vk = {
       enable = lib.mkIf (config.jovian.steam.enable) true;
       ui.enable = lib.mkForce false;

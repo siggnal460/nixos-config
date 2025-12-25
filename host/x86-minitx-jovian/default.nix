@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -6,8 +6,8 @@
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    extraModulePackages = with config.boot.kernelPackages; [ r8125 ];
+    #kernelPackages = pkgs.linuxPackages_latest;
+    #extraModulePackages = with config.boot.kernelPackages; [ r8125 ];
     kernelParams = [
       "video=HDMI-A-2:3840x2160@120"
     ];
