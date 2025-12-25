@@ -1,7 +1,6 @@
 {
   inputs,
   lib,
-  config,
   ...
 }:
 {
@@ -43,7 +42,6 @@
 
   services = {
     lsfg-vk = {
-      enable = lib.mkIf (config.jovian.steam.enable) true;
       ui.enable = lib.mkForce false;
     };
   };
