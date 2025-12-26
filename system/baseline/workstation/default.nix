@@ -77,10 +77,6 @@ in
     };
   };
   services = {
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
-    };
     openssh.enable = false;
     printing.enable = true;
     printing.drivers = [ pkgs.brlaser ];
