@@ -26,7 +26,6 @@ in
     "d /etc/prowlarr 0770 prowlarr wheel"
     "d /etc/radarr 0770 radarr wheel"
     "d /etc/radarr-anime 0770 radarr-anime wheel"
-    "d /etc/readarr 0770 readarr wheel"
     "d /etc/recyclarr 0770 recyclarr wheel"
     "d /etc/sonarr 0770 sonarr wheel"
     "d /etc/sonarr-anime 0770 sonarr-anime wheel"
@@ -159,11 +158,6 @@ in
     };
     komga = {
       uid = 708;
-      isSystemUser = true;
-      group = "media";
-    };
-    readarr = {
-      uid = 709;
       isSystemUser = true;
       group = "media";
     };
@@ -636,29 +630,6 @@ in
       ];
       extraOptions = [
         "--name=komga"
-      ];
-    };
-
-    readarr = {
-      image = "lscr.io/linuxserver/readarr:develop"; # TODO switch to stable when ready
-      autoStart = true;
-      labels = {
-        "io.containers.autoupdate" = "registry";
-      };
-      ports = [
-        "8787:8787"
-      ];
-      environment = {
-        PUID = "709";
-        PGID = "982";
-        TZ = "America/Denver";
-      };
-      volumes = [
-        "/etc/readarr:/config"
-        "/export/media:/data"
-      ];
-      extraOptions = [
-        "--name=readarr"
       ];
     };
 
