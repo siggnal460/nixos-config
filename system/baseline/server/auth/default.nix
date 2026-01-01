@@ -46,7 +46,6 @@ in
     lldap = {
       enable = true;
       settings = {
-        ldap_base_dn = base_dn;
         ldap_user_email = "admin@${domain}";
         database_url = "postgresql://lldap@localhost/lldap?host=/run/postgresql";
       };

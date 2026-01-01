@@ -78,6 +78,10 @@ in
         reverse_proxy arm-raspi4-home:8123
       '';
 
+      "recipes.${domain}".extraConfig = ''
+        reverse_proxy x86-rakmnt-mediaserver:5413
+      '';
+
       "cloud.${domain}".extraConfig = ''
         import auth
 

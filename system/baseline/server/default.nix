@@ -14,6 +14,10 @@
   ];
 
   services = {
+    lldap.settings = {
+      ldap_base_dn = "dc=gappyland,dc=org";
+      http_port = 17170;
+    };
     clamav = {
       daemon.enable = true;
       scanner = {
