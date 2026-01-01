@@ -317,10 +317,8 @@
               ./system/hardware/gpu/nvidia/cuda
               ./system/baseline/server
               ./system/baseline/server/media
-              ./system/baseline/server/emulatorjs
               ./system/baseline/server/nfs
               ./system/baseline/server/samba
-              ./system/baseline/server/netbootxyz
               ./system/baseline/server/nextcloud
               ./system/baseline/server/games-host
             ]
