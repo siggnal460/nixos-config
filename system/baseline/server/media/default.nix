@@ -610,28 +610,28 @@ in
       ];
     };
 
-    komga = {
-      image = "docker.io/gotson/komga:latest";
-      autoStart = true;
-      labels = {
-        "io.containers.autoupdate" = "registry";
-      };
-      ports = [
-        "25600:25600"
-      ];
-      environment = {
-        PUID = "708";
-        PGID = "982";
-        TZ = "America/Denver";
-      };
-      volumes = [
-        "/etc/komga:/config"
-        "/export/media/data/books:/data"
-      ];
-      extraOptions = [
-        "--name=komga"
-      ];
-    };
+    #komga = {
+    #  image = "docker.io/gotson/komga:latest";
+    #  autoStart = true;
+    #  labels = {
+    #    "io.containers.autoupdate" = "registry";
+    #  };
+    #  ports = [
+    #    "25600:25600"
+    #  ];
+    #  environment = {
+    #    PUID = "708";
+    #    PGID = "982";
+    #    TZ = "America/Denver";
+    #  };
+    #  volumes = [
+    #    "/etc/komga:/config"
+    #    "/export/media/data/books:/data"
+    #  ];
+    #  extraOptions = [
+    #    "--name=komga"
+    #  ];
+    #};
 
     doplarr = {
       image = "lscr.io/linuxserver/doplarr:latest";
