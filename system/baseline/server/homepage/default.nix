@@ -67,47 +67,11 @@ in
 
     services = [
       {
-        Nextcloud = [
+        General = [
           {
-            Dashboard = {
-              icon = "nextcloud.svg";
-              href = "https://cloud.gappyland.org/apps/dashboard";
-            };
-          }
-          {
-            Calendar = {
-              icon = "nextcloud-calendar.svg";
-              href = "https://cloud.gappyland.org/apps/calendar";
-            };
-          }
-          {
-            Contacts = {
-              icon = "nextcloud-contacts.svg";
-              href = "https://cloud.gappyland.org/apps/contacts";
-            };
-          }
-          {
-            Files = {
-              icon = "nextcloud-files.svg";
-              href = "https://cloud.gappyland.org/apps/files";
-            };
-          }
-          {
-            News = {
-              icon = "nextcloud-news.svg";
-              href = "https://cloud.gappyland.org/apps/news";
-            };
-          }
-          {
-            Notes = {
-              icon = "nextcloud-notes.svg";
-              href = "https://cloud.gappyland.org/apps/notes";
-            };
-          }
-          {
-            Tasks = {
-              icon = "nextcloud-tasks.svg";
-              href = "https://cloud.gappyland.org/apps/tasks";
+            Tandoor = {
+              icon = "tandoor-recipes.svg";
+              href = "https://recipes.gappyland.org";
             };
           }
         ];
@@ -115,12 +79,6 @@ in
 
       {
         Media = [
-          {
-            EmulatorJS = {
-              icon = "emulatorjs.svg";
-              href = "https://roms.gappyland.org";
-            };
-          }
           {
             Invidious = {
               icon = "invidious.svg";
