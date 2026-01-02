@@ -91,3 +91,23 @@ identity_providers:
         access_token_signed_response_alg: 'none'
         userinfo_signed_response_alg: 'none'
         token_endpoint_auth_method: 'client_secret_post'
+      - client_id: {{ secret "/run/secrets/authelia/tandoor/oidc_client_id" | mindent 10 "|" | msquote }}
+        client_name: 'Tandoor'
+        client_secret: {{ secret "/run/secrets/authelia/tandoor/oidc_client_secret" | mindent 10 "|" | msquote }}
+        public: false
+        authorization_policy: 'two_factor'
+        require_pkce: false
+        pkce_challenge_method: ''
+        redirect_uris:
+          - 'https://recipes.gappyland.org/accounts/oidc/authelia/login/callback/'
+        scopes:
+          - 'openid'
+          - 'profile'
+          - 'email'
+        response_types:
+          - 'code'
+        grant_types:
+          - 'authorization_code'
+        access_token_signed_response_alg: 'none'
+        userinfo_signed_response_alg: 'none'
+        token_endpoint_auth_method: 'client_secret_basic'

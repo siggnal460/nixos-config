@@ -191,6 +191,8 @@ in
   };
 
   sops.secrets = {
+    "authelia/tandoor/oidc_client_id".owner = auth_instance;
+    "authelia/tandoor/oidc_client_secret".owner = auth_instance;
     "authelia/ha/oidc_client_id".owner = auth_instance;
     "authelia/ha/oidc_client_secret".owner = auth_instance;
     "authelia/gitea/oidc_client_id".owner = auth_instance;
