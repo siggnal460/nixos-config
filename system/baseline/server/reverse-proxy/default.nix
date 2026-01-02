@@ -104,19 +104,13 @@ in
       '';
 
       "recipes.${domain}".extraConfig = ''
-        			  import main
-                import auth
-        				import headers
+                			  import main
+                        import auth
+                				import headers
 
-        			  header Host $http_host
-        			  header X-Forwarded-Proto $scheme;
+        								file_server
 
-        				handle_path /media/* {
-        					root * /www/tandoor
-        					file_server
-        				}
-
-                reverse_proxy x86-rakmnt-mediaserver:5413
+                        reverse_proxy x86-rakmnt-mediaserver:5413
       '';
 
       "cloud.${domain}".extraConfig = ''
