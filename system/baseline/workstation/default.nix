@@ -154,6 +154,7 @@ in
       wl-clipboard
       wineWowPackages.waylandFull
       waypipe
+      ungoogled-chromium
       usbimager
     ];
   };
