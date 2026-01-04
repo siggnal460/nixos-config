@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ../../wm/hyprland
+    ../../de/cosmic
     ../../shared/gaming-tweaks.nix
     ../../shared/plymouth-quiet.nix
     ../../shared/pipewire.nix
@@ -22,10 +22,10 @@
   networking.networkmanager.enable = true;
 
   environment.systemPackages = with pkgs; [
-    wezterm
     kodiPackages.inputstream-adaptive
     libsForQt5.qt5.qtquickcontrols2
     libsForQt5.qt5.qtgraphicaleffects
+    jellyfin-media-player
   ];
 
   programs.steam = {
