@@ -77,7 +77,7 @@ in
         "browser.newtabpage.pinned" = "";
         "browser.topsites.contile.enabled" = false;
         "sidebar.revamp" = false;
-				"widget.gtk.libadwaita-colors.enabled" = false;
+        "widget.gtk.libadwaita-colors.enabled" = false;
       };
 
       SkipTermsOfUser = true;

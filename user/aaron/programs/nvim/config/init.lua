@@ -13,10 +13,19 @@ vim.opt.splitbelow = true -- open new vertical split bottom
 vim.opt.splitright = true -- open new horizontal splits right
 vim.opt.termguicolors = true -- enable 24-bit RGB color in the TUI
 vim.opt.fillchars:append({ vert = "┃" }) -- thickens the dividing line with panes
+
 -- Searching
 vim.opt.incsearch = true -- search as characters are entered
 vim.opt.hlsearch = false -- do not highlight matches vim.opt.ignorecase = true
 vim.opt.smartcase = true -- make case sensitive if uppercase
+
+-- List Mode
+
+vim.opt.list = true
+vim.opt.listchars = {
+	tab = ">·",
+	trail = "~",
+}
 
 -- Transparency
 vim.cmd.highlight({ "Normal", "guibg=none" })

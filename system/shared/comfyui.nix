@@ -44,10 +44,10 @@
       environment = {
         PUID = "780";
         PGID = "780";
-				COMFYUI_ARGS = "--max-upload-size 999999999";
+        COMFYUI_ARGS = "--max-upload-size 999999999";
       };
       extraOptions = [
-			  "--network=host"
+        "--network=host"
         "--name=comfyui"
         "--gpus=all"
       ];
