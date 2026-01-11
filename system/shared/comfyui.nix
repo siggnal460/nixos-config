@@ -29,12 +29,11 @@
 
   virtualisation.oci-containers.containers = {
     comfyui = {
-      image = "ghcr.io/siggnal460/comfyui-container-cuda:v2.7";
+      image = "ghcr.io/siggnal460/comfyui-container-cuda:v3.2";
       autoStart = true;
       labels = {
         "io.containers.autoupdate" = "registry";
       };
-      ports = [ "8188:8188" ];
       volumes = [
         "/var/lib/comfyui/custom_nodes:/app/custom_nodes:rw"
         "/var/lib/comfyui/input:/app/input:rw"
@@ -45,8 +44,10 @@
       environment = {
         PUID = "780";
         PGID = "780";
+				COMFYUI_ARGS = "--max-upload-size 999999999";
       };
       extraOptions = [
+			  "--network=host"
         "--name=comfyui"
         "--gpus=all"
       ];
