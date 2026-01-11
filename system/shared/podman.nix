@@ -27,7 +27,6 @@
     };
     services.podman-updater = {
       description = "Podman Container Daily Updater";
-      wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         User = "root";
         Type = "oneshot";
