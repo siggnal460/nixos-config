@@ -1,0 +1,10 @@
+auth:
+    openid:
+        enabled: true
+        providers:
+            authelia:
+                name: 'Authelia'
+                authurl: 'https://auth.gappyland.org'
+                clientid: '${config.sops.placeholder."vikunja/client_id"}'
+                clientsecret: '${config.sops.placeholder."vikunja/client_secret"}'
+                scope: 'openid profile email'

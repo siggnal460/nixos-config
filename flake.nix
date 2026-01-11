@@ -315,6 +315,7 @@
               ./system/hardware/gpu/nvidia/cuda
               ./system/baseline/server
               ./system/baseline/server/recipes
+              ./system/baseline/server/todo
               ./system/baseline/server/media
               ./system/baseline/server/nfs
               ./system/baseline/server/samba
