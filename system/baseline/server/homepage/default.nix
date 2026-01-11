@@ -74,6 +74,12 @@ in
               href = "https://recipes.gappyland.org";
             };
           }
+          {
+            Vikunja = {
+              icon = "vikunja.svg";
+              href = "https://todo.gappyland.org";
+            };
+          }
         ];
       }
 
