@@ -115,6 +115,10 @@ in
                   url = "http://x86-atxtwr-computeserver:7860";
                 }
                 {
+                  name = "Home Assistant";
+                  url = "http://arm-raspi4-home:8123/lovelace/0";
+                }
+                {
                   name = "Jellyfin";
                   url = "http://x86-rakmnt-mediaserver:8096";
                 }
@@ -163,8 +167,20 @@ in
                   url = "http://x86-rakmnt-mediaserver:8988";
                 }
                 {
+                  name = "Tandoor";
+                  url = "https://x86-rakmnt-mediaserver:5413";
+                }
+                {
                   name = "Transmission";
                   url = "http://x86-rakmnt-mediaserver:9091";
+                }
+                {
+                  name = "UniFi Controller";
+                  url = "https://arm-raspi4-home:8443/manage/default/dashboard";
+                }
+                {
+                  name = "Vikunja";
+                  url = "https://x86-rakmnt-mediaserver:3456";
                 }
               ];
             }
