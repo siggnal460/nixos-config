@@ -73,13 +73,12 @@ in
         access_control = {
           default_policy = "deny";
           rules = lib.mkAfter [
-            # Allow access through various app APIs for mobile apps
-            #{
-            #  domain = "cloud.${domain}";
-            #  resources = [ "^/index.php/apps/news/api/.*$" ];
-            #  methods = [ "GET" ];
-            #  policy = "bypass";
-            #}
+            # Allow access for Flux News to miniflux
+            {
+              domain = "rss.${domain}";
+              resources = [ "^/v1/.*$" ];
+              policy = "bypass";
+            }
             {
               domain = "*.${domain}";
               policy = "two_factor";
