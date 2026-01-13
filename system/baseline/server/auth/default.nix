@@ -191,6 +191,8 @@ in
   };
 
   sops.secrets = {
+    "authelia/miniflux/oidc_client_id".owner = auth_instance;
+    "authelia/miniflux/oidc_client_secret".owner = auth_instance;
     "authelia/vikunja/oidc_client_id".owner = auth_instance;
     "authelia/vikunja/oidc_client_secret".owner = auth_instance;
     "authelia/tandoor/oidc_client_id".owner = auth_instance;
