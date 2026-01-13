@@ -121,6 +121,14 @@ in
                 reverse_proxy x86-rakmnt-mediaserver:3456
       '';
 
+      "rss.${domain}".extraConfig = ''
+        import main
+        import auth
+        import headers
+
+        reverse_proxy x86-rakmnt-mediaserver:1932
+      '';
+
       "cloud.${domain}".extraConfig = ''
         			  import main
                 import auth

@@ -69,6 +69,12 @@ in
       {
         General = [
           {
+            Miniflux = {
+              icon = "miniflux.svg";
+              href = "https://rss.gappyland.org";
+            };
+          }
+          {
             Tandoor = {
               icon = "tandoor-recipes.svg";
               href = "https://recipes.gappyland.org";
