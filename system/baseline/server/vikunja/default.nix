@@ -2,7 +2,7 @@
   systemd.tmpfiles.rules = [
     "d /var/lib/vikunja/files 0770 vikunja wheel"
     "d /var/lib/vikunja/db 0770 vikunja wheel"
-	];
+  ];
 
   users.users = {
     vikunja = {
@@ -10,13 +10,13 @@
       isSystemUser = true;
       group = "vikunja";
     };
-	};
+  };
 
   users.groups = {
     vikunja = {
       gid = 600;
     };
-	};
+  };
 
   virtualisation.oci-containers.containers = {
     vikunja = {
@@ -33,11 +33,11 @@
       };
       volumes = [
         "/var/lib/vikunja/files:/app/vikunja/files"
-				"/var/lib/vikunja/db:/db"
+        "/var/lib/vikunja/db:/db"
       ];
       extraOptions = [
         "--name=vikunja"
       ];
     };
-
+  };
 }

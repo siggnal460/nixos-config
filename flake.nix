@@ -318,6 +318,7 @@
               ./system/baseline/server/todo
               ./system/baseline/server/media
               ./system/baseline/server/nfs
+              ./system/baseline/server/rss-server
               ./system/baseline/server/samba
               ./system/baseline/server/nextcloud
               ./system/baseline/server/games-host

@@ -4,6 +4,9 @@ local lspconfig = require("lspconfig")
 vim.opt.clipboard = "unnamedplus" -- use system clipboard
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.mouse = "a" -- allow the mouse to be used in Nvim
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 
 -- UI config
 vim.opt.number = true
@@ -118,7 +121,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		if ft == "python" then
 			vim.opt.tabstop = 4
 			vim.opt.shiftwidth = 4
-		elseif ft == "lua" or ft == "nix" or ft == "nu" then
+		elseif ft == "lua" or ft == "nix" or ft == "nu" or ft == "yaml" then
 			vim.opt.tabstop = 2
 			vim.opt.shiftwidth = 2
 		end
