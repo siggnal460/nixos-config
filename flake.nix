@@ -153,7 +153,7 @@
             [ ./user/aaron/workstation ];
 
         x86-atxtwr-workstation =
-          mkComputerUnstable "x86_64-linux" ./host/x86-atxtwr-workstation
+          mkComputerStable "x86_64-linux" ./host/x86-atxtwr-workstation
             [
               ./system/de/cosmic
               ./system/hardware/gpu/nvidia

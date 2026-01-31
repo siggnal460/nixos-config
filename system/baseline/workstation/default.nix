@@ -147,7 +147,7 @@ in
       gimp
       gnomeExtensions.appindicator
       gnupg
-      #jellyfin-media-player
+      jellyfin-media-player
       libation
       libreoffice
       logseq
