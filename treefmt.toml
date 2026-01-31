@@ -4,10 +4,21 @@ includes = ["*.lua"]
 
 [formatter.nixfmt-rfc-style]
 command = "nixfmt"
-options = ["--indent=2", "--verify"]
+options = ["--indent", "2"]
 includes = ["*.nix"]
 
 [formatter.deadnix]
 command = "deadnix"
 includes = ["*.nix"]
 options = ["--edit"]
+
+[formatter.shell]
+command = "shfmt"
+options = [
+  "-i", "4",     # Indent with 4 spaces (best practice for readability)
+  "-ci",         # Indent switch cases
+  "-bn",         # Binary operators like && and | start a line
+  "-sr",         # Add space after redirect operators
+  "-w"           # Write results back to the file
+]
+includes = ["*.sh", "*.bash"]

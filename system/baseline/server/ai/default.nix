@@ -64,7 +64,7 @@
   };
 
   services.nfs.server = {
-    exports = ''/export/ai x86-atxtwr-workstation(rw,nohide,insecure,no_subtree_check)'';
+    exports = "/export/ai x86-atxtwr-workstation(rw,nohide,insecure,no_subtree_check)";
   };
 
   virtualisation.oci-containers.containers = {

@@ -28,6 +28,6 @@
   ];
 
   services.nfs.server = {
-    exports = ''/export/games 192.168.1.0/24(rw,nohide,insecure,no_subtree_check)'';
+    exports = "/export/games 192.168.1.0/24(rw,nohide,insecure,no_subtree_check)";
   };
 }

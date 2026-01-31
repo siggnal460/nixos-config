@@ -33,18 +33,41 @@ $env.PROMPT_INDICATOR_VI_INSERT = "󰉷 "
 $env.PROMPT_INDICATOR_VI_NORMAL = " "
 $env.PROMPT_MULTILINE_INDICATOR = "::: "
 
-def start_zellij [] {
-  if 'ZELLIJ' not-in ($env | columns) {
-    if 'ZELLIJ_AUTO_ATTACH' in ($env | columns) and $env.ZELLIJ_AUTO_ATTACH == 'true' {
-      zellij attach -c
-    } else {
-      zellij
+$env.config = {
+    hooks: {
+        # This hook runs every time you enter a new directory or start a session
+        env_change: {
+            PWD: [
+                { |before, after|
+                    if "ZELLIJ" in ($env | columns) {
+                        # Get the short hostname and rename the tab
+                        let host_name = (hostname | str trim)
+                        zellij action rename-tab $host_name
+                    }
+                }
+            ]
+        }
     }
+}
 
-    if 'ZELLIJ_AUTO_EXIT' in ($env | columns) and $env.ZELLIJ_AUTO_EXIT == 'true' {
-      exit
+def start_zellij [] {
+    # Check if we are already inside a Zellij session
+    if 'ZELLIJ' not-in ($env | columns) {
+
+        # Safely check for optional config flags using the ? operator
+        let auto_attach = ($env.ZELLIJ_AUTO_ATTACH? == "true")
+        let auto_exit = ($env.ZELLIJ_AUTO_EXIT? == "true")
+
+        if $auto_attach {
+            zellij attach -c
+        } else {
+            zellij
+        }
+
+        if $auto_exit {
+            exit
+        }
     }
-  }
 }
 
 start_zellij

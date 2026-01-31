@@ -130,6 +130,13 @@ in
   hardware.nvidia.nvidiaSettings = lib.mkIf (builtins.elem "nvidia" config.boot.initrd.kernelModules) true;
   programs.kdeconnect.enable = true;
 
+  programs.chromium = {
+    enable = true;
+    extensions = [
+      "blaaajhemilngeeffpbfkdjjoefldkok;https://clients2.google.com/service/update2/crx" # leechblock
+    ];
+  };
+
   environment = {
     systemPackages = with pkgs; [
       anki
@@ -154,7 +161,6 @@ in
       wl-clipboard
       wineWowPackages.waylandFull
       waypipe
-      ungoogled-chromium
       usbimager
     ];
   };
