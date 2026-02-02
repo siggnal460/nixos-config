@@ -19,7 +19,7 @@
     tmp = {
       useTmpfs = lib.mkDefault true;
       cleanOnBoot = lib.mkDefault (!config.boot.tmp.useTmpfs);
-      tmpfsSize = "75%"; # builds often fail because it's too small by default
+      tmpfsSize = "90%"; # builds often fail because it's too small by default
     };
     initrd.systemd.enable = true;
     loader = {
