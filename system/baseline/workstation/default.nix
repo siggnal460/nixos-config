@@ -87,20 +87,6 @@ in
     pcscd.enable = true; # needed for gpg keys
     flatpak.enable = true;
     udev.packages = with pkgs; [ gnome-settings-daemon ]; # for gnome extensions
-    /*
-      		doesn't do anything on wayland I think
-      				libinput.mouse = {
-      					accelProfile = "custom";
-      					accelStepMotion = 1;
-      					accelPointsMotion = [
-      						0.0
-      			0.0
-      			4.0
-      			11.0
-      			27.0
-      					];
-      				};
-    */
   };
 
   systemd.services.flatpak-install = {
