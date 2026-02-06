@@ -8,7 +8,7 @@
     with pkgs;
     [
       inkscape
-      #kdePackages.kdenlive
+      kdePackages.kdenlive
       krita
       handbrake
       libresprite

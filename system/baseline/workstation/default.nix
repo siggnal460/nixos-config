@@ -129,7 +129,7 @@ in
       deluge
       easyeffects
       element-desktop
-      #firefox
+      firefox
       gimp
       gnomeExtensions.appindicator
       gnupg
@@ -148,6 +148,7 @@ in
       wineWowPackages.waylandFull
       waypipe
       usbimager
+      unstable.yt-dlp
     ];
   };
 }
