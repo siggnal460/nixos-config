@@ -1,6 +1,9 @@
 {
   home-manager.users.aaron = {
-    imports = [ ./programs/mangohud ];
+    imports = [
+      ./programs/mangohud
+      ../shared/gaming.nix
+    ];
   };
 
   jovian = {
