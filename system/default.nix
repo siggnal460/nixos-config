@@ -126,7 +126,7 @@
       192.168.1.13  x86-rakmnt-mediaserver
       192.168.1.29  arm-raspi4-downloadclient
       192.168.1.42  x86-atxtwr-computeserver
-      10.0.0.18     x86-stmdck-jovian
+      192.168.1.27     x86-stmdck-jovian
     '';
   };
 
