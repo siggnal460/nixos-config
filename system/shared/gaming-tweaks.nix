@@ -24,11 +24,11 @@ in
   ];
 
   systemd.tmpfiles.rules = [
-    "L+ /srv/games - - - - /nfs/games" # Retroarch Steam can only access /srv for some reason (??)
+    "L+ /nfs/games - - - - /srv/games" # Retroarch Steam can only access /srv for some reason (??)
   ];
 
   fileSystems = {
-    "/nfs/games" = {
+    "/srv/games" = {
       device = lib.mkForce "x86-rakmnt-mediaserver:/export/games";
       fsType = lib.mkForce "nfs4";
       options = mountOptions;
@@ -52,6 +52,6 @@ in
   programs.steam.platformOptimizations.enable = true;
 
   environment.systemPackages = [
-    pkgs.protonup-rs
+    pkgs.protonplus
   ];
 }
