@@ -1,5 +1,3 @@
-local lspconfig = require("lspconfig")
-
 -- Set options
 vim.opt.clipboard = "unnamedplus" -- use system clipboard
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
@@ -69,28 +67,10 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, { -- Relative numbers in Normal M
 require("scrollbar").setup({})
 
 -- lspconfig
-lspconfig.lua_ls.setup({
-	settings = {
-		Lua = {
-			diagnostics = {
-				globals = { "vim" },
-			},
-		},
-	},
-})
-
-lspconfig.pyright.setup({})
-
-lspconfig.nixd.setup({})
-
-lspconfig.nushell.setup({})
-
-vim.lsp.enable("eslint")
+-- to do
 
 -- Treesitter
-require("nvim-treesitter.configs").setup({
-	highlight = { enable = true },
-})
+-- to do
 
 -- Oil
 require("oil").setup({
