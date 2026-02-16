@@ -190,6 +190,8 @@ in
   };
 
   sops.secrets = {
+    "authelia/audiobookshelf/oidc_client_id".owner = auth_instance;
+    "authelia/audiobookshelf/oidc_client_secret".owner = auth_instance;
     "authelia/miniflux/oidc_client_id".owner = auth_instance;
     "authelia/miniflux/oidc_client_secret".owner = auth_instance;
     "authelia/vikunja/oidc_client_id".owner = auth_instance;
