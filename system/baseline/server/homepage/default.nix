@@ -92,6 +92,12 @@ in
       {
         Media = [
           {
+            Audiobookshelf = {
+              icon = "audiobookshelf.svg";
+              href = "https://audiobooks.gappyland.org";
+            };
+          }
+          {
             Invidious = {
               icon = "invidious.svg";
             };
@@ -112,12 +118,6 @@ in
             Komga = {
               icon = "komga.svg";
               href = "https://books.gappyland.org";
-            };
-          }
-          {
-            Audiobookshelf = {
-              icon = "audiobookshelf.svg";
-              href = "https://audiobooks.gappyland.org";
             };
           }
         ];
