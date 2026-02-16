@@ -11,6 +11,8 @@ in
   imports = [ ../../../shared/podman.nix ];
 
   systemd.tmpfiles.rules = [
+    "d /etc/audiobookshelf 0770 root wheel"
+    "d /var/lib/audiobookshelf 0770 root wheel"
     "d /etc/bazarr 0770 bazarr wheel"
     "d /etc/doplarr 0770 doplarr wheel"
     "d /etc/ersatz 0770 ersatz wheel"
@@ -406,6 +408,28 @@ in
       ];
       extraOptions = [
         "--name=notifiarr"
+      ];
+    };
+
+    audiobookshelf = {
+      image = "ghcr.io/advplyr/audiobookshelf:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      ports = [
+        "13378:80"
+      ];
+      environment = {
+        TZ = "America/Denver";
+      };
+      volumes = [
+        "/export/media/data/books/audiobooks:/audiobooks"
+        "/etc/audiobookshelf:/config"
+        "/var/lib/audiobookshelf:/metadata"
+      ];
+      extraOptions = [
+        "--name=audiobookshelf"
       ];
     };
 
