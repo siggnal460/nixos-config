@@ -114,6 +114,12 @@ in
               href = "https://books.gappyland.org";
             };
           }
+          {
+            Audiobookshelf = {
+              icon = "audiobookshelf.svg";
+              href = "https://audiobooks.gappyland.org";
+            };
+          }
         ];
       }
 

@@ -25,6 +25,13 @@ in
                 reverse_proxy x86-merkat-auth:9091
       '';
 
+      "audiobooks.${domain}".extraConfig = ''
+        			  import main
+        				import headers
+
+                reverse_proxy x86-rakmnt-mediaserver:13378
+      '';
+
       "users.${domain}".extraConfig = ''
         			  import main
                 import auth
