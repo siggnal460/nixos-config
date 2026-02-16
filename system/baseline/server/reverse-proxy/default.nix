@@ -179,7 +179,7 @@ in
       						X-Content-Type-Options "nosniff" # disable clients from sniffing the media type
 
       						# clickjacking protection
-      						X-Frame-Options DENY
+      						# X-Frame-Options DENY
       					}
       				}
     '';
