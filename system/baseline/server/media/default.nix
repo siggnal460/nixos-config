@@ -756,6 +756,8 @@ in
   };
 
   sops.secrets = {
+    "audiobookshelf/oidc_client_id".owner = "root";
+    "audiobookshelf/oidc_client_secret".owner = "root";
     "komga/oidc_client_id".owner = "komga";
     "komga/oidc_client_secret".owner = "komga";
     "recyclarr/radarr_apikey".owner = "recyclarr";
