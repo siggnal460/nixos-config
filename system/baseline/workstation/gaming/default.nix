@@ -48,7 +48,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    heroic
     obs-studio
     phoronix-test-suite
   ];
