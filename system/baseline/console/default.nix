@@ -12,7 +12,7 @@
     ../../shared/remotely-managed.nix
     ../../shared/networkmanager.nix
     ../../shared/gaming-tweaks.nix
-    ../../de/cosmic
+    ../../de/plasma
     inputs.jovian-nixos.nixosModules.default
   ];
 
@@ -33,7 +33,7 @@
       enable = true;
     };
     steam = {
-      desktopSession = "cosmic-uwsm";
+      desktopSession = "plasma";
       enable = true;
       autoStart = true;
       user = "aaron";
