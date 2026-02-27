@@ -96,6 +96,7 @@ in
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
       flatpak uninstall --unused -y --noninteractive
       flatpak install -y --noninteractive flathub com.discordapp.Discord
+      flatpak install -y --noninteractive flathub com.mastermindzh.tidal-hifi
       flatpak update -y
     '';
   };
