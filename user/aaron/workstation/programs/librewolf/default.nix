@@ -298,6 +298,13 @@ in
         private_browsing = true;
         locked = true;
       };
+      "{afda92c3-008d-4d08-8766-3f1571995071}" = {
+        default_area = "menupanel";
+        install_url = latestSourceURL "tokyo-night-v2";
+        installation_mode = "force_installed";
+        private_browsing = true;
+        locked = true;
+      };
     };
 
     settings = {
