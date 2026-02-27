@@ -8,10 +8,10 @@
 
   services.ratbagd.enable = true;
 
-  fileSystems."/mnt/nvme1n1" = {
-    device = "/dev/disk/by-uuid/5b778bef-b3af-4710-9d44-6424b693dc29";
-    fsType = "ext4";
-  };
+  #fileSystems."/mnt/nvme1n1" = {
+  #  device = "/dev/disk/by-uuid/5b778bef-b3af-4710-9d44-6424b693dc29";
+  #  fsType = "ext4";
+  #};
 
   environment = {
     systemPackages = with pkgs; [

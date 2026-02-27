@@ -156,8 +156,7 @@
           mkComputerStable "x86_64-linux" ./host/x86-atxtwr-workstation
             [
               ./system/de/cosmic
-              ./system/hardware/gpu/nvidia
-              ./system/hardware/gpu/nvidia/cuda
+              ./system/hardware/gpu/amd
               ./system/baseline/workstation
               ./system/baseline/workstation/art
               ./system/baseline/workstation/gaming
