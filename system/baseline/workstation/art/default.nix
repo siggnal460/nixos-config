@@ -1,7 +1,5 @@
 { pkgs, config, ... }:
 {
-  imports = [ ../../../shared/comfyui.nix ];
-
   hardware.opentabletdriver.enable = true;
 
   environment.systemPackages =
