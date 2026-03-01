@@ -53,5 +53,6 @@ in
 
   environment.systemPackages = [
     pkgs.protonplus
+    pkgs.dolphin.emu
   ];
 }
