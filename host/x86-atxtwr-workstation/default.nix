@@ -26,7 +26,7 @@
     requires = [ "flatpak-gaming-setup.service" ];
     path = [ pkgs.flatpak ];
     script = ''
-            flatpak override --env=DXVK_FRAME_RATE=175 com.valvesoftware.Steam && \
+            flatpak override --env=DXVK_FRAME_RATE=240 com.valvesoftware.Steam && \
       			  echo "Setting max framerate for DXVK"
     '';
   };
