@@ -36,11 +36,11 @@ in
   };
 
   services = {
-    pipewire.lowLatency = {
-      enable = true;
-      quantum = 64;
-      rate = 48000;
-    };
+    #pipewire.lowLatency = {
+    #  enable = true;
+    #  quantum = 64;
+    #  rate = 48000;
+    #};
     lsfg-vk = {
       enable = true;
       ui.enable = true;

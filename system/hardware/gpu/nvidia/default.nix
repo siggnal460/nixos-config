@@ -1,6 +1,16 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.allowUnfreePackages = [
+  ];
+
+  nixpkgs.config = {
+    allowUnfreePredicate =
+      pkg:
+      builtins.elem (lib.getName pkg) [
+        "nvidia-x11"
+        "blender"
+      ];
+  };
 
   boot = {
     initrd.kernelModules = [

@@ -117,6 +117,15 @@ in
   hardware.nvidia.nvidiaSettings = lib.mkIf (builtins.elem "nvidia" config.boot.initrd.kernelModules) true;
   programs.kdeconnect.enable = true;
 
+  nixpkgs.config = {
+    allowUnfreePredicate =
+      pkg:
+      builtins.elem (lib.getName pkg) [
+        "tidal-hifi"
+        "castlabs-electron"
+      ];
+  };
+
   programs.chromium = {
     enable = true;
     extensions = [
@@ -142,6 +151,7 @@ in
       mpv
       openvpn
       protonmail-bridge-gui
+      tidal-hifi
       tor-browser
       wayland-utils
       wezterm
