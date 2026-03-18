@@ -51,8 +51,23 @@ in
 
   programs.steam.platformOptimizations.enable = true;
 
-  environment.systemPackages = [
-    pkgs.protonplus
-    pkgs.dolphin-emu
+  systemd.services.flatpak-gaming-tweaks = {
+    wantedBy = [ "multi-user.target" ];
+    requires = [ "flatpak-install.service" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && \
+      	  echo "Flathub remote added if it wasn't already"
+        flatpak install -y --noninteractive --or-update flathub net.retrodeck.retrodeck//stable && \
+      	  echo "Made sure Retrodeck was installed"
+        flatpak override --filesystem=/srv/games net.retrodeck.retrodeck && \
+      	  echo "Giving Rerodeck access to /srv/games"
+    '';
+  };
+
+  environment.systemPackages = with pkgs; [
+    dolphin-emu
+    pcsx2
+    protonplus
   ];
 }
