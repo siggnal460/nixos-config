@@ -149,6 +149,7 @@ in
       logseq
       loupe
       mpv
+      networkmanager-openvpn
       openvpn
       protonmail-bridge-gui
       tidal-hifi
