@@ -40,7 +40,10 @@
     };
   };
 
+  hardware.steam-hardware.enable = true;
+
   services = {
+    flatpak.enable = true;
     lsfg-vk = {
       ui.enable = lib.mkForce false;
     };
@@ -57,4 +60,9 @@
     };
     wantedBy = [ "multi-user.target" ];
   };
+
+  environment.systemPackages = with pkgs; [
+    maliit-keyboard
+    maliit-framework
+  ];
 }

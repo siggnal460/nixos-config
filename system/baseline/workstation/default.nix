@@ -86,7 +86,6 @@ in
     fwupd.enable = true; # for upgrading firmware
     pcscd.enable = true; # needed for gpg keys
     flatpak.enable = true;
-    udev.packages = with pkgs; [ gnome-settings-daemon ]; # for gnome extensions
   };
 
   systemd.services.flatpak-install = {
