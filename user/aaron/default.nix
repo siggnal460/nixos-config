@@ -32,7 +32,12 @@
   };
 
   systemd.tmpfiles.rules = [
-    "d /home/aaron 0744 aaron aaron"
+    "d /home/aaron 0740 aaron aaron"
+    "d /home/aaron/Games 0744 aaron aaron"
+    "d /home/aaron/Games/retrodeck 0744 aaron aaron"
+    "L+ /home/aaron/Games/retrodeck/psp - - - - /srv/games/roms/psp"
+    "L+ /home/aaron/Games/retrodeck/ps2 - - - - /srv/games/roms/ps2"
+    "L+ /home/aaron/Games/retrodeck/psx - - - - /srv/games/roms/psx"
   ];
 
   users.groups = {
