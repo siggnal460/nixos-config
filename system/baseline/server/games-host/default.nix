@@ -7,6 +7,8 @@
 
   systemd.tmpfiles.rules = [
     "d /export/games 0775 root games"
+    "d /export/games/saves 0775 root games"
+    "d /export/games/saves/aaron 0774 aaron games"
     "d /export/games/bios 0775 root games"
     "d /export/games/gog 0775 root games"
     "d /export/games/roms 0775 root games"
