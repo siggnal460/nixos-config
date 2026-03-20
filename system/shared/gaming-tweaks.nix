@@ -53,7 +53,6 @@ in
 
   systemd.services.flatpak-gaming-tweaks = {
     wantedBy = [ "multi-user.target" ];
-    requires = [ "flatpak-install.service" ];
     path = [ pkgs.flatpak ];
     script = ''
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && \
