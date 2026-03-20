@@ -18,13 +18,13 @@
     "d /export/games/roms/gc 0775 root games"
     "d /export/games/roms/n64 0775 root games"
     "d /export/games/roms/nes 0775 root games"
-    "d /export/games/roms/ps1 0775 root games"
+    "d /export/games/roms/psx 0775 root games"
     "d /export/games/roms/ps2 0775 root games"
     "d /export/games/roms/ps3 0775 root games"
     "d /export/games/roms/psp 0775 root games"
     "d /export/games/roms/snes 0775 root games"
     "d /export/games/roms/wii 0775 root games"
-    "d /export/games/roms/wiiu 0775 root games"
+    "d /export/games/retrodeck 0775 root games"
   ];
 
   services.nfs.server = {

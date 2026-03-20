@@ -321,6 +321,8 @@
               ./system/baseline/server/samba
               ./system/baseline/server/nextcloud
               ./system/baseline/server/games-host
+              #./system/baseline/server/beszel-host
+              #./system/baseline/server/matrix
             ]
             [ ];
       };
