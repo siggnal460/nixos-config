@@ -32,14 +32,14 @@ in
                 reverse_proxy x86-merkat-auth:9091
       '';
 
-      "chat.${domain}".extraConfig = ''
-        			  import main
-        				import headers
-                X-Frame-Options SAMEORIGIN
-                X-Content-Type-Options "nosniff"
+      #"chat.${domain}".extraConfig = ''
+      #  			  import main
+      #  				import headers
+      #          X-Frame-Options SAMEORIGIN
+      #          X-Content-Type-Options "nosniff"
 
-                reverse_proxy x86-rakmnt-mediaserver:8088
-      '';
+      #          reverse_proxy x86-rakmnt-mediaserver:8088
+      #'';
 
       "audiobooks.${domain}".extraConfig = ''
         			  import main
