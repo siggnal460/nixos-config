@@ -18,11 +18,27 @@ in
         reverse_proxy :8082
       '';
 
+      "subtitles.${domain}".extraConfig = ''
+        			  import main
+        				import headers
+
+                reverse_proxy x86-rakmnt-mediaserver:6767
+      '';
+
       "auth.${domain}".extraConfig = ''
         			  import main
         				import headers
 
                 reverse_proxy x86-merkat-auth:9091
+      '';
+
+      "chat.${domain}".extraConfig = ''
+        			  import main
+        				import headers
+                X-Frame-Options SAMEORIGIN
+                X-Content-Type-Options "nosniff"
+
+                reverse_proxy x86-rakmnt-mediaserver:8088
       '';
 
       "audiobooks.${domain}".extraConfig = ''
