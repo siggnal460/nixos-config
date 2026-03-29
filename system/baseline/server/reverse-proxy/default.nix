@@ -21,6 +21,7 @@ in
       "subtitles.${domain}".extraConfig = ''
         			  import main
         				import headers
+                import auth
 
                 reverse_proxy x86-rakmnt-mediaserver:6767
       '';
