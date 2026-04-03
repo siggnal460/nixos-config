@@ -116,11 +116,11 @@
     # these are temporary
     extraHosts = ''
       192.168.0.14  x86-minitx-jovian
+      192.168.0.18   x86-atxtwr-workstation
       192.168.0.22  arm-raspi4-home
       192.168.0.35  x86-merkat-workout
       192.168.1.3   x86-merkat-auth.gappyland.org x86-merkat-auth
       192.168.1.5   x86-merkat-entry
-      192.168.1.6   x86-atxtwr-workstation
       192.168.1.8   x86-legigo-jovian
       192.168.1.11  x86-merkat-bedhtpc
       192.168.1.13  x86-rakmnt-mediaserver

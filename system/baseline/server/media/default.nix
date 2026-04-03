@@ -62,7 +62,7 @@ in
     ];
 
     nfs.server = {
-      exports = "/export/media 192.168.1.0/24(rw,nohide,insecure,no_subtree_check)";
+      exports = "/export/media x86-atxtwr-workstation/24(rw,nohide,insecure,no_subtree_check)";
     };
 
     fail2ban = {
