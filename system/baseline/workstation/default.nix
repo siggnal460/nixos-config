@@ -46,11 +46,11 @@ in
   };
 
   fileSystems = {
-    #"/nfs/ai" = {
-    #  device = lib.mkForce "x86-atxtwr-computeserver:/export/ai";
-    #  fsType = lib.mkForce "nfs4";
-    #  options = mountOptions;
-    #};
+    "/nfs/ai" = {
+      device = lib.mkForce "x86-atxtwr-computeserver:/export/ai";
+      fsType = lib.mkForce "nfs4";
+      options = mountOptions;
+    };
     #"/nfs/blender" = {
     #  device = lib.mkForce "x86-atxtwr-computeserver:/export/blender";
     #  fsType = lib.mkForce "nfs4";
