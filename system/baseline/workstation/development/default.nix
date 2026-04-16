@@ -6,12 +6,12 @@
 
   services.ollama = {
     enable = true;
-    host = "0.0.0.0";
-    environmentVariables = {
-      OLLAMA_HOST = "0.0.0.0:11434";
-    };
+    package = pkgs.unstable.ollama-rocm;
+    host = "127.0.0.1";
     loadModels = [
+      #"gemma3:latest"
       "devstral:latest"
+      "hf.co/DavidAU/OpenAi-GPT-oss-20b-HERETIC-uncensored-NEO-Imatrix-gguf"
     ];
   };
 

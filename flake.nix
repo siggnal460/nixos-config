@@ -157,6 +157,7 @@
             [
               ./system/de/cosmic
               ./system/hardware/gpu/amd
+              ./system/hardware/gpu/amd/rocm
               ./system/baseline/workstation
               ./system/baseline/workstation/art
               ./system/baseline/workstation/gaming
