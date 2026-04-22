@@ -66,15 +66,7 @@ in
   networking.networkmanager.enable = true;
 
   programs = {
-    evince.enable = true;
-    seahorse.enable = true;
-    gnome-disks.enable = true;
     #thunderbird.enable = true;
-    gnupg.agent = {
-      # gpg keys
-      enable = true;
-      enableSSHSupport = true;
-    };
   };
   services = {
     displayManager.cosmic-greeter = {
