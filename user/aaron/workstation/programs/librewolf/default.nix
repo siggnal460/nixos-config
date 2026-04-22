@@ -12,6 +12,7 @@ in
       Authentication = true;
 
       Cookies.Allow = [
+        "https://twitch.tv"
         "https://www.amazon.com"
         "https://civit.ai"
         "https://open.spotify.com"
