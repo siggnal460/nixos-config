@@ -336,4 +336,6 @@
       eslint
     ];
   };
+
+  # Sense reminder 1200 0.5 600sens
 }
