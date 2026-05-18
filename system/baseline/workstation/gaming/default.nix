@@ -25,6 +25,7 @@
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && \
       	  echo "Flathub remote added if it wasn't already"
         flatpak install -y --noninteractive --or-update flathub com.valvesoftware.Steam//stable && \
+        flatpak install -y --noninteractive --or-update flathub com.fightcade.Fightcade//stable && \
       	  echo "Made sure Steam flatpak stable was installed"
         flatpak install -y --noninteractive --or-update flathub org.freedesktop.Platform.VulkanLayer.MangoHud//24.08 && \
       	  echo "Made sure MangoHud 24.08 was installed"

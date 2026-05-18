@@ -141,6 +141,7 @@ in
       loupe
       mpv
       networkmanager-openvpn
+      opensc
       openvpn
       protonmail-bridge-gui
       tidal-hifi
