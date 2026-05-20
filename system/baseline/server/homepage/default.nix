@@ -134,7 +134,7 @@ in
           {
             OpenWebUI = {
               icon = "https://github.com/open-webui/open-webui/blob/main/static/favicon.png?raw=true";
-              href = "https://textgen.gappyland.org";
+              href = "https://owui.gappyland.org";
             };
           }
         ];
