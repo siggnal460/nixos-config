@@ -57,6 +57,14 @@ in
                 reverse_proxy x86-merkat-auth:${toString ldap_cfg.settings.http_port}
       '';
 
+      "owui.${domain}".extraConfig = ''
+        			  import main
+                import auth
+        				import headers
+
+                reverse_proxy x86-atxtwr-computeserver:11000
+      '';
+
       "media.${domain}".extraConfig = ''
         			  import main
         				import headers
