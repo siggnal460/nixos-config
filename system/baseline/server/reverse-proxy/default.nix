@@ -33,15 +33,6 @@ in
                 reverse_proxy x86-merkat-auth:9091
       '';
 
-      #"chat.${domain}".extraConfig = ''
-      #  			  import main
-      #  				import headers
-      #          X-Frame-Options SAMEORIGIN
-      #          X-Content-Type-Options "nosniff"
-
-      #          reverse_proxy x86-rakmnt-mediaserver:8088
-      #'';
-
       "audiobooks.${domain}".extraConfig = ''
         			  import main
         				import headers
@@ -52,7 +43,6 @@ in
       "users.${domain}".extraConfig = ''
         			  import main
                 import auth
-        				import headers
 
                 reverse_proxy x86-merkat-auth:${toString ldap_cfg.settings.http_port}
       '';
@@ -87,14 +77,6 @@ in
                 reverse_proxy x86-rakmnt-mediaserver:5055
       '';
 
-      "roms.${domain}".extraConfig = ''
-        			  import main
-                import auth
-        				import headers
-
-                reverse_proxy x86-rakmnt-mediaserver:81
-      '';
-
       "books.${domain}".extraConfig = ''
         			  import main
                 import auth
@@ -109,22 +91,6 @@ in
         				import headers
 
                 reverse_proxy x86-atxtwr-computeserver:3000
-      '';
-
-      "imagegen.${domain}".extraConfig = ''
-        			  import main
-                import auth
-        				import headers
-
-                reverse_proxy x86-atxtwr-computeserver:9091
-      '';
-
-      "gitea.${domain}".extraConfig = ''
-        			  import main
-                import auth
-        				import headers
-
-                reverse_proxy x86-atxtwr-computeserver:3003
       '';
 
       "home.${domain}".extraConfig = ''
@@ -159,19 +125,6 @@ in
         import headers
 
         reverse_proxy x86-rakmnt-mediaserver:1932
-      '';
-
-      "cloud.${domain}".extraConfig = ''
-        			  import main
-                import auth
-        				import headers
-
-                reverse_proxy https://x86-rakmnt-mediaserver:443 {
-                  transport http {
-                	  tls
-                		tls_insecure_skip_verify
-                	}
-                }
       '';
     };
     extraConfig = ''
