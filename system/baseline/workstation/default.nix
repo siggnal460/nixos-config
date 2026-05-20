@@ -24,6 +24,7 @@ in
   ];
 
   networking.firewall = rec {
+    # for KDE connect
     allowedTCPPortRanges = [
       {
         from = 1714;
@@ -51,11 +52,6 @@ in
       fsType = lib.mkForce "nfs4";
       options = mountOptions;
     };
-    #"/nfs/blender" = {
-    #  device = lib.mkForce "x86-atxtwr-computeserver:/export/blender";
-    #  fsType = lib.mkForce "nfs4";
-    #  options = mountOptions;
-    #};
     "/nfs/media" = {
       device = lib.mkForce "x86-rakmnt-mediaserver:/export/media";
       fsType = lib.mkForce "nfs4";
@@ -65,9 +61,6 @@ in
 
   networking.networkmanager.enable = true;
 
-  programs = {
-    #thunderbird.enable = true;
-  };
   services = {
     displayManager.cosmic-greeter = {
       enable = true;
@@ -117,12 +110,7 @@ in
       ];
   };
 
-  programs.chromium = {
-    enable = true;
-    extensions = [
-      "blaaajhemilngeeffpbfkdjjoefldkok;https://clients2.google.com/service/update2/crx" # leechblock
-    ];
-  };
+  programs.thunderbird.enable = true;
 
   environment = {
     systemPackages = with pkgs; [
@@ -132,7 +120,6 @@ in
       element-desktop
       firefox
       gimp
-      gnomeExtensions.appindicator
       gnupg
       jellyfin-media-player
       libation
