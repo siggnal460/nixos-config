@@ -85,14 +85,6 @@ in
                 reverse_proxy x86-rakmnt-mediaserver:25600
       '';
 
-      "textgen.${domain}".extraConfig = ''
-        			  import main
-                import auth
-        				import headers
-
-                reverse_proxy x86-atxtwr-computeserver:3000
-      '';
-
       "home.${domain}".extraConfig = ''
         				import main
                 import auth

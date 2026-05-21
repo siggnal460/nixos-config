@@ -98,11 +98,6 @@ in
             };
           }
           {
-            Invidious = {
-              icon = "invidious.svg";
-            };
-          }
-          {
             Jellyfin = {
               icon = "jellyfin.svg";
               href = "https://media.gappyland.org";
