@@ -13,8 +13,9 @@ let
   database_port = "5432";
   qdrant_port = "6333";
   valkey_port = "6379";
-  ollama_port = "11434";
+  vllm_port = "11434";
   searxng_port = "8080";
+  speaches_port = "8000";
 in
 {
   imports = [
@@ -118,7 +119,8 @@ in
       "podman-openwebui.service"
       "podman-searxng.service"
       "podman-qdrant.service"
-      "podman-ollama.service"
+      "podman-vllm-gemma4.service"
+      "podman-speaches.service"
     ];
     wantedBy = [
       "multi-user.target"
@@ -126,7 +128,8 @@ in
       "podman-openwebui.service"
       "podman-searxng.service"
       "podman-qdrant.service"
-      "podman-ollama.service"
+      "podman-vllm-gemma4.service"
+      "podman-speaches.service"
     ];
     serviceConfig = {
       Type = "oneshot";
@@ -255,28 +258,101 @@ in
       ];
     };
 
-    ollama = {
-      image = "docker.io/ollama/ollama:latest";
+    #ollama = {
+    #  image = "docker.io/ollama/ollama:latest";
+    #  podman = {
+    #    user = "openwebui";
+    #    sdnotify = "healthy";
+    #  };
+    #  volumes = [
+    #    "ollama:/root/.ollama"
+    #  ];
+    #  autoStart = true;
+    #  environment = {
+    #    OLLAMA_VULKAN = "1";
+    #  };
+    #  labels = {
+    #    "io.containers.autoupdate" = "registry";
+    #  };
+    #  extraOptions = [
+    #    "--name=ollama"
+    #    "--gpus=all"
+    #    "--pod=owui"
+    #    "--health-cmd"
+    #    "bash -c '</dev/tcp/localhost/11434' || exit 1"
+    #  ];
+    #};
+
+    vllm-gemma4 = {
+      image = "docker.io/vllm/vllm-openai:latest";
       podman = {
         user = "openwebui";
         sdnotify = "healthy";
       };
       volumes = [
-        "ollama:/root/.ollama"
+        "vllm:/root/.cache/huggingface"
       ];
+      #environment = {
+      #  CUDA_DEVICE_ORDER = "PCI_BUS_ID";
+      #};
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      cmd = [
+        "--model"
+        "nvidia/Gemma-4-26B-A4B-NVFP4"
+        #"--tensor-parallel-size" "2"
+        #"--pipeline-parallel-size" "1"
+        "--gpu-memory-utilization"
+        "0.75"
+        #"--max-model-len" "4096"
+        #"--max-num-seqs" "16"
+        "--max-num-batched-tokens"
+        "4096"
+        "--dtype"
+        "auto"
+        "--port"
+        "11434"
+        "--enable-auto-tool-choice"
+        "--tool-call-parser"
+        "gemma4"
+        "--reasoning-parser"
+        "gemma4"
+      ];
+      extraOptions = [
+        "--name=vllm-gemma4"
+        "--gpus=0"
+        "--pod=owui"
+        "--ipc=host"
+        "--shm-size=16g"
+        "--health-cmd"
+        "curl -f http://localhost:8000/health || exit 1"
+      ];
+    };
+
+    speaches = {
+      image = "ghcr.io/speaches-ai/speaches:latest-cuda";
+      podman = {
+        user = "openwebui";
+        sdnotify = "healthy";
+      };
       autoStart = true;
       environment = {
-        OLLAMA_VULKAN = "1";
+        SPEACHES_BASE_URL = "http://localhost:${speaches_port}";
       };
+      volumes = [
+        "speaches:/home/ubuntu/.cache/huggingface/hub"
+      ];
       labels = {
         "io.containers.autoupdate" = "registry";
       };
       extraOptions = [
-        "--name=ollama"
+        "--name=speaches"
         "--gpus=all"
         "--pod=owui"
         "--health-cmd"
-        "bash -c '</dev/tcp/localhost/11434' || exit 1"
+        "curl -f http://127.0.0.1:8000/health || exit 1"
       ];
     };
 
@@ -315,7 +391,9 @@ in
         ENABLE_PASSWORD_AUTH = "false";
         USE_CUDA_DOCKER = "true";
         DOCKER = "true";
-        OLLAMA_BASE_URL = "http://localhost:${ollama_port}";
+        #OLLAMA_BASE_URL = "http://localhost:${ollama_port}";
+        ENABLE_OPENAI_API = "true";
+        OPENAI_API_BASE_URL = "http://localhost:${vllm_port}";
         VECTOR_DB = "qdrant";
         QDRANT_URI = "http://localhost:${qdrant_port}";
         DATABASE_TYPE = "postgresql";
@@ -330,13 +408,21 @@ in
         WEB_SEARCH_RESULT_COUNT = "3";
         WEB_SEARCH_CONCURRENT_REQUESTS = "10";
         SEARXNG_QUERY_URL = "http://localhost:${searxng_port}/search?q=<query>";
+        AUDIO_TTS_API_KEY = "not-needed";
+        AUDIO_TTS_ENGINE = "openai";
+        AUDIO_TTS_OPENAI_API_BASE_URL = "http://localhost:${speaches_port}/v1";
+        AUDIO_TTS_OPENAI_API_KEY = "not-needed";
+        AUDIO_STT_ENGINE = "openai";
+        AUDIO_STT_OPENAI_API_BASE_URL = "http://localhost:${speaches_port}/v1";
+        AUDIO_STT_OPENAI_API_KEY = "not-needed";
       };
       dependsOn = [
         "valkey"
         "postgresql"
         "qdrant"
-        "ollama"
+        "vllm-gemma4"
         "searxng"
+        "speaches"
       ];
       extraOptions = [
         "--name=openwebui"
