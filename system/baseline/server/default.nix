@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ../../shared/remotely-managed.nix
@@ -40,4 +41,8 @@
     enable = false;
     powerOnBoot = false;
   };
+
+  environment.systemPackages = with pkgs; [
+    sops
+  ];
 }

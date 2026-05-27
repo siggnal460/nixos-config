@@ -13,9 +13,12 @@ let
   database_port = "5432";
   qdrant_port = "6333";
   valkey_port = "6379";
-  vllm_port = "11434";
+  gemma4_port = "11434";
+  embed_model = "Qwen/Qwen3-Embedding-0.6B";
+  embed_port = "11435";
   searxng_port = "8080";
   speaches_port = "8000";
+  tika_port = "9998";
 in
 {
   imports = [
@@ -290,11 +293,8 @@ in
         sdnotify = "healthy";
       };
       volumes = [
-        "vllm:/root/.cache/huggingface"
+        "vllm-gemma4:/root/.cache/huggingface"
       ];
-      #environment = {
-      #  CUDA_DEVICE_ORDER = "PCI_BUS_ID";
-      #};
       autoStart = true;
       labels = {
         "io.containers.autoupdate" = "registry";
@@ -302,18 +302,14 @@ in
       cmd = [
         "--model"
         "nvidia/Gemma-4-26B-A4B-NVFP4"
-        #"--tensor-parallel-size" "2"
-        #"--pipeline-parallel-size" "1"
         "--gpu-memory-utilization"
         "0.75"
-        #"--max-model-len" "4096"
-        #"--max-num-seqs" "16"
         "--max-num-batched-tokens"
         "4096"
         "--dtype"
         "auto"
         "--port"
-        "11434"
+        "${gemma4_port}"
         "--enable-auto-tool-choice"
         "--tool-call-parser"
         "gemma4"
@@ -327,7 +323,41 @@ in
         "--ipc=host"
         "--shm-size=16g"
         "--health-cmd"
-        "curl -f http://localhost:8000/health || exit 1"
+        "curl -f http://localhost:${gemma4_port}/health || exit 1"
+      ];
+    };
+
+    vllm-embed = {
+      image = "docker.io/vllm/vllm-openai:latest";
+      podman = {
+        user = "openwebui";
+        sdnotify = "healthy";
+      };
+      volumes = [
+        "vllm-embed:/root/.cache/huggingface"
+      ];
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      cmd = [
+        "--model"
+        "${embed_model}"
+        "--gpu-memory-utilization"
+        "0.5"
+        "--port"
+        "${embed_port}"
+        "--runner"
+        "pooling"
+      ];
+      extraOptions = [
+        "--name=vllm-embed"
+        "--gpus=1"
+        "--pod=owui"
+        "--ipc=host"
+        "--shm-size=16g"
+        "--health-cmd"
+        "curl -f http://localhost:${embed_port}/health || exit 1"
       ];
     };
 
@@ -353,6 +383,24 @@ in
         "--pod=owui"
         "--health-cmd"
         "curl -f http://127.0.0.1:8000/health || exit 1"
+      ];
+    };
+
+    tika = {
+      image = "docker.io/apache/tika:latest-full";
+      podman = {
+        user = "openwebui";
+        sdnotify = "healthy";
+      };
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      extraOptions = [
+        "--name=tika"
+        "--pod=owui"
+        "--health-cmd"
+        "wget --quiet --tries=1 --spider http://localhost:${tika_port}"
       ];
     };
 
@@ -393,7 +441,7 @@ in
         DOCKER = "true";
         #OLLAMA_BASE_URL = "http://localhost:${ollama_port}";
         ENABLE_OPENAI_API = "true";
-        OPENAI_API_BASE_URL = "http://localhost:${vllm_port}";
+        OPENAI_API_BASE_URL = "http://localhost:${gemma4_port}";
         VECTOR_DB = "qdrant";
         QDRANT_URI = "http://localhost:${qdrant_port}";
         DATABASE_TYPE = "postgresql";
@@ -415,14 +463,25 @@ in
         AUDIO_STT_ENGINE = "openai";
         AUDIO_STT_OPENAI_API_BASE_URL = "http://localhost:${speaches_port}/v1";
         AUDIO_STT_OPENAI_API_KEY = "not-needed";
+        CONTENT_EXTRACTION_ENGINE = "tika";
+        TIKA_SERVER_URL = "http://localhost:${tika_port}";
+        CHUNK_SIZE = "2000";
+        CHUNK_OVERLAP = "200";
+        RAG_TOP_K = "15";
+        RAG_TEXT_SPLITTER = "token";
+        RAG_EMBEDDING_ENGINE = "openai";
+        RAG_EMBEDDING_MODEL = "${embed_model}";
+        RAG_OPENAI_API_BASE_URL = "http://localhost:${embed_port}/v1";
       };
       dependsOn = [
         "valkey"
         "postgresql"
         "qdrant"
+        "vllm-embed"
         "vllm-gemma4"
         "searxng"
         "speaches"
+        "tika"
       ];
       extraOptions = [
         "--name=openwebui"
