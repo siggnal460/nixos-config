@@ -15,10 +15,10 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager-unstable = {
@@ -155,7 +155,7 @@
         x86-atxtwr-workstation =
           mkComputerStable "x86_64-linux" ./host/x86-atxtwr-workstation
             [
-              ./system/de/plasma
+              ./system/de/cosmic
               ./system/hardware/gpu/amd
               ./system/hardware/gpu/amd/rocm
               ./system/baseline/workstation
