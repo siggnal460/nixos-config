@@ -81,6 +81,7 @@ in
       flatpak uninstall --unused -y --noninteractive
       flatpak install -y --noninteractive flathub com.discordapp.Discord
       flatpak install -y --noninteractive flathub com.mastermindzh.tidal-hifi
+      flatpak install -y --noninteractive flathub com.openwebui.open-webui
       flatpak update -y
     '';
   };
@@ -124,7 +125,7 @@ in
       jellyfin-media-player
       libation
       libreoffice
-      logseq
+      #logseq
       loupe
       mpv
       networkmanager-openvpn
@@ -136,7 +137,6 @@ in
       wayland-utils
       wezterm
       wl-clipboard
-      wineWowPackages.waylandFull
       waypipe
       usbimager
       unstable.yt-dlp

@@ -6,7 +6,6 @@
 
   services.ollama = {
     enable = true;
-    package = pkgs.unstable.ollama-rocm;
     host = "127.0.0.1";
     loadModels = [
       #"gemma3:latest"

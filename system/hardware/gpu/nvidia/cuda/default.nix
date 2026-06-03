@@ -17,6 +17,4 @@
   # nixpkgs.config.cudaSupport = true; # could cause some knarly rebuilds
 
   hardware.nvidia-container-toolkit.enable = true;
-
-  #services.ollama.package = pkgs.ollama-cuda;
 }

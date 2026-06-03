@@ -14,7 +14,7 @@
     ]
     ++ (
       if (builtins.elem "amdgpu" config.boot.initrd.kernelModules) then
-        [ blender-hip ]
+        [ pkgsRocm.blender ]
       else
         (
           if (builtins.elem "nvidia" config.boot.initrd.kernelModules) then

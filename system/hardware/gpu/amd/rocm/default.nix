@@ -1,5 +1,6 @@
+{ pkgs, ... }:
 {
   hardware.amdgpu.opencl.enable = true;
   nixpkgs.config.rocmSupport = true;
-  services.ollama.acceleration = "rocm";
+  services.ollama.package = pkgs.ollama-rocm;
 }
