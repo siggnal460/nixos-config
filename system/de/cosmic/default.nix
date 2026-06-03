@@ -42,7 +42,6 @@
     ];
     cosmic.excludePackages = [
       pkgs.cosmic-term
-      pkgs.cosmic-store
       pkgs.cosmic-player
     ];
   };
