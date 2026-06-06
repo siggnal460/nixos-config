@@ -64,9 +64,9 @@ in
 
   environment.systemPackages = with pkgs; [
     dolphin-emu
-    duckstation
     pcsx2
     protonplus
+    retroarch-free
     steam-rom-manager
     steam-run
   ];
