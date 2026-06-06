@@ -51,10 +51,23 @@ in
 
   programs.steam.platformOptimizations.enable = true;
 
+  nixpkgs.config = {
+    allowUnfreePredicate =
+      pkg:
+      builtins.elem (lib.getName pkg) [
+        "steam-run"
+        "steam-unwrapped"
+      ];
+  };
+
+  nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
     dolphin-emu
+    duckstation
     pcsx2
     protonplus
     steam-rom-manager
+    steam-run
   ];
 }

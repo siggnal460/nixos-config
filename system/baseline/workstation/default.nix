@@ -102,14 +102,14 @@ in
   hardware.nvidia.nvidiaSettings = lib.mkIf (builtins.elem "nvidia" config.boot.initrd.kernelModules) true;
   programs.kdeconnect.enable = true;
 
-  nixpkgs.config = {
-    allowUnfreePredicate =
-      pkg:
-      builtins.elem (lib.getName pkg) [
-        "tidal-hifi"
-        "castlabs-electron"
-      ];
-  };
+  #nixpkgs.config = {
+  #  allowUnfreePredicate =
+  #    pkg:
+  #    builtins.elem (lib.getName pkg) [
+  #      "tidal-hifi"
+  #      "castlabs-electron"
+  #    ];
+  #};
 
   programs.thunderbird.enable = true;
 
@@ -132,7 +132,8 @@ in
       opensc
       openvpn
       protonmail-bridge-gui
-      tidal-hifi
+      #tidal-hifi
+      sone
       tor-browser
       wayland-utils
       wezterm
