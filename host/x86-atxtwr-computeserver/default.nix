@@ -28,5 +28,7 @@ in
     #};
   };
 
+  networking.interfaces.enp8s0.useDHCP = true;
+
   systemd.timers."podman-updater".timerConfig.OnCalendar = lib.mkForce "*-*-* 00:00:00";
 }
