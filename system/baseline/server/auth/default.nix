@@ -75,6 +75,11 @@ in
           rules = lib.mkAfter [
             # Allow access for Flux News to miniflux
             {
+              domain = "todo.${domain}";
+              resources = [ "/api.*" ];
+              policy = "bypass";
+            }
+            {
               domain = "rss.${domain}";
               resources = [ "^/v1/.*$" ];
               policy = "bypass";

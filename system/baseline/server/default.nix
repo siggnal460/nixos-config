@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
     ../../shared/remotely-managed.nix
@@ -8,7 +8,7 @@
     NIGHTLY_REFRESH = "reboot-if-needed";
   };
 
-  networking.wireless.enable = false;
+  networking.wireless.enable = lib.mkDefault false;
 
   systemd.tmpfiles.rules = [
     "d /mnt/backups 0775 restic restic"
