@@ -73,7 +73,11 @@ in
         access_control = {
           default_policy = "deny";
           rules = lib.mkAfter [
-            # Allow access for Flux News to miniflux
+            {
+              domain = "owui.${domain}";
+              resources = [ "/api.*" ];
+              policy = "bypass";
+            }
             {
               domain = "todo.${domain}";
               resources = [ "/api.*" ];
