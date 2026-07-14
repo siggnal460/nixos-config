@@ -50,7 +50,6 @@ in
       "owui.${domain}".extraConfig = ''
         			  import main
                 import auth
-        				import headers
 
                 reverse_proxy x86-atxtwr-computeserver:11000
       '';
