@@ -74,11 +74,6 @@ in
           default_policy = "deny";
           rules = lib.mkAfter [
             {
-              domain = "owui.${domain}";
-              resources = [ "/api.*" ];
-              policy = "bypass";
-            }
-            {
               domain = "todo.${domain}";
               resources = [ "/api.*" ];
               policy = "bypass";
