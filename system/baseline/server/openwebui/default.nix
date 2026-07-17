@@ -17,6 +17,7 @@ let
   embed_model = "Qwen/Qwen3-Embedding-0.6B";
   embed_port = "11435";
   searxng_port = "8080";
+  comfyui_port = "8188";
   speaches_port = "8000";
   tika_port = "9998";
 in
@@ -32,11 +33,26 @@ in
 
   systemd.tmpfiles.rules = [
     "d /etc/searxng 0744 openwebui ai" # needs to be in etc because home.file can't deploy mutable files
+    "d /export/ai 0774 root ai"
+
+    "d /var/ai/toolkit 0770 root wheel"
+    "d /var/ai/toolkit/datasets 0770 root wheel"
+    "d /var/ai/toolkit/config 0770 root wheel"
+    "d /var/ai/toolkit/output 0770 root wheel"
+
+    "d /export/ai/comfyui 0770 openwebui ai"
+    "Z /export/ai/comfyui 0770 openwebui ai"
+    "d /export/ai/comfyui/custom_nodes 0770 openwebui ai"
+    "d /export/ai/comfyui/models 0770 openwebui ai"
+    "d /export/ai/comfyui/user 0770 openwebui ai"
   ];
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ openwebui_outside_port ];
+    allowedTCPPorts = [
+      openwebui_outside_port
+      8189
+    ];
   };
 
   users = {
@@ -141,16 +157,45 @@ in
       Environment = [
         "XDG_RUNTIME_DIR=/run/user/${toString service_account_uid}"
       ];
+      ExecStartPre = [
+        "-${pkgs.podman}/bin/podman pod stop owui"
+        "-${pkgs.podman}/bin/podman pod rm owui"
+      ];
       ExecStart = [
-        "${pkgs.coreutils}/bin/echo 'Checking if pod exists'"
-        "/bin/sh -c '${pkgs.podman}/bin/podman pod exists owui || ${pkgs.podman}/bin/podman pod create --name owui -p ${toString openwebui_outside_port}:${toString openwebui_inside_port}'"
-        "${pkgs.podman}/bin/podman pod start owui"
-        "${pkgs.coreutils}/bin/echo 'Exiting'"
+        "${pkgs.podman}/bin/podman pod create --name owui -p ${toString openwebui_outside_port}:${toString openwebui_inside_port} -p 8189:${comfyui_port}"
       ];
     };
   };
 
   virtualisation.oci-containers.containers = {
+    comfyui-owui = {
+      image = "ghcr.io/siggnal460/comfyui-container-cuda:v3.4";
+      autoStart = true;
+      podman = {
+        user = "openwebui";
+        sdnotify = "healthy";
+      };
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      volumes = [
+        "/export/ai/comfyui/models:/app/models:rw"
+        "/export/ai/comfyui/user:/app/user:rw"
+        "/export/ai/comfyui/custom_nodes:/app/custom_nodes:rw"
+      ];
+      environmentFiles = [ "/run/secrets/comfyui/env" ];
+      environment = {
+        COMFYUI_ARGS = "--max-upload-size 999999999 --reserve-vram 14.4";
+      };
+      extraOptions = [
+        "--name=comfyui-local"
+        "--pod=owui"
+        "--gpus=all"
+        "--health-cmd"
+        "bash -c ':> /dev/tcp/127.0.0.1/${comfyui_port}' || exit 1"
+      ];
+    };
+
     valkey = {
       image = "docker.io/valkey/valkey:9";
       podman = {
@@ -254,40 +299,15 @@ in
       };
       extraOptions = [
         "--name=qdrant"
-        "--gpus=all"
+        "--gpus=1"
         "--pod=owui"
         "--health-cmd"
         "bash -c ':> /dev/tcp/127.0.0.1/6333' || exit 1"
       ];
     };
 
-    #ollama = {
-    #  image = "docker.io/ollama/ollama:latest";
-    #  podman = {
-    #    user = "openwebui";
-    #    sdnotify = "healthy";
-    #  };
-    #  volumes = [
-    #    "ollama:/root/.ollama"
-    #  ];
-    #  autoStart = true;
-    #  environment = {
-    #    OLLAMA_VULKAN = "1";
-    #  };
-    #  labels = {
-    #    "io.containers.autoupdate" = "registry";
-    #  };
-    #  extraOptions = [
-    #    "--name=ollama"
-    #    "--gpus=all"
-    #    "--pod=owui"
-    #    "--health-cmd"
-    #    "bash -c '</dev/tcp/localhost/11434' || exit 1"
-    #  ];
-    #};
-
     vllm-gemma4 = {
-      image = "docker.io/vllm/vllm-openai:latest";
+      image = "docker.io/vllm/vllm-openai:v0.24.0";
       podman = {
         user = "openwebui";
         sdnotify = "healthy";
@@ -301,19 +321,13 @@ in
       };
       cmd = [
         "--model"
-        "nvidia/Gemma-4-26B-A4B-NVFP4"
+        "huihui-ai/Huihui-gemma-4-E2B-it-abliterated"
         "--gpu-memory-utilization"
-        "0.75"
-        "--max-num-batched-tokens"
-        "4096"
-        "--dtype"
-        "auto"
+        "0.45"
         "--port"
         "${gemma4_port}"
         "--enable-auto-tool-choice"
         "--tool-call-parser"
-        "gemma4"
-        "--reasoning-parser"
         "gemma4"
       ];
       extraOptions = [
@@ -349,6 +363,9 @@ in
         "${embed_port}"
         "--runner"
         "pooling"
+      ];
+      dependsOn = [
+        "vllm-gemma4"
       ];
       extraOptions = [
         "--name=vllm-embed"
@@ -405,7 +422,7 @@ in
     };
 
     openwebui = {
-      image = "ghcr.io/open-webui/open-webui:latest";
+      image = "ghcr.io/open-webui/open-webui:v0.10.2";
       podman = {
         user = "openwebui";
         sdnotify = "healthy";
@@ -439,7 +456,6 @@ in
         ENABLE_PASSWORD_AUTH = "false";
         USE_CUDA_DOCKER = "true";
         DOCKER = "true";
-        #OLLAMA_BASE_URL = "http://localhost:${ollama_port}";
         ENABLE_OPENAI_API = "true";
         OPENAI_API_BASE_URL = "http://localhost:${gemma4_port}";
         VECTOR_DB = "qdrant";
@@ -472,6 +488,15 @@ in
         RAG_EMBEDDING_ENGINE = "openai";
         RAG_EMBEDDING_MODEL = "${embed_model}";
         RAG_OPENAI_API_BASE_URL = "http://localhost:${embed_port}/v1";
+        ENABLE_IMAGE_GENERATION = "true";
+        IMAGE_GENERATION_ENGINE = "comfyui";
+        IMAGE_PROMPT_GENERATION_PROMPT_TEMPLATE = builtins.readFile ./image_prompt.txt;
+        IMAGE_SIZE = "1024x1024";
+        ENABLE_IMAGE_EDIT = "true";
+        IMAGE_EDIT_ENGINE = "comfyui";
+        COMFYUI_BASE_URL = "http://127.0.0.1:${comfyui_port}";
+        #IMAGES_EDIT_COMFYUI_WORKFLOW = builtins.readFile ./flux2_klein_edit.json;
+        IMAGES_EDIT_COMFYUI_BASE_URL = "http://127.0.0.1:${comfyui_port}";
       };
       dependsOn = [
         "valkey"
@@ -499,5 +524,6 @@ in
     "openwebui/postgresql".owner = "openwebui";
     "openwebui/qdrant".owner = "openwebui";
     "openwebui/searxng_secret".owner = "openwebui";
+    "comfyui/env".owner = "openwebui";
   };
 }

@@ -68,32 +68,6 @@
       ];
     };
 
-    comfyui-local = {
-      image = "ghcr.io/siggnal460/comfyui-container-cuda:v3.3";
-      autoStart = true;
-      ports = [
-        "8189:8188"
-      ];
-      labels = {
-        "io.containers.autoupdate" = "registry";
-      };
-      volumes = [
-        "/var/ai/comfyui/models:/app/models:rw"
-        "/var/ai/comfyui/user:/app/user:rw"
-        "/var/ai/comfyui/output:/app/output:rw"
-        "/export/ai/comfyui/custom_nodes:/app/custom_nodes:rw"
-      ];
-      environment = {
-        PUID = "780";
-        PGID = "780";
-        COMFYUI_ARGS = "--max-upload-size 999999999";
-      };
-      extraOptions = [
-        "--name=comfyui-local"
-        "--gpus=all"
-      ];
-    };
-
     ai-toolkit = {
       image = "docker.io/ostris/aitoolkit:latest";
       autoStart = true;

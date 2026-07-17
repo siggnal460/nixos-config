@@ -300,8 +300,8 @@
               ./system/baseline/server
               ./system/baseline/server/ai
               ./system/baseline/server/openwebui
-              ./system/baseline/server/blender
-              ./system/baseline/server/nfs
+              #./system/baseline/server/blender
+              #./system/baseline/server/nfs
               #./system/baseline/server/gitea
               #./system/baseline/server/invidious
               #./system/baseline/server/streaming
