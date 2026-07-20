@@ -37,10 +37,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nix-gaming.url = "github:fufexan/nix-gaming";
-    lsfg-vk-flake = {
-      url = "github:pabloaul/lsfg-vk-flake/main";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     nix-index-database.url = "github:Mic92/nix-index-database";
   };
 

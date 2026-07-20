@@ -19,7 +19,6 @@ in
   imports = [
     inputs.nix-gaming.nixosModules.pipewireLowLatency
     inputs.nix-gaming.nixosModules.platformOptimizations
-    inputs.lsfg-vk-flake.nixosModules.default
     ./nfs-client.nix
   ];
 
@@ -41,10 +40,6 @@ in
     #  quantum = 64;
     #  rate = 48000;
     #};
-    lsfg-vk = {
-      enable = true;
-      ui.enable = true;
-    };
   };
 
   hardware.steam-hardware.enable = true;
@@ -69,5 +64,7 @@ in
     retroarch-free
     steam-rom-manager
     steam-run
+    lsfg-vk
+    lsfg-vk-ui
   ];
 }

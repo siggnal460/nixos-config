@@ -1,7 +1,5 @@
 {
   inputs,
-  lib,
-  config,
   pkgs,
   ...
 }:
@@ -30,9 +28,9 @@
 
   jovian = {
     steamos.useSteamOSConfig = true;
-    decky-loader = {
-      enable = true;
-    };
+    # decky-loader = {
+    #   enable = true;
+    # };
     steam = {
       desktopSession = "plasma";
       enable = true;
@@ -45,22 +43,19 @@
 
   services = {
     flatpak.enable = true;
-    lsfg-vk = {
-      ui.enable = lib.mkForce false;
-    };
   };
 
   xdg.autostart.enable = true;
 
-  systemd.services.steam-cef-debug = lib.mkIf config.jovian.decky-loader.enable {
-    description = "Create Steam CEF debugging file";
-    serviceConfig = {
-      Type = "oneshot";
-      User = config.jovian.steam.user;
-      ExecStart = "/bin/sh -c 'mkdir -p ~/.steam/steam && [ ! -f ~/.steam/steam/.cef-enable-remote-debugging ] && touch ~/.steam/steam/.cef-enable-remote-debugging || true'";
-    };
-    wantedBy = [ "multi-user.target" ];
-  };
+  # systemd.services.steam-cef-debug = lib.mkIf config.jovian.decky-loader.enable {
+  #   description = "Create Steam CEF debugging file";
+  #   serviceConfig = {
+  #     Type = "oneshot";
+  #     User = config.jovian.steam.user;
+  #     ExecStart = "/bin/sh -c 'mkdir -p ~/.steam/steam && [ ! -f ~/.steam/steam/.cef-enable-remote-debugging ] && touch ~/.steam/steam/.cef-enable-remote-debugging || true'";
+  #   };
+  #   wantedBy = [ "multi-user.target" ];
+  # };
 
   environment.systemPackages = with pkgs; [
     maliit-keyboard
