@@ -115,7 +115,7 @@
     firewall.allowedUDPPorts = [ ];
     # these are temporary
     extraHosts = ''
-      192.168.0.14  x86-minitx-jovian
+      192.168.1.132  x86-minitx-jovian
       192.168.0.18   x86-atxtwr-workstation
       192.168.0.22  arm-raspi4-home
       192.168.0.35  x86-merkat-workout
