@@ -51,5 +51,6 @@
   environment.systemPackages = with pkgs; [
     obs-studio
     phoronix-test-suite
+    samrewritten
   ];
 }

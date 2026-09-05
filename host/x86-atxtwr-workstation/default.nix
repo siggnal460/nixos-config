@@ -1,9 +1,34 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
+let
+  mountOptions = [
+    "x-systemd.automount"
+    "x-systemd.device-timeout=2s"
+    "x-systemd.mount-timeout=2s"
+    "x-systemd.idle-timeout=600" # 10min
+    "bg"
+    "noauto"
+    "nofail"
+  ];
+in
 {
   imports = [ ./hardware-configuration.nix ];
 
   networking = {
     hostName = "x86-atxtwr-workstation";
+  };
+
+  systemd = {
+    tmpfiles.rules = [
+      "d /nfs/media 0770 root media"
+    ];
+  };
+
+  fileSystems = {
+    "/nfs/media" = {
+      device = lib.mkForce "x86-rakmnt-mediaserver:/export/media";
+      fsType = lib.mkForce "nfs4";
+      options = mountOptions;
+    };
   };
 
   services.ratbagd.enable = true;
@@ -21,7 +46,6 @@
   };
 
   systemd.services.flatpak-host-tweaks = {
-    # this has a 175hz monitor
     wantedBy = [ "multi-user.target" ];
     requires = [ "flatpak-gaming-setup.service" ];
     path = [ pkgs.flatpak ];

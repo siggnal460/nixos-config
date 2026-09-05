@@ -12,7 +12,7 @@
   };
 
   environment.sessionVariables = {
-    XCURSOR_SIZE = "16"; # Or your preferred size like 16, 32, etc.
+    XCURSOR_SIZE = "16";
   };
 
   services = {
@@ -39,10 +39,6 @@
     systemPackages = [
       pkgs.wezterm
       pkgs.mpv
-    ];
-    cosmic.excludePackages = [
-      pkgs.cosmic-term
-      pkgs.cosmic-player
     ];
   };
 }

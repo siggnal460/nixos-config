@@ -4,22 +4,11 @@
   config,
   ...
 }:
-let
-  mountOptions = [
-    "x-systemd.automount"
-    "x-systemd.device-timeout=2s"
-    "x-systemd.mount-timeout=2s"
-    "x-systemd.idle-timeout=600" # 10min
-    "bg"
-    "noauto"
-    "nofail"
-  ];
-in
 {
   imports = [
     ../../shared/plymouth-verbose.nix
     ../../shared/pipewire.nix
-    ../../shared/nfs-client.nix
+    #../../shared/nfs-client.nix
     ../../shared/cosmic-greeter.nix
   ];
 
@@ -39,25 +28,18 @@ in
       NIGHTLY_REFRESH = "poweroff-always";
     };
 
-    tmpfiles.rules = [
-      "d /nfs/ai 0770 root ai"
-      "d /nfs/blender 0770 root users"
-      "d /nfs/media 0770 root media"
-    ];
+    # tmpfiles.rules = [
+    #  "d /nfs/ai 0770 root ai"
+    # ];
   };
 
-  fileSystems = {
-    "/nfs/ai" = {
-      device = lib.mkForce "x86-atxtwr-computeserver:/export/ai";
-      fsType = lib.mkForce "nfs4";
-      options = mountOptions;
-    };
-    "/nfs/media" = {
-      device = lib.mkForce "x86-rakmnt-mediaserver:/export/media";
-      fsType = lib.mkForce "nfs4";
-      options = mountOptions;
-    };
-  };
+  # fileSystems = {
+  #   "/nfs/ai" = {
+  #     device = lib.mkForce "x86-atxtwr-computeserver:/export/ai";
+  #     fsType = lib.mkForce "nfs4";
+  #     options = mountOptions;
+  #   };
+  # };
 
   networking.networkmanager.enable = true;
 
@@ -80,36 +62,64 @@ in
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
       flatpak uninstall --unused -y --noninteractive
       flatpak install -y --noninteractive flathub com.discordapp.Discord
-      flatpak install -y --noninteractive flathub com.mastermindzh.tidal-hifi
-      flatpak install -y --noninteractive flathub com.openwebui.open-webui
       flatpak update -y
     '';
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal
-      pkgs.xdg-desktop-portal-gtk
-    ];
-    config = {
-      common = {
-        default = [ "cosmic" ];
+  xdg = {
+    terminal-exec = {
+      enable = true;
+      settings.default = [ "org.wezfurlong.wezterm.desktop" ];
+    };
+    portal = {
+      enable = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal
+        pkgs.xdg-desktop-portal-gtk
+      ];
+      config = {
+        common = {
+          default = [ "cosmic" ];
+        };
       };
+    };
+    mime.defaultApplications = {
+      "inode/directory" = "com.system76.CosmicFiles.desktop";
+      "text/plain" = "com.system76.CosmicEdit.desktop";
+      "text/markdown" = "com.system76.CosmicEdit.desktop";
+      "application/x-shellscript" = "com.system76.CosmicEdit.desktop";
+      "application/pdf" = "com.system76.CosmicReader.desktop";
+      "image/jpeg" = "org.gnome.Loupe.desktop";
+      "image/png" = "org.gnome.Loupe.desktop";
+      "image/gif" = "org.gnome.Loupe.desktop";
+      "image/webp" = "org.gnome.Loupe.desktop";
+      "video/mp4" = "mpv.desktop";
+      "video/mkv" = "mpv.desktop";
+      "video/webm" = "mpv.desktop";
+      "video/*" = "mpv.desktop";
     };
   };
 
   hardware.nvidia.nvidiaSettings = lib.mkIf (builtins.elem "nvidia" config.boot.initrd.kernelModules) true;
   programs.kdeconnect.enable = true;
 
-  #nixpkgs.config = {
-  #  allowUnfreePredicate =
-  #    pkg:
-  #    builtins.elem (lib.getName pkg) [
-  #      "tidal-hifi"
-  #      "castlabs-electron"
-  #    ];
-  #};
+  environment = {
+    plasma6.excludePackages = with pkgs; [
+      kdePackages.kate
+      kdePackages.kwrited
+      kdePackages.gwenview
+      kdePackages.konsole
+      kdePackages.discover
+      kdePackages.dolphin
+      kdePackages.okular
+      kdePackages.elisa
+      kdePackages.spectacle
+    ];
+    cosmic.excludePackages = [
+      pkgs.cosmic-term
+      pkgs.cosmic-player
+    ];
+  };
 
   programs.thunderbird.enable = true;
 
@@ -132,8 +142,7 @@ in
       opensc
       openvpn
       protonmail-bridge-gui
-      #tidal-hifi
-      sone
+      teams-for-linux
       tor-browser
       wayland-utils
       wezterm

@@ -132,6 +132,7 @@
               ./system/hardware/thunderbolt
               ./system/baseline/workstation
               ./system/de/cosmic
+              ./system/de/plasma
             ]
             [
               #user-specific modules
@@ -152,6 +153,7 @@
           mkComputerStable "x86_64-linux" ./host/x86-atxtwr-workstation
             [
               ./system/de/cosmic
+              ./system/de/plasma
               ./system/hardware/gpu/amd
               ./system/hardware/gpu/amd/rocm
               ./system/baseline/workstation
@@ -238,6 +240,17 @@
             [
               ./user/aaron/htpc
             ];
+        ## VMs ##
+        x86-virtma-comfyui =
+          mkComputerStable "x86_64-linux" ./host/x86-atxtwr-computeserver
+            [
+              ./system/hardware/gpu/nvidia
+              ./system/hardware/gpu/nvidia/cuda
+              ./system/baseline/server
+              ./system/baseline/server/ai
+              ./system/baseline/server/openwebui
+            ]
+            [ ];
 
         ## SERVERS ##
         x86-merkat-auth =
@@ -285,23 +298,6 @@
               ./system/baseline/server
               ./system/baseline/server/glance
               ./system/baseline/server/beszel-hub
-            ]
-            [ ];
-
-        x86-atxtwr-computeserver =
-          mkComputerStable "x86_64-linux" ./host/x86-atxtwr-computeserver
-            [
-              ./system/hardware/gpu/nvidia
-              ./system/hardware/gpu/nvidia/cuda
-              ./system/baseline/server
-              ./system/baseline/server/ai
-              ./system/baseline/server/openwebui
-              #./system/baseline/server/blender
-              #./system/baseline/server/nfs
-              #./system/baseline/server/gitea
-              #./system/baseline/server/invidious
-              #./system/baseline/server/streaming
-              #./system/shared/nfs-client.nix
             ]
             [ ];
 

@@ -12,16 +12,18 @@ in
       Authentication = true;
 
       Cookies.Allow = [
+        "https://mobilesuitarena.com"
+        "https://patreon.com"
         "https://twitch.tv"
-        "https://www.amazon.com"
+        "https://amazon.com"
         "https://civit.ai"
         "https://open.spotify.com"
         "https://duckduckgo.com"
         "https://github.com"
         "https://accounts.proton.me"
         "https://proton.me"
-        "https://www.reddit.com"
-        "https://www.youtube.com"
+        "https://reddit.com"
+        "https://youtube.com"
         "https://discourse.nixos.org"
         # gappyland
         "https://gappyland.org"
@@ -188,6 +190,14 @@ in
             {
               name = "Amazon";
               url = "https://amazon.com";
+            }
+            {
+              name = "Mobile Suit Arena";
+              url = "https://mobilesuitarena.com";
+            }
+            {
+              name = "Proton Mail";
+              url = "https://mail.proton.me";
             }
             {
               name = "Wikipedia";
