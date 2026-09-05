@@ -127,7 +127,7 @@
       192.168.1.29  arm-raspi4-downloadclient
       192.168.1.42  x86-atxtwr-computeserver
       192.168.1.43  x86-stmdck-jovian
-      192.168.1.43  x86-virtma-comfyui
+      192.168.1.82  x86-virtma-comfyui
       192.168.1.118 x86-atxtwr-proxmox
     '';
   };
