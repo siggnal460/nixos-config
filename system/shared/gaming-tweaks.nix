@@ -8,7 +8,6 @@
   imports = [
     inputs.nix-gaming.nixosModules.pipewireLowLatency
     inputs.nix-gaming.nixosModules.platformOptimizations
-    inputs.lsfg-vk-flake.nixosModules.default
     #./nfs-client.nix
   ];
 
