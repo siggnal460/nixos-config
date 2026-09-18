@@ -4,11 +4,22 @@
   config,
   ...
 }:
+let
+  mountOptions = [
+    "x-systemd.automount"
+    "x-systemd.device-timeout=2s"
+    "x-systemd.mount-timeout=2s"
+    "x-systemd.idle-timeout=600" # 10min
+    "bg"
+    "noauto"
+    "nofail"
+  ];
+in
 {
   imports = [
     ../../shared/plymouth-verbose.nix
     ../../shared/pipewire.nix
-    #../../shared/nfs-client.nix
+    ../../shared/nfs-client.nix
     ../../shared/cosmic-greeter.nix
   ];
 
@@ -33,13 +44,13 @@
     # ];
   };
 
-  # fileSystems = {
-  #   "/nfs/ai" = {
-  #     device = lib.mkForce "x86-atxtwr-computeserver:/export/ai";
-  #     fsType = lib.mkForce "nfs4";
-  #     options = mountOptions;
-  #   };
-  # };
+  fileSystems = {
+    "/nfs/media" = {
+      device = lib.mkForce "x86-rakmnt-mediaserver:/export/media";
+      fsType = lib.mkForce "nfs4";
+      options = mountOptions;
+    };
+  };
 
   networking.networkmanager.enable = true;
 
@@ -71,18 +82,43 @@
       enable = true;
       settings.default = [ "org.wezfurlong.wezterm.desktop" ];
     };
+
+    # Merged Portals Configuration
     portal = {
       enable = true;
+      xdgOpenUsePortal = true;
+
       extraPortals = [
-        pkgs.xdg-desktop-portal
-        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal # Core portal
+        pkgs.xdg-desktop-portal-gtk # For GTK apps
+        pkgs.xdg-desktop-portal-cosmic # For COSMIC apps
+        pkgs.kdePackages.xdg-desktop-portal-kde # For KDE Plasma
       ];
+
       config = {
+        # Change the global fallback to prioritize KDE and GTK
         common = {
+          default = [
+            "kde"
+            "gtk"
+          ];
+          "org.freedesktop.impl.portal.ScreenCast" = [ "kde" ];
+          "org.freedesktop.impl.portal.Screenshot" = [ "kde" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
+        };
+
+        kde = {
+          default = [ "kde" ];
+        };
+
+        cosmic = {
           default = [ "cosmic" ];
+          "org.freedesktop.impl.portal.ScreenCast" = [ "cosmic" ];
+          "org.freedesktop.impl.portal.Screenshot" = [ "cosmic" ];
         };
       };
-    };
+    }; # This bracket now correctly closes xdg.portal
+
     mime.defaultApplications = {
       "inode/directory" = "com.system76.CosmicFiles.desktop";
       "text/plain" = "com.system76.CosmicEdit.desktop";
