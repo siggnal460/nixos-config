@@ -39,9 +39,9 @@ in
       NIGHTLY_REFRESH = "poweroff-always";
     };
 
-    # tmpfiles.rules = [
-    #  "d /nfs/ai 0770 root ai"
-    # ];
+    tmpfiles.rules = [
+      "d /nfs/media 0770 root media"
+    ];
   };
 
   fileSystems = {
