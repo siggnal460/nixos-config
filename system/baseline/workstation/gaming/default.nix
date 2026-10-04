@@ -52,5 +52,11 @@
     obs-studio
     phoronix-test-suite
     samrewritten
+    (lutris.override {
+      extraPkgs = _pkgs: [
+        wineWowPackages.stable # or wineWowPackages.staging
+        winetricks
+      ];
+    })
   ];
 }

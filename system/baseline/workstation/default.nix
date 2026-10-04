@@ -169,7 +169,7 @@ in
       gimp
       gnupg
       jellyfin-media-player
-      libation
+      unstable.libation
       libreoffice
       #logseq
       loupe
