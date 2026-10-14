@@ -177,7 +177,9 @@ in
       networkmanager-openvpn
       opensc
       openvpn
+      pear-desktop
       protonmail-bridge-gui
+      signal-desktop
       teams-for-linux
       tor-browser
       wayland-utils

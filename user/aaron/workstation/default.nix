@@ -21,6 +21,8 @@
       ../shared/gaming.nix
     ];
 
+    xdg.configFile."mpv/mpv.conf".force = true;
+
     accounts.email.accounts.aaron.thunderbird.enable = true;
 
     programs.wezterm.enable = true;
