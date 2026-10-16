@@ -86,41 +86,15 @@ in
       settings.default = [ "org.wezfurlong.wezterm.desktop" ];
     };
 
-    # Merged Portals Configuration
     portal = {
       enable = true;
       xdgOpenUsePortal = true;
 
       extraPortals = [
-        pkgs.xdg-desktop-portal # Core portal
-        pkgs.xdg-desktop-portal-gtk # For GTK apps
-        pkgs.xdg-desktop-portal-cosmic # For COSMIC apps
-        pkgs.kdePackages.xdg-desktop-portal-kde # For KDE Plasma
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-cosmic
       ];
-
-      config = {
-        # Change the global fallback to prioritize KDE and GTK
-        common = {
-          default = [
-            "kde"
-            "gtk"
-          ];
-          "org.freedesktop.impl.portal.ScreenCast" = [ "kde" ];
-          "org.freedesktop.impl.portal.Screenshot" = [ "kde" ];
-          "org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
-        };
-
-        kde = {
-          default = [ "kde" ];
-        };
-
-        cosmic = {
-          default = [ "cosmic" ];
-          "org.freedesktop.impl.portal.ScreenCast" = [ "cosmic" ];
-          "org.freedesktop.impl.portal.Screenshot" = [ "cosmic" ];
-        };
-      };
-    }; # This bracket now correctly closes xdg.portal
+    };
 
     mime.defaultApplications = {
       "inode/directory" = "com.system76.CosmicFiles.desktop";
@@ -142,23 +116,10 @@ in
   hardware.nvidia.nvidiaSettings = lib.mkIf (builtins.elem "nvidia" config.boot.initrd.kernelModules) true;
   programs.kdeconnect.enable = true;
 
-  environment = {
-    plasma6.excludePackages = with pkgs; [
-      kdePackages.kate
-      kdePackages.kwrited
-      kdePackages.gwenview
-      kdePackages.konsole
-      kdePackages.discover
-      kdePackages.dolphin
-      kdePackages.okular
-      kdePackages.elisa
-      kdePackages.spectacle
-    ];
-    cosmic.excludePackages = [
-      pkgs.cosmic-term
-      pkgs.cosmic-player
-    ];
-  };
+  environment.cosmic.excludePackages = [
+    pkgs.cosmic-term
+    pkgs.cosmic-player
+  ];
 
   programs.thunderbird.enable = true;
 

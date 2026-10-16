@@ -132,7 +132,6 @@
               ./system/hardware/thunderbolt
               ./system/baseline/workstation
               ./system/de/cosmic
-              ./system/de/plasma
             ]
             [
               #user-specific modules
@@ -153,7 +152,6 @@
           mkComputerStable "x86_64-linux" ./host/x86-atxtwr-workstation
             [
               ./system/de/cosmic
-              ./system/de/plasma
               ./system/hardware/gpu/amd
               ./system/hardware/gpu/amd/rocm
               ./system/baseline/workstation
