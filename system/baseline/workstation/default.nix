@@ -80,37 +80,20 @@ in
     '';
   };
 
-  xdg = {
-    terminal-exec = {
-      enable = true;
-      settings.default = [ "org.wezfurlong.wezterm.desktop" ];
-    };
-
-    portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
-
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-cosmic
-      ];
-    };
-
-    mime.defaultApplications = {
-      "inode/directory" = "com.system76.CosmicFiles.desktop";
-      "text/plain" = "com.system76.CosmicEdit.desktop";
-      "text/markdown" = "com.system76.CosmicEdit.desktop";
-      "application/x-shellscript" = "com.system76.CosmicEdit.desktop";
-      "application/pdf" = "com.system76.CosmicReader.desktop";
-      "image/jpeg" = "org.gnome.Loupe.desktop";
-      "image/png" = "org.gnome.Loupe.desktop";
-      "image/gif" = "org.gnome.Loupe.desktop";
-      "image/webp" = "org.gnome.Loupe.desktop";
-      "video/mp4" = "mpv.desktop";
-      "video/mkv" = "mpv.desktop";
-      "video/webm" = "mpv.desktop";
-      "video/*" = "mpv.desktop";
-    };
+  xdg.mime.defaultApplications = {
+    "inode/directory" = "com.system76.CosmicFiles.desktop";
+    "text/plain" = "com.system76.CosmicEdit.desktop";
+    "text/markdown" = "com.system76.CosmicEdit.desktop";
+    "application/x-shellscript" = "com.system76.CosmicEdit.desktop";
+    "application/pdf" = "com.system76.CosmicReader.desktop";
+    "image/jpeg" = "org.gnome.Loupe.desktop";
+    "image/png" = "org.gnome.Loupe.desktop";
+    "image/gif" = "org.gnome.Loupe.desktop";
+    "image/webp" = "org.gnome.Loupe.desktop";
+    "video/mp4" = "mpv.desktop";
+    "video/mkv" = "mpv.desktop";
+    "video/webm" = "mpv.desktop";
+    "video/*" = "mpv.desktop";
   };
 
   hardware.nvidia.nvidiaSettings = lib.mkIf (builtins.elem "nvidia" config.boot.initrd.kernelModules) true;
@@ -125,14 +108,6 @@ in
 
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
-  programs.appimage.package = pkgs.appimage-run.override {
-    extraPkgs = pkgs: [
-      pkgs.icu
-      pkgs.libxcrypt-legacy
-      pkgs.python312
-      pkgs.python312Packages.torch
-    ];
-  };
 
   environment = {
     systemPackages = with pkgs; [

@@ -2,7 +2,9 @@ $env.config = {
   show_banner: false,
   edit_mode: vi,
 }
-macchina
+if $nu.is-interactive {
+    macchina
+}
 
 def chk-file-fs [ file: string ] {
   df -P -T $file | tail -n +2 | awk '{print $2}'
@@ -70,7 +72,9 @@ def start_zellij [] {
     }
 }
 
-start_zellij
+if $nu.is-interactive {
+    start_zellij
+}
 
 # Tokyonight-night theme colors
 export def --env night () {
