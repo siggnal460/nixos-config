@@ -129,6 +129,7 @@
       192.168.1.43  x86-stmdck-jovian
       192.168.1.82  x86-virtma-comfyui
       192.168.1.118 x86-atxtwr-proxmox
+      192.168.1.48  x86-merkat-home
     '';
   };
 

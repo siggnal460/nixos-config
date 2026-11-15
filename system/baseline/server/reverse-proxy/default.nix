@@ -89,7 +89,7 @@ in
                 import auth
         				import headers
 
-                reverse_proxy arm-raspi4-home:8123
+                reverse_proxy x86-merkat-home:8123
       '';
 
       "recipes.${domain}".extraConfig = ''
