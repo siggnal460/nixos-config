@@ -20,7 +20,8 @@ in
     "d /etc/jellyfin/zap2xml 0775 jellyfin wheel"
     "d /etc/jellyfin/zap2xml/ogden_ota 0775 jellyfin wheel"
     "d /etc/jellyfin/zap2xml/la_ota 0775 jellyfin wheel"
-    "d /etc/jellyseerr 0770 root wheel"
+    "d /etc/seerr 0770 1000 1000"
+    "Z /etc/seerr 0770 1000 1000"
     "d /etc/komga 0770 komga wheel"
     "d /etc/lidarr 0770 prowlarr wheel"
     "d /etc/notifiarr 0770 notifiarr wheel"
@@ -128,7 +129,7 @@ in
       isSystemUser = true;
       group = "media";
     };
-    jellyseerr = {
+    seerr = {
       uid = 702;
       isSystemUser = true;
       group = "media";
@@ -612,8 +613,8 @@ in
       ];
     };
 
-    jellyseerr = {
-      image = "docker.io/fallenbagel/jellyseerr:latest";
+    seerr = {
+      image = "ghcr.io/seerr-team/seerr:latest";
       autoStart = true;
       labels = {
         "io.containers.autoupdate" = "registry";
@@ -622,15 +623,13 @@ in
         "5055:5055"
       ];
       environment = {
-        PUID = "702";
-        PGID = "982";
         TZ = "America/Denver";
       };
       volumes = [
-        "/etc/jellyseerr:/app/config"
+        "/etc/seerr:/app/config"
       ];
       extraOptions = [
-        "--name=jellyseerr"
+        "--name=seerr"
       ];
     };
 
