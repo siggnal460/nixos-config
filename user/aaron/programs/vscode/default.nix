@@ -17,6 +17,7 @@
         ms-python.vscode-pylance
         ms-azuretools.vscode-containers
         ms-vscode-remote.remote-containers
+        thenuprojectcontributors.vscode-nushell-lang
       ];
 
       keybindings = [
