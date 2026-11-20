@@ -69,8 +69,3 @@ My personal nixos-config. The flakes are not meant to be used directly without s
 | update-flake-lock GH Action         | 0330      |
 | NixOS auto-upgrade window           | 0400-0430 |
 | poweroff/reboot window              | 0400-0500 |
-
-## Known Issues
-
-- On COSMIC DE, if the servers are not properly exporting the shares it will case all sorts of odd bugs from Flatpak apps not working to causing the file manager to hang.
-
