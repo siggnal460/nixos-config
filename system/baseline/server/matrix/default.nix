@@ -34,12 +34,18 @@
       pidFile = "${datadir}/homeserver.pid";
       listeners = [
         {
-          bindAddresses = ["::1" "127.0.0.1"];
+          bindAddresses = [
+            "::1"
+            "127.0.0.1"
+          ];
           port = 8008;
           resources = [
             {
               compress = false;
-              names = ["client" "federation"];
+              names = [
+                "client"
+                "federation"
+              ];
             }
           ];
           tls = false;
@@ -63,7 +69,7 @@
       ];
       oidcProviders = [
         {
-          user_profile_method = 'userinfo_endpoint'; #https://www.authelia.com/integration/openid-connect/clients/synapse/#configuration-escape-hatch
+          user_profile_method = "userinfo_endpoint"; # https://www.authelia.com/integration/openid-connect/clients/synapse/#configuration-escape-hatch
           idpId = "authelia";
           idpName = "Authelia";
           idpIcon = "mxc://authelia.com/cKlrTPsGvlpKxAYeHWJsdVHI";

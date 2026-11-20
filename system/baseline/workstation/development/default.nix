@@ -35,6 +35,5 @@
     gopls
     rust-analyzer
     vscode
-    zed-editor-fhs
   ];
 }
