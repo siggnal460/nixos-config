@@ -1,2 +1,4 @@
 core*
 .flatpak-builder
+result
+result-*
