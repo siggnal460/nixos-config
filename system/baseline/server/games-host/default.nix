@@ -1,3 +1,4 @@
+{ config, ... }:
 {
   users.groups = {
     games = {
@@ -8,7 +9,9 @@
   systemd.tmpfiles.rules = [
     "d /export/games 0775 root games"
     "d /export/games/saves 0775 root games"
-    "d /export/games/saves/aaron 0774 aaron games"
+  ]
+  ++ (map (user: "d /export/games/saves/${user} 0774 ${user} games") config.users.primaryUsers)
+  ++ [
     "d /export/games/bios 0775 root games"
     "d /export/games/bios/PPSSPP 0775 root games"
     "d /export/games/bios/ps2 0775 root games"

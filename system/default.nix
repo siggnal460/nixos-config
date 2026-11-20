@@ -239,7 +239,7 @@
     '';
     serviceConfig = {
       WorkingDirectory = "/etc/nixos";
-      User = "aaron";
+      User = builtins.head config.users.primaryUsers;
       Type = "oneshot";
     };
   };
@@ -253,7 +253,7 @@
       pkgs.libnotify
     ];
     environment = {
-      NOTIFY_USER = "aaron";
+      NOTIFY_USER = builtins.head config.users.primaryUsers;
     };
     script = builtins.readFile ./scripts/autoupdate.sh;
     serviceConfig = {

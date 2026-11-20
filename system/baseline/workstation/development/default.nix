@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   imports = [
     ../../../shared/podman.nix
@@ -24,7 +29,7 @@
       ];
   };
 
-  users.users.aaron.extraGroups = [ "adbusers" ];
+  users.groups.adbusers.members = config.users.primaryUsers;
 
   environment.systemPackages = with pkgs; [
     android-tools

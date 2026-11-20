@@ -21,7 +21,7 @@ window_message="power cycle window of ${POWER_CYCLE_START_HOUR}00-${POWER_CYCLE_
 # that user has no active session (headless server, or the PC is off).
 notify_user() {
     [ -n "$NOTIFY_USER" ] || return 0
-    uid=$(id -u "$NOTIFY_USER" 2>/dev/null) || return 0
+    uid=$(id -u "$NOTIFY_USER" 2> /dev/null) || return 0
     [ -S "/run/user/${uid}/bus" ] || return 0
     /run/wrappers/bin/sudo -u "$NOTIFY_USER" \
         XDG_RUNTIME_DIR="/run/user/${uid}" \

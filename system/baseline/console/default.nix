@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  config,
   ...
 }:
 {
@@ -35,7 +36,7 @@
       desktopSession = "plasma";
       enable = true;
       autoStart = true;
-      user = "aaron";
+      user = builtins.head config.users.primaryUsers;
     };
   };
 
