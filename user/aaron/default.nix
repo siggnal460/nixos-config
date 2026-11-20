@@ -63,7 +63,6 @@
         ./programs/nvim
         ./programs/nushell
         ./programs/starship
-        ./programs/vscode
         ./programs/zellij
       ];
 

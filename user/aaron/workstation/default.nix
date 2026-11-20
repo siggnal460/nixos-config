@@ -18,6 +18,7 @@
       ./programs/mpv
       ./programs/librewolf
       ./programs/wezterm
+      ../programs/vscode
       ../shared/gaming.nix
     ];
 

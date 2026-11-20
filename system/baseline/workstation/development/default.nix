@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   config,
   ...
 }:
@@ -19,14 +18,6 @@
       "devstral:latest"
       "hf.co/DavidAU/OpenAi-GPT-oss-20b-HERETIC-uncensored-NEO-Imatrix-gguf"
     ];
-  };
-
-  nixpkgs.config = {
-    allowUnfreePredicate =
-      pkg:
-      builtins.elem (lib.getName pkg) [
-        "claude-code"
-      ];
   };
 
   users.groups.adbusers.members = config.users.primaryUsers;

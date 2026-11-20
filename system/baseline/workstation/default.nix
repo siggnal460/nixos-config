@@ -23,6 +23,13 @@ in
     ../../shared/cosmic-greeter.nix
   ];
 
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "claude-code"
+      "vscode-extension-anthropic-claude-code"
+    ];
+
   networking.firewall = rec {
     # for KDE connect
     allowedTCPPortRanges = [
