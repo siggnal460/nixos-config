@@ -121,10 +121,10 @@ in
       jellyfin-media-player
       unstable.libation
       libreoffice
-      #logseq
       loupe
       mpv
       networkmanager-openvpn
+      obsidian
       opensc
       openvpn
       pear-desktop

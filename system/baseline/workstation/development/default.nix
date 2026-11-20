@@ -1,8 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
     ../../../shared/podman.nix
   ];
+
+  programs.direnv.enable = true;
 
   services.ollama = {
     enable = true;
@@ -14,15 +16,25 @@
     ];
   };
 
+  nixpkgs.config = {
+    allowUnfreePredicate =
+      pkg:
+      builtins.elem (lib.getName pkg) [
+        "claude-code"
+      ];
+  };
+
   users.users.aaron.extraGroups = [ "adbusers" ];
 
   environment.systemPackages = with pkgs; [
     android-tools
     cargo
+    claude-code
     gcc
     go
     gopls
     rust-analyzer
+    vscode
     zed-editor-fhs
   ];
 }
