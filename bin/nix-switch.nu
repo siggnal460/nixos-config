@@ -43,6 +43,21 @@ def repo_changes [] {
     (git status -s | str length) > 0
 }
 
+# Stashes local changes (if any) so a rebase can proceed cleanly, returns whether a stash was made.
+def stash_changes [] {
+    if not (repo_changes) {
+        false
+    } else {
+        git stash push -u -m "nix-switch autostash"
+        $env.LAST_EXIT_CODE == 0
+    }
+}
+
+def pop_stash [] {
+    git stash pop
+    $env.LAST_EXIT_CODE == 0
+}
+
 # Formats the repo in place, returns whether it succeeded.
 def format_repo [] {
     sudo treefmt
@@ -121,6 +136,25 @@ def main [
     print $"Limit Build Resources: ($limit)"
     print ""
 
+    print_header "CHECKING REMOTE"
+    let stashed = (stash_changes)
+    print "Fetching from github..."
+    git fetch $remote $branch
+    git pull --rebase $remote $branch
+    if $env.LAST_EXIT_CODE != 0 {
+        print_error "Rebase failed. Resolve the conflict manually, then re-run."
+        exit 1
+    }
+    if $stashed {
+        if not (pop_stash) {
+            print_error "Restoring your local changes conflicted with the pulled changes. Resolve the conflict manually (see `git status`), then re-run."
+            exit 1
+        }
+        print_success "Local changes restored on top of the pulled commits."
+    }
+    print_success "Pull complete"
+    print ""
+
     if $hardware {
         print_header "UPDATING HARDWARE CONFIG"
         nixos-generate-config --show-hardware-config
@@ -160,17 +194,6 @@ def main [
     } else {
         print "No changes found"
     }
-    print ""
-
-    print_header "CHECKING REMOTE"
-    print "Fetching from github..."
-    git fetch $remote $branch
-    git pull --rebase $remote $branch
-    if $env.LAST_EXIT_CODE != 0 {
-        print_error "Rebase failed. Resolve the conflict manually, then re-run."
-        exit 1
-    }
-    print_success "Pull complete"
     print ""
 
     if $full {
