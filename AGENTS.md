@@ -30,4 +30,4 @@ Each host has a flake.
 | NixOS auto-upgrade window           | 0400-0430 |
 | poweroff/reboot window              | 0400-0500 |
 
-I purposefully spread out podman auto-upgrades between hosts because otherwise I will run into hourly ratelimits
+I purposefully spread out podman auto-upgrades between hosts because otherwise I will run into hourly rate limits.

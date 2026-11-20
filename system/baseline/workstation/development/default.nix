@@ -38,6 +38,7 @@
     gcc
     go
     gopls
+    nodejs
     rust-analyzer
     vscode
   ];

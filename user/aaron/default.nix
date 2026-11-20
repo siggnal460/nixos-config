@@ -55,51 +55,51 @@
   nix.settings.trusted-users = [ "aaron" ];
 
   home-manager.users.aaron = {
-      imports = [
-        inputs.sops-nix.homeManagerModules.sops
-        ./programs/git
-        ./programs/nvim
-        ./programs/nushell
-        ./programs/starship
-        ./programs/zellij
-      ];
+    imports = [
+      inputs.sops-nix.homeManagerModules.sops
+      ./programs/git
+      ./programs/nvim
+      ./programs/nushell
+      ./programs/starship
+      ./programs/zellij
+    ];
 
-      home = {
-        username = "aaron";
-        homeDirectory = "/home/aaron";
-        stateVersion = "23.11";
-      };
+    home = {
+      username = "aaron";
+      homeDirectory = "/home/aaron";
+      stateVersion = "23.11";
+    };
 
-      sops.age.generateKey = true;
+    sops.age.generateKey = true;
 
-      stylix = {
-        enable = true;
-        autoEnable = true;
-        enableReleaseChecks = false;
-        targets.gtk.flatpakSupport.enable = false; # https://github.com/danth/stylix/issues/1093
-      };
+    stylix = {
+      enable = true;
+      autoEnable = true;
+      enableReleaseChecks = false;
+      targets.gtk.flatpakSupport.enable = false; # https://github.com/danth/stylix/issues/1093
+    };
 
-      # Force-overwrite gtk.css symlinks left behind by COSMIC's own theming so Stylix can manage them
-      xdg.configFile = {
-        "gtk-3.0/gtk.css".force = true;
-        "gtk-4.0/gtk.css".force = true;
-      };
+    # Force-overwrite gtk.css symlinks left behind by COSMIC's own theming so Stylix can manage them
+    xdg.configFile = {
+      "gtk-3.0/gtk.css".force = true;
+      "gtk-4.0/gtk.css".force = true;
+    };
 
-      services = {
-        gammastep = {
-          dawnTime = "5:00-6:45";
-          duskTime = "18:45-21:45";
-          settings = {
-            general = {
-              adjustment-method = "wayland";
-            };
+    services = {
+      gammastep = {
+        dawnTime = "5:00-6:45";
+        duskTime = "18:45-21:45";
+        settings = {
+          general = {
+            adjustment-method = "wayland";
           };
         };
       };
-
-      accounts.email.accounts.aaron = {
-        address = "siggnal@proton.me";
-        primary = true;
-      };
     };
+
+    accounts.email.accounts.aaron = {
+      address = "siggnal@proton.me";
+      primary = true;
+    };
+  };
 }
