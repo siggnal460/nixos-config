@@ -66,11 +66,11 @@
         ./programs/zellij
       ];
 
-      home = {
-        username = "aaron";
-        homeDirectory = "/home/aaron";
-        stateVersion = "23.11";
-      };
+    home = {
+      username = "aaron";
+      homeDirectory = "/home/aaron";
+      stateVersion = "23.11";
+    };
 
       gtk.gtk4.theme = lib.mkDefault config.gtk.theme;
 
@@ -84,27 +84,27 @@
         targets.qt.platform = "qtct"; # stylix doesn't support theming the KDE platform directly
       };
 
-      # Force-overwrite gtk.css symlinks left behind by COSMIC's own theming so Stylix can manage them
-      xdg.configFile = {
-        "gtk-3.0/gtk.css".force = true;
-        "gtk-4.0/gtk.css".force = true;
-      };
+    # Force-overwrite gtk.css symlinks left behind by COSMIC's own theming so Stylix can manage them
+    xdg.configFile = {
+      "gtk-3.0/gtk.css".force = true;
+      "gtk-4.0/gtk.css".force = true;
+    };
 
-      services = {
-        gammastep = {
-          dawnTime = "5:00-6:45";
-          duskTime = "18:45-21:45";
-          settings = {
-            general = {
-              adjustment-method = "wayland";
-            };
+    services = {
+      gammastep = {
+        dawnTime = "5:00-6:45";
+        duskTime = "18:45-21:45";
+        settings = {
+          general = {
+            adjustment-method = "wayland";
           };
         };
       };
-
-      accounts.email.accounts.aaron = {
-        address = "siggnal@proton.me";
-        primary = true;
-      };
     };
+
+    accounts.email.accounts.aaron = {
+      address = "siggnal@proton.me";
+      primary = true;
+    };
+  };
 }
