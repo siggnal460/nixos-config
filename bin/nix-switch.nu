@@ -79,7 +79,8 @@ def switch_config [flake_name: string flake_folder: string limit: bool] {
 def main [
     --autoformat (-a)                                                  # Force formatting with treefmt even when --short is used. Formatting always runs otherwise.
     --branch (-b): string = "master"                                   # The branch from which to pull or to which to push
-    --full (-f)                                                        # Will also update the flake lock file to perform a full upgrade.
+    --full (-f)                                                        # Update all machines
+    --update-flake (-k)                                                # Will also update the flake lock file to perform a full upgrade.
     --hardware (-h)                                                    # Will also update the hosts hardware-configuration.nix with the current hardware setup.
     --limit (-l)                                                       # Automatically limit update process to a small amount of cores/threads based on system CPU threads and RAM. Useful for expensive build processes.
     --path (-p): string = "/etc/nixos"                                 # Filepath to the folder containing the flake.nix.
@@ -132,7 +133,8 @@ def main [
     print $"Repo URL: ($url)"
     print $"Branch: ($branch)"
     print $"Remote: ($remote)"
-    print $"Update flake.lock: ($full)"
+    print $"Update flake.lock: ($update_flake)"
+    print $"Update All Machines: ($full)"
     print $"Limit Build Resources: ($limit)"
     print ""
 
@@ -196,7 +198,7 @@ def main [
     }
     print ""
 
-    if $full {
+    if $update_flake {
         print_header "UPDATING FLAKE.LOCK"
         print "Checking for updates..."
         sudo nix flake update
@@ -235,8 +237,26 @@ def main [
     git push $remote $branch
     print ""
 
-    print_header "SYNCING MACHINES"
-    ansible-playbook -i $"($flake_folder)/ansible/inventory.ini" $"($flake_folder)/ansible/sync_hosts.yml" --limit=nix_machines:!(hostnamectl hostname)
+    if $full {
+        print_header "SYNCING MACHINES"
+        let hosts = (
+            nix eval --json $"($flake_folder)#nixosConfigurations" --apply "builtins.attrNames"
+            | from json
+            | where $it != $flake_name
+        )
+        for host in $hosts {
+            if (ssh -o ConnectTimeout=5 -o BatchMode=yes $host true | complete | get exit_code) != 0 {
+                print_warning $"Skipping ($host): unreachable"
+                continue
+            }
+            if (ssh $host "sudo systemctl start pull-updates" | complete | get exit_code) == 0 {
+                print_success $"Triggered update on ($host)"
+            } else {
+                print_error $"Failed to trigger update on ($host)"
+            }
+        }
+        print ""
+    }
 
     print_success "Update complete"
 }

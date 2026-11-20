@@ -5,7 +5,6 @@ My personal nixos-config. The flakes are not meant to be used directly without s
 ## Structure
 
 ```
-├── ansible
 ├── bin
 ├── images
 ├── user
@@ -36,9 +35,8 @@ My personal nixos-config. The flakes are not meant to be used directly without s
 |   ├── shared
 ```
 
-- **ansible**: WIP Ansible workflow which will update all machines on update.
 - **bin**: Contains any custom scripts I've made. These are added to the Nix store and system PATH.
-  - nix-switch: Convenience nushell script for updating the system, formatting each file with nixfmt, and keeping it in sync with a remote repo.
+  - nix-switch: Convenience nushell script for updating the system, formatting each file with nixfmt, and keeping it in sync with a remote repo. `-f`/`--full` triggers the `pull-updates` service on every other host over SSH so they pick up the change immediately instead of waiting for the nightly timer.
 - **images**: Various images such as wallpapers, icons, etc.
 - **user**: Per-user configs. Mostly home-manager modules.
 - **hosts**: Host-specific modules. For things such as setting hostnames and static IPs. Also contains each system's hardware-configuration.nix.
