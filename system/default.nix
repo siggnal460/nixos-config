@@ -212,10 +212,11 @@
   };
 
   systemd.timers."pull-updates" = {
-    description = "Nightly timer between 0400-0430 for pulling of latest changes";
+    description = "Timer for pulling latest changes shortly after boot and nightly between 0400-0430";
     wantedBy = [ "timers.target" ];
     timerConfig = {
       Persistent = true;
+      OnBootSec = "2min";
       OnCalendar = "*-*-* 04:00:00";
       RandomizedDelaySec = "30min";
       Unit = "pull-updates.service";
@@ -249,12 +250,20 @@
     path = [
       pkgs.nixos-rebuild
       pkgs.gawk
+      pkgs.libnotify
     ];
+    environment = {
+      NOTIFY_USER = "aaron";
+    };
     script = builtins.readFile ./scripts/autoupdate.sh;
     serviceConfig = {
       WorkingDirectory = "/etc/nixos";
       User = "root";
       Type = "oneshot";
+      Nice = 19;
+      IOSchedulingClass = "idle";
+      CPUWeight = 10;
+      IOWeight = 10;
     };
   };
 
