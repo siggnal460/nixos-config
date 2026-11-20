@@ -59,7 +59,7 @@
     samrewritten
     (lutris.override {
       extraPkgs = _pkgs: [
-        wineWowPackages.stable # or wineWowPackages.staging
+        wineWow64Packages.stable # or wineWow64Packages.staging
         winetricks
       ];
     })

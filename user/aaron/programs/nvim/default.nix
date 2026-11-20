@@ -3,6 +3,8 @@
   stylix.targets.neovim.enable = false;
 
   programs.neovim = {
+    withRuby = true;
+    withPython3 = true;
     extraPackages = with pkgs; [
       lua-language-server
       pyright
@@ -19,6 +21,6 @@
       tokyonight-nvim
       oil-nvim
     ];
-    extraLuaConfig = lib.fileContents ./config/init.lua;
+    initLua = lib.fileContents ./config/init.lua;
   };
 }

@@ -292,6 +292,7 @@
   stylix = {
     enable = true;
     autoEnable = true;
+    enableReleaseChecks = false;
     polarity = "dark";
     image = ../images/wallpapers/pink_temple.png;
     base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
@@ -336,7 +337,7 @@
       distrobox
       macchina
       git
-      nixfmt-rfc-style
+      nixfmt
       python313
       ripgrep
       shfmt
