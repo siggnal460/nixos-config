@@ -8,8 +8,6 @@
     enable = true;
 
     profiles.default = {
-      mutableUserSettings = true;
-
       extensions = with pkgs.vscode-extensions; [
         vscodevim.vim
         enkia.tokyo-night
