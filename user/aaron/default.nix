@@ -78,6 +78,12 @@
       targets.gtk.flatpakSupport.enable = false; # https://github.com/danth/stylix/issues/1093
     };
 
+    # Force-overwrite gtk.css symlinks left behind by COSMIC's own theming so Stylix can manage them
+    xdg.configFile = {
+      "gtk-3.0/gtk.css".force = true;
+      "gtk-4.0/gtk.css".force = true;
+    };
+
     services = {
       gammastep = {
         dawnTime = "5:00-6:45";
