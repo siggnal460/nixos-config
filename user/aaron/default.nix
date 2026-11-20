@@ -55,7 +55,7 @@
   nix.settings.trusted-users = [ "aaron" ];
 
   home-manager.users.aaron =
-    { config, ... }:
+    { config, lib, ... }:
     {
       imports = [
         inputs.sops-nix.homeManagerModules.sops
@@ -72,7 +72,7 @@
         stateVersion = "23.11";
       };
 
-      gtk.gtk4.theme = config.gtk.theme;
+      gtk.gtk4.theme = lib.mkDefault config.gtk.theme;
 
       sops.age.generateKey = true;
 
