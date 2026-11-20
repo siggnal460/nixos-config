@@ -245,14 +245,39 @@ def main [
             | where $it != $flake_name
         )
         for host in $hosts {
-            if (ssh -o ConnectTimeout=5 -o BatchMode=yes $host true | complete | get exit_code) != 0 {
+            let reachable = (ssh -o ConnectTimeout=5 -o BatchMode=yes $host true | complete)
+            if $reachable.exit_code != 0 {
                 print_warning $"Skipping ($host): unreachable"
+                if ($reachable.stderr | str trim) != "" {
+                    print_warning $"  ($reachable.stderr | str trim)"
+                }
                 continue
             }
-            if (ssh $host "sudo systemctl start pull-updates" | complete | get exit_code) == 0 {
+
+            let update = (ssh $host "sudo systemctl start --wait pull-updates" | complete)
+            if $update.exit_code == 0 {
                 print_success $"Triggered update on ($host)"
             } else {
                 print_error $"Failed to trigger update on ($host)"
+                if ($update.stderr | str trim) != "" {
+                    print_error $"  ($update.stderr | str trim)"
+                }
+
+                let status = (ssh $host "systemctl status pull-updates --no-pager -l" | complete)
+                if $status.exit_code == 0 or ($status.stdout | str trim) != "" {
+                    print_error "  --- systemctl status pull-updates ---"
+                    for line in ($status.stdout | lines) {
+                        print_error $"  ($line)"
+                    }
+                }
+
+                let logs = (ssh $host "journalctl -u pull-updates -n 20 --no-pager" | complete)
+                if ($logs.stdout | str trim) != "" {
+                    print_error "  --- journalctl -u pull-updates (last 20 lines) ---"
+                    for line in ($logs.stdout | lines) {
+                        print_error $"  ($line)"
+                    }
+                }
             }
         }
         print ""
