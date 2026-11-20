@@ -81,10 +81,7 @@
         autoEnable = true;
         enableReleaseChecks = false;
         targets.gtk.flatpakSupport.enable = false; # https://github.com/danth/stylix/issues/1093
-<<<<<<< HEAD
         targets.qt.platform = "qtct"; # stylix doesn't support theming the KDE platform directly
-=======
->>>>>>> c5a340c (Formatting)
       };
 
       # Force-overwrite gtk.css symlinks left behind by COSMIC's own theming so Stylix can manage them
