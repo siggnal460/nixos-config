@@ -9,6 +9,10 @@ This is my NixOS configuration repo for my workstations and homelab
 - x86-minitx-jovian: A SteamOS-like gaming console attached to a TV
 - x86-stmdck-jovian: Handheld gaming PC
 
+# Philosophy
+
+Things should generally be done in nix whenever possible, employing other programming languages as a last resort. The goal is to be pure and declarative. My entire system configuration should be contained within this repository.
+
 # Testing
 
 Always test with dry-runs. Ensure both stable and unstable are tested and fix any build errors or warnings you see.
@@ -19,39 +23,6 @@ Each host has a flake. I run most of my hosts on stable, other than the Jovian h
 
 ## Structure
 
-```
-├── ansible
-├── bin
-├── images
-├── user
-|   ├── <user folders>
-├── host
-|   ├── <host folders>
-├── secrets
-|   ├── <host folders>
-├── system
-|   ├── baseline
-|   |   ├── console
-|   |   |   ├── <submodules>
-|   |   ├── htpc
-|   |   |   ├── <submodules>
-|   |   ├── server
-|   |   |   ├── <submodules>
-|   |   ├── workstation
-|   |   |   ├── <submodules>
-|   ├── extras
-|   ├── hardware
-|   |   ├── arch
-|   |   |   ├── raspi4
-|   |   ├── gpu
-|   |   |   ├── nvidia
-|   |   |   ├── amd
-|   |   ├── laptop
-|   |   ├── steamdeck
-|   ├── shared
-```
-
-- **ansible**: WIP Ansible workflow which will update all machines on update.
 - **bin**: Contains any custom scripts I've made. These are added to the Nix store and system PATH.
   - nix-switch: Convenience nushell script for updating the system, formatting each file with nixfmt, and keeping it in sync with a remote repo.
 - **images**: Various images such as wallpapers, icons, etc.

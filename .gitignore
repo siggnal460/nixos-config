@@ -2,3 +2,4 @@ core*
 .flatpak-builder
 result
 result-*
+.claude

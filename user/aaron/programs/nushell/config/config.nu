@@ -53,8 +53,10 @@ $env.config = {
 }
 
 def start_zellij [] {
-    # Check if we are already inside a Zellij session
-    if 'ZELLIJ' not-in ($env | columns) {
+    # Check if we are already inside a Zellij session, or connected over SSH
+    let via_ssh = ('SSH_CONNECTION' in ($env | columns)) or ('SSH_TTY' in ($env | columns))
+
+    if 'ZELLIJ' not-in ($env | columns) and not $via_ssh {
 
         # Safely check for optional config flags using the ? operator
         let auto_attach = ($env.ZELLIJ_AUTO_ATTACH? == "true")
