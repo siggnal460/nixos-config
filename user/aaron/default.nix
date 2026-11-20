@@ -54,12 +54,7 @@
 
   nix.settings.trusted-users = [ "aaron" ];
 
-  home-manager.users.aaron =
-    {
-      config,
-      ...
-    }:
-    {
+  home-manager.users.aaron = {
       imports = [
         inputs.sops-nix.homeManagerModules.sops
         ./programs/git
@@ -83,8 +78,6 @@
         enableReleaseChecks = false;
         targets.gtk.flatpakSupport.enable = false; # https://github.com/danth/stylix/issues/1093
       };
-
-      gtk.gtk4.theme = config.gtk.theme;
 
       # Force-overwrite gtk.css symlinks left behind by COSMIC's own theming so Stylix can manage them
       xdg.configFile = {
