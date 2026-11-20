@@ -21,7 +21,6 @@
       cleanOnBoot = lib.mkDefault (!config.boot.tmp.useTmpfs);
       tmpfsSize = "90%"; # builds often fail because it's too small by default
     };
-    initrd.systemd.enable = true;
     loader = {
       systemd-boot = {
         enable = lib.mkDefault true;

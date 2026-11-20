@@ -7,7 +7,6 @@
       "rd.udev.log_level=2"
     ];
     consoleLogLevel = 2;
-    initrd.verbose = false;
     loader = {
       timeout = 0;
     };
