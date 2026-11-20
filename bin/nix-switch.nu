@@ -109,6 +109,8 @@ def main [
         exit 1
     }
 
+    cd $flake_folder
+
     if $short {
         if $autoformat and not (format_repo) {
             print_error "Formatting failed."
@@ -123,8 +125,6 @@ def main [
         print ""
         exit 0
     }
-
-    cd $flake_folder
 
     print_header "BUILD INFORMATION"
     print $"Flake Path: ($flake_folder)"
