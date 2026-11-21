@@ -181,9 +181,10 @@
         "nix-command"
         "flakes"
       ];
-      #only allow root and wheel users to configure nix
+      #wheel (admin/sudo) and nix-users (daemon access only, no sudo) may use nix
       allowed-users = [
         "@wheel"
+        "@nix-users"
         "root"
       ];
     };
@@ -279,6 +280,10 @@
   };
 
   users.defaultUserShell = pkgs.nushell;
+
+  # grants Nix daemon access (e.g. so home-manager can activate) without the
+  # passwordless sudo that comes with wheel membership
+  users.groups.nix-users = { };
 
   sops = {
     defaultSopsFormat = lib.mkDefault "yaml";

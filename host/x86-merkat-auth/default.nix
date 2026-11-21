@@ -1,5 +1,8 @@
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../user/aaron
+  ];
 
   networking = {
     hostName = "x86-merkat-auth";

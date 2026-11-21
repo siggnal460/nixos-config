@@ -60,7 +60,7 @@
       };
 
       mkComputerStable =
-        _system: configurationNix: extraModules: extraHomeModules:
+        _system: configurationNix: extraModules:
         inputs.nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs nixpkgs;
@@ -82,14 +82,13 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              imports = [ ] ++ extraHomeModules;
             }
           ]
           ++ extraModules; # system modules
         };
 
       mkComputerUnstable =
-        _system: configurationNix: extraModules: extraHomeModules:
+        _system: configurationNix: extraModules:
         inputs.nixpkgs-unstable.lib.nixosSystem {
           specialArgs = {
             inherit inputs nixpkgs-unstable;
@@ -112,7 +111,6 @@
             {
               home-manager.useUserPackages = true;
               home-manager.useGlobalPkgs = true;
-              imports = [ ] ++ extraHomeModules;
             }
           ]
           ++ extraModules; # system modules
@@ -132,11 +130,6 @@
               ./system/hardware/thunderbolt
               ./system/baseline/workstation
               ./system/de/cosmic
-            ]
-            [
-              #user-specific modules
-              ./user/aaron/workstation
-              ./user/aaron/host/x86-laptop-galago
             ];
 
         x86-laptop-thinkpad =
@@ -145,8 +138,7 @@
               ./system/hardware/gpu/amd
               ./system/hardware/laptop
               ./system/baseline/workstation
-            ]
-            [ ./user/aaron/workstation ];
+            ];
 
         x86-atxtwr-workstation =
           mkComputerStable "x86_64-linux" ./host/x86-atxtwr-workstation
@@ -160,10 +152,6 @@
               ./system/baseline/workstation/gamedev
               ./system/baseline/workstation/development
               ./system/baseline/workstation/vm-host
-            ]
-            [
-              ./user/aaron/host/x86-atxtwr-workstation
-              ./user/aaron/workstation
             ];
         ## VIRTUAL MACHINES ##
         vm =
@@ -172,10 +160,6 @@
               ./system/wm/hyprland
               ./system/baseline/workstation
               ./system/baseline/workstation/vm-guest
-            ]
-            [
-              ./user/aaron/host/vm
-              ./user/aaron/workstation
             ];
 
         ## TABLETS ##
@@ -185,8 +169,7 @@
               ./system/hardware/tablet
               ./system/baseline/workstation
               ./system/baseline/workstation/art
-            ]
-            [ ./user/aaron/workstation ];
+            ];
 
         ## CONSOLES ##
         x86-legigo-jovian =
@@ -194,10 +177,6 @@
             [
               ./system/hardware/gpu/amd
               ./system/baseline/console
-            ]
-            [
-              ./user/aaron/host/x86-legigo-jovian
-              ./user/aaron/console
             ];
 
         x86-stmdck-jovian =
@@ -206,17 +185,13 @@
               ./system/hardware/gpu/amd
               ./system/hardware/steamdeck
               ./system/baseline/console
-            ]
-            [ ./user/aaron/console ];
+            ];
 
         x86-minitx-jovian =
           mkComputerUnstable "x86_64-linux" ./host/x86-minitx-jovian
             [
               ./system/hardware/gpu/amd
               ./system/baseline/console
-            ]
-            [
-              ./user/aaron/console
             ];
 
         ## HTPC ##
@@ -225,8 +200,7 @@
             [
               ./system/hardware/gpu/intel
               ./system/baseline/htpc
-            ]
-            [ ./user/aaron/htpc ];
+            ];
 
         x86-merkat-workout =
           mkComputerStable "x86_64-linux" ./host/x86-merkat-workout
@@ -234,9 +208,6 @@
               ./system/hardware/gpu/intel
               ./system/baseline/htpc
               ./system/baseline/htpc/workout
-            ]
-            [
-              ./user/aaron/htpc
             ];
         ## VMs ##
         x86-virtma-comfyui =
@@ -247,8 +218,7 @@
               ./system/baseline/server
               ./system/baseline/server/ai
               ./system/baseline/server/openwebui
-            ]
-            [ ];
+            ];
 
         ## SERVERS ##
         x86-merkat-auth =
@@ -256,8 +226,7 @@
             [
               ./system/baseline/server
               ./system/baseline/server/auth
-            ]
-            [ ];
+            ];
 
         x86-merkat-entry =
           mkComputerStable "x86_64-linux" ./host/x86-merkat-entry
@@ -266,8 +235,7 @@
               ./system/baseline/server/reverse-proxy
               ./system/baseline/server/homepage
               #./system/baseline/server/headscale
-            ]
-            [ ];
+            ];
 
         arm-raspi4-downloadclient =
           mkComputerStable "aarch64-linux" ./host/arm-raspi4-downloadclient
@@ -277,8 +245,7 @@
               ./system/baseline/server
               ./system/baseline/server/openvpn-client
               ./system/baseline/server/torrent-client
-            ]
-            [ ];
+            ];
 
         arm-raspi4-home =
           mkComputerStable "aarch64-linux" ./host/arm-raspi4-home
@@ -287,8 +254,7 @@
               ./system/hardware/raspi4
               ./system/baseline/server
               ./system/baseline/server/homeassistant
-            ]
-            [ ];
+            ];
 
         x86-merkat-monitoring =
           mkComputerStable "x86_64-linux" ./host/x86-merkat-monitoring
@@ -296,8 +262,7 @@
               ./system/baseline/server
               ./system/baseline/server/glance
               ./system/baseline/server/beszel-hub
-            ]
-            [ ];
+            ];
 
         x86-rakmnt-mediaserver =
           mkComputerStable "x86_64-linux" ./host/x86-rakmnt-mediaserver
@@ -315,8 +280,7 @@
               ./system/baseline/server/games-host
               #./system/baseline/server/beszel-host
               #./system/baseline/server/matrix
-            ]
-            [ ];
+            ];
       };
     };
 }

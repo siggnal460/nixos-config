@@ -1,9 +1,4 @@
 { lib, config, ... }:
-let
-  userDirs = builtins.attrNames (
-    lib.filterAttrs (_: type: type == "directory") (builtins.readDir ../../user)
-  );
-in
 {
   options = {
     nixpkgs.allowUnfreePackages = lib.mkOption {
@@ -18,14 +13,14 @@ in
 
     users.primaryUsers = lib.mkOption {
       type = with lib.types; listOf str;
-      default = userDirs;
+      default = builtins.attrNames (lib.filterAttrs (_: u: u.isNormalUser or false) config.users.users);
       example = [ "aaron" ];
       description = ''
         The primary, fully-managed user(s) of this system (i.e. those with a
-        profile under /user). Defaults to the directory names found there.
-        System modules that need to reference a concrete user (a systemd
-        service's User, a session owner, a per-user directory owner) should
-        read from this instead of hardcoding a username.
+        profile under /user). Defaults to the normal users actually declared
+        on this host. System modules that need to reference a concrete user
+        (a systemd service's User, a session owner, a per-user directory
+        owner) should read from this instead of hardcoding a username.
       '';
     };
   };

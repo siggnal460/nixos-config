@@ -5,6 +5,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    ../../user/aaron
   ];
 
   sops = {

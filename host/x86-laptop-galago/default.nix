@@ -1,6 +1,11 @@
 { pkgs, lib, ... }:
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../user/aaron
+    ../../user/aaron/workstation
+    ../../user/aaron/host/x86-laptop-galago
+  ];
 
   stylix = {
     base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/nord.yaml";

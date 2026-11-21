@@ -2,6 +2,8 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../user/aaron
+    ../../user/aaron/htpc
   ];
 
   networking = {

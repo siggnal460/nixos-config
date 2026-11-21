@@ -1,5 +1,9 @@
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../user/aaron
+    ../../user/aaron/console
+  ];
 
   networking = {
     hostName = "x86-stmdck-jovian";

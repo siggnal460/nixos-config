@@ -1,6 +1,12 @@
 { pkgs, ... }:
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../user/aaron
+    ../../user/aaron/workstation
+    ../../user/aaron/host/x86-atxtwr-workstation
+    ../../user/testuser
+  ];
 
   networking = {
     hostName = "x86-atxtwr-workstation";

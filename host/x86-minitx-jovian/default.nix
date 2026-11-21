@@ -3,6 +3,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../system/shared/plymouth-quiet.nix
+    ../../user/aaron
+    ../../user/aaron/console
   ];
 
   boot = {

@@ -3,7 +3,10 @@ let
   hostname = "arm-raspi4-home";
 in
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../user/aaron
+  ];
 
   sops.defaultSopsFile = ../../secrets/${hostname}/secrets.yaml;
 

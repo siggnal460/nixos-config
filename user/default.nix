@@ -1,6 +1,4 @@
 {
-  imports = [ ./aaron ];
-
   home-manager = {
     backupFileExtension = "hmbackup";
     sharedModules = [
