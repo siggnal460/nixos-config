@@ -52,6 +52,15 @@ $env.config = {
     }
 }
 
+def --wrapped ssh [...args: string] {
+    if "ZELLIJ" in ($env | columns) {
+        let tab_name = ($args | where { |it| not ($it | str starts-with "-") } | first | default "ssh")
+        zellij action new-tab --name $tab_name -- ssh ...$args
+    } else {
+        ^ssh ...$args
+    }
+}
+
 def start_zellij [] {
     # Check if we are already inside a Zellij session, or connected over SSH
     let via_ssh = ('SSH_CONNECTION' in ($env | columns)) or ('SSH_TTY' in ($env | columns))
