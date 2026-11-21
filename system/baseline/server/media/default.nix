@@ -98,8 +98,11 @@ in
             "/etc/jellyfin/cache"
           ];
           pruneOpts = [
-            "--keep-latest"
+            "--keep-last 1"
             "--keep-weekly 4"
+          ];
+          checkOpts = [
+            "--read-data-subset=10%"
           ];
           backupPrepareCommand = "/run/current-system/sw/bin/sudo /run/current-system/sw/bin/podman stop jellyfin";
           backupCleanupCommand = "/run/current-system/sw/bin/sudo /run/current-system/sw/bin/podman start jellyfin";
