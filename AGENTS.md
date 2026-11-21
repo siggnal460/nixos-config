@@ -2,7 +2,7 @@
 
 This is my NixOS configuration repo for my workstations and homelab
 
-- x86-atxtwr-gamingpc: My main gaming PC, configuration optimized for personal computing
+- x86-atxtwr-workstation: My main gaming PC, configuration optimized for personal computing
 - x86-merkat-auth: headless auth server, runs Authelia and LLDAP
 - x86-merkat-entry: headless entrypoint into homelab services, contains reverse proxy and homepage
 - x86-rakmnt-mediaserver: headless fileserver hosting most services
@@ -19,7 +19,7 @@ Always test with dry-runs. Ensure both stable and unstable are tested and fix an
 
 # Hosts
 
-Each host has a flake. I run most of my hosts on stable, other than the Jovian hosts which require unstable. 
+Each host has a flake. I run most of my hosts on stable, other than the Jovian hosts which require unstable. You will not be able to access these hosts, always assume you are running form x86-atxtwr-workstation.
 
 ## Structure
 
