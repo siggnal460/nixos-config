@@ -132,155 +132,123 @@
               ./system/de/cosmic
             ];
 
-        x86-laptop-thinkpad =
-          mkComputerUnstable "x86_64-linux" ./host/x86-laptop-thinkpad
-            [
-              ./system/hardware/gpu/amd
-              ./system/hardware/laptop
-              ./system/baseline/workstation
-            ];
+        x86-laptop-thinkpad = mkComputerUnstable "x86_64-linux" ./host/x86-laptop-thinkpad [
+          ./system/hardware/gpu/amd
+          ./system/hardware/laptop
+          ./system/baseline/workstation
+        ];
 
-        x86-atxtwr-workstation =
-          mkComputerStable "x86_64-linux" ./host/x86-atxtwr-workstation
-            [
-              ./system/de/cosmic
-              ./system/hardware/gpu/amd
-              ./system/hardware/gpu/amd/rocm
-              ./system/baseline/workstation
-              ./system/baseline/workstation/art
-              ./system/baseline/workstation/gaming
-              ./system/baseline/workstation/gamedev
-              ./system/baseline/workstation/development
-              ./system/baseline/workstation/vm-host
-            ];
+        x86-atxtwr-workstation = mkComputerStable "x86_64-linux" ./host/x86-atxtwr-workstation [
+          ./system/de/cosmic
+          ./system/hardware/gpu/amd
+          ./system/hardware/gpu/amd/rocm
+          ./system/baseline/workstation
+          ./system/baseline/workstation/art
+          ./system/baseline/workstation/gaming
+          ./system/baseline/workstation/gamedev
+          ./system/baseline/workstation/development
+          ./system/baseline/workstation/vm-host
+        ];
         ## VIRTUAL MACHINES ##
-        vm =
-          mkComputerStable "x86_64-linux" ./host/vm
-            [
-              ./system/wm/hyprland
-              ./system/baseline/workstation
-              ./system/baseline/workstation/vm-guest
-            ];
+        vm = mkComputerStable "x86_64-linux" ./host/vm [
+          ./system/wm/hyprland
+          ./system/baseline/workstation
+          ./system/baseline/workstation/vm-guest
+        ];
 
         ## TABLETS ##
-        x86-tablet-starlite =
-          mkComputerUnstable "x86_64-linux" ./host/x86-tablet-starlite
-            [
-              ./system/hardware/tablet
-              ./system/baseline/workstation
-              ./system/baseline/workstation/art
-            ];
+        x86-tablet-starlite = mkComputerUnstable "x86_64-linux" ./host/x86-tablet-starlite [
+          ./system/hardware/tablet
+          ./system/baseline/workstation
+          ./system/baseline/workstation/art
+        ];
 
         ## CONSOLES ##
-        x86-legigo-jovian =
-          mkComputerUnstable "x86_64-linux" ./host/x86-legigo-jovian
-            [
-              ./system/hardware/gpu/amd
-              ./system/baseline/console
-            ];
+        x86-legigo-jovian = mkComputerUnstable "x86_64-linux" ./host/x86-legigo-jovian [
+          ./system/hardware/gpu/amd
+          ./system/baseline/console
+        ];
 
-        x86-stmdck-jovian =
-          mkComputerUnstable "x86_64-linux" ./host/x86-stmdck-jovian
-            [
-              ./system/hardware/gpu/amd
-              ./system/hardware/steamdeck
-              ./system/baseline/console
-            ];
+        x86-stmdck-jovian = mkComputerUnstable "x86_64-linux" ./host/x86-stmdck-jovian [
+          ./system/hardware/gpu/amd
+          ./system/hardware/steamdeck
+          ./system/baseline/console
+        ];
 
-        x86-minitx-jovian =
-          mkComputerUnstable "x86_64-linux" ./host/x86-minitx-jovian
-            [
-              ./system/hardware/gpu/amd
-              ./system/baseline/console
-            ];
+        x86-minitx-jovian = mkComputerUnstable "x86_64-linux" ./host/x86-minitx-jovian [
+          ./system/hardware/gpu/amd
+          ./system/baseline/console
+        ];
 
         ## HTPC ##
-        x86-merkat-bedhtpc =
-          mkComputerStable "x86_64-linux" ./host/x86-merkat-bedhtpc
-            [
-              ./system/hardware/gpu/intel
-              ./system/baseline/htpc
-            ];
+        x86-merkat-bedhtpc = mkComputerStable "x86_64-linux" ./host/x86-merkat-bedhtpc [
+          ./system/hardware/gpu/intel
+          ./system/baseline/htpc
+        ];
 
-        x86-merkat-workout =
-          mkComputerStable "x86_64-linux" ./host/x86-merkat-workout
-            [
-              ./system/hardware/gpu/intel
-              ./system/baseline/htpc
-              ./system/baseline/htpc/workout
-            ];
+        x86-merkat-workout = mkComputerStable "x86_64-linux" ./host/x86-merkat-workout [
+          ./system/hardware/gpu/intel
+          ./system/baseline/htpc
+          ./system/baseline/htpc/workout
+        ];
         ## VMs ##
-        x86-virtma-comfyui =
-          mkComputerStable "x86_64-linux" ./host/x86-atxtwr-computeserver
-            [
-              ./system/hardware/gpu/nvidia
-              ./system/hardware/gpu/nvidia/cuda
-              ./system/baseline/server
-              ./system/baseline/server/ai
-              ./system/baseline/server/openwebui
-            ];
+        x86-virtma-comfyui = mkComputerStable "x86_64-linux" ./host/x86-atxtwr-computeserver [
+          ./system/hardware/gpu/nvidia
+          ./system/hardware/gpu/nvidia/cuda
+          ./system/baseline/server
+          ./system/baseline/server/ai
+          ./system/baseline/server/openwebui
+        ];
 
         ## SERVERS ##
-        x86-merkat-auth =
-          mkComputerStable "x86_64-linux" ./host/x86-merkat-auth
-            [
-              ./system/baseline/server
-              ./system/baseline/server/auth
-            ];
+        x86-merkat-auth = mkComputerStable "x86_64-linux" ./host/x86-merkat-auth [
+          ./system/baseline/server
+          ./system/baseline/server/auth
+        ];
 
-        x86-merkat-entry =
-          mkComputerStable "x86_64-linux" ./host/x86-merkat-entry
-            [
-              ./system/baseline/server
-              ./system/baseline/server/reverse-proxy
-              ./system/baseline/server/homepage
-              #./system/baseline/server/headscale
-            ];
+        x86-merkat-entry = mkComputerStable "x86_64-linux" ./host/x86-merkat-entry [
+          ./system/baseline/server
+          ./system/baseline/server/reverse-proxy
+          ./system/baseline/server/homepage
+          #./system/baseline/server/headscale
+        ];
 
-        arm-raspi4-downloadclient =
-          mkComputerStable "aarch64-linux" ./host/arm-raspi4-downloadclient
-            [
-              nixos-hardware.nixosModules.raspberry-pi-4
-              ./system/hardware/raspi4
-              ./system/baseline/server
-              ./system/baseline/server/openvpn-client
-              ./system/baseline/server/torrent-client
-            ];
+        arm-raspi4-downloadclient = mkComputerStable "aarch64-linux" ./host/arm-raspi4-downloadclient [
+          nixos-hardware.nixosModules.raspberry-pi-4
+          ./system/hardware/raspi4
+          ./system/baseline/server
+          ./system/baseline/server/openvpn-client
+          ./system/baseline/server/torrent-client
+        ];
 
-        arm-raspi4-home =
-          mkComputerStable "aarch64-linux" ./host/arm-raspi4-home
-            [
-              nixos-hardware.nixosModules.raspberry-pi-4
-              ./system/hardware/raspi4
-              ./system/baseline/server
-              ./system/baseline/server/homeassistant
-            ];
+        arm-raspi4-home = mkComputerStable "aarch64-linux" ./host/arm-raspi4-home [
+          nixos-hardware.nixosModules.raspberry-pi-4
+          ./system/hardware/raspi4
+          ./system/baseline/server
+          ./system/baseline/server/homeassistant
+        ];
 
-        x86-merkat-monitoring =
-          mkComputerStable "x86_64-linux" ./host/x86-merkat-monitoring
-            [
-              ./system/baseline/server
-              ./system/baseline/server/glance
-              ./system/baseline/server/beszel-hub
-            ];
+        x86-merkat-monitoring = mkComputerStable "x86_64-linux" ./host/x86-merkat-monitoring [
+          ./system/baseline/server
+          ./system/baseline/server/glance
+          ./system/baseline/server/beszel-hub
+        ];
 
-        x86-rakmnt-mediaserver =
-          mkComputerStable "x86_64-linux" ./host/x86-rakmnt-mediaserver
-            [
-              ./system/hardware/gpu/nvidia
-              ./system/hardware/gpu/nvidia/cuda
-              ./system/baseline/server
-              ./system/baseline/server/recipes
-              ./system/baseline/server/todo
-              ./system/baseline/server/media
-              ./system/baseline/server/nfs
-              ./system/baseline/server/rss-server
-              ./system/baseline/server/samba
-              ./system/baseline/server/nextcloud
-              ./system/baseline/server/games-host
-              #./system/baseline/server/beszel-host
-              #./system/baseline/server/matrix
-            ];
+        x86-rakmnt-mediaserver = mkComputerStable "x86_64-linux" ./host/x86-rakmnt-mediaserver [
+          ./system/hardware/gpu/nvidia
+          ./system/hardware/gpu/nvidia/cuda
+          ./system/baseline/server
+          ./system/baseline/server/recipes
+          ./system/baseline/server/todo
+          ./system/baseline/server/media
+          ./system/baseline/server/nfs
+          ./system/baseline/server/rss-server
+          ./system/baseline/server/samba
+          ./system/baseline/server/nextcloud
+          ./system/baseline/server/games-host
+          #./system/baseline/server/beszel-host
+          #./system/baseline/server/matrix
+        ];
       };
     };
 }
