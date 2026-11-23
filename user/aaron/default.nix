@@ -71,6 +71,7 @@
     };
 
     sops.age.generateKey = true;
+    sops.age.keyFile = "/home/aaron/.config/sops/age/keys.txt";
 
     stylix = {
       enable = true;
