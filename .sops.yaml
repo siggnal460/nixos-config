@@ -5,7 +5,7 @@ keys:
   - &user_aaron_computeserver age13gcre65vt0n8s4llxe7dxjfw94cpy757avr8ldr6jkwwhy0l0ems3saq0s
   - &user_aaron_downloadclient age122rl9egshd2x9h6k0sqg4zplhkv99e3nkuy3s2295nnhhy8jz5rswstpxn
   - &user_aaron_home age1v6nakw24ayrklp8ll6c3n8sayhg6j5fpht7ljtrz2led8h7gaa6sze5f8r
-  - &server_gamingpc age1w4yhe66tlnhwl7vkrqlqtd0f3g6z4qjv3l9eklzm27yyl900gyns4es40n
+  - &server_gamingpc age18tgws06ru4wtvd8js28ct02rwvz95mdeuu9cvvd6rxes2glhd3fq6e6n8k
   - &server_mediaserver age1cjk0vwkckvurf5fpltnlaa6vv0mjjgcm97xfwcatdz3ffgna6gwq9nnz7r
   - &server_auth age1m36enhql42snlt2v0fgv6dtmwzv2qtte7vgzudnzvp0rakhu0deqhkexrt
   - &server_computeserver age1hm20lsugmn7mclnrcp9yngme73x4mwyz4jxkmad2lm7mwcvgza2qvtuq7g
@@ -44,3 +44,12 @@ creation_rules:
       - age:
         - *user_aaron_home
         - *server_home
+  - path_regex: secrets/OPNsense.internal/secrets.yaml$
+    key_groups:
+      - age:
+        - *user_aaron_gamingpc
+  - path_regex: secrets/opnsense-mcp/secrets.yaml$
+    key_groups:
+      - age:
+        - *user_aaron_gamingpc
+        - *server_gamingpc
