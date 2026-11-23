@@ -1,13 +1,6 @@
 # Overview
 
-This is my NixOS configuration repo for my workstations and homelab
-
-- x86-atxtwr-workstation: My main gaming PC, configuration optimized for personal computing
-- x86-merkat-auth: headless auth server, runs Authelia and LLDAP
-- x86-merkat-entry: headless entrypoint into homelab services, contains reverse proxy and homepage
-- x86-rakmnt-mediaserver: headless fileserver hosting most services
-- x86-minitx-jovian: A SteamOS-like gaming console attached to a TV
-- x86-stmdck-jovian: Handheld gaming PC
+This is my NixOS and OpenTofu configuration repo for my workstations and homelab
 
 # Philosophy
 
@@ -17,11 +10,23 @@ Things should generally be done in nix whenever possible, employing other progra
 
 Always test with dry-runs. Ensure both stable and unstable are tested and fix any build errors or warnings you see. When testing stable, just test the workstation flake. It will be largely cached and be must faster to check.
 
+# Secrets
+
+I use sops-nix to manage my secrets. There should never be manual secrets handling.
+
 # Hosts
+
+- x86-atxtwr-workstation: My main gaming PC, configuration optimized for personal computing. Also my main configuration machine where I run my automations from.
+- x86-laptop-galago: My backup configuration host. If my workstation goes down, I should be able to manage things from here.
+- x86-merkat-auth: headless auth server, runs Authelia and LLDAP
+- x86-merkat-entry: headless entrypoint into homelab services, contains reverse proxy and homepage
+- x86-rakmnt-mediaserver: headless fileserver hosting most services
+- x86-minitx-jovian: A SteamOS-like gaming console attached to a TV
+- x86-stmdck-jovian: Handheld gaming PC
 
 Each host has a flake. I run most of my hosts on stable, other than the Jovian hosts which require unstable. You will not be able to access these hosts, always assume you are running form x86-atxtwr-workstation.
 
-## Structure
+# Structure
 
 - **bin**: Contains any custom scripts I've made. These are added to the Nix store and system PATH.
   - nix-switch: Convenience nushell script for updating the system, formatting each file with nixfmt, and keeping it in sync with a remote repo.
@@ -35,6 +40,7 @@ Each host has a flake. I run most of my hosts on stable, other than the Jovian h
     - console: Gaming console using Jovian and gamescope as the default interface.
     - htpc: Home Theater PC using Kodi as the default interface.
     - server: Headless, remotely-accessed machines running services.
+      - media: Deploys a full stack of media applications, including the *arr stack and jellyfin.
     - workstation: Machines that are directly accessed via mouse and keyboard.
   - extras: Additional nix tools I've made.
   - hardware: Modules for certain hardware setups, e.g. graphics card drivers, SteamDeck firmware, etc.
