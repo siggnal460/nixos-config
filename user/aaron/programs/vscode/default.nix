@@ -24,6 +24,7 @@
         ms-vscode-remote.remote-containers
         thenuprojectcontributors.vscode-nushell-lang
         jnoortheen.nix-ide
+        hashicorp.terraform
       ];
 
       keybindings = [
@@ -90,6 +91,10 @@
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
         "nix.formatterPath" = "${pkgs.nixfmt}/bin/nixfmt";
+
+        "terraform.languageServer.enable" = true;
+        "terraform.languageServer.path" = "${pkgs.terraform-ls}/bin/terraform-ls";
+        "terraform.languageServer.terraform.path" = "${pkgs.opentofu}/bin/tofu";
 
         # /nix/store and flake result symlinks churn the file watcher/search
         # index for no benefit; they're build outputs, not source.
