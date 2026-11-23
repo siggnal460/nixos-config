@@ -25,7 +25,6 @@
   environment.systemPackages = with pkgs; [
     android-tools
     cargo
-    claude-code
     gcc
     go
     gopls

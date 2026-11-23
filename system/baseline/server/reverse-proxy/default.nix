@@ -110,6 +110,13 @@ in
                 reverse_proxy x86-rakmnt-mediaserver:3456
       '';
 
+      "jellysweep.${domain}".extraConfig = ''
+        			  import main
+        				import headers
+
+                reverse_proxy x86-rakmnt-mediaserver:3002
+      '';
+
       "rss.${domain}".extraConfig = ''
         import main
         import auth

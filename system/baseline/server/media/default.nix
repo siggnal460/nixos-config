@@ -6,6 +6,7 @@
 }:
 let
   auth_site = "https://auth.gappyland.org";
+  domain = "gappyland.org";
 in
 {
   imports = [ ../../../shared/podman.nix ];
@@ -20,6 +21,8 @@ in
     "d /etc/jellyfin/zap2xml 0775 jellyfin wheel"
     "d /etc/jellyfin/zap2xml/ogden_ota 0775 jellyfin wheel"
     "d /etc/jellyfin/zap2xml/la_ota 0775 jellyfin wheel"
+    "d /etc/jellysweep 0770 root wheel"
+    "d /etc/jellysweep/data 0770 root wheel"
     "d /etc/seerr 0770 1000 1000"
     "Z /etc/seerr 0770 1000 1000"
     "d /etc/komga 0770 komga wheel"
@@ -267,6 +270,12 @@ in
       group = "media";
       mode = "0600";
     };
+    "jellysweep/config.yml" = {
+      source = lib.mkForce config.sops.templates.jellysweep-config.path;
+      user = "root";
+      group = "root";
+      mode = "0400";
+    };
   };
 
   sops.templates.recyclarr-secrets = {
@@ -324,6 +333,144 @@ in
   #		};
   #  };
   #};
+
+  sops.templates.jellysweep-config = {
+    owner = "root";
+    file = (pkgs.formats.yaml { }).generate "yaml" {
+      log_level = "info";
+      dry_run = true;
+      listen = "0.0.0.0:3002";
+      cleanup_schedule = "0 */12 * * *";
+      cleanup_mode = "keep_seasons";
+      keep_count = 1;
+      session_key = "${config.sops.placeholder."jellysweep/session_key"}";
+      session_max_age = 172800;
+      secure_cookies = true;
+      server_url = "https://jellysweep.${domain}";
+
+      database = {
+        type = "sqlite";
+        path = "./data/jellysweep.db";
+      };
+
+      auth = {
+        jellyfin.enabled = true;
+      };
+
+      jellyfin = {
+        url = "http://jellyfin:8096";
+        api_key = "${config.sops.placeholder."jellysweep/jellyfin_apikey"}";
+      };
+
+      leaving_collections_enabled = true;
+      leaving_collections_movie_name = "Leaving Movies";
+      leaving_collections_tv_name = "Leaving TV Shows";
+
+      # NOTE: library names below must exactly match the library names configured in Jellyfin.
+      libraries = {
+        "Movies" = {
+          enabled = true;
+          cleanup_delay = 60;
+          protection_period = 90;
+          filter = {
+            content_age_threshold = 120;
+            last_stream_threshold = 90;
+            content_size_threshold = 1073741824;
+            favorites_enabled = true;
+            exclude_tags = [
+              "jellysweep-exclude"
+              "keep"
+              "favorites"
+            ];
+          };
+          disk_usage_thresholds = [
+            {
+              usage_percent = 70.0;
+              max_cleanup_delay = 30;
+            }
+            {
+              usage_percent = 85.0;
+              max_cleanup_delay = 14;
+            }
+            {
+              usage_percent = 90.0;
+              max_cleanup_delay = 7;
+            }
+            {
+              usage_percent = 95.0;
+              max_cleanup_delay = 2;
+            }
+          ];
+        };
+
+        "TV Shows" = {
+          enabled = true;
+          cleanup_delay = 60;
+          protection_period = 90;
+          filter = {
+            content_age_threshold = 120;
+            last_stream_threshold = 90;
+            content_size_threshold = 2147483648;
+            favorites_enabled = false;
+            exclude_tags = [
+              "jellysweep-exclude"
+              "ongoing"
+              "keep"
+            ];
+          };
+          disk_usage_thresholds = [
+            {
+              usage_percent = 70.0;
+              max_cleanup_delay = 30;
+            }
+            {
+              usage_percent = 85.0;
+              max_cleanup_delay = 14;
+            }
+            {
+              usage_percent = 90.0;
+              max_cleanup_delay = 7;
+            }
+            {
+              usage_percent = 95.0;
+              max_cleanup_delay = 2;
+            }
+          ];
+        };
+      };
+
+      email.enabled = false;
+
+      jellyseerr = {
+        url = "http://seerr:5055";
+        api_key = "${config.sops.placeholder."jellysweep/jellyseerr_apikey"}";
+        timeout = 30;
+      };
+
+      sonarr = {
+        url = "http://sonarr:8989";
+        api_key = "${config.sops.placeholder."jellysweep/sonarr_apikey"}";
+        timeout = 30;
+      };
+
+      radarr = {
+        url = "http://radarr:7878";
+        api_key = "${config.sops.placeholder."jellysweep/radarr_apikey"}";
+        timeout = 30;
+      };
+
+      jellystat = {
+        url = "http://jellystat:3000";
+        api_key = "${config.sops.placeholder."jellysweep/jellystat_apikey"}";
+        timeout = 30;
+      };
+
+      cache = {
+        enabled = true;
+        type = "memory";
+      };
+    };
+  };
 
   sops.templates.komga-config = {
     owner = "komga";
@@ -738,6 +885,78 @@ in
       ];
     };
 
+    jellystat-db = {
+      image = "docker.io/library/postgres:18.1";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      environmentFiles = [ "/run/secrets/jellystat_secrets" ];
+      environment = {
+        POSTGRES_USER = "postgres";
+      };
+      volumes = [
+        "jellystat-db-data:/var/lib/postgresql"
+      ];
+      extraOptions = [
+        "--name=jellystat-db"
+        "--shm-size=1gb"
+      ];
+    };
+
+    jellystat = {
+      image = "docker.io/cyfershepard/jellystat:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      dependsOn = [ "jellystat-db" ];
+      ports = [
+        "3000:3000"
+      ];
+      environmentFiles = [ "/run/secrets/jellystat_secrets" ];
+      environment = {
+        POSTGRES_USER = "postgres";
+        POSTGRES_IP = "jellystat-db";
+        POSTGRES_PORT = "5432";
+        TZ = "America/Denver";
+      };
+      volumes = [
+        "jellystat-backup-data:/app/backend/backup-data"
+      ];
+      extraOptions = [
+        "--name=jellystat"
+      ];
+    };
+
+    jellysweep = {
+      image = "ghcr.io/jon4hz/jellysweep:latest";
+      autoStart = true;
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
+      dependsOn = [
+        "jellyfin"
+        "jellystat"
+        "sonarr"
+        "radarr"
+        "seerr"
+      ];
+      ports = [
+        "3002:3002"
+      ];
+      environment = {
+        TZ = "America/Denver";
+      };
+      volumes = [
+        "/etc/jellysweep/config.yml:/app/config.yml:ro"
+        "/etc/jellysweep/data:/app/data"
+      ];
+      extraOptions = [
+        "--name=jellysweep"
+      ];
+    };
+
     zap2xml-la-ota = {
       image = "ghcr.io/jef/zap2xml:latest";
       autoStart = true;
@@ -767,5 +986,12 @@ in
     "restic/jellyfin".owner = "restic";
     "doplarr_secrets".owner = "doplarr";
     "notifiarr_secrets".owner = "notifiarr";
+    "jellysweep/session_key".owner = "root";
+    "jellysweep/jellyfin_apikey".owner = "root";
+    "jellysweep/jellyseerr_apikey".owner = "root";
+    "jellysweep/sonarr_apikey".owner = "root";
+    "jellysweep/radarr_apikey".owner = "root";
+    "jellysweep/jellystat_apikey".owner = "root";
+    "jellystat_secrets".owner = "root";
   };
 }
