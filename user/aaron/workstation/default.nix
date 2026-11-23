@@ -73,6 +73,22 @@
       };
     };
 
+    programs.claude-code = {
+      enable = true;
+      settings = {
+        showThinkingSummaries = true;
+        statusLine = {
+          type = "command";
+          command = "${pkgs.python3}/bin/python3 ${./statusline.py}";
+        };
+      };
+      context = ''
+        # Output & Narration Preferences
+        - Before running any tool or editing a file, briefly explain what you are doing and why.
+        - State key assumptions and explain the reasoning behind each step.
+      '';
+    };
+
     services.kdeconnect.enable = true;
 
     xdg.mimeApps = {
