@@ -8,7 +8,7 @@ Things should generally be done in nix whenever possible, employing other progra
 
 # Testing
 
-Always test with dry-runs. Ensure both stable and unstable are tested and fix any build errors or warnings you see. When testing stable, just test the workstation flake. It will be largely cached and be must faster to check.
+Test basic functionality with `nix eval` and `nix flake check` or other tools. Do not build entire systems when checking, it takes too long.
 
 # Secrets
 
