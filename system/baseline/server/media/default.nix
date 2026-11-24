@@ -337,7 +337,7 @@ in
   sops.templates.jellysweep-config = {
     owner = "root";
     file = (pkgs.formats.yaml { }).generate "yaml" {
-      log_level = "info";
+      log_level = "debug";
       dry_run = true;
       listen = "0.0.0.0:3002";
       cleanup_schedule = "0 */12 * * *";
@@ -345,7 +345,7 @@ in
       keep_count = 1;
       session_key = "${config.sops.placeholder."jellysweep/session_key"}";
       session_max_age = 172800;
-      secure_cookies = true;
+      secure_cookies = false;
       server_url = "https://jellysweep.${domain}";
 
       database = {
@@ -366,15 +366,14 @@ in
       leaving_collections_movie_name = "Leaving Movies";
       leaving_collections_tv_name = "Leaving TV Shows";
 
-      # NOTE: library names below must exactly match the library names configured in Jellyfin.
       libraries = {
         "Movies" = {
           enabled = true;
           cleanup_delay = 60;
           protection_period = 90;
           filter = {
-            content_age_threshold = 120;
-            last_stream_threshold = 90;
+            content_age_threshold = 150;
+            last_stream_threshold = 120;
             content_size_threshold = 1073741824;
             favorites_enabled = true;
             exclude_tags = [
@@ -385,33 +384,29 @@ in
           };
           disk_usage_thresholds = [
             {
-              usage_percent = 70.0;
+              usage_percent = 85.0;
               max_cleanup_delay = 30;
             }
             {
-              usage_percent = 85.0;
+              usage_percent = 90.0;
               max_cleanup_delay = 14;
             }
             {
-              usage_percent = 90.0;
-              max_cleanup_delay = 7;
-            }
-            {
               usage_percent = 95.0;
-              max_cleanup_delay = 2;
+              max_cleanup_delay = 7;
             }
           ];
         };
 
-        "TV Shows" = {
+        "Shows" = {
           enabled = true;
-          cleanup_delay = 60;
-          protection_period = 90;
+          cleanup_delay = 90;
+          protection_period = 120;
           filter = {
-            content_age_threshold = 120;
-            last_stream_threshold = 90;
+            content_age_threshold = 210;
+            last_stream_threshold = 150;
             content_size_threshold = 2147483648;
-            favorites_enabled = false;
+            favorites_enabled = true;
             exclude_tags = [
               "jellysweep-exclude"
               "ongoing"
@@ -420,20 +415,16 @@ in
           };
           disk_usage_thresholds = [
             {
-              usage_percent = 70.0;
+              usage_percent = 85.0;
               max_cleanup_delay = 30;
             }
             {
-              usage_percent = 85.0;
+              usage_percent = 90.0;
               max_cleanup_delay = 14;
             }
             {
-              usage_percent = 90.0;
-              max_cleanup_delay = 7;
-            }
-            {
               usage_percent = 95.0;
-              max_cleanup_delay = 2;
+              max_cleanup_delay = 7;
             }
           ];
         };
