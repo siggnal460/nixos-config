@@ -3,13 +3,6 @@
   users.users.aaron.extraGroups = [ "libvirtd" ];
 
   systemd.tmpfiles.rules = [
-    "d /home/aaron/Blender 0700 aaron aaron"
-    "d /home/aaron/Blender/addons 0700 aaron aaron"
-    "d /home/aaron/Blender/models 0700 aaron aaron"
-    "d /home/aaron/Blender/models/male 0700 aaron aaron"
-    "d /home/aaron/Blender/models/female 0700 aaron aaron"
-    "d /home/aaron/Blender/models/objects 0700 aaron aaron"
-    "d /home/aaron/Blender/environments 0700 aaron aaron"
     "d /home/aaron/Projects 0700 aaron aaron"
   ];
 

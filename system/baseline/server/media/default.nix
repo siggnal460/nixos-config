@@ -337,8 +337,8 @@ in
   sops.templates.jellysweep-config = {
     owner = "root";
     file = (pkgs.formats.yaml { }).generate "yaml" {
-      log_level = "debug";
-      dry_run = true;
+      log_level = "info";
+      dry_run = false;
       listen = "0.0.0.0:3002";
       cleanup_schedule = "0 */12 * * *";
       cleanup_mode = "keep_seasons";
@@ -374,7 +374,6 @@ in
           filter = {
             content_age_threshold = 150;
             last_stream_threshold = 120;
-            content_size_threshold = 1073741824;
             favorites_enabled = true;
             exclude_tags = [
               "jellysweep-exclude"
@@ -384,16 +383,38 @@ in
           };
           disk_usage_thresholds = [
             {
-              usage_percent = 85.0;
+              usage_percent = 90.0;
               max_cleanup_delay = 30;
             }
             {
-              usage_percent = 90.0;
+              usage_percent = 95.0;
               max_cleanup_delay = 14;
+            }
+          ];
+        };
+
+        "Anime Movies" = {
+          enabled = true;
+          cleanup_delay = 60;
+          protection_period = 90;
+          filter = {
+            content_age_threshold = 150;
+            last_stream_threshold = 120;
+            favorites_enabled = true;
+            exclude_tags = [
+              "jellysweep-exclude"
+              "keep"
+              "favorites"
+            ];
+          };
+          disk_usage_thresholds = [
+            {
+              usage_percent = 90.0;
+              max_cleanup_delay = 30;
             }
             {
               usage_percent = 95.0;
-              max_cleanup_delay = 7;
+              max_cleanup_delay = 14;
             }
           ];
         };
@@ -405,7 +426,6 @@ in
           filter = {
             content_age_threshold = 210;
             last_stream_threshold = 150;
-            content_size_threshold = 2147483648;
             favorites_enabled = true;
             exclude_tags = [
               "jellysweep-exclude"
@@ -415,16 +435,38 @@ in
           };
           disk_usage_thresholds = [
             {
-              usage_percent = 85.0;
-              max_cleanup_delay = 30;
-            }
-            {
               usage_percent = 90.0;
-              max_cleanup_delay = 14;
+              max_cleanup_delay = 60;
             }
             {
               usage_percent = 95.0;
-              max_cleanup_delay = 7;
+              max_cleanup_delay = 30;
+            }
+          ];
+        };
+
+        "Anime" = {
+          enabled = true;
+          cleanup_delay = 90;
+          protection_period = 120;
+          filter = {
+            content_age_threshold = 210;
+            last_stream_threshold = 150;
+            favorites_enabled = true;
+            exclude_tags = [
+              "jellysweep-exclude"
+              "ongoing"
+              "keep"
+            ];
+          };
+          disk_usage_thresholds = [
+            {
+              usage_percent = 90.0;
+              max_cleanup_delay = 60;
+            }
+            {
+              usage_percent = 95.0;
+              max_cleanup_delay = 30;
             }
           ];
         };
