@@ -110,6 +110,12 @@ in
             };
           }
           {
+            Jellysweep = {
+              icon = "https://raw.githubusercontent.com/jon4hz/jellysweep/main/internal/static/static/jellysweep.png";
+              href = "https://jellysweep.gappyland.org";
+            };
+          }
+          {
             Komga = {
               icon = "komga.svg";
               href = "https://books.gappyland.org";

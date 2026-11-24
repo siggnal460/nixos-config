@@ -3,6 +3,7 @@
   users.users.aaron.extraGroups = [ "libvirtd" ];
 
   systemd.tmpfiles.rules = [
+    "d /tmp/claude 0700 aaron aaron"
     "d /home/aaron/Projects 0700 aaron aaron"
   ];
 
@@ -76,7 +77,7 @@
         };
         permissions = {
           allow = [
-            "Read(.)"
+            "Read(/tmp/claude)"
           ];
           blockReadsOutsideWorkingDirectories = true;
           deny = [
@@ -94,6 +95,9 @@
             # Claudes configs
             "Edit(~/.claude/settings.json)"
             "Edit(.claude/settings.json)"
+
+            # Remote access to other hosts must go through the user, not Claude
+            "Bash(ssh *)"
 
             # Secrets managed by NixOS / sops-nix / agenix
             "Read(/run/secrets/**)"
