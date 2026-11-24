@@ -24,7 +24,7 @@ I use sops-nix to manage my secrets. There should never be manual secrets handli
 - x86-minitx-jovian: A SteamOS-like gaming console attached to a TV
 - x86-stmdck-jovian: Handheld gaming PC
 
-Each host has a flake. I run most of my hosts on stable, other than the Jovian hosts which require unstable. You will not be able to access these hosts, always assume you are running form x86-atxtwr-workstation.
+Each host has a flake. I run most of my hosts on stable, other than the Jovian hosts which require unstable. You will not be able to access these hosts, do not try. Always assume you are running from x86-atxtwr-workstation.
 
 # Structure
 
