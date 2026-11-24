@@ -345,7 +345,7 @@ in
       keep_count = 1;
       session_key = "${config.sops.placeholder."jellysweep/session_key"}";
       session_max_age = 172800;
-      secure_cookies = false;
+      secure_cookies = true;
       server_url = "https://jellysweep.${domain}";
 
       database = {
