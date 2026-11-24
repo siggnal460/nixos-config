@@ -4,7 +4,7 @@ This is my NixOS and OpenTofu configuration repo for my workstations and homelab
 
 # Philosophy
 
-Things should generally be done in nix whenever possible, employing other programming languages as a last resort. The goal is to be pure and declarative. My entire system configuration should be contained within this repository.
+Things should generally be done in nix whenever possible, employing other programming languages as a last resort. The goal is to be pure and declarative. My entire system configuration should be contained within this repository. This means never edit configuration files directly - all configurations run through the files in this repository only.
 
 # Testing
 
