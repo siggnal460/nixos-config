@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   programs.git = {
     enable = true;
@@ -11,5 +12,14 @@
       init.defaultBranch = "master";
       safe.directory = "/etc/nixos";
     };
+    includes = [
+      {
+        condition = "gitdir:/srv/aaron-projects/";
+        path = pkgs.writeText "aaron-projects-gitconfig" ''
+          [core]
+            sharedRepository = group
+        '';
+      }
+    ];
   };
 }

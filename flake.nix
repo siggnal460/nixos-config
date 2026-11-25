@@ -125,11 +125,11 @@
         x86-laptop-galago =
           mkComputerStable "x86_64-linux" ./host/x86-laptop-galago # machine specific configuration
             [
-              #system-wide modules
               ./system/hardware/gpu/intel
               ./system/hardware/thunderbolt
               ./system/baseline/workstation
               ./system/de/cosmic
+              ./system/baseline/workstation/management
             ];
 
         x86-laptop-thinkpad = mkComputerUnstable "x86_64-linux" ./host/x86-laptop-thinkpad [
@@ -148,6 +148,7 @@
           ./system/baseline/workstation/gamedev
           ./system/baseline/workstation/development
           ./system/baseline/workstation/vm-host
+          ./system/baseline/workstation/management
         ];
         ## VIRTUAL MACHINES ##
         vm = mkComputerStable "x86_64-linux" ./host/vm [

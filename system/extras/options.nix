@@ -23,6 +23,19 @@
         owner) should read from this instead of hardcoding a username.
       '';
     };
+
+    podman.rootless.lingerUsers = lib.mkOption {
+      type = with lib.types; listOf str;
+      default = [ ];
+      example = [ "aaron" ];
+      description = ''
+        Users to enable lingering for so their systemd --user instance (and
+        rootless Podman's user socket/services) keeps running past logout.
+        Opt-in per host rather than defaulting to users.primaryUsers, since
+        lingering an account has session-lifecycle implications that aren't
+        always wanted (e.g. admin accounts on server hosts).
+      '';
+    };
   };
 
   config = {

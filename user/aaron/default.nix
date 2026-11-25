@@ -20,6 +20,7 @@
           "media"
           "ai"
           "games"
+          "development"
         ];
         initialPassword = "@C4ntG23ss!"; # change later
         openssh.authorizedKeys.keys = [
@@ -34,6 +35,9 @@
   systemd.tmpfiles.rules = [
     "d /home/aaron 0740 aaron aaron"
     "d /home/aaron/Games 0744 aaron aaron"
+    "d /srv/aaron-projects 2774 aaron development"
+    "Z /srv/aaron-projects - - development -"
+    "A /srv/aaron-projects - - - - group:development:rwX,default:group:development:rwX"
   ];
 
   users.groups = {
@@ -68,6 +72,16 @@
       username = "aaron";
       homeDirectory = "/home/aaron";
       stateVersion = "23.11";
+      # Run claude-code as the restricted `claude` user instead of as aaron.
+      # -H sets HOME=/home/claude (without resetting other inherited env vars)
+      # so claude-code reads its own config/credentials, while sudo without -i
+      # keeps aaron's cwd. The per-user profile path is a stable symlink kept
+      # current by home-manager activation (useUserPackages/useGlobalPkgs).
+      packages = [
+        (pkgs.writeShellScriptBin "claude" ''
+          exec sudo -H -u claude /etc/profiles/per-user/claude/bin/claude "$@"
+        '')
+      ];
     };
 
     sops.age.generateKey = true;

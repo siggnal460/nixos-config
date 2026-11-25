@@ -12,7 +12,7 @@ Test basic functionality with `nix eval` and `nix flake check` or other tools. D
 
 # Secrets
 
-I use sops-nix to manage my secrets. There should never be manual secrets handling.
+I use sops-nix to manage my secrets.
 
 # Hosts
 
@@ -33,7 +33,7 @@ Each host has a flake. I run most of my hosts on stable, other than the Jovian h
 - **images**: Various images such as wallpapers, icons, etc.
 - **user**: Per-user configs. Mostly home-manager modules.
     - user folders are broken out into several folders depending on the type of machine: console, workstations, htpc, etc. There is also host-specific configurations.
-- **hosts**: Host-specific modules. For things such as setting hostnames and static IPs. Also contains each system's hardware-configuration.nix.
+- **host**: Host-specific modules. For things such as setting hostnames and static IPs. Also contains each system's hardware-configuration.nix.
 - **secrets**: Per-host sops-nix yaml secret files.
 - **system**: System-wide modules.
   - baseline: Outlines of basic computer archetypes. In each baseline are also submodules pertaining to that archetype for more specialized functionality. Only one baseline should be used per machine, and submodules are only meant to work within that baseline.

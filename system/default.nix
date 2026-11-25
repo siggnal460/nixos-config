@@ -211,6 +211,10 @@
     ];
   };
 
+  users.groups.development = {
+    gid = 1101;
+  };
+
   systemd.timers."pull-updates" = {
     description = "Timer for pulling latest changes shortly after boot and nightly between 0400-0430";
     wantedBy = [ "timers.target" ];
