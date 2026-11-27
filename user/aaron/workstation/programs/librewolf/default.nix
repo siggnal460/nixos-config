@@ -11,6 +11,10 @@ in
     policies = {
       Authentication = true;
 
+      # Trust the OS cert store (security.pki.certificateFiles), so the
+      # internal step-ca root is trusted here too, not just system-wide.
+      Certificates.ImportEnterpriseRoots = true;
+
       Cookies.Allow = [
         "https://mobilesuitarena.com"
         "https://patreon.com"

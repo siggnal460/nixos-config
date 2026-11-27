@@ -52,7 +52,23 @@ in
     allowedTCPPorts = [
       openwebui_outside_port
       8189
+      80
+      443
     ];
+  };
+
+  # Local-only HTTPS access to ComfyUI's native UI, via the internal step-ca
+  # CA (see system/baseline/server/step-ca). Not owui: its CORS/OIDC config
+  # is locked to https://owui.gappyland.org and would break under a second
+  # hostname.
+  services.caddy = {
+    enable = true;
+    globalConfig = ''
+      acme_ca https://x86-merkat-auth:8443/acme/acme/directory
+    '';
+    virtualHosts."x86-virtma-comfyui".extraConfig = ''
+      reverse_proxy :8189
+    '';
   };
 
   users = {
