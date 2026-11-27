@@ -51,10 +51,16 @@ in
   # CA (see system/baseline/server/step-ca).
   services.caddy = {
     enable = true;
-    globalConfig = ''
-      acme_ca https://x86-merkat-auth:8443/acme/acme/directory
-    '';
+    # "x86-virtma-comfyui" has no dot/TLD, so Caddy's automatic-HTTPS
+    # heuristic treats it as an internal name and would otherwise mint a
+    # cert from Caddy's own built-in local CA, ignoring acme_ca entirely.
+    # Force the ACME issuer explicitly to get a cert from step-ca instead.
     virtualHosts."x86-virtma-comfyui".extraConfig = ''
+      tls {
+        issuer acme {
+          ca https://x86-merkat-auth:8443/acme/acme/directory
+        }
+      }
       reverse_proxy :8188
     '';
   };
