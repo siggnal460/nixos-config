@@ -205,6 +205,7 @@
         x86-merkat-auth = mkComputerStable "x86_64-linux" ./host/x86-merkat-auth [
           ./system/baseline/server
           ./system/baseline/server/auth
+          ./system/baseline/server/step-ca
         ];
 
         x86-merkat-entry = mkComputerStable "x86_64-linux" ./host/x86-merkat-entry [

@@ -14,7 +14,7 @@
     enable = true;
     host = "127.0.0.1";
     loadModels = [
-      "devstral:latest"
+      "devstral:24b-small-2505-q4_K_M"
     ];
   };
 
@@ -28,6 +28,7 @@
     gopls
     nixd
     nodejs
+    podman-compose
     rust-analyzer
     vscode
   ];

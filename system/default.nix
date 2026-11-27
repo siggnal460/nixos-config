@@ -147,6 +147,9 @@
 
   security = {
     acme.acceptTerms = true;
+    # Trust our internal step-ca root, so certs it issues (via ACME) are
+    # trusted network-wide without touching any public CA/DNS provider.
+    pki.certificateFiles = [ ./shared/pki/root_ca.crt ];
     protectKernelImage = true;
     apparmor.enable = true;
     apparmor.killUnconfinedConfinables = true;

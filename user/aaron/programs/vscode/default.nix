@@ -16,6 +16,7 @@
         vscodevim.vim
         enkia.tokyo-night
         anthropic.claude-code
+        saoudrizwan.claude-dev
         ms-python.python
         ms-python.debugpy
         ms-python.vscode-pylance

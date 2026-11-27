@@ -4,7 +4,7 @@ This is my NixOS and OpenTofu configuration repo for my workstations and homelab
 
 # Philosophy
 
-Things should generally be done in nix whenever possible, employing other programming languages as a last resort. The goal is to be pure and declarative. My entire system configuration should be contained within this repository. This means never edit configuration files directly - all configurations run through the files in this repository only.
+Things should generally be done in nix whenever possible, employing other programming languages as a last resort. The goal is to be pure and declarative. My entire system configuration should be contained within this repository. This means never edit configuration files directly - all configurations run through the files in this repository only. This also means combing throught the nix store manually is not necessary - my configuration is self contained in the files of this repository.
 
 # Testing
 
@@ -44,7 +44,7 @@ Each host has a flake. I run most of my hosts on stable, other than the Jovian h
     - workstation: Machines that are directly accessed via mouse and keyboard.
   - extras: Additional nix tools I've made.
   - hardware: Modules for certain hardware setups, e.g. graphics card drivers, SteamDeck firmware, etc.
-  - shared: Modules that have functionality which is shared among other modules. These are not meant to be imported into the flake directly.
+  - shared: Modules that have functionality which is shared among baselines. These are not meant to be imported into the flake directly, but will be imported into baseline modules.
 
 # Timer Schedule
 
