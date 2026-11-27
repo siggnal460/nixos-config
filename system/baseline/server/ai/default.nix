@@ -42,7 +42,21 @@ in
     allowedTCPPorts = [
       openwebui_outside_port
       8188
+      80
+      443
     ];
+  };
+
+  # Local-only HTTPS access to ComfyUI's native UI, via the internal step-ca
+  # CA (see system/baseline/server/step-ca).
+  services.caddy = {
+    enable = true;
+    globalConfig = ''
+      acme_ca https://x86-merkat-auth:8443/acme/acme/directory
+    '';
+    virtualHosts."x86-virtma-comfyui".extraConfig = ''
+      reverse_proxy :8188
+    '';
   };
 
   users = {
