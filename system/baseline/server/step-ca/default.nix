@@ -11,6 +11,7 @@
   #      to secrets/x86-merkat-auth/secrets.yaml via `sops`.
   services.step-ca = {
     enable = true;
+    address = "0.0.0.0";
     port = 8443;
     openFirewall = true;
     intermediatePasswordFile = config.sops.secrets."step-ca/intermediate_password".path;
