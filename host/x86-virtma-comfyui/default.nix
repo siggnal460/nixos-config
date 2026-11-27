@@ -4,6 +4,7 @@ let
 in
 {
   imports = [
+    ../../user/aaron
     ./hardware-configuration.nix
   ];
 
