@@ -6,7 +6,7 @@
   # Bootstrap (one-time, done by the user, not Nix):
   #   1. Run `step ca init` to generate the root/intermediate CA.
   #   2. Keep the root key offline; copy root_ca.crt and intermediate_ca.crt
-  #      (public) into this repo (see files/ and ../../../shared/pki/).
+  #      (public) into ../../../../certs/.
   #   3. Add step-ca/intermediate_ca_key and step-ca/intermediate_password
   #      to secrets/x86-merkat-auth/secrets.yaml via `sops`.
   services.step-ca = {
@@ -16,8 +16,8 @@
     openFirewall = true;
     intermediatePasswordFile = config.sops.secrets."step-ca/intermediate_password".path;
     settings = {
-      root = ../../../shared/pki/root_ca.crt;
-      crt = ./files/intermediate_ca.crt;
+      root = ../../../../certs/root_ca.crt;
+      crt = ../../../../certs/intermediate_ca.crt;
       key = "/var/lib/step-ca/secrets/intermediate_ca_key";
       dnsNames = [
         "x86-merkat-auth"
