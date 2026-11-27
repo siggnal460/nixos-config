@@ -11,6 +11,8 @@ in
     defaultSopsFile = ../../secrets/${hostname}/secrets.yaml;
   };
 
+  hardware.nvidia.branch = lib.mkForce "latest";
+
   networking = {
     hostName = hostname;
     #interfaces.enp8s0 = {

@@ -193,13 +193,15 @@
           ./system/baseline/htpc/workout
         ];
         ## VMs ##
-        x86-virtma-comfyui = mkComputerStable "x86_64-linux" ./host/x86-atxtwr-computeserver [
-          ./system/hardware/gpu/nvidia
-          ./system/hardware/gpu/nvidia/cuda
-          ./system/baseline/server
-          ./system/baseline/server/ai
-          ./system/baseline/server/openwebui
-        ];
+        x86-virtma-comfyui =
+          mkComputerStable "x86_64-linux" ./host/x86-virtma-comfyui
+            [
+              ./system/hardware/gpu/nvidia
+              ./system/hardware/gpu/nvidia/cuda
+              ./system/baseline/server
+              ./system/baseline/server/ai
+            ]
+            [ ];
 
         ## SERVERS ##
         x86-merkat-auth = mkComputerStable "x86_64-linux" ./host/x86-merkat-auth [
