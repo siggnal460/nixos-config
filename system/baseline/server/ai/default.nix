@@ -58,7 +58,7 @@ in
     virtualHosts."x86-virtma-comfyui".extraConfig = ''
       tls {
         issuer acme {
-          ca https://x86-merkat-auth:8443/acme/acme/directory
+          dir https://x86-merkat-auth:8443/acme/acme/directory
         }
       }
       reverse_proxy :8188
