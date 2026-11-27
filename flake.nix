@@ -201,7 +201,6 @@
               ./system/baseline/server
               ./system/baseline/server/ai
             ]
-            [ ];
 
         ## SERVERS ##
         x86-merkat-auth = mkComputerStable "x86_64-linux" ./host/x86-merkat-auth [
